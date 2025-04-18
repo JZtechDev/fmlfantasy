@@ -1,0 +1,553 @@
+import 'dart:math';
+
+import 'package:fmlfantasy/app/app_images/app_images.dart';
+import 'package:fmlfantasy/app/app_sizings.dart';
+import 'package:fmlfantasy/app/textstyles/textstyle.dart';
+import 'package:fmlfantasy/core/imports/imports.dart';
+import 'package:fmlfantasy/model/select_player_model.dart';
+import 'package:fmlfantasy/ui/components/inner_appbar.dart';
+import 'package:fmlfantasy/ui/helpers/get_initials.dart';
+import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
+import 'package:fmlfantasy/ui/views/loto/loto_controller/loto_controller.dart';
+import 'package:flutter_svg/svg.dart';
+
+class LotoSelectPlayerView extends GetView<LotoController> {
+  final SelectTeam selectplayer;
+  final int playerIndex;
+  final int drawIndex;
+
+  const LotoSelectPlayerView(
+      {super.key,
+      required this.selectplayer,
+      required this.playerIndex,
+      required this.drawIndex});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.grey,
+      appBar: const AppBarInner(title: 'Loto Select Player'),
+      body: LayoutBuilder(builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        double secondLineHeight = constraints.maxWidth > 600 ? 245 : 135;
+        double secondLineWidth = constraints.maxWidth > 600 ? 42 : 42;
+        return CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 45.h,
+              collapsedHeight: 45.h,
+              automaticallyImplyLeading: false,
+              pinned: true,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              flexibleSpace: Padding(
+                padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 5.h),
+                  padding: EdgeInsets.only(
+                      bottom: 5.h, top: 5.h, left: 5.w, right: 5.w),
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(5.r),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Obx(
+                          () => GestureDetector(
+                            onTap: () {
+                              controller.isloadingSelectPlayer.value = true;
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 10.w,
+                                  right: 10.w,
+                                  top: 5.h,
+                                  bottom: 5.h),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5.r),
+                                color: controller.isloadingSelectPlayer.value
+                                    ? AppColors.grey
+                                    : Colors.transparent,
+                              ),
+                              child: Row(
+                                children: [
+                                  selectplayer.homeTeam!.imageUrl == null
+                                      ? Container()
+                                      : controller.sportName == 'CR'
+                                          ? Image.network(replaceSvgWithPng(
+                                              selectplayer.homeTeam!.imageUrl!))
+                                          : SvgPicture.network(
+                                              selectplayer.homeTeam!.imageUrl ??
+                                                  '',
+                                              height: 22.h,
+                                              width: 22.w,
+                                            ),
+                                  horizontalSpace(5.w),
+                                  SizedBox(
+                                    width: width * 0.26,
+                                    child: Text(
+                                      selectplayer.homeTeam!.name ??
+                                          'Home Team',
+                                      style: globalTextStyle(
+                                          fontSize: AppSizing.isMobile(context)
+                                              ? 12.sp
+                                              : 10.sp,
+                                          fontWeight: FontWeight.w500),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      horizontalSpace(10.w),
+                      Expanded(
+                        child: Obx(
+                          () => GestureDetector(
+                            onTap: () {
+                              controller.isloadingSelectPlayer.value = false;
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 10.w,
+                                  right: 10.w,
+                                  top: 5.h,
+                                  bottom: 5.h),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5.r),
+                                color: !controller.isloadingSelectPlayer.value
+                                    ? AppColors.grey
+                                    : Colors.transparent,
+                              ),
+                              child: Row(
+                                children: [
+                                  selectplayer.awayTeam!.imageUrl == null
+                                      ? Container()
+                                      : controller.sportName == 'CR'
+                                          ? Image.network(
+                                              replaceSvgWithPng(
+                                                selectplayer
+                                                    .awayTeam!.imageUrl!,
+                                              ),
+                                            )
+                                          : SvgPicture.network(
+                                              selectplayer.awayTeam!.imageUrl ??
+                                                  '',
+                                              height:
+                                                  AppSizing.isMobile(context)
+                                                      ? 22.h
+                                                      : 40.h,
+                                              width: 22.w,
+                                            ),
+                                  horizontalSpace(5.w),
+                                  SizedBox(
+                                    width: width * 0.26,
+                                    child: Text(
+                                      selectplayer.awayTeam!.name ??
+                                          'Away Team',
+                                      style: globalTextStyle(
+                                          fontSize: AppSizing.isMobile(context)
+                                              ? 12.sp
+                                              : 10.sp,
+                                          fontWeight: FontWeight.w500),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+                child: Padding(
+                    padding: EdgeInsets.only(
+                        left: 10.w, right: 10.w, top: 20.h, bottom: 20.h),
+                    child: Obx(
+                      () => GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: constraints.maxWidth > 600 ? 3 : 2,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 1.1,
+                        ),
+                        itemCount: controller.isloadingSelectPlayer.value
+                            ? selectplayer.homeTeam!.players!.length
+                            : selectplayer.awayTeam!.players!.length,
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          Players player =
+                              controller.isloadingSelectPlayer.value
+                                  ? selectplayer.homeTeam!.players![index]
+                                  : selectplayer.awayTeam!.players![index];
+                          bool isSelected = controller
+                              .drawsList[drawIndex].players
+                              .contains(player);
+                          String teamName =
+                              controller.isloadingSelectPlayer.value
+                                  ? selectplayer.homeTeam!.name!
+                                  : selectplayer.awayTeam!.name!;
+                          String teamKey =
+                              controller.isloadingSelectPlayer.value
+                                  ? selectplayer.homeTeam!.assetCode!
+                                  : selectplayer.awayTeam!.assetCode!;
+
+                          return GestureDetector(
+                            onTap: () {
+                              controller.toggleSelection(player, playerIndex,
+                                  drawIndex, teamName, teamKey);
+                            },
+                            child: Container(
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: AppColors.borderColor, width: 1),
+                                color: isSelected
+                                    ? AppColors.primary
+                                    : AppColors.white,
+                                borderRadius: BorderRadius.circular(5.r),
+                              ),
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                      bottom: -2,
+                                      right: 0,
+                                      child: controller.sportName == 'FB'
+                                          ? player.imageUrl == null
+                                              ? Stack(
+                                                  clipBehavior: Clip.hardEdge,
+                                                  alignment: Alignment.center,
+                                                  children: [
+                                                    player.jerseyImageUrl ==
+                                                            null
+                                                        ? Image.asset(
+                                                            excludeFromSemantics:
+                                                                true,
+                                                            isAntiAlias: true,
+                                                            AppImages
+                                                                .userPlaceHolder,
+                                                            width: width > 600
+                                                                ? Get.width *
+                                                                    0.3
+                                                                : Get.width *
+                                                                    0.25,
+                                                          )
+                                                        : player.jerseyImageUrl!
+                                                                .endsWith('svg')
+                                                            ? SvgPicture
+                                                                .network(
+                                                                player
+                                                                    .jerseyImageUrl!,
+                                                                width:
+                                                                    width > 600
+                                                                        ? 150
+                                                                        : 100,
+                                                              )
+                                                            : Image.network(
+                                                                player
+                                                                    .jerseyImageUrl!,
+                                                                width:
+                                                                    width > 600
+                                                                        ? 150
+                                                                        : 100,
+                                                              ),
+                                                    player.jerseyImageUrl ==
+                                                            null
+                                                        ? const SizedBox()
+                                                        : Positioned(
+                                                            top: 15.h,
+                                                            child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .only(
+                                                                left: 2.w,
+                                                                right: 2.w,
+                                                                top: 1.h,
+                                                                bottom: 1.h,
+                                                              ),
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              decoration: BoxDecoration(
+                                                                  color: AppColors
+                                                                      .white
+                                                                      .withOpacity(
+                                                                          0.9),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              2.r)),
+                                                              child: Text(
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                player.fullName!
+                                                                    .split(' ')
+                                                                    .last,
+                                                                style: globalTextStyle(
+                                                                    fontSize:
+                                                                        8.sp,
+                                                                    color: AppColors
+                                                                        .dark),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                    player.jerseyImageUrl ==
+                                                            null
+                                                        ? const SizedBox()
+                                                        : Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Container(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                top: 5,
+                                                                right: 5,
+                                                                left: 5,
+                                                                bottom: 5,
+                                                              ),
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              decoration: BoxDecoration(
+                                                                  color: AppColors
+                                                                      .white
+                                                                      .withOpacity(
+                                                                          0.9),
+                                                                  shape: BoxShape
+                                                                      .circle),
+                                                              child: Text(
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                player.jerseyNumber ??
+                                                                    'N/A',
+                                                                style: globalTextStyle(
+                                                                    fontSize:
+                                                                        8.sp,
+                                                                    color: AppColors
+                                                                        .dark),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                  ],
+                                                )
+                                              : player.jerseyImageUrl == null
+                                                  ? Image.asset(
+                                                      excludeFromSemantics:
+                                                          true,
+                                                      isAntiAlias: true,
+                                                      AppImages.userPlaceHolder,
+                                                      width: width > 600
+                                                          ? Get.width * 0.3
+                                                          : Get.width * 0.25,
+                                                    )
+                                                  : player.imageUrl!
+                                                          .endsWith('svg')
+                                                      ? SvgPicture.network(
+                                                          player.imageUrl!,
+                                                          width: width > 600
+                                                              ? 150
+                                                              : 100,
+                                                        )
+                                                      : Image.network(
+                                                          player.imageUrl!,
+                                                          width: width > 600
+                                                              ? 150
+                                                              : controller.sportName ==
+                                                                      'FB'
+                                                                  ? 60
+                                                                  : 100,
+                                                        )
+                                          : player.imageUrl == null
+                                              ? Image.asset(
+                                                  excludeFromSemantics: true,
+                                                  isAntiAlias: true,
+                                                  AppImages.userPlaceHolder,
+                                                  width: width > 600
+                                                      ? Get.width * 0.3
+                                                      : Get.width * 0.25,
+                                                )
+                                              : player.imageUrl!.endsWith('svg')
+                                                  ? controller.sportName == 'CR'
+                                                      ? Image.network(
+                                                          replaceSvgWithPng(
+                                                              player.imageUrl!),
+                                                          width: 100,
+                                                        )
+                                                      : SvgPicture.network(
+                                                          player.imageUrl!,
+                                                          width: width > 600
+                                                              ? 150
+                                                              : 100,
+                                                        )
+                                                  : Image.network(
+                                                      player.imageUrl!,
+                                                      width: width > 600
+                                                          ? 150
+                                                          : controller.sportName ==
+                                                                  'FB'
+                                                              ? 60
+                                                              : 100,
+                                                    )),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      left: 10.w,
+                                      top: 10.h,
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SizedBox(
+                                              width: 70.w,
+                                              child: Text(
+                                                teamName,
+                                                style: globalTextStyle(
+                                                  fontSize: width > 600
+                                                      ? 8.sp
+                                                      : 12.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: isSelected
+                                                      ? AppColors.white
+                                                      : AppColors.textGray,
+                                                ),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 5.h),
+                                              child: SvgPicture.asset(
+                                                AppImages.howItWork,
+                                                // ignore: deprecated_member_use
+                                                color: AppColors.textGray,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        verticalSpace(10.h),
+                                        Text(
+                                          maxLines: 2,
+                                          player.fullName!
+                                              .split(' ')
+                                              .join('\n'),
+                                          style: globalTextStyle(
+                                            fontSize:
+                                                width > 600 ? 8.sp : 14.sp,
+                                            fontWeight: FontWeight.w700,
+                                            color: isSelected
+                                                ? AppColors.white
+                                                : AppColors.dark,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Transform.rotate(
+                                      origin: const Offset(30, -30),
+                                      angle: pi / 4.5,
+                                      child: Container(
+                                        height: secondLineHeight,
+                                        width: secondLineWidth,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              AppColors.primary
+                                                  .withOpacity(0.2),
+                                              AppColors.primary
+                                                  .withOpacity(0.2)
+                                                  .withOpacity(0.0),
+                                            ],
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                      bottom: 10.h,
+                                      left: 5.w,
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 5.h, horizontal: 15.w),
+                                        decoration: BoxDecoration(
+                                          color: AppColors.grey,
+                                          borderRadius:
+                                              BorderRadius.circular(5.r),
+                                        ),
+                                        child: Text(
+                                          player.position == null
+                                              ? '-'
+                                              : getInitials(player.position!),
+                                          style: globalTextStyle2(
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      )),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Transform.rotate(
+                                      origin: const Offset(50, -50),
+                                      angle: pi / 4.5,
+                                      child: Container(
+                                        height: secondLineHeight,
+                                        width: secondLineWidth,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              AppColors.primary
+                                                  .withOpacity(0.2),
+                                              AppColors.primary
+                                                  .withOpacity(0.2)
+                                                  .withOpacity(0.0),
+                                            ],
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ))),
+          ],
+        );
+      }),
+    );
+  }
+}
