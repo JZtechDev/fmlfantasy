@@ -57,7 +57,7 @@ class SportsTabBarState extends State<SportsTabBar> {
     return LayoutBuilder(builder: (context, constraints) {
       double maxWidth = constraints.maxWidth;
       final double containerWidth = maxWidth > 600 ? 40.w : 52.w;
-      final double containerHeight = maxWidth > 600 ? 40.h : 40.h;
+      final double containerHeight = maxWidth > 600 ? 50.h : 40.h;
       final double totalWidth = containerWidth * widget.sportsList.length;
       final double leftOffset = containerWidth * widget.selectedIndex;
 
@@ -81,11 +81,13 @@ class SportsTabBarState extends State<SportsTabBar> {
               }
             },
             child: Container(
-              margin: const EdgeInsets.only(left: 10, right: 10),
-              padding: const EdgeInsets.only(top: 2, bottom: 2),
               alignment: Alignment.center,
               width: Get.width,
-              color: AppColors.backgroud,
+              decoration: const BoxDecoration(
+                color: AppColors.backgroud,
+                border: Border.symmetric(
+                    horizontal: BorderSide(color: AppColors.secondary)),
+              ),
               child: Stack(
                 children: [
                   AnimatedPositioned(
@@ -98,7 +100,6 @@ class SportsTabBarState extends State<SportsTabBar> {
                       height: containerHeight,
                       decoration: BoxDecoration(
                         color: widget.selectedColor,
-                        borderRadius: BorderRadius.circular(5.r),
                       ),
                     ),
                   ),
@@ -109,7 +110,7 @@ class SportsTabBarState extends State<SportsTabBar> {
                       (index) {
                         Sport sport = widget.sportsList[index];
                         bool isSelected = index == widget.selectedIndex;
-                        return SingleChildScrollView(
+                        return Expanded(
                           child: GestureDetector(
                             onTap: () => widget.onTap(index),
                             child: Container(
@@ -117,14 +118,29 @@ class SportsTabBarState extends State<SportsTabBar> {
                               width: containerWidth,
                               height: containerHeight,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(
-                                  width: 2,
-                                  color: isSelected
-                                      ? AppColors.secondary
-                                      : Colors.transparent,
-                                ),
-                              ),
+                                  border: const Border.symmetric(
+                                      vertical: BorderSide(
+                                          width: 0.5,
+                                          color: AppColors.secondary)),
+                                  gradient: LinearGradient(
+                                    stops: const [0.0, 0.6, 0.7],
+                                    colors: isSelected
+                                        ? [
+                                            AppColors.secondary
+                                                .withValues(alpha: 0.5),
+                                            AppColors.backgroud
+                                                .withValues(alpha: 0.5),
+                                            AppColors.backgroud
+                                                .withValues(alpha: 0.5),
+                                          ]
+                                        : [
+                                            AppColors.backgroud,
+                                            AppColors.backgroud,
+                                            AppColors.backgroud,
+                                          ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                  )),
                               child: AnimatedOpacity(
                                 duration: const Duration(milliseconds: 300),
                                 opacity: 1,
@@ -161,7 +177,7 @@ class SportsTabBarState extends State<SportsTabBar> {
           Container(
             height: 30,
             width: AppSizing.width(context),
-            color: AppColors.primaryVeryDark,
+            color: AppColors.primaryDark,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(

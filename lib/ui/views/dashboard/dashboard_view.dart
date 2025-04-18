@@ -44,7 +44,7 @@ class DashboardView extends GetView<DashboardController> {
                   padding: const EdgeInsets.only(top: 10, bottom: 0),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: AppColors.primaryDark,
+                    color: AppColors.primaryVeryDark,
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Padding(

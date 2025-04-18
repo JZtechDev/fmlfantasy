@@ -53,7 +53,6 @@ class RegisterView extends StatelessWidget {
                                   AppSizing.isMobile(context) ? 16.sp : 14.sp,
                               color: AppColors.white,
                               fontWeight: FontWeight.w800)),
-
                       verticalSpace(24),
                       AppTextField(
                           labelText: 'Full Name'.tr, obscureText: false),
@@ -107,7 +106,6 @@ class RegisterView extends StatelessWidget {
                           buttonText: 'SIGN UP'.tr,
                           onPressed: () {},
                           isEnabled: true),
-
                       verticalSpace(30),
                       Text('ALREADY A MEMBER?'.tr,
                           style: globalTextStyle(
@@ -129,21 +127,6 @@ class RegisterView extends StatelessWidget {
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                               color: AppColors.white)),
-                      // const Spacer(),
-                      // PrimaryButton(
-                      //     buttonText: 'Open An Account'.tr,
-                      //     onPressed: () {
-                      //       Get.to(() => const BasicInfoView());
-                      //     },
-                      //     isEnabled: true),
-                      // verticalSpace(20.h),
-                      // PrimaryButton(
-                      //     backgroundColor: AppColors.secondary,
-                      //     buttonText: 'Already a customer? Login'.tr,
-                      //     onPressed: () {
-                      //       Get.toNamed(AppRoutes.dashboardView);
-                      //     },
-                      //     isEnabled: true)
                     ],
                   );
                 }),
