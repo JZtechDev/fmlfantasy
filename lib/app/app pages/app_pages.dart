@@ -49,7 +49,11 @@ class AppPages {
     //   page: () => const NewAuthView(),
     // ),
     GetPage(name: AppRoutes.otp, page: () => const OtpView()),
-    GetPage(name: AppRoutes.registerUser, page: () => const RegisterView()),
+    GetPage(
+        name: AppRoutes.registerUser,
+        page: () => const RegisterView(),
+        transition: Transition.fadeIn,
+        transitionDuration: const Duration(milliseconds: 1500)),
     GetPage(name: AppRoutes.loginView, page: () => const LoginView()),
     GetPage(name: AppRoutes.succesView, page: () => const SuccessView()),
     GetPage(
@@ -110,7 +114,10 @@ class AppPages {
     GetPage(name: AppRoutes.friendsView, page: () => const FriendsView()),
     GetPage(
         name: AppRoutes.playersStatsView, page: () => const PlayersStatsView()),
-    GetPage(name: AppRoutes.dashboardView, page: () => const DashboardView()),
+    GetPage(
+        name: AppRoutes.dashboardView,
+        page: () => const DashboardView(),
+        transitionDuration: const Duration(milliseconds: 1000)),
     GetPage(name: AppRoutes.playersView, page: () => const PlayersView()),
     GetPage(name: AppRoutes.teamsView, page: () => const TeamsView()),
     GetPage(

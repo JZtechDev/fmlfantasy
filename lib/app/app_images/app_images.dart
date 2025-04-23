@@ -23,7 +23,7 @@ class AppImages {
   static const String americanFootballsvg =
       'assets/sports_icon/png/american_football.png';
   static const String baseballsvg = 'assets/sports_icon/png/baseBall.png';
-  static const String iceHockeysvg = 'assets/sports_icon/png/hockey.png';
+  static const String iceHockeysvg = 'assets/new_images/hockey.png';
 
   //home
   static const String searchMenu = 'assets/icons/screenmenu.svg';

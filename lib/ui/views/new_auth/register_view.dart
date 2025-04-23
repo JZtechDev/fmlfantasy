@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
@@ -31,28 +32,65 @@ class RegisterView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(AppImages.logo, width: 150.w),
+                      AnimatedContainer(
+                        duration: const Duration(
+                            seconds: 5), // For container's own animation
+                        child: Hero(
+                          tag: 'logo',
+                          transitionOnUserGestures: true,
+                          // createRectTween: (begin, end) {
+                          //   return MaterialRectArcTween(
+                          //       begin: begin, end: end); // Smooth path
+                          // },
+                          // flightShuttleBuilder: (
+                          //   BuildContext flightContext,
+                          //   Animation<double> animation,
+                          //   HeroFlightDirection flightDirection,
+                          //   BuildContext fromHeroContext,
+                          //   BuildContext toHeroContext,
+                          // ) {
+                          //   return ScaleTransition(
+                          //     scale: CurvedAnimation(
+                          //       parent: animation,
+                          //       curve:
+                          //           Curves.easeInOutCubic, // Smooth, slow curve
+                          //     ),
+                          //     child: Image.asset(
+                          //       AppImages.logo,
+                          //       width: 150.w,
+                          //     ),
+                          //   );
+                          // },
+                          child: Image.asset(AppImages.logo, width: 150.w),
+                        ),
+                      ),
                       verticalSpace(20.h),
                       Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: Get.width * 0.1),
-                        child: Text(
-                          'Fantasy Gaming right here in the Turks and Caicos Islands, the thrill is at your fingertips! NO  passport required.'
-                              .tr,
-                          style: globalTextStyle(
-                              fontSize:
-                                  AppSizing.isMobile(context) ? 18.sp : 16.sp,
-                              color: AppColors.white,
-                              fontWeight: FontWeight.w800),
+                        child: FadeIn(
+                          duration: const Duration(seconds: 2),
+                          child: Text(
+                            'Fantasy Gaming right here in the Turks and Caicos Islands, the thrill is at your fingertips! NO  passport required.'
+                                .tr,
+                            style: globalTextStyle(
+                                fontSize:
+                                    AppSizing.isMobile(context) ? 18.sp : 16.sp,
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w800),
+                          ),
                         ),
                       ),
                       verticalSpace(35.h),
-                      Text('SIGN UP NOW'.tr,
-                          style: globalTextStyle(
-                              fontSize:
-                                  AppSizing.isMobile(context) ? 16.sp : 14.sp,
-                              color: AppColors.white,
-                              fontWeight: FontWeight.w800)),
+                      SlideInUp(
+                        duration: Duration(seconds: 2),
+                        child: Text('SIGN UP NOW'.tr,
+                            style: globalTextStyle(
+                                fontSize:
+                                    AppSizing.isMobile(context) ? 16.sp : 14.sp,
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w800)),
+                      ),
                       verticalSpace(24),
                       AppTextField(
                           labelText: 'Full Name'.tr, obscureText: false),
@@ -66,6 +104,9 @@ class RegisterView extends StatelessWidget {
                       verticalSpace(20),
                       Row(
                         children: [
+                          Image.asset('assets/new_images/18+.png',
+                              height: 30.h),
+                          horizontalSpace(10.w),
                           GestureDetector(
                             onTap: () {
                               controller.isAgreed = !controller.isAgreed;
@@ -86,9 +127,10 @@ class RegisterView extends StatelessWidget {
                                     : Container()),
                           ),
                           horizontalSpace(10.w),
-                          Expanded(
+                          SizedBox(
+                            width: AppSizing.width(context) * 0.65,
                             child: Text(
-                                'I CONFIRM THAT I AM 18+ AND \n AGREE TO  THE TERMS'
+                                'I CONFIRM THAT I AM 18+ years OLD AND AGREE TO  THE TERMS of service'
                                     .tr,
                                 style: globalTextStyle(
                                     fontSize: AppSizing.isMobile(context)
@@ -97,8 +139,6 @@ class RegisterView extends StatelessWidget {
                                     color: AppColors.white,
                                     fontWeight: FontWeight.w600)),
                           ),
-                          horizontalSpace(10.w),
-                          Image.asset('assets/new_images/18+.png', height: 30.h)
                         ],
                       ),
                       verticalSpace(20.h),

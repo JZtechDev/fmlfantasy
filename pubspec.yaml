@@ -50,6 +50,8 @@ dependencies:
   # uni_links: ^0.5.1    # For deep linking
   url_launcher: ^6.1.0 # For URL handling
   google_fonts: ^6.2.1
+  animate_do: ^4.2.0
+  device_preview: ^1.2.0
 
 dev_dependencies:
   flutter_test:

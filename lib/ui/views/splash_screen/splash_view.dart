@@ -44,10 +44,9 @@ class SplashVIew extends GetView<SplashController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox.shrink(),
-                    Image.asset(AppImages.logo, height: 150.h),
-                    const CircularProgressIndicator(
-                      color: AppColors.primary,
-                    )
+                    Hero(
+                        tag: 'logo',
+                        child: Image.asset(AppImages.logo, height: 150.h)),
                   ]),
             ),
           );

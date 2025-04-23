@@ -42,26 +42,39 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             preferredSize: const Size.fromHeight(1), child: Container()),
         title: Row(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Image.asset(
-                AppImages.logo,
-                width: 120,
-              ),
+            Image.asset(
+              'assets/new_images/Vector.png',
+              height: 20,
+              width: 20,
             ),
-            horizontalSpace(20),
+            horizontalSpace(5),
             Text('Hi, Superstar Vipul',
                 style: globalTextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 12.sp,
                     color: AppColors.white)),
+            horizontalSpace(20),
+            AnimatedContainer(
+              duration: const Duration(seconds: 5),
+              child: Hero(
+                transitionOnUserGestures: true,
+                tag: 'logo',
+                child: Image.asset(
+                  AppImages.logo,
+                  width: 120,
+                ),
+              ),
+            ),
           ],
         ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
-            child: Icon(FlutterRemix.logout_circle_r_line,
-                color: AppColors.white, size: 25.sp),
+            child: Image.asset(
+              'assets/new_images/Exit.png',
+              height: 30,
+              width: 30,
+            ),
           ),
         ],
       ),

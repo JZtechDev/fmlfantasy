@@ -123,17 +123,20 @@ class SportsTabBarState extends State<SportsTabBar> {
                                           width: 0.5,
                                           color: AppColors.secondary)),
                                   gradient: LinearGradient(
-                                    stops: const [0.0, 0.6, 0.7],
+                                    stops: const [0.0, 0.6, 0.7, 0.9],
                                     colors: isSelected
                                         ? [
                                             AppColors.secondary
-                                                .withValues(alpha: 0.5),
+                                                .withValues(alpha: 0.8),
+                                            AppColors.secondary
+                                                .withValues(alpha: 0.2),
                                             AppColors.backgroud
-                                                .withValues(alpha: 0.5),
+                                                .withValues(alpha: 0.1),
                                             AppColors.backgroud
-                                                .withValues(alpha: 0.5),
+                                                .withValues(alpha: 0.6),
                                           ]
                                         : [
+                                            AppColors.backgroud,
                                             AppColors.backgroud,
                                             AppColors.backgroud,
                                             AppColors.backgroud,
