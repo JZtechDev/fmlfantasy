@@ -60,12 +60,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  fonts:
-    - family: ITCAvantGarde
-      fonts:
-        - asset: assets/fonts/ITCAvantGardePro-Demi.otf
-        - asset: assets/fonts/ITCAvantGardePro-Md.otf
-        - asset: assets/fonts/avantgarde_demi.ttf
 
   assets:
     - assets/
