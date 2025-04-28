@@ -50,6 +50,7 @@ class TournamentLabel extends GetView<HomeController> {
                   SvgPicture.asset(
                     'assets/icons/publictournament.svg',
                     height: maxWidth > 600 ? 20.h : 25.h,
+                    color: AppColors.primary,
                   ),
                   horizontalSpace(10.w),
                   Text(
@@ -57,7 +58,7 @@ class TournamentLabel extends GetView<HomeController> {
                     style: globalTextStyle(
                         fontSize: maxWidth > 600 ? 12.sp : 16.sp,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.dark),
+                        color: AppColors.white),
                   ),
                 ],
               ),
@@ -92,9 +93,7 @@ class TournamentLabel extends GetView<HomeController> {
                         shape: BoxShape.circle, color: nextButtonColor),
                     // ignore: deprecated_member_use
                     child: SvgPicture.asset('assets/icons/arrowright.svg',
-                        height: 10.h,
-                        // ignore: deprecated_member_use
-                        color: nextIconColor),
+                        height: 10.h, color: nextIconColor),
                   ),
                 ),
               ],

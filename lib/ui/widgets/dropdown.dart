@@ -26,7 +26,7 @@ class AppDropdown extends StatelessWidget {
     required this.items,
     this.dropdownWidth = 200,
     this.selectedTextColor = AppColors.textGray,
-    this.hintTextColor = AppColors.textGray,
+    this.hintTextColor = AppColors.secondary,
     this.dropDownUnderTextColor = AppColors.dark,
     this.value,
     this.buttonHeight = 50,
@@ -34,7 +34,7 @@ class AppDropdown extends StatelessWidget {
     this.onChanged,
     this.enabled = true,
     required this.dropdownColor,
-    this.trailingColor = AppColors.dark,
+    this.trailingColor = AppColors.secondary,
     required this.titleColor,
     this.leftImage = '',
     this.fontSize,
@@ -57,7 +57,7 @@ class AppDropdown extends StatelessWidget {
                     hint,
                     style: globalTextStyle(
                         fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w800,
                         color: hintTextColor),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -116,7 +116,7 @@ class AppDropdown extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10.w, right: 10.w),
                   decoration: BoxDecoration(
                       border:
-                          Border.all(color: AppColors.borderColor, width: 1.sp),
+                          Border.all(color: AppColors.secondary, width: 1.sp),
                       borderRadius: BorderRadius.circular(5.sp),
                       color: dropdownColor),
                   elevation: 0,

@@ -52,6 +52,7 @@ dependencies:
   google_fonts: ^6.2.1
   animate_do: ^4.2.0
   device_preview: ^1.2.0
+  flutter_easyloading: ^3.0.5
 
 dev_dependencies:
   flutter_test:
@@ -76,7 +77,7 @@ flutter_launcher_icons:
   android: true
   ios:
     remove_alpha_ios: true
-  image_path: "assets/icons/appIcon.png"
+  image_path: "assets/logo/logo.png"
   min_sdk_android: 21
   adaptive_icon_background: #ffffff
   adaptive_icon_padding: true

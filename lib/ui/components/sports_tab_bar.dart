@@ -57,7 +57,7 @@ class SportsTabBarState extends State<SportsTabBar> {
     return LayoutBuilder(builder: (context, constraints) {
       double maxWidth = constraints.maxWidth;
       final double containerWidth = maxWidth > 600 ? 40.w : 52.w;
-      final double containerHeight = maxWidth > 600 ? 50.h : 40.h;
+      final double containerHeight = maxWidth > 600 ? 55.h : 55.h;
       final double totalWidth = containerWidth * widget.sportsList.length;
       final double leftOffset = containerWidth * widget.selectedIndex;
 
@@ -123,19 +123,22 @@ class SportsTabBarState extends State<SportsTabBar> {
                                           width: 0.5,
                                           color: AppColors.secondary)),
                                   gradient: LinearGradient(
-                                    stops: const [0.0, 0.6, 0.7, 0.9],
+                                    stops: const [0.0, 0.6, 0.7, 0.8, 0.9],
                                     colors: isSelected
                                         ? [
                                             AppColors.secondary
                                                 .withValues(alpha: 0.8),
                                             AppColors.secondary
                                                 .withValues(alpha: 0.2),
+                                            AppColors.secondary
+                                                .withValues(alpha: 0.1),
                                             AppColors.backgroud
                                                 .withValues(alpha: 0.1),
                                             AppColors.backgroud
                                                 .withValues(alpha: 0.6),
                                           ]
                                         : [
+                                            AppColors.backgroud,
                                             AppColors.backgroud,
                                             AppColors.backgroud,
                                             AppColors.backgroud,

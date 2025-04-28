@@ -1,6 +1,6 @@
 class AppImages {
   // ignore: constant_identifier_names
-  static const String logo = 'assets/logo/logo.png';
+  static const String logo = 'assets/new_images/logo.png';
   static const String search = 'assets/bullsket_icons/Search.svg';
   static const String loto = 'assets/images/loto.png';
 

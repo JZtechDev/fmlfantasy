@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
@@ -21,10 +23,11 @@ class SelectPlayerView extends GetView<SelectPlayerController> {
 
   @override
   Widget build(BuildContext context) {
+    log('Match');
     final controller = Get.put(SelectPlayerController());
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.grey,
+        backgroundColor: AppColors.backgroud,
         appBar: const AppBarInner(
           title: 'select players',
         ),
@@ -38,7 +41,7 @@ class SelectPlayerView extends GetView<SelectPlayerController> {
                     future: controller.selectTeam,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const SelectPlayerSkeleton();
+                        return Container();
                       } else if (snapshot.hasError) {
                         return const Center(child: Text('Server Error'));
                       } else if (!snapshot.hasData) {
@@ -105,7 +108,7 @@ class SelectPlayerView extends GetView<SelectPlayerController> {
                                   //height: Get.height*0.21,
                                   width: Get.width,
                                   decoration: const BoxDecoration(
-                                      color: AppColors.white,
+                                      color: AppColors.backgroud,
                                       border: Border(
                                           bottom: BorderSide(
                                         color: AppColors.borderColor,

@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/select_player_model.dart';
@@ -71,6 +72,7 @@ class TournamentServices {
       default:
         throw Exception('Invalid sport type');
     }
+    EasyLoading.show(status: 'Fetching players...');
 
     try {
       final response = await dio.get(
@@ -82,23 +84,29 @@ class TournamentServices {
         }),
       );
       if (response.statusCode == 200) {
+        EasyLoading.dismiss();
         return SelectTeam.fromJson(response.data);
       } else {
+        EasyLoading.dismiss();
         Get.snackbar(
             'Error', 'Failed to fetch players: ${response.statusCode}');
         throw Exception('Failed to fetch players: ${response.statusCode}');
       }
     } on DioException catch (error) {
+      EasyLoading.dismiss();
       if (error.response != null) {
+        EasyLoading.dismiss();
         Get.snackbar(
             'Error', 'Failed to fetch players: ${error.response?.statusCode}');
         throw Exception(
             'Failed to fetch players: ${error.response?.statusCode}');
       } else {
+        EasyLoading.dismiss();
         Get.snackbar('Error', 'Failed to fetch players: ${error.message}');
         throw Exception('Failed to fetch players: ${error.message}');
       }
     } catch (error) {
+      EasyLoading.dismiss();
       Get.snackbar('Error', 'An unexpected error occurred');
       throw Exception('An unexpected error occurred: $error');
     }

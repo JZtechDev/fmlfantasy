@@ -23,7 +23,7 @@ class PrimaryButton extends StatelessWidget {
     super.key,
     required this.buttonText,
     this.iconPath,
-    this.buttonTextSize = 13,
+    this.buttonTextSize = 15,
     this.textColor = AppColors.primaryVeryDark,
     this.iconColor = AppColors.white,
     this.iconHeight = 25,

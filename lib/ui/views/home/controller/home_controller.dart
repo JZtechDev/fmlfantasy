@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/model/sports_type.dart';
@@ -40,9 +41,36 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     Sport(title: 'HK', icon: AppImages.iceHockeysvg, name: 'Hockey'),
   ].obs;
 
+  List<String> _teamNames = [];
+
+  List<String> get teamNames => _teamNames;
+
+  set teamNames(List<String> value) {
+    _teamNames = value;
+    update();
+  }
+
+  String getIconPath(String sportName) {
+    switch (sportName) {
+      case 'CR':
+        return AppImages.cricket;
+      case 'AF':
+        return AppImages.americanFootballsvg;
+      case 'BB':
+        return AppImages.baseketball;
+      case 'FB':
+        return AppImages.footballsvg;
+      case 'BL':
+        return AppImages.baseballsvg;
+      default:
+        return AppImages
+            .iceHockeysvg; // A default icon in case the sport is not recognized
+    }
+  }
+
   Future<List<Tournaments>> fetchData() async {
     try {
-      isPublicTournamentsLoading.value = true;
+      EasyLoading.show(status: 'Loading...');
       List<Tournaments> fetchedTournaments = await tournamentServices
           .fetchTournamentsAndMatches(selectedSport.value);
       tournaments.value = fetchedTournaments.where((tournament) {
@@ -54,11 +82,24 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         }
         return endDate.isAfter(DateTime.now());
       }).toList();
+
+      Set<String> uniqueTeamNames = {};
+      for (var tournament in tournaments) {
+        for (var match in tournament.matches!) {
+          // Assuming matches is a list in Tournaments
+          if (match.home != null) uniqueTeamNames.add(match.home!);
+          if (match.away != null) uniqueTeamNames.add(match.away!);
+        }
+      }
+
+      // Update teamNames with unique names
+      teamNames = uniqueTeamNames.toList();
       animationController.reset();
       animationController.forward();
-      isPublicTournamentsLoading.value = false;
+      EasyLoading.dismiss();
       return tournaments;
     } catch (error) {
+      EasyLoading.dismiss();
       rethrow; // Rethrow the error to handle it in the FutureBuilder
     }
   }
@@ -136,7 +177,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     );
     token = await getStringValuesSF();
     fetchData();
-    fetchPrivateTournaments();
+    //fetchPrivateTournaments();
     animationController.forward();
     privateAnimationController.forward();
     super.onInit();

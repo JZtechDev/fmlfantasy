@@ -19,7 +19,7 @@ class DashboardController extends GetxController {
   List<Cards> cardsList = [
     Cards(
       image: 'assets/images/dashboardcards.png',
-      title: 'CREATE A NEW TEAM',
+      title: 'CREATE NEW TEAM',
       subtitle:
           'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
       icon: 'assets/new_images/create team.svg',

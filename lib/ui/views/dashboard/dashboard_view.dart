@@ -44,7 +44,15 @@ class DashboardView extends GetView<DashboardController> {
                   padding: const EdgeInsets.only(top: 10, bottom: 0),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: AppColors.primaryVeryDark,
+                    gradient: const LinearGradient(
+                        stops: [0.1, 0.5, 01],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          AppColors.primaryVeryDark,
+                          AppColors.primaryDark,
+                          AppColors.primary,
+                        ]),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Padding(
@@ -65,7 +73,7 @@ class DashboardView extends GetView<DashboardController> {
                           style: globalTextStyle(
                             color: AppColors.white,
                             fontSize: 11,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,

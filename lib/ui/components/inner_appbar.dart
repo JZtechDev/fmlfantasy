@@ -1,9 +1,5 @@
-import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
+import 'package:fmlfantasy/core/imports/imports.dart';
 
 class AppBarInner extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -15,7 +11,7 @@ class AppBarInner extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.title,
     this.enableBorder = true,
-    this.backgroundColor = AppColors.white, // Default background color
+    this.backgroundColor = AppColors.backgroud, // Default background color
     this.actions,
   });
 
@@ -32,8 +28,8 @@ class AppBarInner extends StatelessWidget implements PreferredSizeWidget {
         return PreferredSize(
           preferredSize: Size.fromHeight(appBarHeight),
           child: AppBar(
-            foregroundColor: AppColors.white,
-            surfaceTintColor: AppColors.white,
+            foregroundColor: AppColors.backgroud,
+            surfaceTintColor: AppColors.backgroud,
             bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(1),
                 child: Container(
@@ -41,7 +37,7 @@ class AppBarInner extends StatelessWidget implements PreferredSizeWidget {
                         border: enableBorder
                             ? const Border(
                                 bottom: BorderSide(
-                                    color: AppColors.borderColor, width: 1))
+                                    color: Colors.transparent, width: 1))
                             : null))),
             centerTitle: true,
             elevation: 0,
@@ -54,19 +50,19 @@ class AppBarInner extends StatelessWidget implements PreferredSizeWidget {
                   child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.borderColor),
-                        color: AppColors.grey,
+                        border: Border.all(color: AppColors.backgroud),
+                        color: AppColors.secondary,
                         borderRadius: BorderRadius.circular(5.r),
                       ),
                       padding: const EdgeInsets.all(7),
-                      child: SvgPicture.asset(
-                        AppImages.back,
-                      ))),
+                      child: Icon(FlutterRemix.arrow_left_s_line,
+                          color: AppColors.white, size: 20.sp))),
             ),
             backgroundColor: backgroundColor,
-            title: SvgPicture.asset(
+            title: Image.asset(
               AppImages.logo,
               height: 40,
+              width: Get.width * 0.3,
             ),
           ),
         );

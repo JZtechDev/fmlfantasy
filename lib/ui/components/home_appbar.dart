@@ -42,18 +42,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             preferredSize: const Size.fromHeight(1), child: Container()),
         title: Row(
           children: [
-            Image.asset(
-              'assets/new_images/Vector.png',
-              height: 20,
-              width: 20,
-            ),
-            horizontalSpace(5),
-            Text('Hi, Superstar Vipul',
-                style: globalTextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 12.sp,
-                    color: AppColors.white)),
-            horizontalSpace(20),
+            // horizontalSpace(5),
+
+            // horizontalSpace(20),
             AnimatedContainer(
               duration: const Duration(seconds: 5),
               child: Hero(
@@ -70,10 +61,33 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
-            child: Image.asset(
-              'assets/new_images/Exit.png',
-              height: 30,
-              width: 30,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/new_images/Vector.png',
+                  height: 20,
+                  width: 20,
+                ),
+                horizontalSpace(5),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Hi, Vipul',
+                        style: globalTextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.sp,
+                            color: AppColors.white)),
+                    Text('My Account',
+                        style: globalTextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 12.sp,
+                            color: AppColors.white)),
+                  ],
+                )
+              ],
             ),
           ),
         ],

@@ -10,10 +10,12 @@ TextStyle globalTextStyle({
   TextDecoration? decoration,
 }) =>
     TextStyle(
-      color: color ?? AppColors.dark,
+      color: color ?? AppColors.white,
       fontSize: fontSize,
       fontWeight: fontWeight ?? FontWeight.w800,
-      fontFamily: GoogleFonts.raleway().fontFamily,
+      fontFamily: GoogleFonts.raleway(
+        fontWeight: fontWeight,
+      ).fontFamily,
       decoration: decoration ?? TextDecoration.none,
     );
 
@@ -25,9 +27,11 @@ TextStyle globalTextStyle2({
   TextDecoration? decoration,
 }) =>
     TextStyle(
-      color: color ?? AppColors.dark,
+      color: color ?? AppColors.white,
       fontSize: fontSize,
       fontWeight: fontWeight ?? FontWeight.w800,
-      fontFamily: GoogleFonts.raleway().fontFamily,
+      fontFamily: GoogleFonts.raleway(
+        fontWeight: fontWeight,
+      ).fontFamily,
       decoration: decoration ?? TextDecoration.none,
     );

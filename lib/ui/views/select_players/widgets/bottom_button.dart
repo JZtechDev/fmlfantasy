@@ -16,7 +16,7 @@ class BottomButtonSelectPlayer extends GetView<SelectPlayerController> {
     Get.put(SelectPlayerController());
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
-        color: AppColors.white,
+        color: AppColors.backgroud,
         child: SizedBox(
           height: AppSizing.isMobile(context) ? 100.h : 100.h,
           width: Get.width,

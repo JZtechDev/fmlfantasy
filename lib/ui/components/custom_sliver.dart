@@ -10,9 +10,9 @@ class CustomSliver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      toolbarHeight: 100.h,
-      collapsedHeight: 100.h,
-      expandedHeight: 100.h,
+      toolbarHeight: 90.h,
+      collapsedHeight: 90.h,
+      expandedHeight: 90.h,
       automaticallyImplyLeading: false,
       pinned: true,
       backgroundColor: Colors.transparent,

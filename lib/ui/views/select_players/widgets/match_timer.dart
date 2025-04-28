@@ -70,7 +70,7 @@ class _MatchTimerState extends State<MatchTimer> {
           height: Get.height * 0.15,
           child: Container(
             padding: const EdgeInsets.all(20),
-            color: AppColors.white,
+            color: AppColors.backgroud,
             child: Center(
               child: Text(
                 'MATCH ENDED',
@@ -93,15 +93,13 @@ class _MatchTimerState extends State<MatchTimer> {
       final textSize = constraints.maxWidth > 600 ? 8.sp : 12.sp;
       return Container(
           padding: const EdgeInsets.all(20),
-          color: AppColors.white,
+          color: AppColors.backgroud,
           child: Column(
             children: [
               Text(
                 'matchCenterIn'.tr,
                 style: globalTextStyle(
-                    fontSize: 16.sp,
-                    color: AppColors.dark,
-                    fontWeight: FontWeight.w700),
+                    fontSize: 16.sp, fontWeight: FontWeight.w700),
               ),
               verticalSpace(5.h),
               Row(
@@ -114,18 +112,14 @@ class _MatchTimerState extends State<MatchTimer> {
                         Text(
                           '$days',
                           style: globalTextStyle(
-                              fontSize: textSize,
-                              color: AppColors.dark,
-                              fontWeight: FontWeight.w700),
+                              fontSize: textSize, fontWeight: FontWeight.w700),
                         ),
                       horizontalSpace(3),
                       Text('DAYS',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: globalTextStyle(
-                              fontSize: textSize,
-                              color: AppColors.dark,
-                              fontWeight: FontWeight.w700)),
+                              fontSize: textSize, fontWeight: FontWeight.w700)),
                     ],
                   ),
                   Row(
@@ -134,18 +128,14 @@ class _MatchTimerState extends State<MatchTimer> {
                       Text(
                         '$hours',
                         style: globalTextStyle(
-                            fontSize: textSize,
-                            color: AppColors.dark,
-                            fontWeight: FontWeight.w700),
+                            fontSize: textSize, fontWeight: FontWeight.w700),
                       ),
                       horizontalSpace(3),
                       Text('HOURS',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: globalTextStyle(
-                              fontSize: textSize,
-                              color: AppColors.dark,
-                              fontWeight: FontWeight.w700)),
+                              fontSize: textSize, fontWeight: FontWeight.w700)),
                     ],
                   ),
                   Row(
@@ -153,17 +143,13 @@ class _MatchTimerState extends State<MatchTimer> {
                     children: [
                       Text('$minutes',
                           style: globalTextStyle(
-                              fontSize: textSize,
-                              color: AppColors.dark,
-                              fontWeight: FontWeight.w700)),
+                              fontSize: textSize, fontWeight: FontWeight.w700)),
                       horizontalSpace(3),
                       Text('MINUTES',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: globalTextStyle(
-                              fontSize: textSize,
-                              color: AppColors.dark,
-                              fontWeight: FontWeight.w700)),
+                              fontSize: textSize, fontWeight: FontWeight.w700)),
                     ],
                   ),
                   Row(
@@ -171,17 +157,13 @@ class _MatchTimerState extends State<MatchTimer> {
                     children: [
                       Text('$seconds',
                           style: globalTextStyle(
-                              fontSize: textSize,
-                              color: AppColors.dark,
-                              fontWeight: FontWeight.w700)),
+                              fontSize: textSize, fontWeight: FontWeight.w700)),
                       horizontalSpace(3),
                       Text('SECONDS',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: globalTextStyle(
-                              fontSize: textSize,
-                              color: AppColors.dark,
-                              fontWeight: FontWeight.w700)),
+                              fontSize: textSize, fontWeight: FontWeight.w700)),
                     ],
                   ),
                 ],

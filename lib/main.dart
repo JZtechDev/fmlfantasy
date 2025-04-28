@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmlfantasy/app/app%20pages/app_pages.dart';
@@ -39,6 +40,18 @@ void main() async {
       error: true,
       compact: true,
       maxWidth: 90));
+
+  EasyLoading.instance
+    ..textStyle = globalTextStyle(fontSize: 12, color: Colors.white)
+    ..loadingStyle = EasyLoadingStyle.custom
+    ..backgroundColor = AppColors.primary
+    ..radius = 12
+    ..indicatorSize = 30
+    ..textColor = Colors.white
+    ..indicatorColor = Colors.white
+    ..userInteractions = false
+    ..displayDuration = const Duration(seconds: 1)
+    ..dismissOnTap = false;
 
   runApp(const MyApp());
 }
@@ -90,6 +103,7 @@ class MyApp extends StatelessWidget {
             ],
             initialRoute: AppPages.initial,
             getPages: AppPages.routes,
+            builder: EasyLoading.init(),
             title: 'FML Fantasy',
             debugShowCheckedModeBanner: false,
             themeMode: ThemeMode.light,
