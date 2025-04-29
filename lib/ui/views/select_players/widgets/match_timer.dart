@@ -75,7 +75,7 @@ class _MatchTimerState extends State<MatchTimer> {
               child: Text(
                 'MATCH ENDED',
                 style: globalTextStyle(
-                    fontSize: 21.sp,
+                    fontSize: 12.sp,
                     color: AppColors.dark,
                     fontWeight: FontWeight.w700),
               ),
@@ -84,96 +84,79 @@ class _MatchTimerState extends State<MatchTimer> {
         ),
       );
     }
+
     int days = timeDifference.inDays;
     int hours = timeDifference.inHours.remainder(24);
     int minutes = timeDifference.inMinutes.remainder(60);
     int seconds = timeDifference.inSeconds.remainder(60);
 
-    return LayoutBuilder(builder: (context, constraints) {
-      final textSize = constraints.maxWidth > 600 ? 8.sp : 12.sp;
-      return Container(
-          padding: const EdgeInsets.all(20),
-          color: AppColors.backgroud,
-          child: Column(
+    final textSize = MediaQuery.of(context).size.width > 600 ? 8.sp : 12.sp;
+
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10.w),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(5.r),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
             children: [
+              Image.asset('assets/new_images/Stopwatch.png', height: 20.h),
+              horizontalSpace(15.w),
               Text(
-                'matchCenterIn'.tr,
+                'MATCH STARTS IN ',
                 style: globalTextStyle(
-                    fontSize: 16.sp, fontWeight: FontWeight.w700),
+                  fontSize: textSize,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.white,
+                ),
               ),
-              verticalSpace(5.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      if (days > 0)
-                        Text(
-                          '$days',
-                          style: globalTextStyle(
-                              fontSize: textSize, fontWeight: FontWeight.w700),
-                        ),
-                      horizontalSpace(3),
-                      Text('DAYS',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: globalTextStyle(
-                              fontSize: textSize, fontWeight: FontWeight.w700)),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        '$hours',
-                        style: globalTextStyle(
-                            fontSize: textSize, fontWeight: FontWeight.w700),
-                      ),
-                      horizontalSpace(3),
-                      Text('HOURS',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: globalTextStyle(
-                              fontSize: textSize, fontWeight: FontWeight.w700)),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text('$minutes',
-                          style: globalTextStyle(
-                              fontSize: textSize, fontWeight: FontWeight.w700)),
-                      horizontalSpace(3),
-                      Text('MINUTES',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: globalTextStyle(
-                              fontSize: textSize, fontWeight: FontWeight.w700)),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text('$seconds',
-                          style: globalTextStyle(
-                              fontSize: textSize, fontWeight: FontWeight.w700)),
-                      horizontalSpace(3),
-                      Text('SECONDS',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: globalTextStyle(
-                              fontSize: textSize, fontWeight: FontWeight.w700)),
-                    ],
-                  ),
-                ],
-              ),
-              // Text(
-              //   '$days Days $hours Hours $minutes Minutes $seconds Seconds',
-              //   style: globalTextStyle(fontSize: 21, color: AppColors.dark, fontWeight: FontWeight.w700),
-              // ),
             ],
-          ));
-    });
+          ),
+          Row(
+            children: [
+              if (days > 0)
+                Text(
+                  '$days DAY${days > 1 ? 'S' : ''}  ',
+                  style: globalTextStyle(
+                    fontSize: textSize,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.secondary,
+                  ),
+                ),
+              if (hours > 0)
+                Text(
+                  '$hours HRS  ',
+                  style: globalTextStyle(
+                    fontSize: textSize,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.secondary,
+                  ),
+                ),
+              if (minutes > 0)
+                Text(
+                  '$minutes MINs  ',
+                  style: globalTextStyle(
+                    fontSize: textSize,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.secondary,
+                  ),
+                ),
+              Text(
+                '$seconds SEC',
+                style: globalTextStyle(
+                  fontSize: textSize,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.secondary,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 }

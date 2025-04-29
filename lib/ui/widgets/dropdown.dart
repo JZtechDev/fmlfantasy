@@ -25,7 +25,7 @@ class AppDropdown extends StatelessWidget {
     super.key,
     required this.items,
     this.dropdownWidth = 200,
-    this.selectedTextColor = AppColors.textGray,
+    this.selectedTextColor = AppColors.secondary,
     this.hintTextColor = AppColors.secondary,
     this.dropDownUnderTextColor = AppColors.dark,
     this.value,
@@ -99,7 +99,7 @@ class AppDropdown extends StatelessWidget {
                             item,
                             style: globalTextStyle2(
                               fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w600,
                               color:
                                   selectedTextColor, // Selected item text color
                             ),

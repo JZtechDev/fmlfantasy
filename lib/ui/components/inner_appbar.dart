@@ -11,7 +11,7 @@ class AppBarInner extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.title,
     this.enableBorder = true,
-    this.backgroundColor = AppColors.backgroud, // Default background color
+    this.backgroundColor = AppColors.primary, // Default background color
     this.actions,
   });
 
@@ -28,8 +28,8 @@ class AppBarInner extends StatelessWidget implements PreferredSizeWidget {
         return PreferredSize(
           preferredSize: Size.fromHeight(appBarHeight),
           child: AppBar(
-            foregroundColor: AppColors.backgroud,
-            surfaceTintColor: AppColors.backgroud,
+            foregroundColor: AppColors.primary,
+            surfaceTintColor: AppColors.primary,
             bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(1),
                 child: Container(
@@ -50,7 +50,7 @@ class AppBarInner extends StatelessWidget implements PreferredSizeWidget {
                   child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.backgroud),
+                        border: Border.all(color: AppColors.primary),
                         color: AppColors.secondary,
                         borderRadius: BorderRadius.circular(5.r),
                       ),

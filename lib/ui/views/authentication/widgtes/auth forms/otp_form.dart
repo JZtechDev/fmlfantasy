@@ -10,8 +10,6 @@ class OtpForm extends GetView<OtpController> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      double maxWidth = constraints.maxWidth;
-
       return Column(
         children: [
           Padding(
