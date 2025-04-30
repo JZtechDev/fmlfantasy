@@ -3,7 +3,6 @@ import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/select_players/controller/select_player_controller.dart';
 import 'package:fmlfantasy/ui/views/select_players/widgets/fliters_button.dart';
-import 'package:fmlfantasy/ui/views/select_players/widgets/positions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -162,7 +161,7 @@ class SelectPlayerSkeleton extends GetView<SelectPlayerController> {
                   ),
                 ),
                 SizedBox(height: 10.h),
-                const Positions(),
+                // const Positions(),
               ],
             )),
             SizedBox(height: 10.h),

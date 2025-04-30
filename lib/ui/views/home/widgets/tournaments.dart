@@ -54,19 +54,22 @@ class Tournaments extends GetView<HomeController> {
                     verticalSpace(10),
                     Text('Create a Team',
                         style: globalTextStyle(
-                            fontSize: 11.sp,
+                            fontSize:
+                                AppSizing.isMobile(context) ? 11.sp : 10.sp,
                             fontWeight: FontWeight.w700,
                             color: AppColors.white)),
                     Text('Public Tournaments',
                         style: globalTextStyle(
-                            fontSize: 18.sp,
+                            fontSize:
+                                AppSizing.isMobile(context) ? 18.sp : 14.sp,
                             fontWeight: FontWeight.w800,
                             color: AppColors.white)),
                     verticalSpace(5),
                     Text(
                         'Explore  Premier League, La Liga,Serie A (Italy), Bundesliga and Ligue 1 (France)',
                         style: globalTextStyle(
-                            fontSize: 14.sp,
+                            fontSize:
+                                AppSizing.isMobile(context) ? 14.sp : 10.sp,
                             fontWeight: FontWeight.w600,
                             color: AppColors.white)),
                     verticalSpace(10),
@@ -101,12 +104,14 @@ class Tournaments extends GetView<HomeController> {
                       verticalSpace(10),
                       Text('My Teams',
                           style: globalTextStyle(
-                              fontSize: 18.sp,
+                              fontSize:
+                                  AppSizing.isMobile(context) ? 18.sp : 14.sp,
                               fontWeight: FontWeight.w800,
                               color: AppColors.white)),
                       Text('Join a Tournament to Create a Team',
                           style: globalTextStyle(
-                              fontSize: 14.sp,
+                              fontSize:
+                                  AppSizing.isMobile(context) ? 14.sp : 10.sp,
                               fontWeight: FontWeight.w600,
                               color: AppColors.white)),
                       verticalSpace(10),
@@ -127,7 +132,9 @@ class Tournaments extends GetView<HomeController> {
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: globalTextStyle(
-                                          fontSize: 14.sp,
+                                          fontSize: AppSizing.isMobile(context)
+                                              ? 14.sp
+                                              : 10.sp,
                                           fontWeight: FontWeight.w600,
                                           color: AppColors.white)),
                                 ),
@@ -158,7 +165,9 @@ class Tournaments extends GetView<HomeController> {
                               onTap: () => Get.toNamed(AppRoutes.myTeams),
                               child: Text('View All Teams',
                                   style: globalTextStyle(
-                                      fontSize: 14.sp,
+                                      fontSize: AppSizing.isMobile(context)
+                                          ? 14.sp
+                                          : 10.sp,
                                       fontWeight: FontWeight.w800,
                                       color: AppColors.primaryVeryDark)),
                             ),

@@ -26,18 +26,17 @@ class BottomButtonSelectPlayer extends GetView<SelectPlayerController> {
               children: [
                 const SelectedPlayer(),
                 verticalSpace(5.h),
-                Obx(() => PrimaryButton(
-                      isEnabled:
-                          controller.selectedPlayers.length <= 4 ? false : true,
-                      buttonText: 'continue'.tr,
-                      onPressed: () {
-                        controller.navigateToNextPage();
-                      },
-                      iconPath: controller.getIconPath(controller.sportName),
-                      iconColor: AppColors.white,
-                      iconHeight: 15.w,
-                      iconWidth: 15.w,
-                    )),
+                PrimaryButton(
+                  isEnabled: true,
+                  buttonText: 'continue'.tr,
+                  onPressed: () {
+                    controller.navigateToNextPage();
+                  },
+                  iconPath: controller.getIconPath(controller.sportName),
+                  iconColor: AppColors.white,
+                  iconHeight: 15.w,
+                  iconWidth: 15.w,
+                )
               ],
             ),
           ),

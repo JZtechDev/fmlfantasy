@@ -1,3 +1,4 @@
+import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 
@@ -11,7 +12,7 @@ class DashboardButton extends StatelessWidget {
         Get.offAllNamed(AppRoutes.dashboardView);
       },
       child: Container(
-        width: 110,
+        width: AppSizing.isMobile(context) ? 100.w : 80.w,
         padding: const EdgeInsets.all(7),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
@@ -27,7 +28,8 @@ class DashboardButton extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Icon(FlutterRemix.arrow_left_s_line,
-                  color: AppColors.primaryDark, size: 13.sp),
+                  color: AppColors.primaryDark,
+                  size: AppSizing.isMobile(context) ? 13.sp : 10.sp),
             ),
             horizontalSpace(5),
             Text('DASHBOARD',

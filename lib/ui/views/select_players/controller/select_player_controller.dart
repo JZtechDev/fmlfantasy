@@ -4,6 +4,7 @@ import 'package:fmlfantasy/model/select_player_model.dart';
 import 'package:fmlfantasy/services/tournament_services.dart';
 import 'package:fmlfantasy/ui/helpers/get_initials.dart';
 import 'package:flutter/material.dart';
+import 'package:fmlfantasy/ui/helpers/snackbar.dart';
 import 'package:get/get.dart';
 
 class SelectPlayerController extends GetxController {
@@ -83,7 +84,7 @@ class SelectPlayerController extends GetxController {
         selectedPlayersPlaceholders.removeAt(0);
         selectedPlayers.add(player);
       } else {
-        Get.snackbar('Error', 'errormax'.tr);
+        Snackbars.error('errormax'.tr);
       }
     }
   }

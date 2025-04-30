@@ -6,6 +6,7 @@ class AppColors {
   static const lightGreen = Color.fromRGBO(102, 203, 61, 1);
   static const primaryVeryDark = Color.fromRGBO(44, 86, 80, 1);
   static const primaryDark = Color.fromRGBO(0, 91, 78, 1);
+  static const darkGreen = Color.fromRGBO(31, 54, 22, 1);
   static const backgroud = Color.fromRGBO(57, 74, 72, 1);
   static const secondary = Color.fromRGBO(249, 207, 88, 1);
   static const dark = Color.fromRGBO(0, 0, 0, 1);

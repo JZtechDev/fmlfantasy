@@ -14,10 +14,9 @@ class BullPlayerView extends GetView<BullPlayerController> {
   Widget build(BuildContext context) {
     Get.put(BullPlayerController());
     return Scaffold(
-      backgroundColor: AppColors.grey,
+      backgroundColor: AppColors.backgroud,
       appBar: const AppBarInner(
         title: 'Select Bull Player',
-        backgroundColor: AppColors.white,
       ),
       body: ListView(
         children: [

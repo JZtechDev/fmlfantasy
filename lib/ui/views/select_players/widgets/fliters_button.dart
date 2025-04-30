@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/views/select_players/controller/select_player_controller.dart';
-import 'package:flutter_svg/svg.dart';
 
 class FilterButton extends GetView<SelectPlayerController> {
   const FilterButton({super.key});

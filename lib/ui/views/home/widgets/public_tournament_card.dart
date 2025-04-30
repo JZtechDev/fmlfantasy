@@ -1,3 +1,4 @@
+import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
@@ -210,6 +211,8 @@ class TournamentCardSlider extends GetView<HomeController> {
                               )),
                           PrimaryButton(
                               buttonWidth: Get.width * 0.4,
+                              buttonTextSize:
+                                  AppSizing.isMobile(context) ? 12.sp : 8.sp,
                               backgroundColor: AppColors.secondary,
                               buttonText: 'Join for \$${tournament.prize}',
                               onPressed: () {

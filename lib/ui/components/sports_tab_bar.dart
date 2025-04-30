@@ -209,7 +209,8 @@ class SportsTabBarState extends State<SportsTabBar> {
                         child: Text(
                           tabOptions[index]['name'],
                           style: globalTextStyle(
-                            fontSize: 12.sp,
+                            fontSize:
+                                AppSizing.width(context) > 600 ? 8.sp : 12.sp,
                             fontWeight: FontWeight.w800,
                             color: isSelected
                                 ? AppColors.secondary

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:flutter/material.dart';
 
@@ -94,6 +95,7 @@ class _MatchTimerState extends State<MatchTimer> {
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10.w),
+      width: AppSizing.width(context),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       decoration: BoxDecoration(
         color: AppColors.primary,

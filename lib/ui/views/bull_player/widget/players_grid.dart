@@ -24,15 +24,13 @@ class Playergrid extends GetView<BullPlayerController> {
       constraints.maxWidth > 600 ? 80 : 45.h;
       double bullPlayerPositionContainerWidth =
           constraints.maxWidth > 600 ? 32.w : 43.21.w;
-      double secondLineHeight = constraints.maxWidth > 600 ? 245 : 135;
-      double secondLineWidth = constraints.maxWidth > 600 ? 95 : 42;
       return GridView.builder(
           physics: const ScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: constraints.maxWidth > 600 ? 3 : 2,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            childAspectRatio: 0.8,
+            childAspectRatio: 0.95,
           ),
           itemCount: controller.selectedPlayers.length,
           padding: const EdgeInsets.only(left: 10, right: 10),
@@ -42,7 +40,6 @@ class Playergrid extends GetView<BullPlayerController> {
 
             return GestureDetector(
               onTap: () {
-                //controller.selectedIndex(index);
                 controller.selectBullPlayer(player);
                 for (var p in controller.selectedPlayers) {
                   p.isBull.value = false;
@@ -53,10 +50,25 @@ class Playergrid extends GetView<BullPlayerController> {
                 () => Container(
                   padding: EdgeInsets.only(left: 10.w, top: 10.h),
                   decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.borderColor, width: 1),
-                    color: player.isBull.value == true
-                        ? AppColors.primary
-                        : AppColors.white,
+                    border: Border.all(
+                      color: player.isBull.value
+                          ? AppColors.secondary
+                          : AppColors.backgroud,
+                      width: 1,
+                    ),
+                    gradient: LinearGradient(
+                      colors: [
+                        player.isBull.value
+                            ? const Color.fromRGBO(51, 163, 147, 1)
+                            : const Color.fromRGBO(31, 54, 22, 1),
+                        // 30% of this color
+                        const Color.fromRGBO(
+                            18, 96, 85, 1), // 70% of this color
+                      ],
+                      stops: const [0.6, 0.6],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Stack(
@@ -70,100 +82,42 @@ class Playergrid extends GetView<BullPlayerController> {
                                 ? '-'
                                 : player.teamName!.split(' ').join('\n'),
                             style: globalTextStyle(
-                              fontSize: maxWidth > 600 ? 8.sp : 12.sp,
-                              fontWeight: FontWeight.w500,
-                              color: player.isBull.value == true
-                                  ? AppColors.white.withOpacity(0.7)
-                                  : AppColors.textGray,
-                            ),
+                                fontSize: maxWidth > 600 ? 8.sp : 12.sp,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.white),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          verticalSpace(30.h),
+                          verticalSpace(10.h),
                           Text(
                             "${player.assetIndexPrice!.toStringAsFixed(0)},000\$",
                             style: globalTextStyle(
-                              fontSize: maxWidth > 600 ? 16.sp : 15.sp,
-                              fontWeight: FontWeight.w600,
-                              color: player.isBull.value == true
-                                  ? AppColors.white
-                                  : AppColors.dark,
-                            ),
+                                fontSize: maxWidth > 600 ? 16.sp : 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.secondary),
                           ),
                           Text(
-                            'salary'.tr,
+                            'SALARY'.tr,
                             style: globalTextStyle2(
-                                fontSize: maxWidth > 600 ? 10.sp : 10.sp,
-                                fontWeight: FontWeight.w500,
-                                color: player.isBull.value == true
-                                    ? AppColors.white.withOpacity(0.7)
-                                    : AppColors.textGray),
+                                fontSize: maxWidth > 600 ? 10.sp : 11.sp,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.white),
                           ),
-                          verticalSpace(20.h),
+                          Expanded(child: Container()),
                           SizedBox(
                             width: 73.w,
                             child: Text(
                               player.fullName!.split(' ').join('\n'),
                               style: globalTextStyle(
-                                fontSize: maxWidth > 600 ? 8.sp : 14.sp,
-                                fontWeight: FontWeight.w700,
-                                color: player.isBull.value == true
-                                    ? AppColors.white.withOpacity(0.7)
-                                    : AppColors.dark,
-                              ),
+                                  fontSize: maxWidth > 600 ? 8.sp : 12.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.secondary),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                             ),
                           ),
+                          verticalSpace(20)
                         ],
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Transform.rotate(
-                          origin: const Offset(30, -30),
-                          angle: pi / 4.5, // Rotate 60 degrees clockwise
-                          child: Container(
-                            height:
-                                secondLineHeight, //  135.0, Adjust height of the bar
-                            width:
-                                secondLineWidth, // 42.0, Adjust width of the bar
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              gradient: LinearGradient(
-                                colors: [
-                                  AppColors.grey.withOpacity(0.35),
-                                  AppColors.grey.withOpacity(0.2).withOpacity(
-                                      0.0), // Adjust opacity or color as needed
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Transform.rotate(
-                          origin: const Offset(5, -00),
-                          angle: pi / 4.5, // Rotate 60 degrees clockwise
-                          child: Container(
-                            height: 135.0, // Adjust height of the bar
-                            width: 42.0, // Adjust width of the bar
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              gradient: LinearGradient(
-                                colors: [
-                                  AppColors.grey.withOpacity(0.35),
-                                  AppColors.grey.withOpacity(0.2).withOpacity(
-                                      0.0), // Adjust opacity or color as needed
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
-                            ),
-                          ),
-                        ),
                       ),
                       Positioned(
                           right: 20,
@@ -173,7 +127,7 @@ class Playergrid extends GetView<BullPlayerController> {
                               padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                color: Colors.black,
+                                color: AppColors.backgroud,
                               ),
                               child: Text(
                                 getInitials(player.position ?? ''),

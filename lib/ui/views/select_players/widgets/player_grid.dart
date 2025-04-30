@@ -2,6 +2,7 @@ import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/select_player_model.dart';
+import 'package:fmlfantasy/ui/helpers/get_initials.dart';
 import 'package:fmlfantasy/ui/helpers/picture_shimmer.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 import 'package:fmlfantasy/ui/views/select_players/controller/select_player_controller.dart';
@@ -47,7 +48,7 @@ class PlayersGrid extends GetView<SelectPlayerController> {
             crossAxisCount: constraints.maxWidth > 600 ? 3 : 2,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            childAspectRatio: 1.1,
+            childAspectRatio: 0.85,
           ),
           itemCount: filteredList.length,
           padding: const EdgeInsets.only(left: 10, right: 10),
@@ -67,16 +68,32 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                       player, homeTeam, awayTeam, teamName);
                 },
                 child: Container(
-                  padding: EdgeInsets.only(left: 10.w, top: 10.h),
+                  padding: EdgeInsets.only(left: 10.w, top: 5.h),
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: isSelected
-                            ? AppColors.secondary
-                            : AppColors.backgroud,
-                        width: 1),
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(5),
+                      color: isSelected
+                          ? AppColors.secondary
+                          : AppColors.backgroud,
+                      width: 1,
+                    ),
+                    gradient: LinearGradient(
+                      colors: [
+                        isSelected
+                            ? const Color.fromRGBO(51, 163, 147, 1)
+                            : const Color.fromRGBO(31, 54, 22, 1),
+                        // 30% of this color
+                        const Color.fromRGBO(
+                            18, 96, 85, 1), // 70% of this color
+                      ],
+                      stops: const [0.6, 0.6],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5.r),
+                      topRight: Radius.circular(5.r),
+                    ),
                   ),
                   child: Stack(
                     children: [
@@ -85,10 +102,10 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                         child: SizedBox(
                           width: width > 600
                               ? 130
-                              : 100, // Reduced from 150 to 130 and 120 to 100
+                              : 110, // Reduced from 150 to 130 and 120 to 100
                           height: width > 600
                               ? 130
-                              : 100, // Reduced from 150 to 130 and 120 to 100
+                              : 110, // Reduced from 150 to 130 and 120 to 100
                           child: AspectRatio(
                             aspectRatio: 1,
                             child: controller.sportName == 'FB'
@@ -105,7 +122,7 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                                                   width: width > 600
                                                       ? Get.width * 0.28
                                                       : Get.width *
-                                                          0.3, // Slightly reduced
+                                                          0.32, // Slightly reduced
                                                 )
                                               : player.jerseyImageUrl!
                                                       .endsWith('svg')
@@ -113,13 +130,13 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                                                       player.jerseyImageUrl!,
                                                       width: width > 600
                                                           ? 130
-                                                          : 100, // Reduced
+                                                          : 120, // Reduced
                                                     )
                                                   : Image.network(
                                                       player.jerseyImageUrl!,
                                                       width: width > 600
                                                           ? 130
-                                                          : 100, // Reduced
+                                                          : 120, // Reduced
                                                     ),
                                           player.jerseyImageUrl == null
                                               ? const SizedBox()
@@ -197,22 +214,22 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                                             AppImages.userPlaceHolder,
                                             width: width > 600
                                                 ? Get.width * 0.28
-                                                : Get.width * 0.3, // Reduced
+                                                : Get.width * 0.32, // Reduced
                                           )
                                         : player.imageUrl!.endsWith('svg')
                                             ? SvgPicture.network(
                                                 player.imageUrl!,
                                                 width: width > 600
                                                     ? 130
-                                                    : 100, // Reduced
+                                                    : 120, // Reduced
                                                 placeholderBuilder: (context) =>
                                                     SizedBox(
                                                   width: width > 600
                                                       ? 130
-                                                      : 100, // Reduced
+                                                      : 120, // Reduced
                                                   height: width > 600
                                                       ? 130
-                                                      : 100, // Reduced
+                                                      : 120, // Reduced
                                                   child: const PictureShimmer(),
                                                 ),
                                                 fit: BoxFit.fill,
@@ -223,7 +240,7 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                                                 image: player.imageUrl!,
                                                 width: width > 600
                                                     ? 130
-                                                    : 100, // Reduced
+                                                    : 120, // Reduced
                                                 fadeInDuration: const Duration(
                                                     milliseconds: 300),
                                                 imageErrorBuilder: (context,
@@ -235,7 +252,7 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                                                         : controller.sportName ==
                                                                 'FB'
                                                             ? 50
-                                                            : 90, // Reduced
+                                                            : 120, // Reduced
                                                   );
                                                 },
                                               )
@@ -246,7 +263,7 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                                         AppImages.userPlaceHolder,
                                         width: width > 600
                                             ? Get.width * 0.28
-                                            : Get.width * 0.3, // Reduced
+                                            : Get.width * 0.32, // Reduced
                                       )
                                     : player.imageUrl!.endsWith('svg')
                                         ? controller.sportName == 'CR'
@@ -254,7 +271,7 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                                                 constraints: BoxConstraints(
                                                   maxWidth: width > 600
                                                       ? 130
-                                                      : 130, // Reduced
+                                                      : 150, // Reduced
                                                 ),
                                                 child: Image.network(
                                                   replaceSvgWithPng(
@@ -267,16 +284,16 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                                                     SizedBox(
                                                   width: width > 600
                                                       ? 130
-                                                      : 100, // Reduced
+                                                      : 120, // Reduced
                                                   height: width > 600
                                                       ? 130
-                                                      : 100, // Reduced
+                                                      : 120, // Reduced
                                                   child: const PictureShimmer(),
                                                 ),
                                                 fit: BoxFit.fill,
                                                 width: width > 600
                                                     ? 130
-                                                    : 100, // Reduced
+                                                    : 120, // Reduced
                                               )
                                         : FadeInImage.assetNetwork(
                                             placeholder:
@@ -286,7 +303,7 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                                                 ? 130
                                                 : controller.sportName == 'FB'
                                                     ? 50
-                                                    : 100, // Reduced
+                                                    : 120, // Reduced
                                             fadeInDuration: const Duration(
                                                 milliseconds: 300),
                                             imageErrorBuilder:
@@ -295,7 +312,7 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                                                 AppImages.userPlaceHolder,
                                                 width: width > 600
                                                     ? 130
-                                                    : 100, // Reduced
+                                                    : 120, // Reduced
                                               );
                                             },
                                           ),
@@ -306,53 +323,74 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            maxLines: 2,
-                            player.fullName ?? '-',
-                            // player.fullName!.split(' ').join('\n'),
-                            style: globalTextStyle(
-                                fontSize: width > 600 ? 8.sp : 14.sp,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.secondary),
-                            overflow: TextOverflow.ellipsis,
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: Get.width * 0.2,
+                                  child: Text(
+                                    teamName,
+                                    style: globalTextStyle(
+                                        fontSize: width > 600 ? 8.sp : 12.sp,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppColors.white),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
+                                  decoration: BoxDecoration(
+                                      color: AppColors.backgroud,
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(5.r),
+                                      )),
+                                  child: Text(
+                                    getInitials(player.position!),
+                                    style: globalTextStyle(
+                                        fontSize: width > 600 ? 8.sp : 12.sp,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppColors.white),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                          verticalSpace(5),
-                          Text(
-                            teamName,
-                            style: globalTextStyle(
-                                fontSize: width > 600 ? 8.sp : 12.sp,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.white),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          verticalSpace(5),
-                          Text(
-                            player.position ?? '-',
-                            style: globalTextStyle(
-                                fontSize: width > 600 ? 8.sp : 12.sp,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.white),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Expanded(child: Container()),
-                          Text(
-                            'SALARY'.tr,
-                            style: globalTextStyle(
-                                fontSize: width > 600 ? 8.sp : 10.sp,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.white),
-                          ),
+                          verticalSpace(15),
                           Text(
                             "\$${player.assetIndexPrice!.toStringAsFixed(0)},000",
                             style: globalTextStyle(
-                              fontSize: width > 600 ? 16.sp : 15.sp,
+                              fontSize: width > 600 ? 16.sp : 18.sp,
                               fontWeight: FontWeight.w700,
-                              color: AppColors.white,
+                              color: AppColors.secondary,
                             ),
                           ),
-                          verticalSpace(10)
+                          Text(
+                            'SALARY'.tr,
+                            style: globalTextStyle(
+                                fontSize: width > 600 ? 8.sp : 11.sp,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.white),
+                          ),
+                          Expanded(child: Container()),
+                          SizedBox(
+                            width: Get.width * 0.2,
+                            child: Text(
+                              maxLines: 2,
+                              player.fullName ?? '-',
+                              // player.fullName!.split(' ').join('\n'),
+                              style: globalTextStyle(
+                                  fontSize: width > 600 ? 8.sp : 12.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.secondary),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          verticalSpace(20)
                         ],
                       ),
                     ],

@@ -77,6 +77,7 @@ class TeamsContainer extends GetView<SelectPlayerController> {
                         ),
                         horizontalSpace(10.w),
                         SizedBox(
+                          width: 80.w,
                           child: Center(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +88,7 @@ class TeamsContainer extends GetView<SelectPlayerController> {
                                       fontSize: 14,
                                       fontWeight: FontWeight.w700,
                                       color: AppColors.primaryVeryDark),
-                                  maxLines: 2,
+                                  maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.left,
                                 ),
