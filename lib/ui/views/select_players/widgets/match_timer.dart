@@ -2,13 +2,10 @@ import 'dart:async';
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:flutter/material.dart';
-
-// Assuming these are your imports for colors and text styles
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class MatchTimer extends StatefulWidget {
   final String startDate;
@@ -65,23 +62,21 @@ class _MatchTimerState extends State<MatchTimer> {
   @override
   Widget build(BuildContext context) {
     if (matchEnded) {
-      return Padding(
-        padding: EdgeInsets.only(top: 20.h),
-        child: SizedBox(
-          height: Get.height * 0.15,
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            color: AppColors.backgroud,
-            child: Center(
-              child: Text(
-                'MATCH ENDED',
-                style: globalTextStyle(
-                    fontSize: 12.sp,
-                    color: AppColors.dark,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-          ),
+      return Container(
+        alignment: Alignment.center,
+        margin: EdgeInsets.symmetric(horizontal: 10.w),
+        width: AppSizing.width(context),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        decoration: BoxDecoration(
+          color: AppColors.primary,
+          borderRadius: BorderRadius.circular(5.r),
+        ),
+        child: Text(
+          'MATCH ENDED',
+          style: globalTextStyle(
+              fontSize: 12.sp,
+              color: AppColors.secondary,
+              fontWeight: FontWeight.w700),
         ),
       );
     }

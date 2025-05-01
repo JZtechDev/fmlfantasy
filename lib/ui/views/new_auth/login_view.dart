@@ -1,7 +1,7 @@
+import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
-import 'package:fmlfantasy/ui/views/authentication/widgtes/top_container.dart';
 import 'package:fmlfantasy/ui/views/new_auth/basic_info_view.dart';
 import 'package:fmlfantasy/ui/views/new_auth/controller/login_controller.dart';
 import 'package:fmlfantasy/ui/widgets/app_textfield.dart';
@@ -14,11 +14,27 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(LoginController());
     return Scaffold(
-      backgroundColor: AppColors.grey,
+      backgroundColor: AppColors.backgroud,
       body: Stack(
         alignment: Alignment.center,
         children: [
-          const TopContainer(),
+          Positioned.fill(
+              child: Opacity(
+                  opacity: 0.5,
+                  child: Image.asset('assets/new_images/login-bg.png',
+                      fit: BoxFit.cover))),
+          Positioned(
+            top: 150,
+            child: AnimatedContainer(
+              duration:
+                  const Duration(seconds: 5), // For container's own animation
+              child: Hero(
+                tag: 'logo',
+                transitionOnUserGestures: true,
+                child: Image.asset(AppImages.logo, width: 150.w),
+              ),
+            ),
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -88,23 +104,23 @@ class LoginView extends StatelessWidget {
                           ],
                         ),
                         verticalSpace(20.h),
-                        PrimaryButton(
-                            backgroundColor: AppColors.secondary,
-                            buttonText: 'Login With Face ID'.tr,
-                            onPressed: () {
-                              if (controller.isBiometricEnabled) {
-                                controller.authenticateUser();
-                              } else {
-                                Get.snackbar(
-                                    "Error",
-                                    'Please login with credentials first to setup biometric authentication'
-                                        .tr,
-                                    backgroundColor: AppColors.errorRed,
-                                    colorText: AppColors.white);
-                              }
-                              //controller.authenticateUser();
-                            },
-                            isEnabled: true),
+                        // PrimaryButton(
+                        //     backgroundColor: AppColors.secondary,
+                        //     buttonText: 'Login With Face ID'.tr,
+                        //     onPressed: () {
+                        //       if (controller.isBiometricEnabled) {
+                        //         controller.authenticateUser();
+                        //       } else {
+                        //         Get.snackbar(
+                        //             "Error",
+                        //             'Please login with credentials first to setup biometric authentication'
+                        //                 .tr,
+                        //             backgroundColor: AppColors.errorRed,
+                        //             colorText: AppColors.white);
+                        //       }
+                        //       //controller.authenticateUser();
+                        //     },
+                        //     isEnabled: true),
                         verticalSpace(10.h),
                         PrimaryButton(
                             isLoading: controller.isLoading,
@@ -115,12 +131,10 @@ class LoginView extends StatelessWidget {
                             isEnabled: true),
                         verticalSpace(10),
                         PrimaryButton(
-                            textColor: AppColors.dark,
-                            backgroundColor:
-                                AppColors.white.withValues(alpha: 0.4),
+                            textColor: AppColors.white,
+                            backgroundColor: Colors.transparent,
                             buttonText: 'Open Account'.tr,
                             onPressed: () {
-                              // Get.to(() => const KYCView());
                               Get.to(() => const BasicInfoView());
                             },
                             isEnabled: true),

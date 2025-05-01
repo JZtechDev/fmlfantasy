@@ -49,7 +49,7 @@ class FilterButton extends GetView<SelectPlayerController> {
                   child: Icon(
                 CupertinoIcons.search,
                 color: AppColors.secondary,
-                size: 16.dg,
+                size: 20.dg,
               )),
             ),
           ],

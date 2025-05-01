@@ -16,8 +16,8 @@ class TopContainer extends GetView<SelectPlayerController> {
     Get.put(SelectPlayerController());
     return SliverAppBar(
         pinned: true,
-        expandedHeight: AppSizing.height(context) * 0.35,
-        collapsedHeight: AppSizing.height(context) * 0.35,
+        expandedHeight: AppSizing.height(context) * 0.3,
+        collapsedHeight: AppSizing.height(context) * 0.3,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -32,8 +32,8 @@ class TopContainer extends GetView<SelectPlayerController> {
                   child: Obx(
                     () => Column(
                       children: [
-                        verticalSpace(10),
-                        const DashboardButton(),
+                       // verticalSpace(10),
+                       // const DashboardButton(),
                         TeamsContainer(
                           homeTeamNme: selectTeam.homeTeam!.name,
                           awayTeamName: selectTeam.awayTeam!.name,

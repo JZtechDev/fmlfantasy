@@ -12,53 +12,52 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     Get.put(DashboardController());
     return CustomLayout(
-      appBar: Obx(
-        () => SportsTabBar(
-          sportsList: controller.sportsList,
-          selectedIndex: controller.sportsList
-              .indexWhere((sport) => sport.title == selectedSPort.value),
-          onTap: (index) {
-            selectedSPort.value = controller.sportsList[index].title;
-            controller.selectedIndex.value = index;
-          },
-        ),
-      ),
-      child: GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            childAspectRatio: 1,
+        appBar: Obx(
+          () => SportsTabBar(
+            sportsList: controller.sportsList,
+            selectedIndex: controller.sportsList
+                .indexWhere((sport) => sport.title == selectedSPort.value),
+            onTap: (index) {
+              selectedSPort.value = controller.sportsList[index].title;
+              controller.selectedIndex.value = index;
+            },
           ),
-          itemCount: controller.cardsList.length,
-          itemBuilder: (context, index) {
+        ),
+        child: Wrap(
+          runSpacing: 10,
+          alignment: WrapAlignment.start,
+          children: List.generate(controller.cardsList.length, (index) {
             final e = controller.cardsList[index];
-            return GestureDetector(
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 5), // Adjust spacing between items
+              child: GestureDetector(
                 onTap: () {
                   Get.toNamed(e.route);
                 },
                 child: Container(
+                  width: Get.width * 0.3,
+                  height: Get.height * 0.14,
                   padding: const EdgeInsets.only(top: 10, bottom: 0),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
-                        stops: [0.1, 0.5, 01],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          AppColors.primaryVeryDark,
-                          AppColors.primaryDark,
-                          AppColors.primary,
-                        ]),
+                      stops: [0.1, 0.5, 1],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        AppColors.primaryVeryDark,
+                        AppColors.primaryDark,
+                        AppColors.primary,
+                      ],
+                    ),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SvgPicture.asset(
                           e.icon,
@@ -81,8 +80,10 @@ class DashboardView extends GetView<DashboardController> {
                       ],
                     ),
                   ),
-                ));
+                ),
+              ),
+            );
           }),
-    );
+        ));
   }
 }

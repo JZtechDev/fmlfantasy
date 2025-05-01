@@ -21,7 +21,8 @@ class RegisterView extends StatelessWidget {
             Positioned.fill(
                 child: Opacity(
                     opacity: 0.5,
-                    child: Image.asset('assets/new_images/login-bg.png'))),
+                    child: Image.asset('assets/new_images/login-bg.png',
+                        fit: BoxFit.cover))),
             SingleChildScrollView(
               physics: const ScrollPhysics(),
               child: Padding(
@@ -38,29 +39,6 @@ class RegisterView extends StatelessWidget {
                         child: Hero(
                           tag: 'logo',
                           transitionOnUserGestures: true,
-                          // createRectTween: (begin, end) {
-                          //   return MaterialRectArcTween(
-                          //       begin: begin, end: end); // Smooth path
-                          // },
-                          // flightShuttleBuilder: (
-                          //   BuildContext flightContext,
-                          //   Animation<double> animation,
-                          //   HeroFlightDirection flightDirection,
-                          //   BuildContext fromHeroContext,
-                          //   BuildContext toHeroContext,
-                          // ) {
-                          //   return ScaleTransition(
-                          //     scale: CurvedAnimation(
-                          //       parent: animation,
-                          //       curve:
-                          //           Curves.easeInOutCubic, // Smooth, slow curve
-                          //     ),
-                          //     child: Image.asset(
-                          //       AppImages.logo,
-                          //       width: 150.w,
-                          //     ),
-                          //   );
-                          // },
                           child: Image.asset(AppImages.logo, width: 150.w),
                         ),
                       ),
@@ -75,7 +53,7 @@ class RegisterView extends StatelessWidget {
                                 .tr,
                             style: globalTextStyle(
                                 fontSize:
-                                    AppSizing.isMobile(context) ? 18.sp : 16.sp,
+                                    AppSizing.isMobile(context) ? 18.sp : 14.sp,
                                 color: AppColors.white,
                                 fontWeight: FontWeight.w800),
                           ),
@@ -83,11 +61,11 @@ class RegisterView extends StatelessWidget {
                       ),
                       verticalSpace(35.h),
                       SlideInUp(
-                        duration: Duration(seconds: 2),
+                        duration: const Duration(seconds: 2),
                         child: Text('SIGN UP NOW'.tr,
                             style: globalTextStyle(
                                 fontSize:
-                                    AppSizing.isMobile(context) ? 16.sp : 14.sp,
+                                    AppSizing.isMobile(context) ? 16.sp : 12.sp,
                                 color: AppColors.white,
                                 fontWeight: FontWeight.w800)),
                       ),
@@ -135,7 +113,7 @@ class RegisterView extends StatelessWidget {
                                 style: globalTextStyle(
                                     fontSize: AppSizing.isMobile(context)
                                         ? 12.sp
-                                        : 12.sp,
+                                        : 9.sp,
                                     color: AppColors.white,
                                     fontWeight: FontWeight.w600)),
                           ),
@@ -149,7 +127,8 @@ class RegisterView extends StatelessWidget {
                       verticalSpace(30),
                       Text('ALREADY A MEMBER?'.tr,
                           style: globalTextStyle(
-                            fontSize: 12,
+                            fontSize:
+                                AppSizing.isMobile(context) ? 12.sp : 8.sp,
                             color: AppColors.white,
                           )),
                       verticalSpace(10),
@@ -158,7 +137,7 @@ class RegisterView extends StatelessWidget {
                           backgroundColor: Colors.transparent,
                           buttonText: 'LOGIN'.tr,
                           onPressed: () {
-                            Get.toNamed(AppRoutes.dashboardView);
+                            Get.toNamed(AppRoutes.loginView);
                           },
                           isEnabled: true),
                       verticalSpace(20),
