@@ -21,7 +21,7 @@ class FilterButton extends GetView<SelectPlayerController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'selectPlayer'.tr,
+              'Tap To Select Player'.tr,
               style: globalTextStyle(
                   fontSize: maxWidth > 600 ? 12.sp : 20.sp,
                   fontWeight: FontWeight.w800),

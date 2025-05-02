@@ -56,7 +56,7 @@ class AppBarInner extends StatelessWidget implements PreferredSizeWidget {
                       ),
                       padding: const EdgeInsets.all(7),
                       child: Icon(FlutterRemix.arrow_left_s_line,
-                          color: AppColors.white, size: 20.sp))),
+                          color: AppColors.primaryDark, size: 20.sp))),
             ),
             backgroundColor: backgroundColor,
             title: Image.asset(

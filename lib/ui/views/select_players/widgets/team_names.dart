@@ -1,4 +1,5 @@
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
+import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
@@ -77,23 +78,13 @@ class TeamsContainer extends GetView<SelectPlayerController> {
                         ),
                         horizontalSpace(10.w),
                         SizedBox(
-                          width: 80.w,
+                          width: AppSizing.width(context) * 0.25,
                           child: Center(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   homeTeamNme!,
-                                  style: globalTextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColors.primaryVeryDark),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.left,
-                                ),
-                                Text(
-                                  awayTeamCode!,
                                   style: globalTextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w700,
@@ -144,7 +135,7 @@ class TeamsContainer extends GetView<SelectPlayerController> {
                       ),
                       horizontalSpace(10.w),
                       SizedBox(
-                        width: 80.w,
+                        width: AppSizing.width(context) * 0.25,
                         child: Center(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,18 +148,7 @@ class TeamsContainer extends GetView<SelectPlayerController> {
                                   fontWeight: FontWeight.w700,
                                   color: AppColors.primaryVeryDark,
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                textAlign: TextAlign.left,
-                                awayTeamCode ?? '-',
-                                style: globalTextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: AppColors.primaryVeryDark,
-                                ),
-                                maxLines: 1,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ],
