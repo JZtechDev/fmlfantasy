@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/model/match_center_model.dart';
@@ -10,7 +11,7 @@ import 'package:get/get.dart';
 class MatchCenterController extends GetxController {
   MatchCenterServices matchCenterServices = MatchCenterServices();
   RxList<MatchCenterModel> matchData = <MatchCenterModel>[].obs;
-  RxList<MatchCenterModel> tournaments = <MatchCenterModel>[].obs;
+  RxList<PastMatches> tournaments = <PastMatches>[].obs;
   RxBool isSearch = false.obs;
   var isloading = false.obs;
   RxInt selectedIndex = 0.obs;
@@ -97,14 +98,16 @@ class MatchCenterController extends GetxController {
   //   }
   // }
 
-  Future<List<MatchCenterModel>> fetchMatchCenterData() async {
+  Future<List<PastMatches>> fetchMatchCenterData() async {
     try {
-      List<MatchCenterModel> fetchedTournaments =
-          await matchCenterServices.fetchMatchCenterData(
-              selectedSport.value, formattedPastDate, formattedDate);
+      EasyLoading.show(status: 'Loading...');
+      List<PastMatches> fetchedTournaments =
+          await matchCenterServices.pastMatches(selectedSport.value);
       tournaments.value = fetchedTournaments;
+      EasyLoading.dismiss();
       return tournaments;
     } catch (error) {
+      EasyLoading.dismiss();
       rethrow; // Rethrow the error to handle it in the FutureBuilder
     }
   }

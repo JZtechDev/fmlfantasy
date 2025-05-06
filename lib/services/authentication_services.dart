@@ -38,8 +38,6 @@ class AuthenticationServices {
       // Handle DioErrors (network issues, server responses other than 200)
       if (e.response != null) {
         // When the server responded with an error
-        Snackbars.error(
-            e.response!.data['message'] ?? 'Unknown error occurred');
       } else {
         // When there is no response (network issues, timeouts, etc.)
         Get.snackbar('Error', 'Check Your Internet Connection');

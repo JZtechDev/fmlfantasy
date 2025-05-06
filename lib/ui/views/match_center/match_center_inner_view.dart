@@ -1,5 +1,6 @@
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/match_center_inner.dart';
+import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/components/inner_appbar.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/label_and_toggle.dart';
@@ -11,6 +12,7 @@ import 'package:fmlfantasy/ui/views/match_center/widget/skeleton/match_inner_cri
 import 'package:fmlfantasy/ui/views/match_center/widget/skeleton/match_inner_football_skeleton.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/team_and_lineup_tabs.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/top_players_sider.dart';
+import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
 
 class MatchCenterInnerView extends GetView<MatchCenterInner> {
   const MatchCenterInnerView({
@@ -20,12 +22,19 @@ class MatchCenterInnerView extends GetView<MatchCenterInner> {
   Widget build(BuildContext context) {
     Get.put(MatchCenterInner());
     return Scaffold(
-        backgroundColor: AppColors.grey,
-        appBar: const AppBarInner(title: 'Match Center Leaderboard'),
+        appBar: HomeAppBar(title: 'matchcenter'.tr),
         body: LayoutBuilder(builder: (context, constraints) {
           return CustomScrollView(slivers: [
             SliverToBoxAdapter(
                 child: Column(children: [
+              const Padding(
+                padding:
+                    EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [DashboardButton(), DashboardButton()],
+                ),
+              ),
               const PastMatchesSlider(),
               Obx(() {
                 if (controller.isLoading.value) {
