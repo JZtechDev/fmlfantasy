@@ -19,9 +19,9 @@ class ToggleCarouselSliderContainer extends GetView<MatchCenterInner> {
               width: maxWidth > 350 ? 170.w : 209.w,
               height: 49.h,
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: const Color.fromRGBO(44, 86, 80, 1),
                 border: Border.all(
-                  color: AppColors.white,
+                  color: const Color.fromRGBO(44, 86, 80, 1),
                   width: 1,
                 ),
                 borderRadius: BorderRadius.circular(5.r),
@@ -45,8 +45,14 @@ class ToggleCarouselSliderContainer extends GetView<MatchCenterInner> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5.r),
                             color: controller.isStatsList[index].value
-                                ? AppColors.primary
-                                : AppColors.white,
+                                ? AppColors.secondary
+                                : const Color.fromRGBO(44, 86, 80, 1),
+                            border: Border.all(
+                              color: controller.isStatsList[index].value
+                                  ? const Color.fromRGBO(44, 86, 80, 1)
+                                  : AppColors.secondary,
+                              width: 1,
+                            ),
                           ),
                           child: AnimatedDefaultTextStyle(
                             duration: const Duration(milliseconds: 300),
@@ -56,15 +62,15 @@ class ToggleCarouselSliderContainer extends GetView<MatchCenterInner> {
                               color: AppColors.dark,
                             ),
                             child: Text(
-                              'statistics'.tr,
+                              'STATISTICS'.tr,
                               style: globalTextStyle(
                                   color: controller.isStatsList[index].value
-                                      ? AppColors.white
-                                      : AppColors.dark,
+                                      ? AppColors.darkGreen
+                                      : AppColors.secondary,
                                   fontSize: AppSizing.isMobile(context)
                                       ? 12.sp
                                       : 8.sp,
-                                  fontWeight: FontWeight.w600),
+                                  fontWeight: FontWeight.w700),
                             ),
                           ),
                         ),
@@ -83,8 +89,14 @@ class ToggleCarouselSliderContainer extends GetView<MatchCenterInner> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5.r),
                             color: controller.isStatsList[index].value
-                                ? AppColors.white
-                                : AppColors.primary,
+                                ? const Color.fromRGBO(44, 86, 80, 1)
+                                : AppColors.secondary,
+                            border: Border.all(
+                              color: controller.isStatsList[index].value
+                                  ? AppColors.secondary
+                                  : const Color.fromRGBO(44, 86, 80, 1),
+                              width: 1,
+                            ),
                           ),
                           child: AnimatedDefaultTextStyle(
                             duration: const Duration(milliseconds: 300),
@@ -94,15 +106,15 @@ class ToggleCarouselSliderContainer extends GetView<MatchCenterInner> {
                               color: AppColors.dark,
                             ),
                             child: Text(
-                              'Fantasy Points'.tr,
+                              ' POINTS'.tr,
                               style: globalTextStyle(
                                   color: controller.isStatsList[index].value
-                                      ? AppColors.dark
-                                      : AppColors.white,
+                                      ? AppColors.secondary
+                                      : AppColors.darkGreen,
                                   fontSize: AppSizing.isMobile(context)
                                       ? 12.sp
                                       : 8.sp,
-                                  fontWeight: FontWeight.w600),
+                                  fontWeight: FontWeight.w700),
                             ),
                           ),
                         ),

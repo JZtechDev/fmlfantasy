@@ -1,7 +1,6 @@
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/match_center_inner.dart';
 import 'package:fmlfantasy/ui/components/home_appbar.dart';
-import 'package:fmlfantasy/ui/components/inner_appbar.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/label_and_toggle.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/lineup_and_formation.dart';
@@ -35,7 +34,7 @@ class MatchCenterInnerView extends GetView<MatchCenterInner> {
                   children: [DashboardButton(), DashboardButton()],
                 ),
               ),
-              const PastMatchesSlider(),
+              //const PastMatchesSlider(),
               Obx(() {
                 if (controller.isLoading.value) {
                   return Center(child: Builder(builder: (context) {
@@ -61,9 +60,8 @@ class MatchCenterInnerView extends GetView<MatchCenterInner> {
                       MatchPreview(data: data),
                       verticalSpace(10.h),
                       const LabelAndToggle(),
-                      verticalSpace(10.h),
                       TopPlayersSider(data: data),
-                      verticalSpace(5.h),
+                      verticalSpace(30.h),
                       TeamAndLineupTabs(data: data),
                       verticalSpace(20.h),
                       LineupAndFormation(data: data)

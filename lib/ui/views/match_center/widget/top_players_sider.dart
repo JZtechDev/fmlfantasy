@@ -20,8 +20,6 @@ class TopPlayersSider extends GetView<MatchCenterInner> {
             : Padding(
                 padding: EdgeInsets.only(left: 10.w),
                 child: CarouselSlider.builder(
-                  //carouselController:
-                  // controller.carouselController,
                   controller: controller.carouselController,
                   itemCount: 5,
                   itemBuilder: (context, index, realIndex) {
@@ -32,11 +30,12 @@ class TopPlayersSider extends GetView<MatchCenterInner> {
                     );
                   },
                   options: CarouselOptions(
-                    aspectRatio: AppSizing.isTablet(context) ? 1.3 : 0.9,
-                    viewportFraction: AppSizing.isTablet(context) ? 0.5 : 0.62,
+                    clipBehavior: Clip.hardEdge,
+                    aspectRatio: AppSizing.isTablet(context) ? 1.3 : 0.85,
+                    viewportFraction: AppSizing.isTablet(context) ? 0.5 : 0.9,
                     scrollDirection: Axis.horizontal,
                     enableInfiniteScroll: false,
-                    padEnds: false,
+                    padEnds: true,
                     onPageChanged: (index, reason) {
                       controller.topPlayerCrouselIndex.value = index;
                     },

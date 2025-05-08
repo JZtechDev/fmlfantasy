@@ -41,130 +41,269 @@ class LineupAndFormation extends GetView<MatchCenterInner> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 5),
-                      child: ListTile(
-                        style: ListTileStyle.list,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.r),
-                        ),
-                        trailing:
-                            Row(mainAxisSize: MainAxisSize.min, children: [
-                          Text(
-                            topPlayers.fantasyPoints!.toStringAsFixed(0),
-                            style: globalTextStyle2(
-                                fontSize:
-                                    AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                                color: AppColors.navyBlue),
-                          ),
-                          horizontalSpace(10.w),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: AppColors.primary,
-                            size: AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                          )
-                        ]),
-                        tileColor: AppColors.white,
-                        leading: Text(
-                          topPlayers.rank.toString(),
-                          style: globalTextStyle2(
-                              fontSize:
-                                  AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                              color: AppColors.navyBlue),
-                        ),
-                        title: SizedBox(
-                          width: Get.width * 0.3,
-                          child: Row(
-                            children: [
-                              // Condition For Football
-                              controller.sportsCode == 'FB'
-                                  ? topPlayers.imageUrl == null ||
-                                          topPlayers.imageUrl!.isEmpty
-                                      ? topPlayers.jerseyImage == null ||
-                                              topPlayers.jerseyImage!.isEmpty
-                                          ? Container()
-                                          : topPlayers.jerseyImage!
-                                                  .endsWith('.svg')
-                                              ? SvgPicture.network(
-                                                  topPlayers.jerseyImage!,
-                                                  height: 30.h,
-                                                  width: 30.w,
-                                                )
-                                              : Image.network(
-                                                  topPlayers.jerseyImage!,
-                                                  height: 30.h,
-                                                  width: 30.w,
-                                                )
+                      child: Row(children: [
+                        Container(
+                            padding: const EdgeInsets.all(5),
+                            width: 70.w,
+                            height: 71.h,
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5.r),
+                                  bottomLeft: Radius.circular(5.r)),
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: 35.w,
+                                    maxHeight: 55.h,
+                                  ),
+                                  child: controller.sportsCode == 'FB'
+                                      ? topPlayers.imageUrl == null ||
+                                              topPlayers.imageUrl!.isEmpty
+                                          ? topPlayers.jerseyImage == null ||
+                                                  topPlayers
+                                                      .jerseyImage!.isEmpty
+                                              ? Container()
+                                              : topPlayers.jerseyImage!
+                                                      .endsWith('.svg')
+                                                  ? SvgPicture.network(
+                                                      topPlayers.jerseyImage!,
+                                                    )
+                                                  : Image.network(
+                                                      topPlayers.jerseyImage!,
+                                                    )
+                                          : topPlayers.imageUrl == null ||
+                                                  topPlayers.imageUrl!.isEmpty
+                                              ? Container()
+                                              : topPlayers.imageUrl!
+                                                      .endsWith('.svg')
+                                                  ? SvgPicture.network(
+                                                      topPlayers.imageUrl!,
+                                                    )
+                                                  : Image.network(
+                                                      topPlayers.imageUrl!,
+                                                    )
+                                      //Condition for general
                                       : topPlayers.imageUrl == null ||
                                               topPlayers.imageUrl!.isEmpty
                                           ? Container()
                                           : topPlayers.imageUrl!
                                                   .endsWith('.svg')
-                                              ? SvgPicture.network(
-                                                  topPlayers.imageUrl!,
-                                                  height: 30.h,
-                                                  width: 30.w,
-                                                )
+                                              ? controller.sportsCode == 'CR'
+                                                  ? Image.network(
+                                                      replaceSvgWithPng(
+                                                          topPlayers.imageUrl!),
+                                                    )
+                                                  : SvgPicture.network(
+                                                      topPlayers.imageUrl!,
+                                                    )
                                               : Image.network(
                                                   topPlayers.imageUrl!,
-                                                  height: 30.h,
-                                                  width: 30.w,
-                                                )
-                                  //Condition for general
-                                  : topPlayers.imageUrl == null ||
-                                          topPlayers.imageUrl!.isEmpty
-                                      ? Container()
-                                      : topPlayers.imageUrl!.endsWith('.svg')
-                                          ? controller.sportsCode == 'CR'
-                                              ? Image.network(
-                                                  replaceSvgWithPng(
-                                                      topPlayers.imageUrl!),
-                                                  height: 30.h,
-                                                )
-                                              : SvgPicture.network(
-                                                  topPlayers.imageUrl!,
-                                                  height: 30.h,
-                                                  width: 30.w,
-                                                )
-                                          : Image.network(
-                                              topPlayers.imageUrl!,
-                                              height: 30.h,
-                                              width: 30.w,
-                                            ),
-                              horizontalSpace(5.w),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: Get.width * 0.35,
-                                    child: Text(
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        topPlayers.name ?? '-',
-                                        style: globalTextStyle(
-                                            fontSize:
-                                                AppSizing.isMobile(context)
-                                                    ? 12.sp
-                                                    : 10.sp,
-                                            fontWeight: FontWeight.w400)),
-                                  ),
-                                  Text(topPlayers.position ?? '-',
-                                      style: globalTextStyle2(
-                                          fontSize: AppSizing.isMobile(context)
-                                              ? 10.sp
-                                              : 8.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.textGray)),
-                                ],
+                                                ),
+                                ),
+                                verticalSpace(2.h),
+                                Text(
+                                  topPlayers.rank.toString().padLeft(2, '0'),
+                                  style: globalTextStyle2(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: AppSizing.isMobile(context)
+                                          ? 14.sp
+                                          : 10.sp,
+                                      color: AppColors.navyBlue),
+                                ),
+                              ],
+                            )),
+                        Expanded(
+                          child: Container(
+                              alignment: Alignment.center,
+                              height: 71.h,
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryLight,
                               ),
-                              topPlayers.isStarter == true
-                                  ? Container()
-                                  : SvgPicture.asset(
-                                      'assets/images/Mobile-Substitution-On.svg',
-                                      height: 20.h,
-                                      width: 20.w)
-                            ],
-                          ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    topPlayers.name!,
+                                    style: globalTextStyle2(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: AppSizing.isMobile(context)
+                                            ? 14.sp
+                                            : 10.sp,
+                                        color: AppColors.white),
+                                  ),
+                                  verticalSpace(2.h),
+                                  Text(
+                                    topPlayers.position ?? '-',
+                                    style: globalTextStyle2(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: AppSizing.isMobile(context)
+                                            ? 12.sp
+                                            : 8.sp,
+                                        color: AppColors.white),
+                                  ),
+                                ],
+                              )),
                         ),
-                      ),
+                        Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(5),
+                            width: 70.w,
+                            height: 71.h,
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(5.r),
+                                  bottomRight: Radius.circular(5.r)),
+                            ),
+                            child:
+                                Row(mainAxisSize: MainAxisSize.min, children: [
+                              Text(
+                                topPlayers.fantasyPoints!.toStringAsFixed(0),
+                                style: globalTextStyle2(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: AppSizing.isMobile(context)
+                                        ? 14.sp
+                                        : 8.sp,
+                                    color: AppColors.navyBlue),
+                              ),
+                              horizontalSpace(10.w),
+                              Icon(
+                                Icons.arrow_forward_outlined,
+                                color: AppColors.primary,
+                                size:
+                                    AppSizing.isMobile(context) ? 12.sp : 10.sp,
+                              )
+                            ]))
+                      ]),
+                      //  ListTile(
+                      //   style: ListTileStyle.list,
+                      //   shape: RoundedRectangleBorder(
+                      //     borderRadius: BorderRadius.circular(5.r),
+                      //   ),
+                      //   trailing:
+                      //       Row(mainAxisSize: MainAxisSize.min, children: [
+                      //     Text(
+                      //       topPlayers.fantasyPoints!.toStringAsFixed(0),
+                      //       style: globalTextStyle2(
+                      //           fontSize:
+                      //               AppSizing.isMobile(context) ? 12.sp : 8.sp,
+                      //           color: AppColors.navyBlue),
+                      //     ),
+                      //     horizontalSpace(10.w),
+                      //     Icon(
+                      //       Icons.arrow_forward_ios,
+                      //       color: AppColors.primary,
+                      //       size: AppSizing.isMobile(context) ? 12.sp : 10.sp,
+                      //     )
+                      //   ]),
+                      //   tileColor: AppColors.primaryLight,
+                      //   leading: Text(
+                      //     topPlayers.rank.toString(),
+                      //     style: globalTextStyle2(
+                      //         fontSize:
+                      //             AppSizing.isMobile(context) ? 12.sp : 10.sp,
+                      //         color: AppColors.navyBlue),
+                      //   ),
+                      //   title: SizedBox(
+                      //     width: Get.width * 0.3,
+                      //     child: Row(
+                      //       children: [
+                      //         // Condition For Football
+                      //         controller.sportsCode == 'FB'
+                      //             ? topPlayers.imageUrl == null ||
+                      //                     topPlayers.imageUrl!.isEmpty
+                      //                 ? topPlayers.jerseyImage == null ||
+                      //                         topPlayers.jerseyImage!.isEmpty
+                      //                     ? Container()
+                      //                     : topPlayers.jerseyImage!
+                      //                             .endsWith('.svg')
+                      //                         ? SvgPicture.network(
+                      //                             topPlayers.jerseyImage!,
+                      //                             height: 30.h,
+                      //                             width: 30.w,
+                      //                           )
+                      //                         : Image.network(
+                      //                             topPlayers.jerseyImage!,
+                      //                             height: 30.h,
+                      //                             width: 30.w,
+                      //                           )
+                      //                 : topPlayers.imageUrl == null ||
+                      //                         topPlayers.imageUrl!.isEmpty
+                      //                     ? Container()
+                      //                     : topPlayers.imageUrl!
+                      //                             .endsWith('.svg')
+                      //                         ? SvgPicture.network(
+                      //                             topPlayers.imageUrl!,
+                      //                             height: 30.h,
+                      //                             width: 30.w,
+                      //                           )
+                      //                         : Image.network(
+                      //                             topPlayers.imageUrl!,
+                      //                             height: 30.h,
+                      //                             width: 30.w,
+                      //                           )
+                      //             //Condition for general
+                      //             : topPlayers.imageUrl == null ||
+                      //                     topPlayers.imageUrl!.isEmpty
+                      //                 ? Container()
+                      //                 : topPlayers.imageUrl!.endsWith('.svg')
+                      //                     ? controller.sportsCode == 'CR'
+                      //                         ? Image.network(
+                      //                             replaceSvgWithPng(
+                      //                                 topPlayers.imageUrl!),
+                      //                             height: 30.h,
+                      //                           )
+                      //                         : SvgPicture.network(
+                      //                             topPlayers.imageUrl!,
+                      //                             height: 30.h,
+                      //                             width: 30.w,
+                      //                           )
+                      //                     : Image.network(
+                      //                         topPlayers.imageUrl!,
+                      //                         height: 30.h,
+                      //                         width: 30.w,
+                      //                       ),
+                      //         horizontalSpace(5.w),
+                      //         Column(
+                      //           crossAxisAlignment: CrossAxisAlignment.start,
+                      //           children: [
+                      //             SizedBox(
+                      //               width: Get.width * 0.35,
+                      //               child: Text(
+                      //                   maxLines: 1,
+                      //                   overflow: TextOverflow.ellipsis,
+                      //                   topPlayers.name ?? '-',
+                      //                   style: globalTextStyle(
+                      //                       fontSize:
+                      //                           AppSizing.isMobile(context)
+                      //                               ? 12.sp
+                      //                               : 10.sp,
+                      //                       fontWeight: FontWeight.w400)),
+                      //             ),
+                      //             Text(topPlayers.position ?? '-',
+                      //                 style: globalTextStyle2(
+                      //                     fontSize: AppSizing.isMobile(context)
+                      //                         ? 10.sp
+                      //                         : 8.sp,
+                      //                     fontWeight: FontWeight.w600,
+                      //                     color: AppColors.textGray)),
+                      //           ],
+                      //         ),
+                      //         topPlayers.isStarter == true
+                      //             ? Container()
+                      //             : SvgPicture.asset(
+                      //                 'assets/images/Mobile-Substitution-On.svg',
+                      //                 height: 20.h,
+                      //                 width: 20.w)
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                     ));
               },
             ),

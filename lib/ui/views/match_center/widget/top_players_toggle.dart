@@ -30,51 +30,44 @@ class TopPlayersToggle extends GetView<MatchCenterInner> {
   @override
   Widget build(BuildContext context) {
     Get.put(MatchCenterInner());
-    return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Row(
-            children: [
-              GestureDetector(
-                onTap: onPrevious,
-                child: Container(
-                  height: 30.h,
-                  width: 30.w,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: previousButtonColor),
-                  child: SvgPicture.asset('assets/icons/arrowleft.svg',
-                      height: 10.h,
-                      width: 10.w,
-                      // ignore: deprecated_member_use
-                      color: previousIconColor),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Row(
+          children: [
+            GestureDetector(
+              onTap: onPrevious,
+              child: Container(
+                height: 40.h,
+                width: 40.w,
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(5),
+                child: Image.asset(
+                  'assets/new_images/arrow left.png',
+                  height: 25.h,
+                  width: 25.w,
                 ),
               ),
-              horizontalSpace(10.w),
-              GestureDetector(
-                onTap: onNext,
-                child: Container(
-                  height: 30.h,
-                  width: 30.w,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: nextButtonColor),
-                  child: SvgPicture.asset('assets/icons/arrowright.svg',
-                      height: 10.h,
-                      width: 10.w,
-                      // ignore: deprecated_member_use
-                      color: nextIconColor),
+            ),
+            horizontalSpace(Get.width * 0.5),
+            GestureDetector(
+              onTap: onNext,
+              child: Container(
+                height: 40.h,
+                width: 40.w,
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(5),
+                child: Image.asset(
+                  'assets/new_images/arrow right.png',
+                  height: 25.h,
+                  width: 25.w,
                 ),
               ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

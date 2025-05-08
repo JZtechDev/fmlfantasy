@@ -14,14 +14,8 @@ class LabelAndToggle extends GetView<MatchCenterInner> {
       return Padding(
         padding: EdgeInsets.only(left: 20.w, right: 10.w),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'topPlayers'.tr,
-              style: globalTextStyle(
-                  fontSize: maxWidth > 600 ? 14.sp : 26.sp,
-                  fontWeight: FontWeight.w600),
-            ),
             Obx(() {
               return TopPlayersToggle(
                 iconPathN: 'assets/icons/arrowright.svg',
