@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class MatchCenterController extends GetxController {
   MatchCenterServices matchCenterServices = MatchCenterServices();
   RxList<MatchCenterModel> matchData = <MatchCenterModel>[].obs;
-  RxList<MatchCenterModel> tournaments = <MatchCenterModel>[].obs;
+  RxList<PastMatches> tournaments = <PastMatches>[].obs;
   RxBool isSearch = false.obs;
   var isloading = false.obs;
   RxInt selectedIndex = 0.obs;
@@ -35,12 +35,12 @@ class MatchCenterController extends GetxController {
   DateTime pastDate = DateTime.now().subtract(const Duration(days: 15));
   String formattedPastDate = '';
 
-  Future<List<MatchCenterModel>> fetchMatchCenterData() async {
+
+  Future<List<PastMatches>> fetchMatchCenterData() async {
     try {
       EasyLoading.show(status: 'Loading...');
-      List<MatchCenterModel> fetchedTournaments =
-          await matchCenterServices.fetchMatchCenterData(
-              selectedSport.value, formattedPastDate, formattedDate);
+      List<PastMatches> fetchedTournaments =
+          await matchCenterServices.pastMatches(selectedSport.value);
       tournaments.value = fetchedTournaments;
       EasyLoading.dismiss();
       return tournaments;

@@ -44,7 +44,7 @@ class AuthenticationServices {
           Snackbars.error('Account is not activated');
         } else {
           Snackbars.error('Server Error: ${e.response!.data}');
-        }
+        
       } else {
         // When there is no response (network issues, timeouts, etc.)
         Get.snackbar('Error', 'Check Your Internet Connection');

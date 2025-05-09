@@ -7,11 +7,8 @@ import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/components/sports_tab_bar.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_controller.dart';
-import 'package:fmlfantasy/ui/views/match_center/widget/label_and_search.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/match_center_tiles.dart';
-import 'package:fmlfantasy/ui/widgets/app_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
 import 'package:get/get.dart';
@@ -49,36 +46,36 @@ class MatchCenter extends GetView<MatchCenterController> {
                 SingleChildScrollView(
                   child: Column(
                     children: [
-                      verticalSpace(20.h),
-                      const LabelAndSearch(),
-                      Obx(() {
-                        return AnimatedContainer(
-                            clipBehavior: Clip.hardEdge,
-                            height: controller.isSearch.value ? 60 : 0,
-                            duration: const Duration(milliseconds: 400),
-                            decoration: BoxDecoration(
-                                color: AppColors.grey,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: OverflowBox(
-                              fit: OverflowBoxFit.deferToChild,
-                              minHeight: 0,
-                              maxHeight: 60,
-                              child: Padding(
-                                padding:
-                                    EdgeInsets.only(left: 15.w, right: 15.w),
-                                child: AppTextField(
-                                  fillColor: AppColors.white,
-                                  labelText: 'search'.tr,
-                                  controller: controller.searchController,
-                                  onChanged: (value) {
-                                    controller.searchQuery.value = value;
-                                  },
-                                ),
-                              ),
-                            ));
-                      }),
+                      const DashboardButton(),
                       verticalSpace(10.h),
-                      Obx(() => FutureBuilder<List<MatchCenterModel>>(
+                      // const LabelAndSearch(),
+                      // Obx(() {
+                      //   return AnimatedContainer(
+                      //       clipBehavior: Clip.hardEdge,
+                      //       height: controller.isSearch.value ? 60 : 0,
+                      //       duration: const Duration(milliseconds: 400),
+                      //       decoration: BoxDecoration(
+                      //           color: AppColors.grey,
+                      //           borderRadius: BorderRadius.circular(5)),
+                      //       child: OverflowBox(
+                      //         fit: OverflowBoxFit.deferToChild,
+                      //         minHeight: 0,
+                      //         maxHeight: 60,
+                      //         child: Padding(
+                      //           padding:
+                      //               EdgeInsets.only(left: 15.w, right: 15.w),
+                      //           child: AppTextField(
+                      //             fillColor: AppColors.white,
+                      //             labelText: 'search'.tr,
+                      //             controller: controller.searchController,
+                      //             onChanged: (value) {
+                      //               controller.searchQuery.value = value;
+                      //             },
+                      //           ),
+                      //         ),
+                      //       ));
+                      // }),
+                      Obx(() => FutureBuilder<List<PastMatches>>(
                           future: controller.fetchMatchCenterData(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
@@ -92,12 +89,10 @@ class MatchCenter extends GetView<MatchCenterController> {
                                   return item.competitionName!
                                           .toLowerCase()
                                           .contains(query) ||
-                                      item.teams![0].name!
+                                      item.home!
                                           .toLowerCase()
                                           .contains(query) ||
-                                      item.teams![1].name!
-                                          .toLowerCase()
-                                          .contains(query);
+                                      item.away!.toLowerCase().contains(query);
                                 }).toList();
                                 return ListView.builder(
                                     itemCount: filteredList.length,
@@ -105,8 +100,7 @@ class MatchCenter extends GetView<MatchCenterController> {
                                     physics:
                                         const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
-                                      MatchCenterModel data =
-                                          filteredList[index];
+                                      PastMatches data = filteredList[index];
                                       return GestureDetector(
                                           onTap: () {
                                             Get.toNamed(
@@ -122,7 +116,8 @@ class MatchCenter extends GetView<MatchCenterController> {
                                           child: Padding(
                                             padding: EdgeInsets.only(
                                                 left: 15.w, right: 15.w),
-                                            child: MatchCenterTiles(data: data),
+                                            child:
+                                                MatchCenterTiles(matches: data),
                                           ));
                                     });
                               });

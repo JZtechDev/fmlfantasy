@@ -14,13 +14,8 @@ class TeamAndLineupTabs extends GetView<MatchCenterInner> {
     return Column(
       children: [
         Obx(
-          () => Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.w),
-            padding: const EdgeInsets.all(2.5),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(5.r),
-            ),
+          () => Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(children: [
               Expanded(
                 child: GestureDetector(
@@ -29,21 +24,35 @@ class TeamAndLineupTabs extends GetView<MatchCenterInner> {
                   },
                   child: Container(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 20),
                     decoration: BoxDecoration(
                       color: controller.playersTabIsAway.value
-                          ? AppColors.grey
-                          : AppColors.primary,
-                      borderRadius: BorderRadius.circular(2.5.r),
+                          ? AppColors.backgroud
+                          : AppColors.secondary,
+                      borderRadius: BorderRadius.circular(5.r),
+                      border: Border.all(
+                        color: controller.playersTabIsAway.value
+                            ? AppColors.secondary
+                            : AppColors.backgroud,
+                        width: 1,
+                      ),
                     ),
-                    child: Text(
-                        style: globalTextStyle2(
-                          fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                          color: controller.playersTabIsAway.value == false
-                              ? AppColors.white
-                              : AppColors.navyBlue,
-                        ),
-                        data.teamAName ?? '-'),
+                    child: SizedBox(
+                      width: Get.width * 0.3,
+                      child: Text(
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: globalTextStyle2(
+                            fontSize:
+                                AppSizing.isMobile(context) ? 12.sp : 10.sp,
+                            color: controller.playersTabIsAway.value == false
+                                ? AppColors.darkGreen
+                                : AppColors.secondary,
+                          ),
+                          data.teamAName ?? '-'),
+                    ),
                   ),
                 ),
               ),
@@ -55,20 +64,33 @@ class TeamAndLineupTabs extends GetView<MatchCenterInner> {
                   },
                   child: Container(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 20),
                     decoration: BoxDecoration(
                       color: controller.playersTabIsAway.value
-                          ? AppColors.primary
-                          : AppColors.grey,
-                      borderRadius: BorderRadius.circular(2.5.r),
+                          ? AppColors.secondary
+                          : AppColors.backgroud,
+                      borderRadius: BorderRadius.circular(5.r),
+                      border: Border.all(
+                        color: controller.playersTabIsAway.value
+                            ? AppColors.backgroud
+                            : AppColors.secondary,
+                        width: 1,
+                      ),
                     ),
-                    child: Text(
-                      data.teamBName ?? '-',
-                      style: globalTextStyle2(
-                        fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                        color: controller.playersTabIsAway.value == true
-                            ? AppColors.white
-                            : AppColors.navyBlue,
+                    child: SizedBox(
+                      width: Get.width * 0.3,
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        data.teamBName ?? '-',
+                        style: globalTextStyle2(
+                          fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
+                          color: controller.playersTabIsAway.value == true
+                              ? AppColors.darkGreen
+                              : AppColors.secondary,
+                        ),
                       ),
                     ),
                   ),
@@ -79,13 +101,8 @@ class TeamAndLineupTabs extends GetView<MatchCenterInner> {
         ),
         verticalSpace(5.h),
         Obx(
-          () => Container(
-            margin: EdgeInsets.symmetric(horizontal: 40.w),
-            padding: const EdgeInsets.all(2.5),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(5.r),
-            ),
+          () => Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(children: [
               Expanded(
                 child: GestureDetector(
@@ -94,20 +111,27 @@ class TeamAndLineupTabs extends GetView<MatchCenterInner> {
                   },
                   child: Container(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 20),
                     decoration: BoxDecoration(
                       color: controller.isLineup.value
-                          ? AppColors.primary
-                          : AppColors.grey,
-                      borderRadius: BorderRadius.circular(2.5.r),
+                          ? const Color.fromRGBO(255, 240, 130, 1)
+                          : AppColors.backgroud,
+                      borderRadius: BorderRadius.circular(5.r),
+                      border: Border.all(
+                        color: controller.isLineup.value
+                            ? AppColors.backgroud
+                            : const Color.fromRGBO(255, 240, 130, 1),
+                        width: 1,
+                      ),
                     ),
                     child: Text(
                         style: globalTextStyle2(
-                          fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                          color: controller.isLineup.value
-                              ? AppColors.white
-                              : AppColors.navyBlue,
-                        ),
+                            fontSize:
+                                AppSizing.isMobile(context) ? 12.sp : 10.sp,
+                            color: controller.isLineup.value
+                                ? AppColors.darkGreen
+                                : const Color.fromRGBO(255, 240, 130, 1)),
                         'Lineup'.tr),
                   ),
                 ),
@@ -120,20 +144,27 @@ class TeamAndLineupTabs extends GetView<MatchCenterInner> {
                   },
                   child: Container(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 20),
                     decoration: BoxDecoration(
                       color: controller.isLineup.value
-                          ? AppColors.grey
-                          : AppColors.primary,
-                      borderRadius: BorderRadius.circular(2.5.r),
+                          ? AppColors.backgroud
+                          : const Color.fromRGBO(255, 240, 130, 1),
+                      borderRadius: BorderRadius.circular(5.r),
+                      border: Border.all(
+                        color: controller.isLineup.value
+                            ? const Color.fromRGBO(255, 240, 130, 1)
+                            : AppColors.backgroud,
+                        width: 1,
+                      ),
                     ),
                     child: Text(
                       'Formation'.tr,
                       style: globalTextStyle2(
                         fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
                         color: controller.isLineup.value
-                            ? AppColors.dark
-                            : AppColors.white,
+                            ? const Color.fromRGBO(255, 240, 130, 1)
+                            : AppColors.darkGreen,
                       ),
                     ),
                   ),

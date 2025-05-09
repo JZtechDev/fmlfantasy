@@ -13,7 +13,7 @@ class DashboardButton extends StatelessWidget {
         Get.offAllNamed(AppRoutes.dashboardView);
       },
       child: Container(
-        width: AppSizing.isMobile(context) ? 100.w : 80.w,
+        width: AppSizing.isMobile(context) ? 120.w : 80.w,
         padding: const EdgeInsets.all(7),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),

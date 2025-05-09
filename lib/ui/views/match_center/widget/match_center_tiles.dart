@@ -11,178 +11,192 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class MatchCenterTiles extends GetView<MatchCenterController> {
-  final MatchCenterModel data;
-  const MatchCenterTiles({super.key, required this.data});
+  final PastMatches matches;
+  const MatchCenterTiles({super.key, required this.matches});
 
   @override
   Widget build(BuildContext context) {
     Get.put(MatchCenterController());
     return LayoutBuilder(builder: (context, constraints) {
-      double maxWidth = constraints.maxWidth;
-      return Column(
-        children: [
-          Container(
-            width: Get.width,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(5.r),
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(top: 5.h, left: 5.w, right: 5.w),
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.grey,
-                      borderRadius: BorderRadius.circular(5.r),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: 5.h, left: 5.w, right: 5.w, bottom: 5.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                  padding: EdgeInsets.all(10.w),
-                                  height: maxWidth > 600 ? 55.h : 60.h,
-                                  width: maxWidth > 600 ? 55.w : 60.w,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.white,
-                                      borderRadius:
-                                          BorderRadius.circular(8.33.r)),
-                                  child: data.teams?.isNotEmpty == true &&
-                                          data.teams?[0].imageUrl != null
-                                      ? data.teams![0].imageUrl!.endsWith('svg')
-                                          ? controller.selectedSport.value ==
-                                                  'CR'
-                                              ? Image.network(replaceSvgWithPng(
-                                                  data.teams![0].imageUrl!))
-                                              : SvgPicture.network(
-                                                  data.teams![0].imageUrl!,
-                                                  height: maxWidth > 600
-                                                      ? 40.h
-                                                      : 36.28.h,
-                                                  width: maxWidth > 600
-                                                      ? 50.w
-                                                      : 47.72.w,
-                                                  fit: BoxFit.contain,
-                                                )
-                                          : Image.network(
-                                              data.teams![0].imageUrl!,
+      //double maxWidth = constraints.maxWidth;
+      return Container(
+        width: Get.width,
+        margin: EdgeInsets.only(bottom: 10.h),
+        decoration: BoxDecoration(
+          color: const Color.fromRGBO(77, 134, 126, 1),
+          borderRadius: BorderRadius.circular(5.r),
+        ),
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(bottom: 5.h),
+              width: Get.width,
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(
+                    18, 96, 85, 1), // Changed to match screenshot background
+                borderRadius: BorderRadius.circular(5.r),
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: 15, bottom: 10.h, left: 10.w, right: 10.w),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10.w),
+                              height: 40.h,
+                              width: 40.w,
+                              decoration: const BoxDecoration(
+                                  color: Color.fromRGBO(217, 217, 217, 1),
+                                  shape: BoxShape.circle),
+                              child: matches.homeImageUrl == null ||
+                                      matches.homeImageUrl!.isEmpty
+                                  ? Container()
+                                  : controller.selectedSport.value == 'CR'
+                                      ? Image.network(
+                                          replaceSvgWithPng(
+                                              matches.homeImageUrl!),
+                                          height: 30.h,
+                                          width: 30.w,
+                                        )
+                                      : matches.homeImageUrl!.endsWith('.svg')
+                                          ? SvgPicture.network(
+                                              matches.homeImageUrl!,
+                                              height: 30.h,
+                                              width: 30.w,
                                             )
-                                      : Container()),
-                              horizontalSpace(10.w),
-                              Text(
-                                data.teams?.isNotEmpty == true &&
-                                        data.teams?[0].name != null
-                                    ? data.teams![0].name!.split(' ').join('\n')
-                                    : '',
+                                          : Image.network(
+                                              matches.homeImageUrl!,
+                                              height: 30.h,
+                                              width: 30.w,
+                                            ),
+                            ),
+                            verticalSpace(5.h),
+                            SizedBox(
+                              width: Get.width * 0.3,
+                              child: Text(
+                                matches.home ?? 'Team 2 large name here',
+                                textAlign: TextAlign.center,
                                 style: globalTextStyle2(
-                                    fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                                    color: AppColors.dark,
-                                    fontWeight: FontWeight.w500),
+                                  fontSize: 12.sp,
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                            ],
-                          ),
-                          Row(children: [
-                            Text(
-                              textAlign: TextAlign.end,
-                              data.teams?.length == 2 &&
-                                      data.teams?[1].name != null
-                                  ? data.teams![1].name!.split(' ').join('\n')
-                                  : '',
-                              style: globalTextStyle2(
-                                  fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                                  color: AppColors.dark,
-                                  fontWeight: FontWeight.w500),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
                             ),
-                            horizontalSpace(10.w),
-                            Container(
-                                padding: EdgeInsets.all(10.w),
-                                height: maxWidth > 600 ? 55.h : 60.h,
-                                width: maxWidth > 600 ? 55.w : 60.w,
-                                decoration: BoxDecoration(
-                                    color: AppColors.white,
-                                    borderRadius:
-                                        BorderRadius.circular(8.33.r)),
-                                child: data.teams?.length == 2 &&
-                                        data.teams?[1].imageUrl != null
-                                    ? data.teams![1].imageUrl!.endsWith('svg')
-                                        ? controller.selectedSport.value == 'CR'
-                                            ? Image.network(
-                                                replaceSvgWithPng(
-                                                    data.teams![1].imageUrl!),
-                                                height: maxWidth > 600
-                                                    ? 40.h
-                                                    : 36.28.h,
-                                                width: maxWidth > 600
-                                                    ? 50.w
-                                                    : 47.72.w,
-                                                fit: BoxFit.contain,
-                                              )
-                                            : SvgPicture.network(
-                                                data.teams![1].imageUrl!,
-                                              )
-                                        : Image.network(
-                                            data.teams![1].imageUrl!,
-                                          )
-                                    : Container()),
-                          ])
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: 5.h, left: 5.w, right: 5.w, bottom: 5.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(data.competitionName ?? '',
-                            style: globalTextStyle2(
-                                fontSize: maxWidth > 600 ? 8.sp : 10.sp,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.textGray),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/clock.svg',
-                              // ignore: deprecated_member_use
-                              color: Colors.red,
-                              height: 16.h,
-                              width: 16.w,
-                            ),
-                            horizontalSpace(5.w),
-                            Text(
-                                data.validAt != null
-                                    ? DateFormat('d MMM hh:mm a').format(
-                                        DateTime.parse(data.start!).toLocal())
-                                    : '',
-                                style: globalTextStyle2(
-                                    fontSize: maxWidth > 600 ? 8.sp : 10.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.red),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis),
                           ],
-                        )
+                        ),
+                        SizedBox(
+                          height: 80.h,
+                          child: VerticalDivider(
+                            color: AppColors.white,
+                            thickness: 1,
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10.w),
+                              height: 40.h,
+                              width: 40.w,
+                              decoration: const BoxDecoration(
+                                color: AppColors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: matches.awayImageUrl == null ||
+                                      matches.awayImageUrl!.isEmpty
+                                  ? Container()
+                                  : controller.selectedSport.value == 'CR'
+                                      ? Image.network(
+                                          replaceSvgWithPng(
+                                              matches.awayImageUrl!),
+                                          height: 30.h,
+                                          width: 30.w,
+                                        )
+                                      : matches.awayImageUrl!.endsWith('.svg')
+                                          ? SvgPicture.network(
+                                              matches.awayImageUrl!,
+                                              height: 30.h,
+                                              width: 30.w,
+                                            )
+                                          : Image.network(
+                                              matches.awayImageUrl!,
+                                              height: 30.h,
+                                              width: 30.w,
+                                            ),
+                            ),
+                            verticalSpace(5.h),
+                            SizedBox(
+                              width: Get.width * 0.3,
+                              child: Text(
+                                matches.away ?? 'Team 1 large name here',
+                                textAlign: TextAlign.center,
+                                style: globalTextStyle2(
+                                  fontSize: 12.sp,
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                  )
+                    SizedBox(height: 5.h),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Image.asset('assets/new_images/calender.png',
+                          height: 15.h, width: 15.w),
+                      horizontalSpace(5.w),
+                      Text(
+                        matches.start != null
+                            ? DateFormat('d MMM yyyy').format(
+                                DateTime.parse(matches.start ?? '').toLocal())
+                            : '6th May 1430',
+                        style: globalTextStyle2(
+                          fontSize: 12.sp,
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                  Text(
+                    matches.competitionName ?? 'English Premier League',
+                    style: globalTextStyle2(
+                      fontSize: 12.sp,
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),
-          ),
-          verticalSpace(5.h),
-        ],
+          ],
+        ),
       );
     });
   }
