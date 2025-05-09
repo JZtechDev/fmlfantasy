@@ -1,5 +1,4 @@
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
-import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/team_name/controller/team_name_controller.dart';
@@ -25,7 +24,8 @@ class TeamNameForm extends GetView<TeamNameController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  AppImages.teamName,
+                  'assets/new_images/create team.svg',
+                  color: AppColors.secondary,
                   height: maxWidth > 600 ? 63.h : 65.h,
                   width: maxWidth > 600 ? 66.w : 68.w,
                 ),
@@ -33,16 +33,16 @@ class TeamNameForm extends GetView<TeamNameController> {
                 Text(
                   "makeItOfficial".tr,
                   style: globalTextStyle(
-                      fontSize: maxWidth > 600 ? 16.sp : 30.sp,
-                      fontWeight: FontWeight.w600),
+                      fontSize: maxWidth > 600 ? 16.sp : 20.sp,
+                      fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  "namefantasy".tr,
+                  "Name your Fantasy Team".tr,
                   style: globalTextStyle2(
-                      color: AppColors.textGray,
+                      color: AppColors.white,
                       fontSize: maxWidth > 600 ? 10.sp : 14.sp,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w500),
                 ),
                 verticalSpace(15.h),
                 Form(

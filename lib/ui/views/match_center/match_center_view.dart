@@ -2,17 +2,18 @@ import 'package:fmlfantasy/app/app%20routes/app_routes.dart';
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/model/match_center_model.dart';
-import 'package:fmlfantasy/ui/components/app_appbar.dart';
+import 'package:fmlfantasy/ui/components/custom_sliver.dart';
+import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/components/sports_tab_bar.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_controller.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/label_and_search.dart';
-import 'package:fmlfantasy/ui/views/match_center/widget/match_center_skeleton.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/match_center_tiles.dart';
 import 'package:fmlfantasy/ui/widgets/app_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
 import 'package:get/get.dart';
 
 class MatchCenter extends GetView<MatchCenterController> {
@@ -22,18 +23,12 @@ class MatchCenter extends GetView<MatchCenterController> {
   Widget build(BuildContext context) {
     Get.put(MatchCenterController());
     return Scaffold(
-        backgroundColor: AppColors.grey,
-        appBar: const AppBarGeneral(title: 'Match center'),
+        backgroundColor: AppColors.backgroud,
+        appBar: const HomeAppBar(title: 'Match Center'),
+        resizeToAvoidBottomInset: true,
         body: CustomScrollView(slivers: [
-          SliverAppBar(
-            toolbarHeight: 45.h,
-            expandedHeight: 45.h,
-            collapsedHeight: 45.h,
-            automaticallyImplyLeading: false,
-            pinned: true,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            flexibleSpace: Obx(() {
+          CustomSliver(
+            appBar: Obx(() {
               return SportsTabBar(
                 sportsList: controller.sportsList,
                 selectedIndex: controller.sportsList
@@ -50,7 +45,7 @@ class MatchCenter extends GetView<MatchCenterController> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                verticalSpace(5.h),
+                const DashboardButton(),
                 SingleChildScrollView(
                   child: Column(
                     children: [
@@ -86,14 +81,8 @@ class MatchCenter extends GetView<MatchCenterController> {
                       Obx(() => FutureBuilder<List<MatchCenterModel>>(
                           future: controller.fetchMatchCenterData(),
                           builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const MatchCenterSkeleton();
-                            } else if (snapshot.hasError) {
+                            if (snapshot.hasError) {
                               return Text('servererror'.tr);
-                            } else if (!snapshot.hasData ||
-                                snapshot.data!.isEmpty) {
-                              return Text('notournamentavailable.'.tr);
                             } else {
                               return Obx(() {
                                 final query =

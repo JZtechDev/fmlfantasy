@@ -38,10 +38,10 @@ class LoginView extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 0),
+              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
               child: GetBuilder<LoginController>(builder: (controller) {
                 return SizedBox(
-                  height: Get.height * 0.5,
+                  height: Get.height * 0.6,
                   child: Form(
                     key: controller.formKey,
                     child: Column(
@@ -97,30 +97,15 @@ class LoginView extends StatelessWidget {
                                     fontSize: AppSizing.isMobile(context)
                                         ? 12.sp
                                         : 8.sp,
-                                    color: AppColors.dark,
-                                    fontWeight: FontWeight.w500),
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w700),
                               ),
                             ),
                           ],
                         ),
-                        verticalSpace(20.h),
-                        // PrimaryButton(
-                        //     backgroundColor: AppColors.secondary,
-                        //     buttonText: 'Login With Face ID'.tr,
-                        //     onPressed: () {
-                        //       if (controller.isBiometricEnabled) {
-                        //         controller.authenticateUser();
-                        //       } else {
-                        //         Get.snackbar(
-                        //             "Error",
-                        //             'Please login with credentials first to setup biometric authentication'
-                        //                 .tr,
-                        //             backgroundColor: AppColors.errorRed,
-                        //             colorText: AppColors.white);
-                        //       }
-                        //       //controller.authenticateUser();
-                        //     },
-                        //     isEnabled: true),
+                        Expanded(
+                          child: Container(),
+                        ),
                         verticalSpace(10.h),
                         PrimaryButton(
                             isLoading: controller.isLoading,

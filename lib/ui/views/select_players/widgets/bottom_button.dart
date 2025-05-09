@@ -3,6 +3,7 @@ import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/select_players/controller/select_player_controller.dart';
 import 'package:fmlfantasy/ui/views/select_players/widgets/selected_players.dart';
+import 'package:fmlfantasy/ui/widgets/button_with_arrow.dart';
 import 'package:fmlfantasy/ui/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,9 +27,9 @@ class BottomButtonSelectPlayer extends GetView<SelectPlayerController> {
               children: [
                 const SelectedPlayer(),
                 verticalSpace(5.h),
-                PrimaryButton(
+                ButtonWithArrow(
                   isEnabled: true,
-                  buttonText: 'continue'.tr,
+                  buttonText: 'CONTINUE'.tr,
                   onPressed: () {
                     controller.navigateToNextPage();
                   },

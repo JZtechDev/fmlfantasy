@@ -37,9 +37,14 @@ class AuthenticationServices {
     } on DioException catch (e) {
       // Handle DioErrors (network issues, server responses other than 200)
       if (e.response != null) {
-        // When the server responded with an error
-        Snackbars.error(
-            e.response!.data['message'] ?? 'Unknown error occurred');
+        // Handle specific error messages from the server
+        if (e.response!.statusCode == 401) {
+          Snackbars.error('Something went wrong!! Please try again later');
+        } else if (e.response!.statusCode == 403) {
+          Snackbars.error('Account is not activated');
+        } else {
+          Snackbars.error('Server Error: ${e.response!.data}');
+        }
       } else {
         // When there is no response (network issues, timeouts, etc.)
         Get.snackbar('Error', 'Check Your Internet Connection');

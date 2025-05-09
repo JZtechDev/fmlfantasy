@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:fmlfantasy/core/imports/imports.dart';
-import 'package:fmlfantasy/ui/components/inner_appbar.dart';
+import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/views/select_players/controller/select_player_controller.dart';
 import 'package:fmlfantasy/ui/views/select_players/widgets/bottom_button.dart';
 import 'package:fmlfantasy/ui/views/select_players/widgets/players_section.dart';
@@ -16,8 +16,8 @@ class SelectPlayerView extends GetView<SelectPlayerController> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.backgroud,
-        appBar: const AppBarInner(
-          title: 'select players',
+        appBar: const HomeAppBar(
+          title: 'Home',
         ),
         body: LayoutBuilder(builder: (context, constraints) {
           return Stack(

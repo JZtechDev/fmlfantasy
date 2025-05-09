@@ -1,6 +1,8 @@
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/ui/components/app_appbar.dart';
+import 'package:fmlfantasy/ui/components/custom_sliver.dart';
+import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/components/sports_tab_bar.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/monthly_leaderboard/controller/monthly_leaderboard_controller.dart';
@@ -21,21 +23,12 @@ class MonthlyLeaderboard extends GetView<MonthlyLeaderboardController> {
   Widget build(BuildContext context) {
     Get.put(MonthlyLeaderboardController());
     return Scaffold(
-      backgroundColor: AppColors.grey,
-      appBar: const AppBarGeneral(
-        title: 'Monthly leaderboard',
-      ),
+      backgroundColor: AppColors.backgroud,
+      appBar: const HomeAppBar(title: 'Monthly Leaderboard'),
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            toolbarHeight: 45.h,
-            expandedHeight: 45.h,
-            collapsedHeight: 45.h,
-            automaticallyImplyLeading: false,
-            pinned: true,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            flexibleSpace: Obx(() => SportsTabBar(
+          CustomSliver(
+            appBar: Obx(() => SportsTabBar(
                 sportsList: controller.sportsList,
                 selectedIndex: controller.sportsList
                     .indexWhere((sport) => sport.title == selectedSPort.value),
@@ -53,9 +46,9 @@ class MonthlyLeaderboard extends GetView<MonthlyLeaderboardController> {
               padding: EdgeInsets.only(left: 15.w, right: 15.w),
               child: Column(
                 children: [
-                  verticalSpace(20.h),
-                  const LabelText(),
-                  verticalSpace(10),
+                  //verticalSpace(20.h),
+                  // const LabelText(),
+                  //verticalSpace(10),
                   Obx(
                     () => AnimatedContainer(
                         clipBehavior: Clip.hardEdge,

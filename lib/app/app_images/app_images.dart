@@ -8,7 +8,7 @@ class AppImages {
   static const String menu = 'assets/images/menu.svg';
   static const String back = 'assets/icons/back.svg';
 
-  static const String star = "assets/icons/start.svg";
+  static const String star = "assets/new_images/star.png";
 
   static const String userPlaceHolder = 'assets/images/headshort.png';
   static const String userIcon = 'assets/images/Person.svg';
