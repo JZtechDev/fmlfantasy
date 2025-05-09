@@ -21,7 +21,8 @@ class MatchCenter extends GetView<MatchCenterController> {
     Get.put(MatchCenterController());
     return Scaffold(
         backgroundColor: AppColors.backgroud,
-        appBar: HomeAppBar(title: 'matchcenter'.tr),
+        appBar: const HomeAppBar(title: 'Match Center'),
+        resizeToAvoidBottomInset: true,
         body: CustomScrollView(slivers: [
           CustomSliver(
             appBar: Obx(() {
@@ -41,7 +42,7 @@ class MatchCenter extends GetView<MatchCenterController> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                verticalSpace(5.h),
+                const DashboardButton(),
                 SingleChildScrollView(
                   child: Column(
                     children: [
@@ -77,8 +78,8 @@ class MatchCenter extends GetView<MatchCenterController> {
                       Obx(() => FutureBuilder<List<PastMatches>>(
                           future: controller.fetchMatchCenterData(),
                           builder: (context, snapshot) {
-                            if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                              return Text('notournamentavailable.'.tr);
+                            if (snapshot.hasError) {
+                              return Text('servererror'.tr);
                             } else {
                               return Obx(() {
                                 final query =

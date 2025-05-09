@@ -2,18 +2,18 @@ import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 
-class DashboardButton extends StatelessWidget {
+class PreviousButton extends StatelessWidget {
   final String? title;
-  const DashboardButton({super.key, this.title = 'DASHBOARD'});
+  const PreviousButton({super.key, this.title = 'PREVIOUS'});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.offAllNamed(AppRoutes.dashboardView);
+        Get.back();
       },
       child: Container(
-        width: AppSizing.isMobile(context) ? 120.w : 80.w,
+        width: AppSizing.isMobile(context) ? 100.w : 80.w,
         padding: const EdgeInsets.all(7),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),

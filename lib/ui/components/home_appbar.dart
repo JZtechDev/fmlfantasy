@@ -1,6 +1,7 @@
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 RxBool isLogin = false.obs;
 
@@ -80,11 +81,19 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                             fontWeight: FontWeight.w500,
                             fontSize: 12.sp,
                             color: AppColors.white)),
-                    Text('My Account',
-                        style: globalTextStyle(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 12.sp,
-                            color: AppColors.white)),
+                    GestureDetector(
+                      onTap: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.remove('token');
+                        Get.offAllNamed(AppRoutes.authentication);
+                      },
+                      child: Text('My Account',
+                          style: globalTextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 12.sp,
+                              color: AppColors.white)),
+                    ),
                   ],
                 )
               ],

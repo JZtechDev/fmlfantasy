@@ -27,20 +27,6 @@ class MatchCenterController extends GetxController {
     Sport(title: 'BL', icon: AppImages.baseballsvg, name: 'Base'),
     Sport(title: 'HK', icon: AppImages.iceHockeysvg, name: 'Hockey'),
   ].obs;
-  // Future<void> fetchMatchData() async {
-  //   try {
-  //     isloading(true);
-  //     List<MatchCenterModel> data =
-  //         await matchCenterServices.fetchMatchCenterData(
-  //             selectedSport.value, formattedPastDate, formattedDate);
-  //     matchData.assignAll(data);
-  //     isloading(false);
-  //   } catch (e) {
-  //     throw Exception('Failed to fetch data and matches: $e');
-  //   } finally {
-  //     isloading(false);
-  //   }
-  // }
 
   String day = DateTime.now().day.toString().padLeft(2, '0');
   String month = DateTime.now().month.toString().padLeft(2, '0');
@@ -49,54 +35,6 @@ class MatchCenterController extends GetxController {
   DateTime pastDate = DateTime.now().subtract(const Duration(days: 15));
   String formattedPastDate = '';
 
-  // useIsolate() async {
-  //   ReceivePort receivePort = ReceivePort();
-  //   final sendPort = receivePort.sendPort;
-  //   final isolate = await Isolate.spawn(fetchMatchCenterData, sendPort);
-  //   receivePort.listen((message) {
-  //     tournaments.value = message;
-  //     receivePort.close();
-  //     isolate.kill();
-  //   });
-  // }
-
-  // Future<void> fetchMatchCenterDataInIsolate(SendPort sendPort) async {
-  //   try {
-  //     // Simulate fetching data (you can replace this with your actual API call)
-  //     List<MatchCenterModel> fetchedTournaments =
-  //         await matchCenterServices.fetchMatchCenterData(
-  //             selectedSport.value, formattedPastDate, formattedDate);
-
-  //     // Send the result back to the main isolate
-  //     sendPort.send(fetchedTournaments);
-  //   } catch (error) {
-  //     sendPort.send('Error: $error');
-  //   }
-  // }
-
-  // Future<List<MatchCenterModel>> fetchMatchCenterData() async {
-  //   try {
-  //     // Create a ReceivePort to receive data from the isolate
-  //     final receivePort = ReceivePort();
-
-  //     // Pass the ReceivePort to the isolate
-
-  //     // Spawn an isolate to run the fetchMatchCenterDataInIsolate function
-  //     await Isolate.spawn(fetchMatchCenterDataInIsolate, receivePort.sendPort);
-
-  //     // Wait for the result from the isolate
-  //     final result = await receivePort.first;
-
-  //     if (result is List<MatchCenterModel>) {
-  //       tournaments.value = result;
-  //       return result;
-  //     } else {
-  //       throw Exception('Failed to fetch tournaments: $result');
-  //     }
-  //   } catch (error) {
-  //     rethrow; // Rethrow the error to handle it in the FutureBuilder
-  //   }
-  // }
 
   Future<List<PastMatches>> fetchMatchCenterData() async {
     try {
@@ -108,7 +46,7 @@ class MatchCenterController extends GetxController {
       return tournaments;
     } catch (error) {
       EasyLoading.dismiss();
-      rethrow; // Rethrow the error to handle it in the FutureBuilder
+      rethrow;
     }
   }
 

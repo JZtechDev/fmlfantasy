@@ -1,11 +1,11 @@
-import 'package:fmlfantasy/app/app_sizings.dart';
-import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
-import 'package:fmlfantasy/ui/components/inner_appbar.dart';
+import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/views/bull_player/controller/bull_player_controller.dart';
 import 'package:fmlfantasy/ui/views/bull_player/widget/bottom_button_bull_player.dart';
 import 'package:fmlfantasy/ui/views/bull_player/widget/bull_player_card.dart';
 import 'package:fmlfantasy/ui/views/bull_player/widget/players_grid.dart';
+import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
+import 'package:fmlfantasy/ui/widgets/privious_button.dart';
 
 class BullPlayerView extends GetView<BullPlayerController> {
   const BullPlayerView({super.key});
@@ -15,8 +15,8 @@ class BullPlayerView extends GetView<BullPlayerController> {
     Get.put(BullPlayerController());
     return Scaffold(
       backgroundColor: AppColors.backgroud,
-      appBar: const AppBarInner(
-        title: 'Select Bull Player',
+      appBar: const HomeAppBar(
+        title: 'Home',
       ),
       body: ListView(
         children: [
@@ -29,14 +29,10 @@ class BullPlayerView extends GetView<BullPlayerController> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  'Select Bull Player',
-                  style: globalTextStyle(
-                      fontSize: AppSizing.isMobile(context) ? 27.sp : 16.sp,
-                      fontWeight: FontWeight.w600),
+                verticalSpace(10.h),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [PreviousButton(), DashboardButton()],
                 ),
                 verticalSpace(10.h),
                 const BullPlayerCard(),
