@@ -43,43 +43,18 @@ class MatchCenter extends GetView<MatchCenterController> {
             child: Column(
               children: [
                 const DashboardButton(),
+                verticalSpace(10.h),
                 SingleChildScrollView(
                   child: Column(
                     children: [
-                      const DashboardButton(),
-                      verticalSpace(10.h),
-                      // const LabelAndSearch(),
-                      // Obx(() {
-                      //   return AnimatedContainer(
-                      //       clipBehavior: Clip.hardEdge,
-                      //       height: controller.isSearch.value ? 60 : 0,
-                      //       duration: const Duration(milliseconds: 400),
-                      //       decoration: BoxDecoration(
-                      //           color: AppColors.grey,
-                      //           borderRadius: BorderRadius.circular(5)),
-                      //       child: OverflowBox(
-                      //         fit: OverflowBoxFit.deferToChild,
-                      //         minHeight: 0,
-                      //         maxHeight: 60,
-                      //         child: Padding(
-                      //           padding:
-                      //               EdgeInsets.only(left: 15.w, right: 15.w),
-                      //           child: AppTextField(
-                      //             fillColor: AppColors.white,
-                      //             labelText: 'search'.tr,
-                      //             controller: controller.searchController,
-                      //             onChanged: (value) {
-                      //               controller.searchQuery.value = value;
-                      //             },
-                      //           ),
-                      //         ),
-                      //       ));
-                      // }),
                       Obx(() => FutureBuilder<List<PastMatches>>(
                           future: controller.fetchMatchCenterData(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
                               return Text('servererror'.tr);
+                            } else if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Container();
                             } else {
                               return Obx(() {
                                 final query =

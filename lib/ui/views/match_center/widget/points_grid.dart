@@ -12,55 +12,61 @@ class PointsGrid extends StatelessWidget {
     List<StatsBreakDown> sortedStats = List.from(playersdata.statsBreakDown)
       ..sort((a, b) => b.value!.compareTo(a.value!));
 
-    return Padding(
-      padding: EdgeInsets.only(left: 10.w, right: 10.w),
-      child: Wrap(
-        spacing: 5.w,
-        runSpacing: 5.h,
-        children: sortedStats.asMap().entries.map((entry) {
-          int index = entry.key;
-          StatsBreakDown data = entry.value;
+    return Container(
+      padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+      width: Get.width,
+      color: AppColors.primaryLight,
+      child: Padding(
+        padding: EdgeInsets.only(left: 3.w, right: 3.w),
+        child: Wrap(
+          spacing: 5.w,
+          runSpacing: 5.h,
+          children: sortedStats.asMap().entries.map((entry) {
+            int index = entry.key;
+            StatsBreakDown data = entry.value;
 
-          // Apply a different color for the top 3 highest values
-          Color containerColor = (index < 3)
-              ? AppColors.primary // Gold for the top 3
-              : AppColors.white; // Default color for the rest
-          Color textColor = (index < 3)
-              ? AppColors.white // White text for the top 3
-              : AppColors.navyBlue;
+            Color containerColor =
+                (index < 3) ? AppColors.secondary : AppColors.primaryLight;
+            Color textColor =
+                (index < 3) ? AppColors.darkGreen : AppColors.white;
 
-          return Container(
-            alignment: Alignment.center,
-            height: 70.h,
-            width: Get.width * 0.3,
-            padding: EdgeInsets.only(left: 2.w, right: 2.w),
-            decoration: BoxDecoration(
-              color: containerColor,
-              borderRadius: BorderRadius.circular(5.r),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  data.value!.toStringAsFixed(0).padLeft(2, "0"),
-                  style: globalTextStyle(
-                      fontSize: 18.sp,
-                      color: textColor,
-                      fontWeight: FontWeight.w600),
+            return Container(
+              alignment: Alignment.center,
+              height: 70.h,
+              width: Get.width * 0.3,
+              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+              decoration: BoxDecoration(
+                color: containerColor,
+                borderRadius: BorderRadius.circular(5.r),
+                border: Border.all(
+                  color: AppColors.secondary,
+                  width: 1.5,
                 ),
-                Text(
-                  textAlign: TextAlign.center,
-                  data.name!,
-                  style: globalTextStyle2(
-                      fontSize: 10.sp,
-                      color: textColor,
-                      fontWeight: FontWeight.w500),
-                )
-              ],
-            ),
-          );
-        }).toList(),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    data.value!.toStringAsFixed(0).padLeft(2, "0"),
+                    style: globalTextStyle(
+                        fontSize: 24.sp,
+                        color: textColor,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  Text(
+                    textAlign: TextAlign.center,
+                    data.name!,
+                    style: globalTextStyle2(
+                        fontSize: 12.sp,
+                        color: textColor,
+                        fontWeight: FontWeight.w700),
+                  )
+                ],
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

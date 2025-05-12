@@ -1,4 +1,3 @@
-import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/top_players_toggle.dart';
@@ -10,7 +9,6 @@ class LabelAndToggle extends GetView<MatchCenterInner> {
   Widget build(BuildContext context) {
     Get.put(MatchCenterInner());
     return LayoutBuilder(builder: (context, constraints) {
-      final maxWidth = constraints.maxWidth;
       return Padding(
         padding: EdgeInsets.only(left: 20.w, right: 10.w),
         child: Row(

@@ -12,11 +12,10 @@ class ToggleCarouselSliderContainer extends GetView<MatchCenterInner> {
     Get.put(MatchCenterInner());
     return LayoutBuilder(
       builder: (context, constraints) {
-        final maxWidth = constraints.maxWidth;
         return Column(
           children: [
             Container(
-              width: maxWidth > 350 ? 170.w : 209.w,
+              margin: EdgeInsets.only(left: 5.w, right: 5.w),
               height: 49.h,
               decoration: BoxDecoration(
                 color: const Color.fromRGBO(44, 86, 80, 1),
@@ -31,90 +30,93 @@ class ToggleCarouselSliderContainer extends GetView<MatchCenterInner> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Obx(
-                      () => GestureDetector(
-                        onTap: () {
-                          //controller.isStats.value = true;
-                          controller.isStatsList[index].value = true;
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          alignment: Alignment.center,
-                          height: 39.h,
-                          width: maxWidth > 350 ? 75.w : 97.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.r),
-                            color: controller.isStatsList[index].value
-                                ? AppColors.secondary
-                                : const Color.fromRGBO(44, 86, 80, 1),
-                            border: Border.all(
-                              color: controller.isStatsList[index].value
-                                  ? const Color.fromRGBO(44, 86, 80, 1)
-                                  : AppColors.secondary,
-                              width: 1,
-                            ),
-                          ),
-                          child: AnimatedDefaultTextStyle(
+                    Expanded(
+                      child: Obx(
+                        () => GestureDetector(
+                          onTap: () {
+                            //controller.isStats.value = true;
+                            controller.isStatsList[index].value = true;
+                          },
+                          child: AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
-                            style: globalTextStyle(
-                              fontSize:
-                                  AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                              color: AppColors.dark,
+                            alignment: Alignment.center,
+                            height: 39.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.r),
+                              color: controller.isStatsList[index].value
+                                  ? AppColors.secondary
+                                  : const Color.fromRGBO(44, 86, 80, 1),
+                              border: Border.all(
+                                color: controller.isStatsList[index].value
+                                    ? const Color.fromRGBO(44, 86, 80, 1)
+                                    : AppColors.secondary,
+                                width: 1,
+                              ),
                             ),
-                            child: Text(
-                              'STATISTICS'.tr,
+                            child: AnimatedDefaultTextStyle(
+                              duration: const Duration(milliseconds: 300),
                               style: globalTextStyle(
-                                  color: controller.isStatsList[index].value
-                                      ? AppColors.darkGreen
-                                      : AppColors.secondary,
-                                  fontSize: AppSizing.isMobile(context)
-                                      ? 12.sp
-                                      : 8.sp,
-                                  fontWeight: FontWeight.w700),
+                                fontSize:
+                                    AppSizing.isMobile(context) ? 12.sp : 8.sp,
+                                color: AppColors.dark,
+                              ),
+                              child: Text(
+                                'STATISTICS'.tr,
+                                style: globalTextStyle(
+                                    color: controller.isStatsList[index].value
+                                        ? AppColors.darkGreen
+                                        : AppColors.secondary,
+                                    fontSize: AppSizing.isMobile(context)
+                                        ? 12.sp
+                                        : 8.sp,
+                                    fontWeight: FontWeight.w700),
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                    Obx(
-                      () => GestureDetector(
-                        onTap: () {
-                          controller.isStatsList[index].value = false;
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          alignment: Alignment.center,
-                          height: 39.h,
-                          width: maxWidth > 350 ? 75.w : 97.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.r),
-                            color: controller.isStatsList[index].value
-                                ? const Color.fromRGBO(44, 86, 80, 1)
-                                : AppColors.secondary,
-                            border: Border.all(
-                              color: controller.isStatsList[index].value
-                                  ? AppColors.secondary
-                                  : const Color.fromRGBO(44, 86, 80, 1),
-                              width: 1,
-                            ),
-                          ),
-                          child: AnimatedDefaultTextStyle(
+                    horizontalSpace(5.w),
+                    Expanded(
+                      child: Obx(
+                        () => GestureDetector(
+                          onTap: () {
+                            controller.isStatsList[index].value = false;
+                          },
+                          child: AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
-                            style: globalTextStyle(
-                              fontSize:
-                                  AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                              color: AppColors.dark,
+                            alignment: Alignment.center,
+                            height: 39.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.r),
+                              color: controller.isStatsList[index].value
+                                  ? const Color.fromRGBO(44, 86, 80, 1)
+                                  : AppColors.secondary,
+                              border: Border.all(
+                                color: controller.isStatsList[index].value
+                                    ? AppColors.secondary
+                                    : const Color.fromRGBO(44, 86, 80, 1),
+                                width: 1,
+                              ),
                             ),
-                            child: Text(
-                              ' POINTS'.tr,
+                            child: AnimatedDefaultTextStyle(
+                              duration: const Duration(milliseconds: 300),
                               style: globalTextStyle(
-                                  color: controller.isStatsList[index].value
-                                      ? AppColors.secondary
-                                      : AppColors.darkGreen,
-                                  fontSize: AppSizing.isMobile(context)
-                                      ? 12.sp
-                                      : 8.sp,
-                                  fontWeight: FontWeight.w700),
+                                fontSize:
+                                    AppSizing.isMobile(context) ? 12.sp : 8.sp,
+                                color: AppColors.dark,
+                              ),
+                              child: Text(
+                                ' POINTS'.tr,
+                                style: globalTextStyle(
+                                    color: controller.isStatsList[index].value
+                                        ? AppColors.secondary
+                                        : AppColors.darkGreen,
+                                    fontSize: AppSizing.isMobile(context)
+                                        ? 12.sp
+                                        : 8.sp,
+                                    fontWeight: FontWeight.w700),
+                              ),
                             ),
                           ),
                         ),

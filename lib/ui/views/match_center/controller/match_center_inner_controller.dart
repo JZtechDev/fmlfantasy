@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/match_center_inner.dart';
@@ -93,6 +94,7 @@ class MatchCenterInner extends GetxController {
   Future<List<InnerMatchCenterModel>> fetchMatchCenterInnerData(
       String matchKeys) async {
     try {
+      EasyLoading.show(status: 'Loading...');
       isLoading.value = true;
       hasError.value = false;
       List<InnerMatchCenterModel> fetchedTournaments = await matchCenterServices
@@ -100,10 +102,12 @@ class MatchCenterInner extends GetxController {
       matchCenterInnerData.value = fetchedTournaments;
       isLoading.value = false;
       hasError.value = false;
+      EasyLoading.dismiss();
       return matchCenterInnerData;
     } catch (error) {
       hasError.value = true;
       isLoading.value = false;
+      EasyLoading.dismiss();
       rethrow;
     }
   }

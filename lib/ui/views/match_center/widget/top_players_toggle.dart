@@ -2,7 +2,6 @@ import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class TopPlayersToggle extends GetView<MatchCenterInner> {
@@ -50,7 +49,7 @@ class TopPlayersToggle extends GetView<MatchCenterInner> {
                 ),
               ),
             ),
-            horizontalSpace(Get.width * 0.5),
+            horizontalSpace(Get.width * 0.45),
             GestureDetector(
               onTap: onNext,
               child: Container(

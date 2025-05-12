@@ -26,8 +26,7 @@ class LoginView extends StatelessWidget {
           Positioned(
             top: 150,
             child: AnimatedContainer(
-              duration:
-                  const Duration(seconds: 5), // For container's own animation
+              duration: const Duration(seconds: 5),
               child: Hero(
                 tag: 'logo',
                 transitionOnUserGestures: true,

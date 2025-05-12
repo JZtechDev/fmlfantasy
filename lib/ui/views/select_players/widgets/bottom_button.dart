@@ -4,7 +4,6 @@ import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/select_players/controller/select_player_controller.dart';
 import 'package:fmlfantasy/ui/views/select_players/widgets/selected_players.dart';
 import 'package:fmlfantasy/ui/widgets/button_with_arrow.dart';
-import 'package:fmlfantasy/ui/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

@@ -26,7 +26,7 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
         child: Container(
           padding: const EdgeInsets.only(left: 5, right: 5, top: 20),
           decoration: BoxDecoration(
-            color: Color.fromRGBO(44, 86, 80, 1),
+            color: const Color.fromRGBO(44, 86, 80, 1),
             borderRadius: BorderRadius.circular(10.r),
             border: Border.all(color: AppColors.secondary, width: 1.w),
           ),
@@ -34,239 +34,245 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        alignment: Alignment.center,
-                        height: 64,
-                        width: maxWidth > 350 ? 40.w : 60.w,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                            color: AppColors.primaryLight),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/publictournament.svg',
-                              // ignore: deprecated_member_use
-                              color: AppColors.white,
-                              height: 16.h,
-                              width: 16.w,
+              Padding(
+                padding: EdgeInsets.only(left: 10.w, right: 30.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            alignment: Alignment.center,
+                            height: 64.h,
+                            width: 60.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r),
+                                color: AppColors.primaryLight),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/new_images/Award.png',
+                                  // ignore: deprecated_member_use
+                                  color: AppColors.white,
+                                  height: 20.h,
+                                  width: 20.w,
+                                ),
+                                verticalSpace(5.h),
+                                Text(
+                                  topPlayers.rank!.toString().padLeft(2, '0'),
+                                  style: globalTextStyle(
+                                    color: AppColors.white,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                )
+                              ],
                             ),
-                            verticalSpace(5.h),
-                            Text(
-                              topPlayers.rank!.toString().padLeft(2, '0'),
+                          ),
+                          verticalSpace(10.h),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 60.h,
+                            width: 60.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r),
+                              color: AppColors.primaryLight,
+                            ),
+                            child: Text(
+                              topPlayers.fantasyPoints!.toStringAsFixed(0),
                               style: globalTextStyle(
                                 color: AppColors.white,
-                                fontSize: maxWidth > 350 ? 12.sp : 14.sp,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w700,
                               ),
-                            )
-                          ],
-                        ),
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        ],
                       ),
-                      verticalSpace(2.h),
-                      Container(
-                        alignment: Alignment.center,
-                        height: 60.h,
-                        width: maxWidth > 350 ? 40.w : 60.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          color: AppColors.primaryLight,
-                        ),
-                        child: Text(
-                          topPlayers.fantasyPoints!.toStringAsFixed(0),
-                          style: globalTextStyle(
-                            color: AppColors.white,
-                            fontSize: maxWidth > 350 ? 12.sp : 14.sp,
-                            fontWeight: FontWeight.w600,
+                    ),
+                    horizontalSpace(5.w),
+                    Column(
+                      children: [
+                        Container(
+                          height: 90.h,
+                          width: maxWidth > 350 ? 120.w : 147.w,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(
+                                44, 86, 80, 1), // Change color if needed
+                            borderRadius: BorderRadius.circular(5.r),
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      )
-                    ],
-                  ),
-                  horizontalSpace(5.w),
-                  Column(
-                    children: [
-                      Container(
-                        height: 90.h,
-                        width: maxWidth > 350 ? 120.w : 147.w,
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(
-                              44, 86, 80, 1), // Change color if needed
-                          borderRadius: BorderRadius.circular(5.r),
-                        ),
-                        child: Stack(
-                            alignment: Alignment.topLeft,
-                            clipBehavior: Clip.none,
-                            fit: StackFit.passthrough,
-                            children: [
-                              Positioned(
-                                top: -10,
-                                left: 0,
-                                right: 0,
-                                bottom: 0,
-                                child: controller.sportsCode == 'FB'
-                                    ? topPlayers.imageUrl == null
-                                        ? Stack(
-                                            clipBehavior: Clip.hardEdge,
-                                            alignment: Alignment.center,
-                                            children: [
-                                              topPlayers.jerseyImage == null
-                                                  ? Image.asset(
-                                                      excludeFromSemantics:
-                                                          true,
-                                                      isAntiAlias: true,
-                                                      AppImages.userPlaceHolder,
-                                                    )
-                                                  : topPlayers.jerseyImage!
-                                                          .endsWith('svg')
-                                                      ? SvgPicture.network(
-                                                          topPlayers
-                                                              .jerseyImage!,
-                                                        )
-                                                      : Image.network(
-                                                          topPlayers
-                                                              .jerseyImage!,
-                                                        ),
-                                              topPlayers.jerseyImage == null
-                                                  ? const SizedBox()
-                                                  : Positioned(
-                                                      top: 20.h,
-                                                      child: Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                          left: 2.w,
-                                                          right: 2.w,
-                                                          top: 1.h,
-                                                          bottom: 1.h,
-                                                        ),
-                                                        alignment:
-                                                            Alignment.center,
-                                                        decoration: BoxDecoration(
-                                                            color: AppColors
-                                                                .white
-                                                                .withOpacity(
-                                                                    0.9),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        2.r)),
-                                                        child: Text(
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          topPlayers.name!
-                                                              .split(' ')
-                                                              .last
-                                                              .split(' ')
-                                                              .last,
-                                                          style: globalTextStyle(
-                                                              fontSize: 8.sp,
+                          child: Stack(
+                              alignment: Alignment.topLeft,
+                              clipBehavior: Clip.none,
+                              fit: StackFit.passthrough,
+                              children: [
+                                Positioned(
+                                  top: -10,
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  child: controller.sportsCode == 'FB'
+                                      ? topPlayers.imageUrl == null
+                                          ? Stack(
+                                              clipBehavior: Clip.hardEdge,
+                                              alignment: Alignment.center,
+                                              children: [
+                                                topPlayers.jerseyImage == null
+                                                    ? Image.asset(
+                                                        excludeFromSemantics:
+                                                            true,
+                                                        isAntiAlias: true,
+                                                        AppImages
+                                                            .userPlaceHolder,
+                                                      )
+                                                    : topPlayers.jerseyImage!
+                                                            .endsWith('svg')
+                                                        ? SvgPicture.network(
+                                                            topPlayers
+                                                                .jerseyImage!,
+                                                          )
+                                                        : Image.network(
+                                                            topPlayers
+                                                                .jerseyImage!,
+                                                          ),
+                                                topPlayers.jerseyImage == null
+                                                    ? const SizedBox()
+                                                    : Positioned(
+                                                        top: 20.h,
+                                                        child: Container(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                            left: 2.w,
+                                                            right: 2.w,
+                                                            top: 1.h,
+                                                            bottom: 1.h,
+                                                          ),
+                                                          alignment:
+                                                              Alignment.center,
+                                                          decoration: BoxDecoration(
                                                               color: AppColors
-                                                                  .dark),
-                                                        ),
-                                                      ),
-                                                    ),
-                                              topPlayers.jerseyImage == null
-                                                  ? const SizedBox()
-                                                  : Align(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      child: Container(
-                                                        height: 30.h,
-                                                        width: 30.w,
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                          top: 5,
-                                                          right: 5,
-                                                          left: 5,
-                                                          bottom: 5,
-                                                        ),
-                                                        alignment:
-                                                            Alignment.center,
-                                                        decoration:
-                                                            BoxDecoration(
+                                                                  .white
+                                                                  .withOpacity(
+                                                                      0.9),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          2.r)),
+                                                          child: Text(
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            topPlayers.name!
+                                                                .split(' ')
+                                                                .last
+                                                                .split(' ')
+                                                                .last,
+                                                            style: globalTextStyle(
+                                                                fontSize: 8.sp,
                                                                 color: AppColors
-                                                                    .white
-                                                                    .withOpacity(
-                                                                        0.9),
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                        child: Text(
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          topPlayers
-                                                                  .fantasyNumnber ??
-                                                              '-',
-                                                          style: globalTextStyle(
-                                                              fontSize: 10.sp,
-                                                              color: AppColors
-                                                                  .dark),
+                                                                    .dark),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                            ],
-                                          )
-                                        : topPlayers.jerseyImage == null
-                                            ? Image.asset(
-                                                excludeFromSemantics: true,
-                                                isAntiAlias: true,
-                                                AppImages.userPlaceHolder,
-                                              )
-                                            : topPlayers.imageUrl!
-                                                    .endsWith('svg')
-                                                ? SvgPicture.network(
-                                                    topPlayers.imageUrl!,
-                                                  )
-                                                : Image.network(
-                                                    topPlayers.imageUrl!,
-                                                  )
-                                    : topPlayers.imageUrl == null
-                                        ? Image.asset(
-                                            excludeFromSemantics: true,
-                                            isAntiAlias: true,
-                                            AppImages.userPlaceHolder,
-                                          )
-                                        : topPlayers.imageUrl!.endsWith('svg')
-                                            ? controller.sportsCode == 'CR'
-                                                ? Image.network(
-                                                    replaceSvgWithPng(
-                                                        topPlayers.imageUrl!),
-                                                  )
-                                                : SvgPicture.network(
-                                                    topPlayers.imageUrl!,
-                                                  )
-                                            : Image.network(
-                                                topPlayers.imageUrl!,
-                                              ),
-                              ),
-                            ]),
-                      ),
-                      verticalSpace(5.h),
-                      Text(
-                        topPlayers.name!,
-                        style: globalTextStyle(
-                            fontSize:
-                                AppSizing.isMobile(context) ? 14.sp : 10.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        topPlayers.position!,
-                        style: globalTextStyle2(
-                            fontSize:
-                                AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.white),
-                      ),
-                    ],
-                  ),
-                ],
+                                                topPlayers.jerseyImage == null
+                                                    ? const SizedBox()
+                                                    : Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Container(
+                                                          height: 30.h,
+                                                          width: 30.w,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                            top: 5,
+                                                            right: 5,
+                                                            left: 5,
+                                                            bottom: 5,
+                                                          ),
+                                                          alignment:
+                                                              Alignment.center,
+                                                          decoration: BoxDecoration(
+                                                              color: AppColors
+                                                                  .white
+                                                                  .withOpacity(
+                                                                      0.9),
+                                                              shape: BoxShape
+                                                                  .circle),
+                                                          child: Text(
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            topPlayers
+                                                                    .fantasyNumnber ??
+                                                                '-',
+                                                            style: globalTextStyle(
+                                                                fontSize: 10.sp,
+                                                                color: AppColors
+                                                                    .dark),
+                                                          ),
+                                                        ),
+                                                      ),
+                                              ],
+                                            )
+                                          : topPlayers.jerseyImage == null
+                                              ? Image.asset(
+                                                  excludeFromSemantics: true,
+                                                  isAntiAlias: true,
+                                                  AppImages.userPlaceHolder,
+                                                )
+                                              : topPlayers.imageUrl!
+                                                      .endsWith('svg')
+                                                  ? SvgPicture.network(
+                                                      topPlayers.imageUrl!,
+                                                    )
+                                                  : Image.network(
+                                                      topPlayers.imageUrl!,
+                                                    )
+                                      : topPlayers.imageUrl == null
+                                          ? Image.asset(
+                                              excludeFromSemantics: true,
+                                              isAntiAlias: true,
+                                              AppImages.userPlaceHolder,
+                                            )
+                                          : topPlayers.imageUrl!.endsWith('svg')
+                                              ? controller.sportsCode == 'CR'
+                                                  ? Image.network(
+                                                      replaceSvgWithPng(
+                                                          topPlayers.imageUrl!),
+                                                    )
+                                                  : SvgPicture.network(
+                                                      topPlayers.imageUrl!,
+                                                    )
+                                              : Image.network(
+                                                  topPlayers.imageUrl!,
+                                                ),
+                                ),
+                              ]),
+                        ),
+                        verticalSpace(5.h),
+                        Text(
+                          topPlayers.name!,
+                          style: globalTextStyle(
+                              fontSize:
+                                  AppSizing.isMobile(context) ? 14.sp : 10.sp,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          topPlayers.position!,
+                          style: globalTextStyle2(
+                              fontSize:
+                                  AppSizing.isMobile(context) ? 12.sp : 8.sp,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.white),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               verticalSpace(10.h),
               ToggleCarouselSliderContainer(index: indexs),
@@ -274,54 +280,51 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
                     children: [
                       verticalSpace(5.h),
                       controller.isStatsList[indexs].value == true
-                          ? SizedBox(
-                              width: 210.w,
-                              height: 140.h,
-                              child: Wrap(
-                                alignment: WrapAlignment.start,
-                                spacing: 5.w,
-                                runSpacing: 5.h,
-                                children: topPlayers.statsBreakDown
-                                    .take(4)
-                                    .map((statics) {
-                                  return Container(
-                                    padding: const EdgeInsets.all(12),
-                                    width: maxWidth > 350 ? 82.w : 102.w,
-                                    // height: 67.h,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.primaryLight,
-                                      borderRadius: BorderRadius.circular(5.r),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          statics.value!
-                                              .toStringAsFixed(0)
-                                              .padLeft(2, '0'),
-                                          style: globalTextStyle(
-                                            fontSize:
-                                                maxWidth > 350 ? 16.sp : 23.sp,
-                                            fontWeight: FontWeight.w700,
-                                            color: AppColors.secondary,
-                                          ),
+                          ? Wrap(
+                              alignment: WrapAlignment.start,
+                              spacing: 5.w,
+                              runSpacing: 5.h,
+                              children: topPlayers.statsBreakDown
+                                  .take(4)
+                                  .map((statics) {
+                                return Container(
+                                  padding: const EdgeInsets.all(12),
+                                  width: Get.width * 0.3,
+                                  //width: maxWidth > 350 ? 100.w : 140.w,
+                                  // height: 67.h,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primaryLight,
+                                    borderRadius: BorderRadius.circular(5.r),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        statics.value!
+                                            .toStringAsFixed(0)
+                                            .padLeft(2, '0'),
+                                        style: globalTextStyle(
+                                          fontSize:
+                                              maxWidth > 350 ? 20.sp : 24.sp,
+                                          fontWeight: FontWeight.w700,
+                                          color: AppColors.secondary,
                                         ),
-                                        Text(
-                                          statics.name!,
-                                          textAlign: TextAlign.center,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: globalTextStyle2(
-                                            color: AppColors.secondary,
-                                            fontSize:
-                                                maxWidth > 350 ? 8.sp : 12.sp,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                      ),
+                                      Text(
+                                        statics.name!,
+                                        textAlign: TextAlign.center,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: globalTextStyle2(
+                                          color: AppColors.secondary,
+                                          fontSize:
+                                              maxWidth > 350 ? 12.sp : 14.sp,
+                                          fontWeight: FontWeight.w600,
                                         ),
-                                      ],
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
                             )
                           : topPlayers.fantasyPointsBreakDown.isEmpty
                               ? Text(
@@ -333,7 +336,7 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
                                 )
                               : Container(
                                   clipBehavior: Clip.hardEdge,
-                                  width: maxWidth > 350 ? 170.w : 210.w,
+                                  width: Get.width * 0.62,
                                   height: 135.h,
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
@@ -414,11 +417,11 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
                                                       .join('\n'),
                                                   style: globalTextStyle2(
                                                     fontSize: maxWidth > 350
-                                                        ? 7.sp
+                                                        ? 10.sp
                                                         : 10.sp,
                                                     fontWeight: FontWeight.w600,
                                                   ),
-                                                ), // Display x value
+                                                ),
                                               ],
                                             );
                                           },
@@ -427,7 +430,6 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
                                           alignment: ChartAlignment.center,
                                           isVisible: true,
                                           position: LegendPosition.left,
-                                          //overflowMode: LegendItemOverflowMode.scroll,
                                           isResponsive: false,
                                         ),
                                         tooltipBehavior: TooltipBehavior(
@@ -435,8 +437,8 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
                                           canShowMarker: false,
                                           color: AppColors.navyBlue,
                                         ),
-                                        centerX: '70%',
-                                        centerY: '50%',
+                                        centerX: '65%',
+                                        centerY: '45%',
                                         series: <CircularSeries>[
                                           DoughnutSeries<FantasyPointsBreakDown,
                                               String>(
@@ -479,34 +481,6 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
                                                 LegendIconType.circle,
                                           ),
                                         ],
-                                        // annotations: <CircularChartAnnotation>[
-                                        //   CircularChartAnnotation(
-                                        //       radius: '0%',
-                                        //       widget: Column(
-                                        //         mainAxisAlignment:
-                                        //             MainAxisAlignment.center,
-                                        //         children: [
-                                        //           Text(
-                                        //               topPlayers
-                                        //                   .fantasyPoints!
-                                        //                   .toStringAsFixed(0)
-                                        //                   .padLeft(2, '0'),
-                                        //               style: globalTextStyle(
-                                        //                 fontSize:
-                                        //                     maxWidth > 350
-                                        //                         ? 10.sp
-                                        //                         : 12.sp,
-                                        //               )),
-                                        //           Text('points'.tr,
-                                        //               style: globalTextStyle(
-                                        //                 fontSize:
-                                        //                     maxWidth > 350
-                                        //                         ? 10.sp
-                                        //                         : 12.sp,
-                                        //               )),
-                                        //         ],
-                                        //       ))
-                                        // ]),
                                       )
                                     ],
                                   ),

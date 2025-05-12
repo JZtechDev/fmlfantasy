@@ -1,3 +1,5 @@
+import 'package:fmlfantasy/app/app_images/app_images.dart';
+import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/match_center_inner.dart';
 import 'package:fmlfantasy/ui/components/home_appbar.dart';
@@ -6,12 +8,10 @@ import 'package:fmlfantasy/ui/views/match_center/widget/label_and_toggle.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/lineup_and_formation.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/match_preview.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/past_matches.dart';
-import 'package:fmlfantasy/ui/views/match_center/widget/skeleton/inner_skeleton.dart';
-import 'package:fmlfantasy/ui/views/match_center/widget/skeleton/match_inner_cricket_skeleton.dart';
-import 'package:fmlfantasy/ui/views/match_center/widget/skeleton/match_inner_football_skeleton.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/team_and_lineup_tabs.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/top_players_sider.dart';
 import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
+import 'package:fmlfantasy/ui/widgets/privious_button.dart';
 
 class MatchCenterInnerView extends GetView<MatchCenterInner> {
   const MatchCenterInnerView({
@@ -31,22 +31,13 @@ class MatchCenterInnerView extends GetView<MatchCenterInner> {
                     EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [DashboardButton(), DashboardButton()],
+                  children: [PreviousButton(), DashboardButton()],
                 ),
               ),
-              //const PastMatchesSlider(),
+              const PastMatchesSlider(),
               Obx(() {
                 if (controller.isLoading.value) {
-                  return Center(child: Builder(builder: (context) {
-                    switch (controller.selectedSports) {
-                      case 'FB':
-                        return const MatchInnerFBSkeleton();
-                      case 'CR':
-                        return const MatchInnerCRSkeleton();
-                      default:
-                        return const InnerMatchCenterSkeleton();
-                    }
-                  }));
+                  return Container();
                 } else if (controller.hasError.value) {
                   return Center(child: Text('erroroccurred'.tr));
                 } else if (controller.matchCenterInnerData.isEmpty) {
@@ -56,8 +47,30 @@ class MatchCenterInnerView extends GetView<MatchCenterInner> {
                       controller.matchCenterInnerData[0];
                   return Column(
                     children: [
-                      verticalSpace(10.h),
                       MatchPreview(data: data),
+                      Container(
+                        width: Get.width,
+                        padding: EdgeInsets.only(
+                            left: 10.w, right: 10.w, bottom: 10.h, top: 10.h),
+                        decoration: const BoxDecoration(
+                          color: AppColors.primary,
+                        ),
+                        child: Column(
+                          children: [
+                            Image.asset(AppImages.star, height: 20, width: 20),
+                            Text('Player of the Match'.tr,
+                                style: globalTextStyle2(
+                                    fontSize: 12.sp,
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w700)),
+                            Text(data.playerOfTheMatchName ?? '',
+                                style: globalTextStyle2(
+                                    fontSize: 12.sp,
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w700)),
+                          ],
+                        ),
+                      ),
                       verticalSpace(10.h),
                       const LabelAndToggle(),
                       TopPlayersSider(data: data),

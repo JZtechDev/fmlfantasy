@@ -23,7 +23,7 @@ class FilterButton extends GetView<SelectPlayerController> {
             Text(
               'Tap To Select Player'.tr,
               style: globalTextStyle(
-                  fontSize: maxWidth > 600 ? 12.sp : 20.sp,
+                  fontSize: maxWidth > 600 ? 12.sp : 14.sp,
                   fontWeight: FontWeight.w800),
             ),
             const Spacer(),
