@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/views/player_stats_view/controller/players_stats_controller.dart';

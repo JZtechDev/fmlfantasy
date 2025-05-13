@@ -119,7 +119,7 @@ class BullPlayerCard extends GetView<BullPlayerController> {
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
                                                     color: AppColors.white
-                                                        .withOpacity(0.9),
+                                                        .withValues(alpha: 0.9),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             2.r)),
@@ -150,7 +150,7 @@ class BullPlayerCard extends GetView<BullPlayerController> {
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
                                                     color: AppColors.white
-                                                        .withOpacity(0.9),
+                                                        .withValues(alpha: 0.9),
                                                     shape: BoxShape.circle),
                                                 child: Text(
                                                   textAlign: TextAlign.center,

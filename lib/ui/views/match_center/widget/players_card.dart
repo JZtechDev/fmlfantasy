@@ -48,27 +48,24 @@ class PlayersCard extends GetView<MatchCenterInner> {
                                 fontSize: maxWidth > 600 ? 12.sp : 12.sp,
                                 color: AppColors.white),
                           ),
-                          Positioned(
-                              right: 5.w,
-                              top: 5.h,
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 5),
-                                decoration: BoxDecoration(
-                                    color: AppColors.backgroud,
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(5.r),
-                                    )),
-                                child: Text(
-                                  getInitials(topPlayers.position!),
-                                  style: globalTextStyle(
-                                      fontSize: AppSizing.isTablet(context)
-                                          ? 8.sp
-                                          : 12.sp,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColors.white),
-                                ),
-                              )),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 5),
+                            decoration: BoxDecoration(
+                                color: AppColors.backgroud,
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(5.r),
+                                )),
+                            child: Text(
+                              getInitials(topPlayers.position!),
+                              style: globalTextStyle(
+                                  fontSize: AppSizing.isTablet(context)
+                                      ? 8.sp
+                                      : 12.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.white),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -115,7 +112,7 @@ class PlayersCard extends GetView<MatchCenterInner> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            topPlayers.fantasyPoints.toString(),
+                            topPlayers.fantasyPoints!.toStringAsFixed(2),
                             style: globalTextStyle(
                                 fontSize: 24.sp,
                                 color: AppColors.secondary,
@@ -175,7 +172,7 @@ class PlayersCard extends GetView<MatchCenterInner> {
                                               alignment: Alignment.center,
                                               decoration: BoxDecoration(
                                                   color: AppColors.white
-                                                      .withOpacity(0.9),
+                                                      .withValues(alpha: 0.9),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           2.r)),
@@ -208,7 +205,7 @@ class PlayersCard extends GetView<MatchCenterInner> {
                                               alignment: Alignment.center,
                                               decoration: BoxDecoration(
                                                   color: AppColors.white
-                                                      .withOpacity(0.9),
+                                                      .withValues(alpha: 0.9),
                                                   shape: BoxShape.circle),
                                               child: Text(
                                                 textAlign: TextAlign.center,

@@ -3,7 +3,6 @@ import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 import 'package:fmlfantasy/ui/views/create_contest/controller/create_contests_controller.dart';
-import 'package:fmlfantasy/ui/views/create_contest/widgets/create_contest_stepper.dart';
 import 'package:fmlfantasy/ui/widgets/primary_button.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -167,7 +166,7 @@ class CreateContestView extends GetView<CreateContestsController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5.r),
                             color: controller.selectedMembers.isEmpty
-                                ? AppColors.primary.withOpacity(0.3)
+                                ? AppColors.primary.withValues(alpha: 0.3)
                                 : AppColors.primary,
                           ),
                           child: Row(
@@ -218,7 +217,7 @@ class CreateContestView extends GetView<CreateContestsController> {
                                 width: 24.w,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: AppColors.white.withOpacity(0.2),
+                                  color: AppColors.white.withValues(alpha: 0.2),
                                 ),
                                 child: Image.asset(
                                   AppImages.nextIcon,

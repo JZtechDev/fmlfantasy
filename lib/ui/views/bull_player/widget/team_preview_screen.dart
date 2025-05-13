@@ -117,8 +117,9 @@ class TeamPreviewScreen extends GetView<BullPlayerController> {
                                                                           2.r)),
                                                               color: AppColors
                                                                   .white
-                                                                  .withOpacity(
-                                                                      0.9)),
+                                                                  .withValues(
+                                                                      alpha:
+                                                                          0.9)),
                                                           child: SizedBox(
                                                             width: 22.w,
                                                             child: Text(
@@ -156,8 +157,9 @@ class TeamPreviewScreen extends GetView<BullPlayerController> {
                                                                   .circle,
                                                               color: AppColors
                                                                   .white
-                                                                  .withOpacity(
-                                                                      0.9)),
+                                                                  .withValues(
+                                                                      alpha:
+                                                                          0.9)),
                                                           child: Text(
                                                             controller
                                                                     .selectedPlayers[

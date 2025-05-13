@@ -25,6 +25,38 @@ class BasketballGround extends StatelessWidget {
               color: Color.fromRGBO(132, 91, 69, 1),
             ),
           )),
+          Positioned(
+              top: 10.h,
+              left: 40.w,
+              right: 40.w,
+              child: Image.asset(
+                'assets/new_images/basketball_court.png',
+                width: Get.width,
+                height: Get.height * 0.2,
+              )),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40.w),
+            child: Align(
+              alignment: Alignment.center,
+              child: Image.asset('assets/new_images/mid-line.png'),
+            ),
+          ),
+          Positioned(
+            bottom: 10.h,
+            left: 40.w,
+            right: 40.w,
+            child: Transform.rotate(
+              angle: 180 * math.pi / 180,
+              child: Transform.scale(
+                scaleX: -1,
+                child: Image.asset(
+                  'assets/new_images/basketball_court.png',
+                  width: Get.width,
+                  height: Get.height * 0.2,
+                ),
+              ),
+            ),
+          ),
           Wrap(
             spacing: 20.w,
             runSpacing: 30.h,
@@ -96,38 +128,6 @@ class BasketballGround extends StatelessWidget {
                 ),
               );
             }).toList(),
-          ),
-          Positioned(
-              top: 10.h,
-              left: 40.w,
-              right: 40.w,
-              child: Image.asset(
-                'assets/new_images/basketball_court.png',
-                width: Get.width,
-                height: Get.height * 0.2,
-              )),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40.w),
-            child: Align(
-              alignment: Alignment.center,
-              child: Image.asset('assets/new_images/mid-line.png'),
-            ),
-          ),
-          Positioned(
-            bottom: 10.h,
-            left: 40.w,
-            right: 40.w,
-            child: Transform.rotate(
-              angle: 180 * math.pi / 180,
-              child: Transform.scale(
-                scaleX: -1,
-                child: Image.asset(
-                  'assets/new_images/basketball_court.png',
-                  width: Get.width,
-                  height: Get.height * 0.2,
-                ),
-              ),
-            ),
           ),
         ]));
   }

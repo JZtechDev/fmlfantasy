@@ -96,10 +96,10 @@ class PlayersStatsView extends StatelessWidget {
                       //                       gradient: LinearGradient(
                       //                         colors: [
                       //                           AppColors.primary
-                      //                               .withOpacity(0.25),
+                      //                               .withValues(alpha:0.25),
                       //                           AppColors.primary
-                      //                               .withOpacity(0.2)
-                      //                               .withOpacity(0.0),
+                      //                               .withValues(alpha:0.2)
+                      //                               .withValues(alpha:0.0),
                       //                         ],
                       //                         begin: Alignment.topCenter,
                       //                         end: Alignment.bottomCenter,
@@ -122,10 +122,10 @@ class PlayersStatsView extends StatelessWidget {
                       //                       gradient: LinearGradient(
                       //                         colors: [
                       //                           AppColors.primary
-                      //                               .withOpacity(0.20),
+                      //                               .withValues(alpha:0.20),
                       //                           AppColors.primary
-                      //                               .withOpacity(0.2)
-                      //                               .withOpacity(0.0),
+                      //                               .withValues(alpha:0.2)
+                      //                               .withValues(alpha:0.0),
                       //                         ],
                       //                         begin: Alignment.topCenter,
                       //                         end: Alignment.bottomCenter,
@@ -148,10 +148,10 @@ class PlayersStatsView extends StatelessWidget {
                       //                       gradient: LinearGradient(
                       //                         colors: [
                       //                           AppColors.primary
-                      //                               .withOpacity(0.1),
+                      //                               .withValues(alpha:0.1),
                       //                           AppColors.primary
-                      //                               .withOpacity(0.1)
-                      //                               .withOpacity(0.0),
+                      //                               .withValues(alpha:0.1)
+                      //                               .withValues(alpha:0.0),
                       //                         ],
                       //                         begin: Alignment.topCenter,
                       //                         end: Alignment.bottomCenter,

@@ -400,7 +400,7 @@ class PlayersInfoCard extends StatelessWidget {
                 horizontalMargin: 0,
                 dividerThickness: 0,
                 columnSpacing: 0,
-                dataRowHeight: 35,
+                // dataRowHeight: 35,
                 columns: <DataColumn>[
                   const DataColumn(label: Text('')),
                   DataColumn(

@@ -1,13 +1,10 @@
-import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
-import 'package:fmlfantasy/ui/components/app_appbar.dart' show AppBarGeneral;
 import 'package:fmlfantasy/ui/views/teams/controller/teams_controller.dart';
 import 'package:fmlfantasy/ui/views/teams/widgets/teams_tile.dart';
 import 'package:fmlfantasy/ui/widgets/app_textfield.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 

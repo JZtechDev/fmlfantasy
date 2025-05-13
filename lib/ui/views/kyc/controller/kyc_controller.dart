@@ -62,37 +62,34 @@ class KycController extends GetxController {
   void launchSDK() async {
     final String accessToken = kycId;
 
-    final onTokenExpiration = () async {
-      // Simulate fetching a new token from your backend (replace this with real call)
+    onTokenExpiration() async {
       return Future<String>.delayed(
-          Duration(seconds: 2), () => "your new access token");
-    };
+          const Duration(seconds: 2), () => "your new access token");
+    }
 
-    final SNSStatusChangedHandler onStatusChanged =
-        (SNSMobileSDKStatus newStatus, SNSMobileSDKStatus prevStatus) {
-      print("The SDK status was changed: $prevStatus -> $newStatus");
+    onStatusChanged(
+        SNSMobileSDKStatus newStatus, SNSMobileSDKStatus prevStatus) {
+      log("The SDK status was changed: $prevStatus -> $newStatus");
 
       if (newStatus == SNSMobileSDKStatus.Failed) {
-        print("SDK failed to launch.");
-        // Optionally add more debugging output or error reporting here.
+        log("SDK failed to launch.");
       } else if (newStatus == SNSMobileSDKStatus.Ready) {
-        print("SDK is ready.");
+        log("SDK is ready.");
       } else {
-        print("Other status: $newStatus");
+        log("Other status: $newStatus");
       }
-    };
+    }
 
     final snsMobileSDK = SNSMobileSDK.init(accessToken, onTokenExpiration)
         .withHandlers(onStatusChanged: onStatusChanged)
-        .withDebug(true) // Keep debug mode for troubleshooting
-        // Consider removing .withLocale() if locale overrides are not needed
+        .withDebug(true)
         .build();
 
     try {
       final SNSMobileSDKResult result = await snsMobileSDK.launch();
-      print("Completed with result: $result");
+      log("Completed with result: $result");
     } catch (e) {
-      print("Error launching SDK: $e");
+      log("Error launching SDK: $e");
     }
   }
 

@@ -284,8 +284,9 @@ class LotoSelectPlayerView extends GetView<LotoController> {
                                                               decoration: BoxDecoration(
                                                                   color: AppColors
                                                                       .white
-                                                                      .withOpacity(
-                                                                          0.9),
+                                                                      .withValues(
+                                                                          alpha:
+                                                                              0.9),
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -326,8 +327,9 @@ class LotoSelectPlayerView extends GetView<LotoController> {
                                                               decoration: BoxDecoration(
                                                                   color: AppColors
                                                                       .white
-                                                                      .withOpacity(
-                                                                          0.9),
+                                                                      .withValues(
+                                                                          alpha:
+                                                                              0.9),
                                                                   shape: BoxShape
                                                                       .circle),
                                                               child: Text(
@@ -480,10 +482,10 @@ class LotoSelectPlayerView extends GetView<LotoController> {
                                           gradient: LinearGradient(
                                             colors: [
                                               AppColors.primary
-                                                  .withOpacity(0.2),
+                                                  .withValues(alpha: 0.2),
                                               AppColors.primary
-                                                  .withOpacity(0.2)
-                                                  .withOpacity(0.0),
+                                                  .withValues(alpha: 0.2)
+                                                  .withValues(alpha: 0.0),
                                             ],
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,
@@ -526,10 +528,10 @@ class LotoSelectPlayerView extends GetView<LotoController> {
                                           gradient: LinearGradient(
                                             colors: [
                                               AppColors.primary
-                                                  .withOpacity(0.2),
+                                                  .withValues(alpha: 0.2),
                                               AppColors.primary
-                                                  .withOpacity(0.2)
-                                                  .withOpacity(0.0),
+                                                  .withValues(alpha: 0.2)
+                                                  .withValues(alpha: 0.0),
                                             ],
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,

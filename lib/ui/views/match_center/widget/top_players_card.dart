@@ -157,8 +157,9 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
                                                           decoration: BoxDecoration(
                                                               color: AppColors
                                                                   .white
-                                                                  .withOpacity(
-                                                                      0.9),
+                                                                  .withValues(
+                                                                      alpha:
+                                                                          0.9),
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
@@ -199,8 +200,9 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
                                                           decoration: BoxDecoration(
                                                               color: AppColors
                                                                   .white
-                                                                  .withOpacity(
-                                                                      0.9),
+                                                                  .withValues(
+                                                                      alpha:
+                                                                          0.9),
                                                               shape: BoxShape
                                                                   .circle),
                                                           child: Text(
@@ -437,8 +439,8 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
                                           canShowMarker: false,
                                           color: AppColors.navyBlue,
                                         ),
-                                        centerX: '65%',
-                                        centerY: '45%',
+                                        centerX: '67%',
+                                        centerY: '47%',
                                         series: <CircularSeries>[
                                           DoughnutSeries<FantasyPointsBreakDown,
                                               String>(
@@ -460,9 +462,7 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
                                                     255, 255, 255, 1),
                                                 const Color.fromRGBO(
                                                     230, 180, 125, 1),
-                                                // Add more colors if needed
                                               ];
-                                              // Return the color based on the index
                                               return colors[
                                                   index % colors.length];
                                             },
@@ -475,7 +475,7 @@ class TopPlayersCard extends GetView<MatchCenterInner> {
                                                         _) =>
                                                     data.value,
                                             strokeWidth: 1,
-                                            innerRadius: '80%',
+                                            innerRadius: '70%',
                                             radius: '70%',
                                             legendIconType:
                                                 LegendIconType.circle,

@@ -28,7 +28,7 @@ class PrivateContestSuccessView extends GetView<CreateContestsController> {
                   padding: const EdgeInsets.all(25),
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColors.primary.withOpacity(0.2)),
+                      color: AppColors.primary.withValues(alpha: 0.2)),
                   child: Image.asset(
                     AppImages.tick,
                   ),

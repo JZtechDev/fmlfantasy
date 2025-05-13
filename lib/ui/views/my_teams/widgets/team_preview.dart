@@ -116,8 +116,9 @@ class TeamPreview extends GetView<MyTeamsController> {
                                                                           2.r)),
                                                               color: AppColors
                                                                   .white
-                                                                  .withOpacity(
-                                                                      0.9)),
+                                                                  .withValues(
+                                                                      alpha:
+                                                                          0.9)),
                                                           child: SizedBox(
                                                             width: 22.w,
                                                             child: Text(
@@ -155,8 +156,9 @@ class TeamPreview extends GetView<MyTeamsController> {
                                                                   .circle,
                                                               color: AppColors
                                                                   .white
-                                                                  .withOpacity(
-                                                                      0.9)),
+                                                                  .withValues(
+                                                                      alpha:
+                                                                          0.9)),
                                                           child: Text(
                                                             controller
                                                                     .myTeamPlayers[

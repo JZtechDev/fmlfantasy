@@ -41,7 +41,7 @@ class BullPlayerView extends GetView<BullPlayerController> {
           ),
           verticalSpace(10.h),
           Divider(
-            color: AppColors.textGray.withOpacity(0.1),
+            color: AppColors.textGray.withValues(alpha: 0.1),
           ),
           verticalSpace(10.h),
           const Playergrid()

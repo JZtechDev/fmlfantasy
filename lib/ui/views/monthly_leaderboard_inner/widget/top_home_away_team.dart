@@ -97,14 +97,14 @@ class TopHomeAwayTeam extends GetView<MonthlyInnerLeaderboard> {
                 alignment: Alignment.center,
                 height: 5.h,
                 width: 5.w,
-                color: AppColors.dark.withOpacity(0.6),
+                color: AppColors.dark.withValues(alpha: 0.6),
               ),
               verticalSpace(5.h),
               Container(
                 alignment: Alignment.center,
                 height: 5.h,
                 width: 5.w,
-                color: AppColors.dark.withOpacity(0.6),
+                color: AppColors.dark.withValues(alpha: 0.6),
               )
             ],
           ),

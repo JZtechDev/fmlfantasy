@@ -14,7 +14,7 @@ class PlaySportypickController extends GetxController {
 
   int get previousIndex => _previousIndex;
 
-  set previousIndex(int value) {
+  set setPreviousIndex(int value) {
     _previousIndex = value;
   }
 

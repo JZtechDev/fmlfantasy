@@ -95,7 +95,7 @@ class MatchCenterTiles extends GetView<MatchCenterController> {
                         ),
                         SizedBox(
                           height: 80.h,
-                          child: VerticalDivider(
+                          child: const VerticalDivider(
                             color: AppColors.white,
                             thickness: 1,
                           ),

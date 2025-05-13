@@ -84,10 +84,7 @@ class AccountDetailsController extends GetxController {
       accountDetailsList.refresh();
       Get.back();
       Get.snackbar('Success', 'Profile updated successfully');
-    } else {
-      //Get.snackbar('Error', 'Failed to update profile');
-      // log('Failed to update profile');
-    }
+    } else {}
   }
 
   var dob = Rx<DateTime?>(null);
@@ -108,13 +105,11 @@ class AccountDetailsController extends GetxController {
               onPrimary: Colors.white,
               onSurface: AppColors.dark,
             ),
-            dialogBackgroundColor: Colors.yellow,
           ),
           child: child!,
         );
       },
     );
-    //2019-01-06T17:16:40
 
     if (pickedDate != null && pickedDate != dob.value) {
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);

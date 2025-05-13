@@ -97,8 +97,8 @@ class LeaderboardSportyplay extends StatelessWidget {
                           ]);
                         }).toList(),
                         // Table styling
-                        headingRowColor:
-                            MaterialStateProperty.all(AppColors.grey),
+                        // headingRowColor:
+                        //     MaterialStateProperty.all(AppColors.grey),
                         border: TableBorder.all(
                           color: Colors.transparent,
                           width: 1,

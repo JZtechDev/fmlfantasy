@@ -66,7 +66,7 @@ class PreviewPlayerCard extends GetView<MyTeamsController> {
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(2.r)),
                                               color: AppColors.white
-                                                  .withOpacity(0.9)),
+                                                  .withValues(alpha: 0.9)),
                                           child: SizedBox(
                                             width: 22.w,
                                             child: Text(
@@ -89,7 +89,7 @@ class PreviewPlayerCard extends GetView<MyTeamsController> {
                                           decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: AppColors.white
-                                                  .withOpacity(0.9)),
+                                                  .withValues(alpha: 0.9)),
                                           child: Text(
                                             controller.myTeamPlayers[0]
                                                     .jerseyNumber ??

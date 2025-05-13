@@ -61,7 +61,7 @@ class OtpForm extends GetView<OtpController> {
                     width: Get.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.r),
-                      color: AppColors.errorRed.withOpacity(0.2),
+                      color: AppColors.errorRed.withValues(alpha: 0.2),
                     ),
                     child: Text(
                       controller.errorMessage.value,
@@ -115,7 +115,7 @@ class OtpForm extends GetView<OtpController> {
                         width: 1.w,
                         height: 30.h,
                         decoration: BoxDecoration(
-                            color: AppColors.dark.withOpacity(0.5),
+                            color: AppColors.dark.withValues(alpha: 0.5),
                             borderRadius: BorderRadius.circular(5.r)),
                       ),
                     ],
@@ -131,8 +131,8 @@ class OtpForm extends GetView<OtpController> {
                     decoration: controller.defaultPinTheme.decoration!.copyWith(
                       color: AppColors.grey,
                       borderRadius: BorderRadius.circular(5.r),
-                      border:
-                          Border.all(color: AppColors.white.withOpacity(0.5)),
+                      border: Border.all(
+                          color: AppColors.white.withValues(alpha: 0.5)),
                     ),
                   ),
                   errorPinTheme: controller.defaultPinTheme.copyBorderWith(

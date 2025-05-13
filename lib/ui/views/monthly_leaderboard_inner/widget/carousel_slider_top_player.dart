@@ -186,7 +186,8 @@ class CarouselSliderTopPlayerToggle
                                                     alignment: Alignment.center,
                                                     decoration: BoxDecoration(
                                                         color: AppColors.white
-                                                            .withOpacity(0.9),
+                                                            .withValues(
+                                                                alpha: 0.9),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(2.r)),
@@ -221,7 +222,7 @@ class CarouselSliderTopPlayerToggle
                                                 //     alignment: Alignment.center,
                                                 //     decoration: BoxDecoration(
                                                 //         color: AppColors.white
-                                                //             .withOpacity(0.9),
+                                                //             .withValues(alpha:0.9),
                                                 //         borderRadius:
                                                 //             BorderRadius
                                                 //                 .circular(2.r)),

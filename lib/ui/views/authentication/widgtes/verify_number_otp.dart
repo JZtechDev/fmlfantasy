@@ -115,7 +115,7 @@ class VerifyNumberOtp extends StatelessWidget {
                             width: 1.w,
                             height: 30.h,
                             decoration: BoxDecoration(
-                                color: AppColors.dark.withOpacity(0.5),
+                                color: AppColors.dark.withValues(alpha: 0.5),
                                 borderRadius: BorderRadius.circular(5.r)),
                           ),
                         ],
@@ -135,7 +135,7 @@ class VerifyNumberOtp extends StatelessWidget {
                           color: AppColors.grey,
                           borderRadius: BorderRadius.circular(5.r),
                           border: Border.all(
-                              color: AppColors.white.withOpacity(0.5)),
+                              color: AppColors.white.withValues(alpha: 0.5)),
                         ),
                       ),
                       errorPinTheme: controller.defaultPinTheme.copyBorderWith(

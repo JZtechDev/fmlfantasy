@@ -94,7 +94,8 @@ class TwoFactorOtpView extends GetView<TwoFactorAuthController> {
                                 width: Get.width,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5.r),
-                                  color: AppColors.errorRed.withOpacity(0.2),
+                                  color:
+                                      AppColors.errorRed.withValues(alpha: 0.2),
                                 ),
                                 child: Text(
                                   controller.errorMessage.value,
@@ -154,7 +155,8 @@ class TwoFactorOtpView extends GetView<TwoFactorAuthController> {
                                     width: 1.w,
                                     height: 30.h,
                                     decoration: BoxDecoration(
-                                        color: AppColors.dark.withOpacity(0.5),
+                                        color: AppColors.dark
+                                            .withValues(alpha: 0.5),
                                         borderRadius:
                                             BorderRadius.circular(5.r)),
                                   ),

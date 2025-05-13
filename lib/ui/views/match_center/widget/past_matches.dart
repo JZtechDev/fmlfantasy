@@ -16,7 +16,7 @@ class PastMatchesSlider extends StatelessWidget {
     Get.put(MatchCenterInner());
     return GetBuilder<MatchCenterInner>(builder: (controller) {
       return Container(
-        padding: EdgeInsets.only(top: 10, bottom: 10),
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
         color: AppColors.primaryVeryDark,
         child: CarouselSlider.builder(
           itemCount: controller.pastMatches.length,

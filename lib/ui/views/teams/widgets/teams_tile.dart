@@ -1,6 +1,5 @@
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
-import 'package:fmlfantasy/ui/views/players/controller/players_controller.dart';
 import 'package:fmlfantasy/ui/views/teams/controller/teams_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';

@@ -102,7 +102,8 @@ class SelectedPlayersList extends GetView<SelectPlayerController> {
                                                 decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     color: AppColors.white
-                                                        .withOpacity(0.9)),
+                                                        .withValues(
+                                                            alpha: 0.9)),
                                                 child: Text(
                                                   player.jerseyNumber ?? '',
                                                   style: globalTextStyle2(

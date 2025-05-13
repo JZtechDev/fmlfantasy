@@ -118,7 +118,8 @@ class PlayersWidget extends GetView<LotoController> {
                                                           Alignment.center,
                                                       decoration: BoxDecoration(
                                                           color: AppColors.white
-                                                              .withOpacity(0.9),
+                                                              .withValues(
+                                                                  alpha: 0.9),
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
@@ -142,7 +143,7 @@ class PlayersWidget extends GetView<LotoController> {
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
                                                   color: AppColors.white
-                                                      .withOpacity(0.9),
+                                                      .withValues(alpha: 0.9),
                                                 ),
                                                 child: Text(
                                                   players.jerseyNumber ?? '',

@@ -201,7 +201,7 @@ class DrawContainer extends GetView<LotoController> {
                   //                                                     decoration: BoxDecoration(
                   //                                                         color: AppColors
                   //                                                             .white
-                  //                                                             .withOpacity(
+                  //                                                             .withValues(alpha:
                   //                                                                 0.9),
                   //                                                         borderRadius:
                   //                                                             BorderRadius.circular(2.r)),
@@ -232,7 +232,7 @@ class DrawContainer extends GetView<LotoController> {
                   //                                                     .circle,
                   //                                                 color: AppColors
                   //                                                     .white
-                  //                                                     .withOpacity(
+                  //                                                     .withValues(alpha:
                   //                                                         0.9),
                   //                                               ),
                   //                                               child: Text(

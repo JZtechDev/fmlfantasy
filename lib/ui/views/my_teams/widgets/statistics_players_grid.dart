@@ -83,7 +83,8 @@ class PlayerGridView extends GetView<MyTeamsController> {
                                                     alignment: Alignment.center,
                                                     decoration: BoxDecoration(
                                                         color: AppColors.white
-                                                            .withOpacity(0.9),
+                                                            .withValues(
+                                                                alpha: 0.9),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(2.r)),
@@ -117,7 +118,8 @@ class PlayerGridView extends GetView<MyTeamsController> {
                                                     alignment: Alignment.center,
                                                     decoration: BoxDecoration(
                                                         color: AppColors.white
-                                                            .withOpacity(0.9),
+                                                            .withValues(
+                                                                alpha: 0.9),
                                                         shape: BoxShape.circle),
                                                     child: Text(
                                                       textAlign:

@@ -245,7 +245,7 @@ class CreateLotoView extends GetView<LotoController> {
                                   //                                                                 bottom: 1.h,
                                   //                                                               ),
                                   //                                                               alignment: Alignment.center,
-                                  //                                                               decoration: BoxDecoration(color: AppColors.white.withOpacity(0.9), borderRadius: BorderRadius.circular(2.r)),
+                                  //                                                               decoration: BoxDecoration(color: AppColors.white.withValues(alpha:0.9), borderRadius: BorderRadius.circular(2.r)),
                                   //                                                               child: Text(
                                   //                                                                 textAlign: TextAlign.center,
                                   //                                                                 players.fullName!.split(' ').last,
@@ -257,7 +257,7 @@ class CreateLotoView extends GetView<LotoController> {
                                   //                                                         padding: const EdgeInsets.all(5),
                                   //                                                         decoration: BoxDecoration(
                                   //                                                           shape: BoxShape.circle,
-                                  //                                                           color: AppColors.white.withOpacity(0.9),
+                                  //                                                           color: AppColors.white.withValues(alpha:0.9),
                                   //                                                         ),
                                   //                                                         child: Text(
                                   //                                                           players.jerseyNumber ?? '',

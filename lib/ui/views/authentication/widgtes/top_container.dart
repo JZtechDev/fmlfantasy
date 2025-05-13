@@ -60,8 +60,8 @@ class TopContainer extends GetView<AuthenticationController> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      AppColors.textGray.withOpacity(0.3),
-                      AppColors.grey.withOpacity(0.01),
+                      AppColors.textGray.withValues(alpha: 0.3),
+                      AppColors.grey.withValues(alpha: 0.01),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -83,9 +83,9 @@ class TopContainer extends GetView<AuthenticationController> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      AppColors.textGray.withOpacity(0.3),
-                      AppColors.grey.withOpacity(
-                          0.01), // Adjust opacity or color as needed
+                      AppColors.textGray.withValues(alpha: 0.3),
+                      AppColors.grey.withValues(
+                          alpha: 0.01), // Adjust opacity or color as needed
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,

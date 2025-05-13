@@ -44,9 +44,9 @@ class TeamStatistics extends GetView<MyTeamsController> {
                   borderRadius: BorderRadius.circular(5),
                   gradient: LinearGradient(
                     colors: [
-                      AppColors.primary.withOpacity(0.25),
-                      AppColors.primary.withOpacity(0.2).withOpacity(
-                          0.0), // Adjust opacity or color as needed
+                      AppColors.primary.withValues(alpha: 0.25),
+                      AppColors.primary.withValues(alpha: 0.2).withValues(
+                          alpha: 0.0), // Adjust opacity or color as needed
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -67,8 +67,10 @@ class TeamStatistics extends GetView<MyTeamsController> {
                   borderRadius: BorderRadius.circular(5),
                   gradient: LinearGradient(
                     colors: [
-                      AppColors.primary.withOpacity(0.20),
-                      AppColors.primary.withOpacity(0.2).withOpacity(0.0),
+                      AppColors.primary.withValues(alpha: 0.20),
+                      AppColors.primary
+                          .withValues(alpha: 0.2)
+                          .withValues(alpha: 0.0),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -89,8 +91,10 @@ class TeamStatistics extends GetView<MyTeamsController> {
                   borderRadius: BorderRadius.circular(5),
                   gradient: LinearGradient(
                     colors: [
-                      AppColors.primary.withOpacity(0.1),
-                      AppColors.primary.withOpacity(0.1).withOpacity(0.0),
+                      AppColors.primary.withValues(alpha: 0.1),
+                      AppColors.primary
+                          .withValues(alpha: 0.1)
+                          .withValues(alpha: 0.0),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,

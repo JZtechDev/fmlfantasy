@@ -170,7 +170,7 @@ class TeamsContainer extends GetView<SelectPlayerController> {
             //         shape: BoxShape.circle,
             //         boxShadow: [
             //           BoxShadow(
-            //             color: AppColors.primary.withOpacity(0.1),
+            //             color: AppColors.primary.withValues(alpha:0.1),
             //             blurRadius: 5,
             //             offset: const Offset(0, 3),
             //           ),
