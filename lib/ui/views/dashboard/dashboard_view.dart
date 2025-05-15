@@ -57,7 +57,7 @@ class DashboardView extends GetView<DashboardController> {
                     },
                     child: Container(
                       width: Get.width * 0.3,
-                      height: Get.height * 0.14,
+                      height: Get.height * 0.15,
                       padding: const EdgeInsets.only(top: 10, bottom: 0),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(

@@ -1,5 +1,6 @@
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
+import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -76,7 +77,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Hi, Vipul',
+                    Text('Hi, $userName',
                         style: globalTextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 12.sp,

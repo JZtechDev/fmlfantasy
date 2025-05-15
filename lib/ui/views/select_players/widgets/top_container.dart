@@ -17,8 +17,8 @@ class TopContainer extends GetView<SelectPlayerController> {
     Get.put(SelectPlayerController());
     return SliverAppBar(
         pinned: true,
-        expandedHeight: AppSizing.height(context) * 0.34,
-        collapsedHeight: AppSizing.height(context) * 0.34,
+        expandedHeight: AppSizing.height(context) * 0.36,
+        collapsedHeight: AppSizing.height(context) * 0.36,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,

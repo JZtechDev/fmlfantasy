@@ -27,7 +27,7 @@ class Playergrid extends GetView<BullPlayerController> {
             crossAxisCount: constraints.maxWidth > 600 ? 3 : 2,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            childAspectRatio: 0.95,
+            childAspectRatio: 1.1,
           ),
           itemCount: controller.selectedPlayers.length,
           padding: const EdgeInsets.only(left: 10, right: 10),

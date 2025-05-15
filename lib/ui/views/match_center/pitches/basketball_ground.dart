@@ -117,11 +117,19 @@ class BasketballGround extends StatelessWidget {
                                     width: 25.w,
                                   ),
                     verticalSpace(5.h),
-                    Text(
-                      player.name ?? '-',
-                      style: globalTextStyle(
-                        fontSize: AppSizing.isMobile(context) ? 10.sp : 10.sp,
-                        fontWeight: FontWeight.w400,
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 5),
+                      decoration: BoxDecoration(
+                        color: AppColors.dark,
+                        borderRadius: BorderRadius.circular(5.r),
+                      ),
+                      child: Text(
+                        player.name ?? '-',
+                        style: globalTextStyle(
+                          fontSize: AppSizing.isMobile(context) ? 10.sp : 10.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ],

@@ -50,6 +50,8 @@ class FilterContainer extends GetView<SelectPlayerController> {
                             ),
                             child: Text(
                               homeTeamName!.split(' ').first, // Take first word
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                               style: globalTextStyle(
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w800,
@@ -81,6 +83,8 @@ class FilterContainer extends GetView<SelectPlayerController> {
                           child: Center(
                             child: Text(
                               awayTeamName!.split(' ').first,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                               style: globalTextStyle(
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w800,

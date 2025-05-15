@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
 import 'package:fmlfantasy/app/app%20routes/app_routes.dart';
+import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:get/get.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 
@@ -55,6 +57,11 @@ class SplashController extends GetxController {
       if (token == '' || token.isEmpty) {
         Get.offAllNamed(AppRoutes.registerUser);
       } else {
+        log('Token is not empty');
+        log(token);
+        Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+        log(decodedToken.toString());
+        userName = decodedToken['name'];
         Get.offAllNamed(AppRoutes.dashboardView);
       }
     });

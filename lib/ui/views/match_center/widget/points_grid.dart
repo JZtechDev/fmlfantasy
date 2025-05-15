@@ -13,17 +13,23 @@ class PointsGrid extends StatelessWidget {
       ..sort((a, b) => b.value!.compareTo(a.value!));
 
     return Container(
-      padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+      padding: EdgeInsets.symmetric(vertical: 10.h),
       width: Get.width,
       color: AppColors.primaryLight,
       child: Padding(
-        padding: EdgeInsets.only(left: 3.w, right: 3.w),
-        child: Wrap(
-          spacing: 5.w,
-          runSpacing: 5.h,
-          children: sortedStats.asMap().entries.map((entry) {
-            int index = entry.key;
-            StatsBreakDown data = entry.value;
+        padding: EdgeInsets.symmetric(horizontal: 3.w),
+        child: GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 5.w,
+            mainAxisSpacing: 5.h,
+            childAspectRatio: 1.2, // Adjust as needed for proper height
+          ),
+          itemCount: sortedStats.length,
+          itemBuilder: (context, index) {
+            StatsBreakDown data = sortedStats[index];
 
             Color containerColor =
                 (index < 3) ? AppColors.secondary : AppColors.primaryLight;
@@ -32,9 +38,7 @@ class PointsGrid extends StatelessWidget {
 
             return Container(
               alignment: Alignment.center,
-              height: 70.h,
-              width: Get.width * 0.3,
-              padding: EdgeInsets.only(left: 2.w, right: 2.w),
+              padding: EdgeInsets.symmetric(horizontal: 2.w),
               decoration: BoxDecoration(
                 color: containerColor,
                 borderRadius: BorderRadius.circular(5.r),
@@ -65,7 +69,7 @@ class PointsGrid extends StatelessWidget {
                 ],
               ),
             );
-          }).toList(),
+          },
         ),
       ),
     );

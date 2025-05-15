@@ -43,3 +43,5 @@ RxList<GetContacts> contacts = <GetContacts>[].obs;
 RxString selectedSPort = 'CR'.obs;
 
 RxString selectedTab = 'Fantasy Sports'.obs;
+
+String? userName;
