@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/model/monthly_leader_model.dart';
@@ -63,6 +64,7 @@ class MonthlyLeaderboardController extends GetxController
 
   Future<TopPlayers> fetchMonthlyLeaderBoard() async {
     try {
+      EasyLoading.show(status: 'Loading...');
       isLoading(true);
       final data = await monthylyLeaderboardServices
           .fetchMonthlyLeaderBoard(selectedSport.value);
@@ -89,11 +91,14 @@ class MonthlyLeaderboardController extends GetxController
           );
         } else {}
       } else {}
+      EasyLoading.dismiss();
       isLoading(false);
     } catch (e) {
+      EasyLoading.dismiss();
       log('Error: $e');
       throw Exception('Failed to fetch data and matches: $e');
     } finally {
+      EasyLoading.dismiss();
       isLoading(false);
       return TopPlayers();
     }

@@ -4,8 +4,7 @@ import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/doughnut_chart.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/players_card.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/points_grid.dart';
-import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
-import 'package:fmlfantasy/ui/widgets/privious_button.dart';
+import 'package:fmlfantasy/ui/widgets/navigation_buttons.dart';
 
 class PlayerDetails extends StatelessWidget {
   final PlayersBreakDown playersdata;
@@ -17,40 +16,36 @@ class PlayerDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroud,
-      appBar: HomeAppBar(title: 'Player Details'.tr),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Padding(
-              padding:
-                  EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [PreviousButton(), DashboardButton()],
-              ),
-            ),
-            verticalSpace(20.h),
-            Container(
-              margin: const EdgeInsets.only(left: 10, right: 10),
-              padding: const EdgeInsets.all(1),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.r),
-                color: AppColors.secondary,
-              ),
+        backgroundColor: AppColors.backgroud,
+        appBar: HomeAppBar(title: 'Player Details'.tr),
+        body: CustomScrollView(
+          slivers: [
+            const NavigationButtons(),
+            SliverToBoxAdapter(
               child: Column(
                 children: [
-                  PlayersCard(topPlayers: playersdata),
-                  verticalSpace(2),
-                  DoughnutChart(playersdata: playersdata),
-                  verticalSpace(2),
-                  PointsGrid(playersdata: playersdata),
+                  verticalSpace(20.h),
+                  Container(
+                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.r),
+                      color: AppColors.secondary,
+                    ),
+                    child: Column(
+                      children: [
+                        PlayersCard(topPlayers: playersdata),
+                        verticalSpace(2),
+                        DoughnutChart(playersdata: playersdata),
+                        verticalSpace(2),
+                        PointsGrid(playersdata: playersdata),
+                      ],
+                    ),
+                  )
                 ],
               ),
             )
           ],
-        ),
-      ),
-    );
+        ));
   }
 }

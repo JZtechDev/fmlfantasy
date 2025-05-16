@@ -2,7 +2,6 @@ import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/model/monthly_leader_model.dart';
-import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/monthly_leaderboard_inner/controller/monthly_inner_leaderboard_controller.dart';
 import 'package:fmlfantasy/ui/views/monthly_leaderboard_inner/widget/monthy_leaderbiard_toggle.dart';
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
@@ -20,310 +19,276 @@ class CarouselSliderTopPlayerToggle
   @override
   Widget build(BuildContext context) {
     Get.put(MonthlyInnerLeaderboardController());
-    return LayoutBuilder(builder: (context, constraints) {
-      //double maxWidth = constraints.maxWidth;
-      return Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 15.w),
-                child: Text(
-                  'topPlayers'.tr,
-                  style: globalTextStyle(
-                      fontSize: 24.sp, fontWeight: FontWeight.w600),
-                ),
-              ),
-              Obx(
-                () => MonthlyLeaderboardToggle(
-                  iconPathN: 'assets/icons/arrowright.svg',
-                  iconPathP: 'assets/icons/arrowright.svg',
-                  onPrevious: () {
-                    controller.onPreviousPlayerCard();
-                  },
-                  onNext: () {
-                    controller.onNextPlayerCard();
-                  },
-                  previousButtonColor: controller.topPlayerCrouselIndex.value ==
-                          controller.colorPlayerCrouselIndex.value - 0
-                      ? AppColors.dark
-                      : AppColors.white,
-                  nextButtonColor: controller.topPlayerCrouselIndex.value ==
-                          controller.colorPlayerCrouselIndex.value - 0
-                      ? AppColors.white
-                      : AppColors.dark,
-                  previousIconColor: controller.topPlayerCrouselIndex.value ==
-                          controller.colorPlayerCrouselIndex.value - 0
-                      ? AppColors.white
-                      : AppColors.dark,
-                  nextIconColor: controller.topPlayerCrouselIndex.value ==
-                          controller.colorPlayerCrouselIndex.value - 0
-                      ? AppColors.dark
-                      : AppColors.white,
-                ),
-              ),
-            ],
-          ),
-          verticalSpace(10.h),
-          CarouselSlider.builder(
-            controller: controller.carouselController,
-            itemCount: topPlayers.length,
-            itemBuilder: (context, index, realIndex) {
-              final player = topPlayers[index];
-              return Padding(
-                padding: EdgeInsets.only(
-                  left: 20.h,
-                ),
-                child: Row(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isPortrait =
+            MediaQuery.of(context).orientation == Orientation.portrait;
+        final cardWidth = constraints.maxWidth * 0.48;
+        final imageSize = cardWidth * 0.51;
+        final rankBoxSize = cardWidth * 0.3;
+        final rankBoxheight = cardWidth * 0.35;
+        final fontSize = isPortrait ? 12.sp : 10.sp;
+        final smallFontSize = isPortrait ? 12.sp : 8.sp;
+        final padding = cardWidth * 0.05;
+
+        return Column(
+          children: [
+            MonthlyLeaderboardToggle(
+              iconPathN: 'assets/icons/arrowright.svg',
+              iconPathP: 'assets/icons/arrowright.svg',
+              onPrevious: () => controller.onPreviousPlayerCard(),
+              onNext: () => controller.onNextPlayerCard(),
+            ),
+            CarouselSlider.builder(
+              controller: controller.carouselController,
+              itemCount: topPlayers.length,
+              itemBuilder: (context, index, realIndex) {
+                final player = topPlayers[index];
+                return Container(
+                  width: cardWidth,
+                  margin:
+                      EdgeInsets.symmetric(horizontal: padding, vertical: 5.h),
+                  decoration: BoxDecoration(
+                    color: AppColors.dark,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(padding),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
+                            // Rank and Points
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(10),
-                                  alignment: Alignment.center,
-                                  //height: 55.h,
-                                  width: 47.w,
+                                  width: rankBoxSize,
+                                  height: rankBoxheight,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.r),
-                                      color: AppColors.navyBlue),
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    color: AppColors.primary,
+                                    border: Border.all(
+                                        color: AppColors.white, width: 1.5),
+                                  ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SvgPicture.asset(
-                                        AppImages.reward,
-                                        // ignore: deprecated_member_use
+                                      Image.asset(
+                                        'assets/new_images/Award.png',
+                                        height: rankBoxSize * 0.4,
+                                        width: rankBoxSize * 0.4,
                                         color: AppColors.white,
-                                        height: 16.h,
-                                        width: 16.w,
                                       ),
-                                      verticalSpace(5.h),
+                                      SizedBox(height: padding * 0.5),
                                       Text(
-                                        player.rank.toString().padLeft(2, '0'),
+                                        player.rank.toString(),
                                         style: globalTextStyle(
                                           color: AppColors.white,
-                                          fontSize: 12.sp,
+                                          fontSize: smallFontSize,
                                           fontWeight: FontWeight.w600,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
-                                verticalSpace(2.h),
+                                SizedBox(height: padding),
                                 Container(
-                                  alignment: Alignment.center,
-                                  height: 33.h,
-                                  width: 47.w,
+                                  width: rankBoxSize,
+                                  height: rankBoxSize * 0.6,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5.r),
+                                    borderRadius: BorderRadius.circular(6.r),
                                     color: AppColors.primary,
+                                    border: Border.all(
+                                        color: AppColors.white, width: 1.5),
                                   ),
-                                  child: Text(
-                                    player.fantasyPoint!.toStringAsFixed(
-                                        1), // Limit to 2 decimal places
-                                    style: globalTextStyle(
-                                      color: AppColors.white,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w600,
+                                  child: Center(
+                                    child: Text(
+                                      player.fantasyPoint!.toStringAsFixed(1),
+                                      style: globalTextStyle(
+                                        color: AppColors.white,
+                                        fontSize: smallFontSize,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
-                                    textAlign: TextAlign.center,
                                   ),
-                                )
+                                ),
                               ],
                             ),
-                            horizontalSpace(5.w),
+                            // Player Image
                             Container(
-                              height: 90.h,
-                              width: 101.w,
+                              constraints: BoxConstraints(
+                                maxHeight: imageSize,
+                                maxWidth: imageSize,
+                              ),
                               decoration: BoxDecoration(
-                                color:
-                                    AppColors.white, // Change color if needed
+                                color: AppColors.primary,
                                 borderRadius: BorderRadius.circular(5.r),
                               ),
                               child: Stack(
-                                  alignment: Alignment.topLeft,
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    controller.sportName == 'FB'
-                                        ? Positioned(
-                                            top: -10,
-                                            left: 0,
-                                            right: 0,
-                                            bottom: 0,
-                                            child: Stack(
-                                              alignment: Alignment.center,
-                                              children: [
-                                                player.jerseyImage != null
-                                                    ? player.jerseyImage!
-                                                            .endsWith('.svg')
-                                                        ? SvgPicture.network(
-                                                            player.jerseyImage!)
-                                                        : Image.network(
-                                                            player.jerseyImage!)
-                                                    : Image.asset(
-                                                        AppImages
-                                                            .userPlaceHolder,
-                                                      ),
-                                                Align(
-                                                  alignment:
-                                                      Alignment.topCenter,
-                                                  heightFactor: 4,
-                                                  child: Container(
-                                                    height: 15.h,
-                                                    width: 40.h,
-                                                    padding: EdgeInsets.only(
-                                                      left: 2.w,
-                                                      right: 2.w,
-                                                      top: 1.h,
-                                                      bottom: 1.h,
+                                alignment: Alignment.topCenter,
+                                clipBehavior: Clip.none,
+                                children: [
+                                  Positioned(
+                                    top: -padding,
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    child: controller.sportName == 'FB'
+                                        ? Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              player.jerseyImage != null
+                                                  ? player.jerseyImage!
+                                                          .endsWith('.svg')
+                                                      ? SvgPicture.network(
+                                                          player.jerseyImage!,
+                                                          height: imageSize,
+                                                          width: imageSize,
+                                                          fit: BoxFit.contain,
+                                                        )
+                                                      : Image.network(
+                                                          player.jerseyImage!,
+                                                          height: imageSize,
+                                                          width: imageSize,
+                                                          fit: BoxFit.contain,
+                                                        )
+                                                  : Image.asset(
+                                                      AppImages.userPlaceHolder,
+                                                      height: imageSize,
+                                                      width: imageSize,
+                                                      fit: BoxFit.contain,
                                                     ),
-                                                    alignment: Alignment.center,
-                                                    decoration: BoxDecoration(
-                                                        color: AppColors.white
-                                                            .withValues(
-                                                                alpha: 0.9),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(2.r)),
-                                                    child: Text(
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        player.jerseyName ==
-                                                                null
-                                                            ? player.name!
-                                                                .split(' ')
-                                                                .last
-                                                            : player.jerseyName
-                                                                .toString()
-                                                                .padLeft(
-                                                                    2, '0'),
-                                                        style: globalTextStyle2(
-                                                            fontSize: 10.sp,
-                                                            color: AppColors
-                                                                .dark)),
+                                              Align(
+                                                alignment: Alignment.topCenter,
+                                                heightFactor: 4,
+                                                child: Container(
+                                                  height: imageSize * 0.2,
+                                                  width: imageSize * 0.5,
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: padding * 0.5,
+                                                    vertical: padding * 0.2,
+                                                  ),
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.white
+                                                        .withValues(alpha: 0.9),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            2.r),
+                                                  ),
+                                                  child: Text(
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    player.jerseyName == null
+                                                        ? player.name!
+                                                            .split(' ')
+                                                            .last
+                                                        : player.jerseyName
+                                                            .toString()
+                                                            .padLeft(2, '0'),
+                                                    style: globalTextStyle2(
+                                                      fontSize:
+                                                          smallFontSize * 0.8,
+                                                      color: AppColors.dark,
+                                                    ),
                                                   ),
                                                 ),
-                                                // Positioned(
-                                                //   top: 15.h,
-                                                //   child: Container(
-                                                //     padding: EdgeInsets.only(
-                                                //       left: 2.w,
-                                                //       right: 2.w,
-                                                //       top: 1.h,
-                                                //       bottom: 1.h,
-                                                //     ),
-                                                //     alignment: Alignment.center,
-                                                //     decoration: BoxDecoration(
-                                                //         color: AppColors.white
-                                                //             .withValues(alpha:0.9),
-                                                //         borderRadius:
-                                                //             BorderRadius
-                                                //                 .circular(2.r)),
-                                                //     child: Text(
-                                                //       textAlign:
-                                                //           TextAlign.center,
-                                                //       player.jerseyName ??
-                                                //           '-'.split(' ').last,
-                                                //       style: globalTextStyle(
-                                                //           fontSize: 8.sp,
-                                                //           color:
-                                                //               AppColors.dark),
-                                                //     ),
-                                                //   ),
-                                                // ),
-                                                player.jerseyNumber == null
-                                                    ? const SizedBox()
-                                                    : Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Container(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  5.r),
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            color:
-                                                                AppColors.white,
-                                                          ),
-                                                          child: Text(
-                                                            player.jerseyNumber ==
-                                                                    null
-                                                                ? ''
-                                                                : player
-                                                                    .jerseyNumber
-                                                                    .toString()
-                                                                    .padLeft(
-                                                                        2, '0'),
-                                                            style: globalTextStyle2(
-                                                                fontSize: 8.sp,
-                                                                color: AppColors
-                                                                    .dark),
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ),
-                                                      )
-                                              ],
-                                            ))
-                                        : Positioned(
-                                            top: -10,
-                                            left: 0,
-                                            right: 0,
-                                            bottom: 0,
-                                            child: player.picture != null
-                                                ? player.picture!
-                                                        .endsWith('.svg')
-                                                    ? SvgPicture.network(
-                                                        player.picture!)
-                                                    : Image.network(
-                                                        player.picture!)
-                                                : Image.asset(
-                                                    AppImages.userPlaceHolder,
+                                              ),
+                                              if (player.jerseyNumber != null)
+                                                Align(
+                                                  alignment: Alignment.center,
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.all(3.r),
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: AppColors.white,
+                                                    ),
+                                                    child: Text(
+                                                      player.jerseyNumber
+                                                          .toString()
+                                                          .padLeft(2, '0'),
+                                                      style: globalTextStyle2(
+                                                        fontSize:
+                                                            smallFontSize * 0.8,
+                                                        color: AppColors.dark,
+                                                      ),
+                                                    ),
                                                   ),
-                                          ),
-                                  ]),
+                                                ),
+                                            ],
+                                          )
+                                        : player.picture != null
+                                            ? player.picture!.endsWith('.svg')
+                                                ? SvgPicture.network(
+                                                    player.picture!,
+                                                    height: imageSize,
+                                                    width: imageSize,
+                                                    fit: BoxFit.contain,
+                                                  )
+                                                : Image.network(
+                                                    player.picture!,
+                                                    height: imageSize,
+                                                    width: imageSize,
+                                                    fit: BoxFit.contain,
+                                                  )
+                                            : Image.asset(
+                                                AppImages.userPlaceHolder,
+                                                height: imageSize,
+                                                width: imageSize,
+                                                fit: BoxFit.contain,
+                                              ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
-                        verticalSpace(5.h),
-                        SizedBox(
-                          width: Get.width * 0.2,
-                          child: Text(
-                            player.name!,
-                            style: globalTextStyle(
-                                fontSize: 12.sp, fontWeight: FontWeight.w600),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: padding),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: padding),
+                        child: Text(
+                          player.name!,
+                          style: globalTextStyle(
+                            fontSize: fontSize,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.white,
                           ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
                         ),
-                      ],
-                    )
-                  ],
-                ),
-              );
-            },
-            options: CarouselOptions(
-                height: 150.h,
-                aspectRatio: 0.9,
-                viewportFraction: 0.5,
+                      ),
+                    ],
+                  ),
+                );
+              },
+              options: CarouselOptions(
+                aspectRatio: isPortrait ? 2.2 : 3.0,
+                viewportFraction: isPortrait ? 0.5 : 0.45,
                 scrollDirection: Axis.horizontal,
                 enableInfiniteScroll: false,
                 padEnds: false,
                 onPageChanged: (index, reason) {
                   controller.topPlayerCrouselIndex.value = index;
-                }),
-          ),
-        ],
-      );
-    });
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

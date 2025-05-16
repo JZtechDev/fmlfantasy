@@ -5,8 +5,6 @@ import 'package:fmlfantasy/ui/views/select_players/controller/select_player_cont
 import 'package:fmlfantasy/ui/views/select_players/widgets/match_timer.dart';
 import 'package:fmlfantasy/ui/views/select_players/widgets/selected_players_list.dart';
 import 'package:fmlfantasy/ui/views/select_players/widgets/team_names.dart';
-import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
-import 'package:fmlfantasy/ui/widgets/privious_button.dart';
 
 class TopContainer extends GetView<SelectPlayerController> {
   final SelectTeam selectTeam;
@@ -17,8 +15,8 @@ class TopContainer extends GetView<SelectPlayerController> {
     Get.put(SelectPlayerController());
     return SliverAppBar(
         pinned: true,
-        expandedHeight: AppSizing.height(context) * 0.36,
-        collapsedHeight: AppSizing.height(context) * 0.36,
+        expandedHeight: AppSizing.height(context) * 0.3,
+        collapsedHeight: AppSizing.height(context) * 0.3,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -33,11 +31,11 @@ class TopContainer extends GetView<SelectPlayerController> {
                   child: Obx(
                     () => Column(
                       children: [
-                        verticalSpace(5),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [PreviousButton(), DashboardButton()],
-                        ),
+                        // verticalSpace(5),
+                        // const Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [PreviousButton(), DashboardButton()],
+                        // ),
                         TeamsContainer(
                           homeTeamNme: selectTeam.homeTeam!.name,
                           awayTeamName: selectTeam.awayTeam!.name,

@@ -5,6 +5,7 @@ import 'package:fmlfantasy/ui/views/select_players/controller/select_player_cont
 import 'package:fmlfantasy/ui/views/select_players/widgets/bottom_button.dart';
 import 'package:fmlfantasy/ui/views/select_players/widgets/players_section.dart';
 import 'package:fmlfantasy/ui/views/select_players/widgets/top_container.dart';
+import 'package:fmlfantasy/ui/widgets/navigation_buttons.dart';
 
 class SelectPlayerView extends GetView<SelectPlayerController> {
   const SelectPlayerView({super.key});
@@ -36,6 +37,7 @@ class SelectPlayerView extends GetView<SelectPlayerController> {
                       return Obx(() {
                         controller.filterPlayers(selectTeam);
                         return CustomScrollView(slivers: [
+                          const NavigationButtons(),
                           TopContainer(selectTeam: selectTeam),
                           PlayersSection(selectTeam: selectTeam)
                         ]);

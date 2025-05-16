@@ -6,12 +6,12 @@ import 'package:fmlfantasy/ui/components/sports_tab_bar.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/monthly_leaderboard/controller/monthly_leaderboard_controller.dart';
 import 'package:fmlfantasy/ui/views/monthly_leaderboard/widget/leaderboard_list.dart';
-import 'package:fmlfantasy/ui/views/monthly_leaderboard/widget/leaderboard_shimmer.dart';
 import 'package:fmlfantasy/ui/views/monthly_leaderboard_inner/monthly_inner_leaderboard.dart';
 import 'package:fmlfantasy/ui/widgets/app_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
 import 'package:get/get.dart';
 
 class MonthlyLeaderboard extends GetView<MonthlyLeaderboardController> {
@@ -44,9 +44,7 @@ class MonthlyLeaderboard extends GetView<MonthlyLeaderboardController> {
               padding: EdgeInsets.only(left: 15.w, right: 15.w),
               child: Column(
                 children: [
-                  //verticalSpace(20.h),
-                  // const LabelText(),
-                  //verticalSpace(10),
+                  const DashboardButton(),
                   Obx(
                     () => AnimatedContainer(
                         clipBehavior: Clip.hardEdge,
@@ -79,38 +77,36 @@ class MonthlyLeaderboard extends GetView<MonthlyLeaderboardController> {
                           item.home!.toLowerCase().contains(query) ||
                           item.away!.toLowerCase().contains(query);
                     }).toList();
-                    return controller.isLoading.value
-                        ? const LeaderboardShimmer()
-                        : controller.leaderboard.isEmpty
-                            ? Text('noMatchesfound'.tr)
-                            : ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                itemCount: filteredList.length,
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  final leaderBoardData = filteredList[index];
-                                  return GestureDetector(
-                                    onTap: () {
-                                      if (leaderBoardData.rankings != null &&
-                                          leaderBoardData.topPlayers != null) {
-                                        Get.to(
-                                            () => MonthlyInnerLeaderboard(
-                                                  sports: controller
-                                                      .selectedSport.value,
-                                                  data: leaderBoardData,
-                                                ),
-                                            arguments: {
-                                              'sportName': controller
+                    return controller.leaderboard.isEmpty
+                        ? Text('noMatchesfound'.tr)
+                        : ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            itemCount: filteredList.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              final leaderBoardData = filteredList[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  if (leaderBoardData.rankings != null &&
+                                      leaderBoardData.topPlayers != null) {
+                                    Get.to(
+                                        () => MonthlyInnerLeaderboard(
+                                              sports: controller
                                                   .selectedSport.value,
-                                            });
-                                      }
-                                    },
-                                    child: LeaderboardListItems(
-                                        leaderboard: leaderBoardData),
-                                  );
+                                              data: leaderBoardData,
+                                            ),
+                                        arguments: {
+                                          'sportName':
+                                              controller.selectedSport.value,
+                                        });
+                                  }
                                 },
+                                child: LeaderboardListItems(
+                                    leaderboard: leaderBoardData),
                               );
+                            },
+                          );
                   }),
                 ],
               ),

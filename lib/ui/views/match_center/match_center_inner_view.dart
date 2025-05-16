@@ -10,8 +10,7 @@ import 'package:fmlfantasy/ui/views/match_center/widget/match_preview.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/past_matches.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/team_and_lineup_tabs.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/top_players_sider.dart';
-import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
-import 'package:fmlfantasy/ui/widgets/privious_button.dart';
+import 'package:fmlfantasy/ui/widgets/navigation_buttons.dart';
 
 class MatchCenterInnerView extends GetView<MatchCenterInner> {
   const MatchCenterInnerView({
@@ -24,16 +23,18 @@ class MatchCenterInnerView extends GetView<MatchCenterInner> {
         appBar: HomeAppBar(title: 'matchcenter'.tr),
         body: LayoutBuilder(builder: (context, constraints) {
           return CustomScrollView(slivers: [
+            const NavigationButtons(),
             SliverToBoxAdapter(
                 child: Column(children: [
-              const Padding(
-                padding:
-                    EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [PreviousButton(), DashboardButton()],
-                ),
-              ),
+              verticalSpace(10.h),
+              // const Padding(
+              //   padding:
+              //       EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [PreviousButton(), DashboardButton()],
+              //   ),
+              // ),
               const PastMatchesSlider(),
               Obx(() {
                 if (controller.isLoading.value) {
