@@ -1,7 +1,7 @@
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
+import 'package:fmlfantasy/ui/components/trapezoid.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
-import 'package:fmlfantasy/ui/views/dashboard/dashboard_view.dart';
 import 'package:fmlfantasy/ui/views/monthly_leaderboard_inner/monthly_inner_leaderboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

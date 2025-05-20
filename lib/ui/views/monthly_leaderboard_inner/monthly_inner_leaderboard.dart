@@ -3,6 +3,7 @@ import 'package:fmlfantasy/model/monthly_leader_model.dart';
 import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/monthly_leaderboard_inner/controller/monthly_inner_leaderboard_controller.dart';
+import 'package:fmlfantasy/ui/views/monthly_leaderboard_inner/widget/leaderboard_table.dart';
 import 'package:fmlfantasy/ui/views/monthly_leaderboard_inner/widget/top_home_away_team.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +45,6 @@ class MonthlyInnerLeaderboard
                     data.awayScore!,
                     sports),
                 CarouselSliderTopPlayerToggle(data.topPlayers!),
-                verticalSpace(10.h),
               ],
             ),
           ),

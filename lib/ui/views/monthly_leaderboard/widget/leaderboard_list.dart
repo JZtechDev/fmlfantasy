@@ -44,75 +44,85 @@ class LeaderboardListItems extends GetView<MonthlyLeaderboardController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            Container(
-                                height: maxWidth > 600 ? 50.h : 60.h,
-                                width: maxWidth > 600 ? 50.w : 60.w,
-                                padding: const EdgeInsets.all(10),
-                                child: leaderboard.homeImageUrl
-                                        .toString()
-                                        .endsWith('.png')
-                                    ? Image.network(leaderboard.homeImageUrl!)
-                                    : controller.selectedSport.value == 'CR'
-                                        ? Image.network(
-                                            replaceSvgWithPng(
-                                                leaderboard.homeImageUrl!),
-                                            height:
-                                                maxWidth > 600 ? 30.h : 36.28.h,
-                                            width:
-                                                maxWidth > 600 ? 40.w : 47.72.w,
-                                            fit: BoxFit.contain,
-                                          )
-                                        : SvgPicture.network(
-                                            leaderboard.homeImageUrl!)),
-                            horizontalSpace(10.w),
-                            Text(
-                              leaderboard.home!.split(' ').join('\n'),
-                              style: globalTextStyle2(
-                                  fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                                  color: AppColors.primaryVeryDark,
-                                  fontWeight: FontWeight.w700),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
+                        SizedBox(
+                          width: Get.width * 0.4,
+                          child: Row(
+                            children: [
+                              Container(
+                                  height: maxWidth > 600 ? 50.h : 60.h,
+                                  width: maxWidth > 600 ? 50.w : 60.w,
+                                  padding: const EdgeInsets.all(10),
+                                  child: leaderboard.homeImageUrl
+                                          .toString()
+                                          .endsWith('.png')
+                                      ? Image.network(leaderboard.homeImageUrl!)
+                                      : controller.selectedSport.value == 'CR'
+                                          ? Image.network(
+                                              replaceSvgWithPng(
+                                                  leaderboard.homeImageUrl!),
+                                              height: maxWidth > 600
+                                                  ? 30.h
+                                                  : 36.28.h,
+                                              width: maxWidth > 600
+                                                  ? 40.w
+                                                  : 47.72.w,
+                                              fit: BoxFit.contain,
+                                            )
+                                          : SvgPicture.network(
+                                              leaderboard.homeImageUrl!)),
+                              horizontalSpace(10.w),
+                              Text(
+                                leaderboard.home!.split(' ').join('\n'),
+                                style: globalTextStyle2(
+                                    fontSize: maxWidth > 600 ? 10.sp : 12.sp,
+                                    color: AppColors.primaryVeryDark,
+                                    fontWeight: FontWeight.w700),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              textAlign: TextAlign.end,
-                              leaderboard.away!.split(' ').join('\n'),
-                              style: globalTextStyle2(
-                                  fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                                  color: AppColors.primaryVeryDark,
-                                  fontWeight: FontWeight.w700),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            horizontalSpace(10.w),
-                            Container(
-                                height: maxWidth > 600 ? 50.h : 60.h,
-                                width: maxWidth > 600 ? 50.w : 60.w,
-                                padding: const EdgeInsets.all(10),
-                                child: leaderboard.awayImageUrl
-                                        .toString()
-                                        .endsWith('.png')
-                                    ? Image.network(leaderboard.awayImageUrl!)
-                                    : controller.selectedSport.value == 'CR'
-                                        ? Image.network(
-                                            replaceSvgWithPng(
-                                                leaderboard.awayImageUrl!),
-                                            height:
-                                                maxWidth > 600 ? 30.h : 36.28.h,
-                                            width:
-                                                maxWidth > 600 ? 40.w : 47.72.w,
-                                            fit: BoxFit.contain,
-                                          )
-                                        : SvgPicture.network(
-                                            leaderboard.awayImageUrl!)),
-                          ],
+                        SizedBox(
+                          width: Get.width * 0.4,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                  height: maxWidth > 600 ? 50.h : 60.h,
+                                  width: maxWidth > 600 ? 50.w : 60.w,
+                                  padding: const EdgeInsets.all(10),
+                                  child: leaderboard.awayImageUrl
+                                          .toString()
+                                          .endsWith('.png')
+                                      ? Image.network(leaderboard.awayImageUrl!)
+                                      : controller.selectedSport.value == 'CR'
+                                          ? Image.network(
+                                              replaceSvgWithPng(
+                                                  leaderboard.awayImageUrl!),
+                                              height: maxWidth > 600
+                                                  ? 30.h
+                                                  : 36.28.h,
+                                              width: maxWidth > 600
+                                                  ? 40.w
+                                                  : 47.72.w,
+                                              fit: BoxFit.contain,
+                                            )
+                                          : SvgPicture.network(
+                                              leaderboard.awayImageUrl!)),
+                              horizontalSpace(10.w),
+                              Text(
+                                textAlign: TextAlign.start,
+                                leaderboard.away!.split(' ').join('\n'),
+                                style: globalTextStyle2(
+                                    fontSize: maxWidth > 600 ? 10.sp : 12.sp,
+                                    color: AppColors.primaryVeryDark,
+                                    fontWeight: FontWeight.w700),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

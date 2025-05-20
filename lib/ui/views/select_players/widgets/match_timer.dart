@@ -1,67 +1,101 @@
 import 'dart:async';
+import 'dart:isolate';
+import 'package:flutter/material.dart';
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
-import 'package:flutter/material.dart';
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+// Data class to pass to the isolate
+class TimerData {
+  final DateTime startTime;
+  final SendPort sendPort;
+
+  TimerData(this.startTime, this.sendPort);
+}
+
+// Function to run in the isolate
+void timerIsolate(TimerData data) {
+  Timer.periodic(const Duration(seconds: 1), (timer) {
+    final currentTime = DateTime.now();
+    final timeDifference = data.startTime.difference(currentTime);
+
+    if (timeDifference.isNegative) {
+      data.sendPort.send({'matchEnded': true});
+      timer.cancel();
+    } else {
+      data.sendPort.send({
+        'matchEnded': false,
+        'timeDifference': timeDifference.inSeconds,
+      });
+    }
+  });
+}
 
 class MatchTimer extends StatefulWidget {
   final String startDate;
   const MatchTimer({super.key, required this.startDate});
 
   @override
-  // ignore: library_private_types_in_public_api
   _MatchTimerState createState() => _MatchTimerState();
 }
 
 class _MatchTimerState extends State<MatchTimer> {
-  Timer? countdownTimer;
-  late DateTime startTime;
-  late Duration timeDifference;
+  ReceivePort? _receivePort;
+  Isolate? _isolate;
+  Duration? timeDifference;
   bool matchEnded = false;
 
   @override
   void initState() {
     super.initState();
-    startTimer();
+    startTimerInIsolate();
   }
 
   @override
   void dispose() {
-    countdownTimer?.cancel();
+    _receivePort?.close();
+    _isolate?.kill(priority: Isolate.immediate);
     super.dispose();
   }
 
-  void startTimer() {
-    startTime = DateTime.parse(widget.startDate);
+  Future<void> startTimerInIsolate() async {
+    final startTime = DateTime.parse(widget.startDate);
     final currentTime = DateTime.now();
     timeDifference = startTime.difference(currentTime);
 
-    if (timeDifference.isNegative) {
+    if (timeDifference!.isNegative) {
       setState(() {
         matchEnded = true;
       });
       return;
     }
-
-    countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) {
-      setState(() {
-        timeDifference = timeDifference - const Duration(seconds: 1);
-      });
-      if (timeDifference.isNegative) {
+    _receivePort = ReceivePort();
+    _receivePort!.listen((message) {
+      if (mounted) {
         setState(() {
-          matchEnded = true;
+          if (message['matchEnded'] == true) {
+            matchEnded = true;
+            _receivePort?.close();
+            _isolate?.kill(priority: Isolate.immediate);
+          } else {
+            timeDifference = Duration(seconds: message['timeDifference']);
+          }
         });
-        countdownTimer?.cancel();
       }
     });
+
+    // Spawn the isolate
+    _isolate = await Isolate.spawn(
+      timerIsolate,
+      TimerData(startTime, _receivePort!.sendPort),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    if (matchEnded) {
+    if (matchEnded || timeDifference == null) {
       return Container(
         alignment: Alignment.center,
         margin: EdgeInsets.symmetric(horizontal: 10.w),
@@ -81,10 +115,10 @@ class _MatchTimerState extends State<MatchTimer> {
       );
     }
 
-    int days = timeDifference.inDays;
-    int hours = timeDifference.inHours.remainder(24);
-    int minutes = timeDifference.inMinutes.remainder(60);
-    int seconds = timeDifference.inSeconds.remainder(60);
+    int days = timeDifference!.inDays;
+    int hours = timeDifference!.inHours.remainder(24);
+    int minutes = timeDifference!.inMinutes.remainder(60);
+    int seconds = timeDifference!.inSeconds.remainder(60);
 
     final textSize = MediaQuery.of(context).size.width > 600 ? 8.sp : 12.sp;
 
@@ -157,3 +191,11 @@ class _MatchTimerState extends State<MatchTimer> {
     );
   }
 }
+
+// Usage in your widget tree remains the same
+// controller.matchData.isEmpty
+//     ? Container()
+//     : MatchTimer(
+//         key: const ValueKey('MatchTimer'),
+//         startDate: controller.matchData['ExpStartDate'],
+//       ),

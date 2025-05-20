@@ -24,41 +24,37 @@ class MonthlyLeaderboardToggle extends GetView<MonthlyLeaderboardController> {
     return Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: onPrevious,
-                  child: Container(
-                    height: 40.h,
-                    width: 40.w,
-                    alignment: Alignment.center,
-                    //padding: const EdgeInsets.all(5),
-                    child: Image.asset(
-                      'assets/new_images/arrow left.png',
-                      height: 25.h,
-                      width: 25.w,
-                    ),
-                  ),
+            GestureDetector(
+              onTap: onPrevious,
+              child: Container(
+                height: 40.h,
+                width: 40.w,
+                alignment: Alignment.center,
+                //padding: const EdgeInsets.all(5),
+                child: Image.asset(
+                  'assets/new_images/arrow left.png',
+                  height: 25.h,
+                  width: 25.w,
                 ),
-                horizontalSpace(Get.width * 0.67),
-                GestureDetector(
-                  onTap: onNext,
-                  child: Container(
-                    height: 40.h,
-                    width: 40.w,
-                    alignment: Alignment.center,
-                    //padding: const EdgeInsets.all(5),
-                    child: Image.asset(
-                      'assets/new_images/arrow right.png',
-                      height: 25.h,
-                      width: 25.w,
-                    ),
-                  ),
+              ),
+            ),
+            Expanded(
+              child: Container(),
+            ),
+            GestureDetector(
+              onTap: onNext,
+              child: Container(
+                height: 40.h,
+                width: 40.w,
+                alignment: Alignment.center,
+                //padding: const EdgeInsets.all(5),
+                child: Image.asset(
+                  'assets/new_images/arrow right.png',
+                  height: 25.h,
+                  width: 25.w,
                 ),
-              ],
+              ),
             ),
           ],
         ));

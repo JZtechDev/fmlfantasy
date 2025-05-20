@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
-import 'package:fmlfantasy/ui/views/dashboard/dashboard_view.dart';
+import 'package:fmlfantasy/ui/components/trapezoid.dart';
 
 class NavigationButtons extends StatelessWidget {
   const NavigationButtons({super.key});
@@ -10,7 +9,7 @@ class NavigationButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: AppColors.backgroud,
+      backgroundColor: Colors.transparent,
       expandedHeight: 20.h,
       collapsedHeight: 20.h,
       automaticallyImplyLeading: false,
