@@ -1,9 +1,8 @@
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/monthly_leader_model.dart';
+import 'package:fmlfantasy/ui/components/trapezoid.dart';
 import 'package:fmlfantasy/ui/views/monthly_leaderboard_inner/controller/monthly_inner_leaderboard_controller.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../../../app/app_images/app_images.dart';
 
 class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
   final List<Rankings> rankings;
@@ -13,264 +12,303 @@ class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
   final String away;
   final String sports;
 
-  const LeaderBoardTable(this.rankings, this.homeImageUrl, this.home,
-      this.awayImageUrl, this.away, this.sports,
-      {super.key});
+  const LeaderBoardTable(
+    this.rankings,
+    this.homeImageUrl,
+    this.home,
+    this.awayImageUrl,
+    this.away,
+    this.sports, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     Get.put(MonthlyInnerLeaderboardController());
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      double maxWidth = constraints.maxWidth;
+      builder: (BuildContext context, BoxConstraints constraints) {
+        double maxWidth = constraints.maxWidth;
+        final textScaler = MediaQuery.of(context).textScaler;
 
-      return Padding(
-        padding: EdgeInsets.only(left: 15.w, right: 15.w),
-        child: Container(
-          padding:
-              EdgeInsets.only(left: 10.w, right: 10.w, top: 10.h, bottom: 2.h),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5), color: AppColors.white),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(right: 10.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "leaderBoard".tr,
-                      style: globalTextStyle(
-                          fontSize: maxWidth > 600 ? 20.sp : 24.sp,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    horizontalSpace(10.w),
-                    SvgPicture.asset(
-                      AppImages.leaderboard,
-                      height: 21.h,
-                      width: 21.w,
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    home,
-                    style: globalTextStyle2(
-                        fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                        color: AppColors.textGray),
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 12.h),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.r),
+              color: AppColors.backgroud,
+            ),
+            child: Column(
+              children: [
+                Container(
+                  width: Get.width * 0.9,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: AppColors.primary,
                   ),
-                  horizontalSpace(2.w),
-                  Text(
-                    "vs",
-                    style: globalTextStyle2(
-                        fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                        color: AppColors.textGray),
+                  child: Text(
+                    'LeaderBoard',
+                    style: globalTextStyle(
+                        fontSize: 16.sp,
+                        color: AppColors.secondary,
+                        fontWeight: FontWeight.w700),
                   ),
-                  horizontalSpace(2.w),
-                  Text(
-                    away,
-                    style: globalTextStyle2(
-                        fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                        color: AppColors.textGray),
+                ),
+                SizedBox(
+                  width: Get.width,
+                  child: ClipPath(
+                    clipper: TrapezoidClipper(),
+                    child: Container(
+                        width: Get.width,
+                        height: 25.h,
+                        color: AppColors.secondary,
+                        padding: EdgeInsets.only(
+                            left: 35.w, right: 35.w, top: 5.h, bottom: 5.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              home,
+                              style: globalTextStyle(
+                                  fontSize: 12.sp,
+                                  color: AppColors.darkGreen,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              height: 25.h,
+                              width: 25.w,
+                              decoration: const BoxDecoration(
+                                color: AppColors.backgroud,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                'VS',
+                                style: globalTextStyle(
+                                    fontSize: 10.sp,
+                                    color: AppColors.secondary,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            Text(
+                              home,
+                              style: globalTextStyle(
+                                  fontSize: 12.sp,
+                                  color: AppColors.darkGreen,
+                                  fontWeight: FontWeight.w600),
+                            )
+                          ],
+                        )),
                   ),
-                ],
-              ),
-              verticalSpace(10.h),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: AppColors.grey,
                 ),
-                padding: EdgeInsets.only(
-                    top: 5.h, bottom: 5.h, left: 10.w, right: 10.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '#',
-                      style: globalTextStyle(
-                          fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                          fontWeight: FontWeight.w400),
+                verticalSpace(20.h),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5.r),
+                      topRight: Radius.circular(5.r),
                     ),
-                    Text(
-                      'name'.tr,
-                      style: globalTextStyle(
-                          fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    Text(
-                      'winnings'.tr,
-                      style: globalTextStyle(
-                          fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    Text(
-                      'points'.tr,
-                      style: globalTextStyle(
-                          fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                          fontWeight: FontWeight.w400),
-                    )
-                  ],
+                    color: AppColors.customWhite,
+                  ),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        flex: 5,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: maxWidth * 0.15,
+                              child: Text(
+                                'Rank',
+                                style: globalTextStyle(
+                                  fontSize: textScaler
+                                      .scale(maxWidth > 600 ? 10 : 12),
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.primaryVeryDark,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 8.w),
+                            Expanded(
+                              child: Text(
+                                'name'.tr,
+                                style: globalTextStyle(
+                                  fontSize: textScaler
+                                      .scale(maxWidth > 600 ? 10 : 12),
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.primaryVeryDark,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 4,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'winnings'.tr,
+                                style: globalTextStyle(
+                                  fontSize: textScaler
+                                      .scale(maxWidth > 600 ? 10 : 12),
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.primaryVeryDark,
+                                ),
+                                textAlign: TextAlign.right,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            SizedBox(width: 8.w),
+                            SizedBox(
+                              width: maxWidth * 0.15,
+                              child: Text(
+                                'points'.tr,
+                                style: globalTextStyle(
+                                  fontSize: textScaler
+                                      .scale(maxWidth > 600 ? 10 : 12),
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.primaryVeryDark,
+                                ),
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              ListView.builder(
+                ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
                   itemCount: rankings.length,
                   itemBuilder: (context, index) {
                     return Obx(() {
                       RxList sortedRankings = List.from(rankings).obs;
                       sortedRankings.sort((a, b) {
-                        if (a.userId == controller.userId.value) {
-                          return -1;
-                        }
-                        if (b.userId == controller.userId.value) {
-                          return 1;
-                        }
+                        if (a.userId == controller.userId.value) return -1;
+                        if (b.userId == controller.userId.value) return 1;
                         return a.rank.compareTo(b.rank);
                       });
                       final playerRanks = sortedRankings[index];
 
-                      return Column(
-                        children: [
-                          Obx(
-                            () => Container(
-                              padding: EdgeInsets.only(
-                                left: 10.w,
-                                right: 10.w,
-                                top: 10.h,
-                                bottom: 10.h,
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: playerRanks.userId ==
-                                          controller.userId.value
-                                      ? AppColors.primary
-                                      : AppColors.white),
-                              child: Column(
+                      final color = index % 2 == 0
+                          ? AppColors.primary
+                          : const Color.fromRGBO(18, 96, 85, 1);
+
+                      return Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.w, vertical: 10.h),
+                        decoration: BoxDecoration(
+                          color: playerRanks.userId == controller.userId.value
+                              ? AppColors.darkGreen
+                              : color,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: Row(
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        playerRanks.rank
-                                            .toString()
-                                            .padLeft(2, '0'),
-                                        style: globalTextStyle(
-                                            fontSize:
-                                                maxWidth > 600 ? 10.sp : 12.sp,
-                                            fontWeight: FontWeight.w600,
-                                            color: playerRanks.userId ==
-                                                    controller.userId.value
-                                                ? AppColors.white
-                                                : AppColors.dark),
+                                  SizedBox(
+                                    width: maxWidth * 0.15,
+                                    child: Text(
+                                      playerRanks.rank
+                                          .toString()
+                                          .padLeft(2, '0'),
+                                      style: globalTextStyle(
+                                        fontSize: textScaler
+                                            .scale(maxWidth > 600 ? 10 : 12),
+                                        fontWeight: FontWeight.w700,
+                                        color: playerRanks.userId ==
+                                                controller.userId.value
+                                            ? AppColors.white
+                                            : AppColors.white,
                                       ),
-                                      horizontalSpace(14.w),
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          gradient: RadialGradient(
-                                            colors: [
-                                              Color(0xFFE0F9FF),
-                                              Color(0xFF7AE5FF),
-                                              Color(0xFF008CAD),
-                                            ],
-                                            radius: 0.85,
-                                          ),
-                                        ),
-                                        child: CircleAvatar(
-                                          radius: 14
-                                              .r, // Adjust the radius as needed
-                                          backgroundImage: const AssetImage(
-                                              'assets/images/leaderoard_user.png'),
-                                          backgroundColor: Colors
-                                              .transparent, // To show the gradient background
-                                        ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 8.w),
+                                  Expanded(
+                                    child: Text(
+                                      playerRanks.name ?? '',
+                                      style: globalTextStyle(
+                                        fontSize: textScaler
+                                            .scale(maxWidth > 600 ? 10 : 12),
+                                        fontWeight: FontWeight.w700,
+                                        color: playerRanks.userId ==
+                                                controller.userId.value
+                                            ? AppColors.white
+                                            : AppColors.white,
                                       ),
-                                      SizedBox(width: 10.w),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: Get.width * 0.3,
-                                            child: Text(
-                                              playerRanks.name!,
-                                              style: globalTextStyle(
-                                                  fontSize: maxWidth > 600
-                                                      ? 10.sp
-                                                      : 12.sp,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: playerRanks.userId ==
-                                                          controller
-                                                              .userId.value
-                                                      ? AppColors.white
-                                                      : AppColors.dark),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: Get.width * 0.3,
-                                            child: Text(
-                                              playerRanks.name!,
-                                              style: globalTextStyle(
-                                                  fontSize: maxWidth > 600
-                                                      ? 8.sp
-                                                      : 10.sp,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: playerRanks.userId ==
-                                                          controller
-                                                              .userId.value
-                                                      ? AppColors.white
-                                                      : AppColors.textGray),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        '\$${playerRanks.prizeMoney!.toStringAsFixed(0).padLeft(2, '0')}',
-                                        style: globalTextStyle(
-                                            fontSize:
-                                                maxWidth > 600 ? 10.sp : 12.sp,
-                                            color: playerRanks.userId ==
-                                                    controller.userId.value
-                                                ? AppColors.white
-                                                : AppColors.dark),
-                                      ),
-                                      const Expanded(child: SizedBox()),
-                                      Text(
-                                        '${playerRanks.fantasyPointsWeighted!.toStringAsFixed(0)} Points',
-                                        style: globalTextStyle(
-                                            fontSize:
-                                                maxWidth > 600 ? 10.sp : 12.sp,
-                                            fontWeight: FontWeight.w600,
-                                            color: playerRanks.userId ==
-                                                    controller.userId.value
-                                                ? AppColors.white
-                                                : AppColors.dark),
-                                      ),
-                                    ],
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          ),
-                          const Divider(
-                            height: 1,
-                            color: AppColors.grey,
-                          )
-                        ],
+                            Expanded(
+                              flex: 4,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      '\$${playerRanks.prizeMoney?.toStringAsFixed(0).padLeft(2, '0') ?? '0'}',
+                                      style: globalTextStyle(
+                                        fontSize: textScaler
+                                            .scale(maxWidth > 600 ? 10 : 12),
+                                        fontWeight: FontWeight.w700,
+                                        color: playerRanks.userId ==
+                                                controller.userId.value
+                                            ? AppColors.white
+                                            : AppColors.white,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(width: 10.w),
+                                  SizedBox(
+                                    width: maxWidth * 0.1,
+                                    child: Text(
+                                      playerRanks.fantasyPointsWeighted
+                                              ?.toStringAsFixed(0) ??
+                                          '0',
+                                      style: globalTextStyle(
+                                        fontSize: textScaler
+                                            .scale(maxWidth > 600 ? 10 : 12),
+                                        fontWeight: FontWeight.w700,
+                                        color: playerRanks.userId ==
+                                                controller.userId.value
+                                            ? AppColors.white
+                                            : AppColors.white,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       );
                     });
-                  }),
-            ],
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

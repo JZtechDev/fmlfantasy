@@ -45,6 +45,8 @@ class MonthlyInnerLeaderboard
                     data.awayScore!,
                     sports),
                 CarouselSliderTopPlayerToggle(data.topPlayers!),
+                LeaderBoardTable(data.rankings!, data.homeImageUrl!, data.home!,
+                    data.awayImageUrl!, data.away!, sports),
               ],
             ),
           ),
