@@ -6,6 +6,7 @@ import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/model/my_teams_model.dart';
 import 'package:fmlfantasy/model/sports_type.dart';
 import 'package:fmlfantasy/model/tournament_model.dart';
+import 'package:fmlfantasy/services/match_center_services.dart';
 import 'package:fmlfantasy/services/myteam_services.dart';
 import 'package:fmlfantasy/services/tournament_services.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class HomeController extends GetxController {
   RxInt selectedIndex = 0.obs;
   double scrollOffset = 0.0;
   RxString selectedSport = 'BB'.obs;
+  MatchCenterServices matchCenterServices = MatchCenterServices();
   String token = '';
   RxList<Tournaments> tournaments = <Tournaments>[].obs;
   RxList<Tournaments> filteredTournaments = <Tournaments>[].obs;

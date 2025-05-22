@@ -20,8 +20,7 @@ class SplashController extends GetxController {
   void onInit() async {
     super.onInit();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = prefs.getString('token') ??
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJiNjBiODg3Yi1kZGNkLTRjN2YtOTYyNi1kMjI0OWE4NjE4YjkiLCJCcm9rZXJJZCI6IjMiLCJhZHg6YWNjb3VudCI6IjAiLCJuYW1lIjoibmVtYW5qYSIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTc0NTgyNjE1NiwiZXhwIjoxNzQ2NjkwMTU2LCJpYXQiOjE3NDU4MjYxNTYsImlzcyI6InNtYXJ0LWF1dGgiLCJhdWQiOiJzbWFydC1hcGkifQ.E17lSl53GIBo6B9Jifdy8_T7_b7H0iGKeB28CNWXFv0';
+    token = prefs.getString('token') ?? '';
     local = prefs.getString('local') ?? '';
     lang = Get.deviceLocale?.languageCode;
     log(lang.toString());

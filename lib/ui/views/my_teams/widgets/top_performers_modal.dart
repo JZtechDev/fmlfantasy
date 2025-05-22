@@ -18,13 +18,13 @@ class TopPerformersModal extends GetView<MyTeamsController> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: AppColors.white,
-      surfaceTintColor: AppColors.white,
+      backgroundColor: const Color.fromRGBO(101, 184, 172, 1),
+      surfaceTintColor: const Color.fromRGBO(101, 184, 172, 1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0.r),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: SizedBox(
           child: Obx(() {
             InnerMatchCenterModel data = controller.matchCenterInnerData[0];
@@ -34,138 +34,192 @@ class TopPerformersModal extends GetView<MyTeamsController> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ...data.playersBreakDown.take(5).map((topPlayer) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.primary, width: 1),
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    margin: const EdgeInsets.only(bottom: 10),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 10),
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          topPlayer.rank.toString(),
-                          style: globalTextStyle(
-                              fontSize: 12.sp, color: AppColors.dark),
-                        ),
-                        horizontalSpace(20),
                         Expanded(
-                          child: Row(
-                            children: [
-                              topPlayer.teamAbbreviation ==
-                                      selectedTeam.matchData!.awayShortName!
-                                  ? Container(
-                                      constraints: BoxConstraints(
-                                        maxHeight: 20.h,
-                                        maxWidth: 25.w,
-                                      ),
-                                      child: selectedTeam
-                                                  .matchData!.awayImageUrl ==
-                                              null
-                                          ? Container()
-                                          : selectedTeam
-                                                  .matchData!.awayImageUrl!
-                                                  .endsWith('.png')
-                                              ? Image.network(
-                                                  selectedTeam
-                                                      .matchData!.awayImageUrl!,
-                                                  fit: BoxFit.fill,
-                                                )
-                                              : controller.selectedSport
-                                                          .value ==
-                                                      'CR'
-                                                  ? Image.network(
-                                                      replaceSvgWithPng(
-                                                          selectedTeam
-                                                              .matchData!
-                                                              .awayImageUrl!),
-                                                      fit: BoxFit.fill,
-                                                    )
-                                                  : SvgPicture.network(
-                                                      selectedTeam.matchData!
-                                                          .awayImageUrl!
-                                                          .toString(),
-                                                      fit: BoxFit.fill,
-                                                    ),
-                                    )
-                                  : Container(
-                                      constraints: BoxConstraints(
-                                        maxHeight: 20.h,
-                                        maxWidth: 25.w,
-                                      ),
-                                      child: selectedTeam
-                                                  .matchData!.homeImageUrl ==
-                                              null
-                                          ? Container()
-                                          : selectedTeam
-                                                  .matchData!.homeImageUrl!
-                                                  .endsWith('.png')
-                                              ? Image.network(
-                                                  selectedTeam
-                                                      .matchData!.homeImageUrl!,
-                                                  fit: BoxFit.fill,
-                                                )
-                                              : controller.selectedSport
-                                                          .value ==
-                                                      'CR'
-                                                  ? Image.network(
-                                                      replaceSvgWithPng(
-                                                          selectedTeam
-                                                              .matchData!
-                                                              .homeImageUrl!),
-                                                      fit: BoxFit.fill,
-                                                    )
-                                                  : SvgPicture.network(
-                                                      selectedTeam.matchData!
-                                                          .homeImageUrl!
-                                                          .toString(),
-                                                      fit: BoxFit.fill,
-                                                    ),
-                                    ),
-                              horizontalSpace(10),
-                              SizedBox(
-                                width: Get.width * 0.5,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      topPlayer.name ?? '-',
-                                      style: globalTextStyle(
-                                          fontSize: AppSizing.isMobile(context)
-                                              ? 12.sp
-                                              : 10.sp,
-                                          color: AppColors.dark),
-                                    ),
-                                    Text(
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      topPlayer.position ?? '-',
-                                      style: globalTextStyle(
-                                          fontSize: AppSizing.isMobile(context)
-                                              ? 10.sp
-                                              : 8.sp,
-                                          color: AppColors.textGray),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          flex: 1,
+                          child: Container(
+                            height: Get.height * 0.08,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 20.h, horizontal: 20.w),
+                            decoration: const BoxDecoration(
+                                color: Color.fromRGBO(72, 122, 116, 1)),
+                            child: Text(
+                              topPlayer.rank.toString(),
+                              style: globalTextStyle(
+                                  fontSize: 14.sp,
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
                           ),
                         ),
-                        Text(
-                          "${topPlayer.fantasyPoints!.toStringAsFixed(0)} Points",
-                          style: globalTextStyle(
-                              fontSize:
-                                  AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                              color: AppColors.textGray),
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            alignment: Alignment.centerRight,
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            height: Get.height * 0.08,
+                            decoration:
+                                const BoxDecoration(color: AppColors.backgroud),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  topPlayer.teamAbbreviation ==
+                                          selectedTeam.matchData!.awayShortName!
+                                      ? Container(
+                                          constraints: BoxConstraints(
+                                            maxHeight: 20.h,
+                                            maxWidth: 25.w,
+                                          ),
+                                          child: selectedTeam.matchData!
+                                                      .awayImageUrl ==
+                                                  null
+                                              ? Container()
+                                              : selectedTeam
+                                                      .matchData!.awayImageUrl!
+                                                      .endsWith('.png')
+                                                  ? Image.network(
+                                                      selectedTeam.matchData!
+                                                          .awayImageUrl!,
+                                                      fit: BoxFit.fill,
+                                                    )
+                                                  : controller.selectedSport
+                                                              .value ==
+                                                          'CR'
+                                                      ? Image.network(
+                                                          replaceSvgWithPng(
+                                                              selectedTeam
+                                                                  .matchData!
+                                                                  .awayImageUrl!),
+                                                          fit: BoxFit.fill,
+                                                        )
+                                                      : SvgPicture.network(
+                                                          selectedTeam
+                                                              .matchData!
+                                                              .awayImageUrl!
+                                                              .toString(),
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                        )
+                                      : Container(
+                                          constraints: BoxConstraints(
+                                            maxHeight: 20.h,
+                                            maxWidth: 25.w,
+                                          ),
+                                          child: selectedTeam.matchData!
+                                                      .homeImageUrl ==
+                                                  null
+                                              ? Container()
+                                              : selectedTeam
+                                                      .matchData!.homeImageUrl!
+                                                      .endsWith('.png')
+                                                  ? Image.network(
+                                                      selectedTeam.matchData!
+                                                          .homeImageUrl!,
+                                                      fit: BoxFit.fill,
+                                                    )
+                                                  : controller.selectedSport
+                                                              .value ==
+                                                          'CR'
+                                                      ? Image.network(
+                                                          replaceSvgWithPng(
+                                                              selectedTeam
+                                                                  .matchData!
+                                                                  .homeImageUrl!),
+                                                          fit: BoxFit.fill,
+                                                        )
+                                                      : SvgPicture.network(
+                                                          selectedTeam
+                                                              .matchData!
+                                                              .homeImageUrl!
+                                                              .toString(),
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                        ),
+                                  horizontalSpace(10),
+                                  SizedBox(
+                                    width: Get.width * 0.35,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          topPlayer.name ?? '-',
+                                          style: globalTextStyle(
+                                              fontSize:
+                                                  AppSizing.isMobile(context)
+                                                      ? 14.sp
+                                                      : 10.sp,
+                                              color: AppColors.secondary,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Text(
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          topPlayer.position ?? '-',
+                                          style: globalTextStyle(
+                                              fontSize:
+                                                  AppSizing.isMobile(context)
+                                                      ? 12.sp
+                                                      : 8.sp,
+                                              color: AppColors.white,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: Get.height * 0.08,
+                            decoration:
+                                const BoxDecoration(color: AppColors.secondary),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  topPlayer.fantasyPoints!.toStringAsFixed(0),
+                                  style: globalTextStyle(
+                                      fontSize: AppSizing.isMobile(context)
+                                          ? 14.sp
+                                          : 10.sp,
+                                      color: AppColors.backgroud),
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  'Points',
+                                  style: globalTextStyle(
+                                      fontSize: AppSizing.isMobile(context)
+                                          ? 12.sp
+                                          : 10.sp,
+                                      color: AppColors.backgroud),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   );
                 }),
+                verticalSpace(10.h),
                 PrimaryButton(
                     buttonText: 'Back',
                     onPressed: () {

@@ -3,8 +3,8 @@ import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/views/my_teams/controller/my_teams_controller.dart';
 
-class TeamsDropdown extends GetView<MyTeamsController> {
-  const TeamsDropdown({super.key});
+class TeamsTabs extends GetView<MyTeamsController> {
+  const TeamsTabs({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +13,9 @@ class TeamsDropdown extends GetView<MyTeamsController> {
       padding: EdgeInsets.only(left: 10.w, right: 10),
       child: Obx(
         () => Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 7.h),
           decoration: BoxDecoration(
-            color: AppColors.white,
-            border: Border.all(color: AppColors.borderColor),
+            color: const Color.fromRGBO(101, 184, 172, 1),
             borderRadius: BorderRadius.circular(5.r),
           ),
           child: Row(
@@ -33,14 +32,22 @@ class TeamsDropdown extends GetView<MyTeamsController> {
                       top: 5.h, bottom: 5.h, left: 10.w, right: 10.w),
                   decoration: BoxDecoration(
                     color: controller.showAll.value == 'all'
-                        ? AppColors.grey
-                        : AppColors.white,
-                    borderRadius: BorderRadius.circular(2.5.r),
+                        ? AppColors.primary
+                        : null,
+                    borderRadius: BorderRadius.circular(5.r),
+                    border: Border.all(
+                        color: controller.showAll.value == 'all'
+                            ? Colors.transparent
+                            : AppColors.primary,
+                        width: 1.5),
                   ),
                   child: Text(
                     'allTeams'.tr,
                     style: globalTextStyle(
                       fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
+                      color: controller.showAll.value == 'all'
+                          ? AppColors.white
+                          : AppColors.primary,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -59,14 +66,22 @@ class TeamsDropdown extends GetView<MyTeamsController> {
                       top: 5.h, bottom: 5.h, left: 10.w, right: 10.w),
                   decoration: BoxDecoration(
                     color: controller.showAll.value == 'closed'
-                        ? AppColors.grey
-                        : AppColors.white,
-                    borderRadius: BorderRadius.circular(2.5.r),
+                        ? AppColors.primary
+                        : null,
+                    borderRadius: BorderRadius.circular(5.r),
+                    border: Border.all(
+                        color: controller.showAll.value == 'closed'
+                            ? Colors.transparent
+                            : AppColors.primary,
+                        width: 1.5),
                   ),
                   child: Text(
                     'closed'.tr,
                     style: globalTextStyle(
                       fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
+                      color: controller.showAll.value == 'closed'
+                          ? AppColors.white
+                          : AppColors.primary,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -85,14 +100,22 @@ class TeamsDropdown extends GetView<MyTeamsController> {
                       top: 5.h, bottom: 5.h, left: 10.w, right: 10.w),
                   decoration: BoxDecoration(
                     color: controller.showAll.value == 'upcoming'
-                        ? AppColors.grey
-                        : AppColors.white,
-                    borderRadius: BorderRadius.circular(2.5.r),
+                        ? AppColors.primary
+                        : null,
+                    borderRadius: BorderRadius.circular(5.r),
+                    border: Border.all(
+                        color: controller.showAll.value == 'upcoming'
+                            ? Colors.transparent
+                            : AppColors.primary,
+                        width: 1.5),
                   ),
                   child: Text(
                     'upcoming'.tr,
                     style: globalTextStyle(
                       fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
+                      color: controller.showAll.value == 'upcoming'
+                          ? AppColors.white
+                          : AppColors.primary,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

@@ -4,12 +4,14 @@ import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/components/trapezoid.dart';
 
 class NavigationButtons extends StatelessWidget {
-  const NavigationButtons({super.key});
+  final Color color;
+  const NavigationButtons({super.key, this.color = Colors.transparent});
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
+      backgroundColor: color,
       expandedHeight: 20.h,
       collapsedHeight: 20.h,
       automaticallyImplyLeading: false,

@@ -1,3 +1,4 @@
+import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/views/bull_player/controller/bull_player_controller.dart';
@@ -39,7 +40,15 @@ class BullPlayerView extends GetView<BullPlayerController> {
                   const BullPlayerCard(),
                   verticalSpace(10.h),
                   Divider(
-                    color: AppColors.textGray.withValues(alpha: 0.1),
+                    color: AppColors.secondary,
+                    thickness: 2.0,
+                    endIndent: 30.w,
+                    indent: 30.w,
+                  ),
+                  Text(
+                    'Tap to Select the star player'.tr,
+                    style: globalTextStyle(
+                        fontSize: 14.sp, fontWeight: FontWeight.w700),
                   ),
                   verticalSpace(10.h),
                   const Playergrid(),

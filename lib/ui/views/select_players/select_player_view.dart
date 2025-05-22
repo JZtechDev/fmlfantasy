@@ -37,7 +37,9 @@ class SelectPlayerView extends GetView<SelectPlayerController> {
                       return Obx(() {
                         controller.filterPlayers(selectTeam);
                         return CustomScrollView(slivers: [
-                          const NavigationButtons(),
+                          const NavigationButtons(
+                            color: AppColors.backgroud,
+                          ),
                           TopContainer(selectTeam: selectTeam),
                           PlayersSection(selectTeam: selectTeam)
                         ]);

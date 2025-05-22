@@ -12,6 +12,7 @@ class TrapezoidClipper extends CustomClipper<Path> {
     path.lineTo(size.width - 40, size.height);
     // Bottom-left: Slant to (40, height)
     path.lineTo(40, size.height);
+    path.quadraticBezierTo(size.width - 5, 50, 50, 50);
     // Close the path back to top-left
     path.close();
     return path;

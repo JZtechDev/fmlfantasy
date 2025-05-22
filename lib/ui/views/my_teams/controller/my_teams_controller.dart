@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
@@ -130,6 +131,7 @@ class MyTeamsController extends GetxController
   Future<List<MyTeamsModel>> fetchTeams() async {
     try {
       isLoading.value = true;
+      EasyLoading.show();
       List<MyTeamsModel> fetchedTeams =
           await getMyTeamServices.getMyTeams(token, selectedSport.value);
       myTeams.value = fetchedTeams;
@@ -140,10 +142,10 @@ class MyTeamsController extends GetxController
         fetchMyTeamsPlayers();
       }
       isLoading.value = false;
-      animationController.reset();
-      animationController.forward();
+      EasyLoading.dismiss();
       return fetchedTeams;
     } catch (error) {
+      EasyLoading.dismiss();
       isLoading.value = false;
       rethrow;
     }
@@ -168,6 +170,7 @@ class MyTeamsController extends GetxController
 
   Future<List<MyTeamPlayersModel>> fetchMyTeamsPlayers() async {
     try {
+      EasyLoading.show();
       isLoadingMyTeamPlayer.value = true;
       List<MyTeamPlayersModel> fetchedTeamsPlayer = await getMyTeamServices
           .gethMyTeamsPlayers(selectedSport.value, selectedTeamId.value, token);
@@ -180,10 +183,12 @@ class MyTeamsController extends GetxController
           return 0;
         }
       });
+      EasyLoading.dismiss();
       isLoadingMyTeamPlayer.value = false;
       myTeamPlayers.value = fetchedTeamsPlayer;
       return fetchedTeamsPlayer;
     } catch (error) {
+      EasyLoading.dismiss();
       isLoadingMyTeamPlayer.value = false;
       log('Error fetching players: $error');
 

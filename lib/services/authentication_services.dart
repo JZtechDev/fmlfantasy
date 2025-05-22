@@ -16,7 +16,7 @@ class AuthenticationServices {
   Future<bool> signIn(String email, String password) async {
     try {
       final response = await dio.post(
-        'https://smartabgapimanagement.azure-api.net/smartauthenticationapi-uat/token',
+        'https://smartabgapimanagement.azure-api.net/smartauthenticationapi-dev/token',
         data: {
           'username': email,
           'password': password,

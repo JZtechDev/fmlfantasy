@@ -41,8 +41,9 @@ class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
             child: Column(
               children: [
                 Container(
+                  alignment: Alignment.center,
                   width: Get.width * 0.9,
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.r),
                     color: AppColors.primary,
@@ -64,21 +65,28 @@ class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
                         height: 25.h,
                         color: AppColors.secondary,
                         padding: EdgeInsets.only(
-                            left: 35.w, right: 35.w, top: 5.h, bottom: 5.h),
+                          left: 35.w,
+                          right: 35.w,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              home,
-                              style: globalTextStyle(
-                                  fontSize: 12.sp,
-                                  color: AppColors.darkGreen,
-                                  fontWeight: FontWeight.w600),
+                            SizedBox(
+                              width: Get.width * 0.3,
+                              child: Text(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                home,
+                                style: globalTextStyle(
+                                    fontSize: 12.sp,
+                                    color: AppColors.darkGreen,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
                             Container(
                               alignment: Alignment.center,
-                              height: 25.h,
-                              width: 25.w,
+                              height: 20.h,
+                              width: 20.w,
                               decoration: const BoxDecoration(
                                 color: AppColors.backgroud,
                                 shape: BoxShape.circle,
@@ -91,12 +99,17 @@ class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
                                     fontWeight: FontWeight.w700),
                               ),
                             ),
-                            Text(
-                              home,
-                              style: globalTextStyle(
-                                  fontSize: 12.sp,
-                                  color: AppColors.darkGreen,
-                                  fontWeight: FontWeight.w600),
+                            SizedBox(
+                              width: Get.width * 0.3,
+                              child: Text(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                away,
+                                style: globalTextStyle(
+                                    fontSize: 12.sp,
+                                    color: AppColors.darkGreen,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             )
                           ],
                         )),
@@ -231,7 +244,7 @@ class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
                                         fontWeight: FontWeight.w700,
                                         color: playerRanks.userId ==
                                                 controller.userId.value
-                                            ? AppColors.white
+                                            ? AppColors.secondary
                                             : AppColors.white,
                                       ),
                                     ),
@@ -246,7 +259,7 @@ class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
                                         fontWeight: FontWeight.w700,
                                         color: playerRanks.userId ==
                                                 controller.userId.value
-                                            ? AppColors.white
+                                            ? AppColors.secondary
                                             : AppColors.white,
                                       ),
                                       overflow: TextOverflow.ellipsis,
@@ -269,7 +282,7 @@ class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
                                         fontWeight: FontWeight.w700,
                                         color: playerRanks.userId ==
                                                 controller.userId.value
-                                            ? AppColors.white
+                                            ? AppColors.secondary
                                             : AppColors.white,
                                       ),
                                       textAlign: TextAlign.center,
@@ -289,7 +302,7 @@ class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
                                         fontWeight: FontWeight.w700,
                                         color: playerRanks.userId ==
                                                 controller.userId.value
-                                            ? AppColors.white
+                                            ? AppColors.secondary
                                             : AppColors.white,
                                       ),
                                       textAlign: TextAlign.center,

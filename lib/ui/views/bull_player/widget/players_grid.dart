@@ -27,10 +27,9 @@ class Playergrid extends GetView<BullPlayerController> {
             crossAxisCount: constraints.maxWidth > 600 ? 3 : 2,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            childAspectRatio: 1.1,
+            childAspectRatio: 1.3,
           ),
           itemCount: controller.selectedPlayers.length,
-          padding: const EdgeInsets.only(left: 10, right: 10),
           shrinkWrap: true,
           itemBuilder: ((context, index) {
             Players player = controller.selectedPlayers[index];
@@ -45,7 +44,6 @@ class Playergrid extends GetView<BullPlayerController> {
               },
               child: Obx(
                 () => Container(
-                  //padding: EdgeInsets.only(left: 10.w, top: 5.h),
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -54,20 +52,7 @@ class Playergrid extends GetView<BullPlayerController> {
                           : AppColors.backgroud,
                       width: 1,
                     ),
-                    gradient: LinearGradient(
-                      colors: [
-                        player.isBull.value
-                            ? const Color.fromRGBO(51, 163, 147, 1)
-                            : const Color.fromRGBO(31, 54, 22, 1),
-                        // 30% of this color
-                        player.isBull.value
-                            ? const Color.fromRGBO(51, 163, 147, 1)
-                            : const Color.fromRGBO(31, 54, 22, 1),
-                      ],
-                      stops: const [0.6, 0.6],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
+                    color: const Color.fromRGBO(51, 163, 147, 1),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(5.r),
                       topRight: Radius.circular(5.r),
@@ -76,175 +61,26 @@ class Playergrid extends GetView<BullPlayerController> {
                   child: Stack(
                     children: [
                       Positioned(
-                        bottom: 30,
-                        left: 0,
-                        right: 0,
-                        child: Stack(
-                          children: [
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.only(left: 10, top: 10),
-                              width: Get.width,
-                              height: 80,
-                              color: const Color.fromRGBO(18, 96, 85, 1),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "\$${player.assetIndexPrice!.toStringAsFixed(0)},000",
-                                    style: globalTextStyle(
-                                      fontSize: maxWidth > 600 ? 16.sp : 18.sp,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColors.secondary,
-                                    ),
-                                  ),
-                                  Text(
-                                    'SALARY'.tr,
-                                    style: globalTextStyle(
-                                        fontSize: maxWidth > 600 ? 8.sp : 11.sp,
-                                        fontWeight: FontWeight.w700,
-                                        color: AppColors.white),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Positioned(
-                              right: -20,
-                              bottom: 0,
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: SizedBox(
-                                  width: maxWidth > 600
-                                      ? 80
-                                      : 110, // Reduced from 150 to 130 and 120 to 100
-                                  height: maxWidth > 600
-                                      ? 130
-                                      : 80, // Reduced from 150 to 130 and 120 to 100
-                                  child: AspectRatio(
-                                    aspectRatio: 1,
-                                    child: controller.sportName == 'FB'
-                                        ? player.imageUrl == null
-                                            ? Stack(
-                                                clipBehavior: Clip.hardEdge,
-                                                alignment: Alignment.center,
-                                                children: [
-                                                  player.jerseyImageUrl == null
-                                                      ? Image.asset(
-                                                          excludeFromSemantics:
-                                                              true,
-                                                          isAntiAlias: true,
-                                                          AppImages
-                                                              .userPlaceHolder,
-                                                          width: maxWidth > 600
-                                                              ? Get.width * 0.28
-                                                              : Get.width *
-                                                                  0.32, // Slightly reduced
-                                                        )
-                                                      : player.jerseyImageUrl!
-                                                              .endsWith('svg')
-                                                          ? SvgPicture.network(
-                                                              player
-                                                                  .jerseyImageUrl!,
-                                                              width: maxWidth >
-                                                                      600
-                                                                  ? 130
-                                                                  : 120, // Reduced
-                                                            )
-                                                          : Image.network(
-                                                              player
-                                                                  .jerseyImageUrl!,
-                                                              width: maxWidth >
-                                                                      600
-                                                                  ? 130
-                                                                  : 120, // Reduced
-                                                            ),
-                                                  player.jerseyImageUrl == null
-                                                      ? const SizedBox()
-                                                      : Positioned(
-                                                          top: 14
-                                                              .h, // Adjusted slightly for smaller size
-                                                          child: Container(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                              left: 2.w,
-                                                              right: 2.w,
-                                                              top: 1.h,
-                                                              bottom: 1.h,
-                                                            ),
-                                                            alignment: Alignment
-                                                                .center,
-                                                            decoration: BoxDecoration(
-                                                                color: AppColors
-                                                                    .white
-                                                                    .withValues(
-                                                                        alpha:
-                                                                            0.9),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            2.r)),
-                                                            child: Text(
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              player.fullName!
-                                                                  .split(' ')
-                                                                  .last,
-                                                              style: globalTextStyle(
-                                                                  fontSize:
-                                                                      8.sp,
-                                                                  color:
-                                                                      AppColors
-                                                                          .dark),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                  player.jerseyImageUrl == null
-                                                      ? const SizedBox()
-                                                      : Align(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          child: Container(
-                                                            height: 22
-                                                                .h, // Reduced slightly
-                                                            width: 22
-                                                                .w, // Reduced slightly
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                              top: 5,
-                                                              right: 5,
-                                                              left: 5,
-                                                              bottom: 5,
-                                                            ),
-                                                            alignment: Alignment
-                                                                .center,
-                                                            decoration: BoxDecoration(
-                                                                color: AppColors
-                                                                    .white
-                                                                    .withValues(
-                                                                        alpha:
-                                                                            0.9),
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                            child: Text(
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              player.jerseyNumber ??
-                                                                  'N/A',
-                                                              style: globalTextStyle(
-                                                                  fontSize:
-                                                                      10.sp,
-                                                                  color:
-                                                                      AppColors
-                                                                          .dark),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                ],
-                                              )
-                                            : player.jerseyImageUrl == null
+                        right: -20,
+                        bottom: 10,
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: SizedBox(
+                            width: maxWidth > 600
+                                ? 80
+                                : 110, // Reduced from 150 to 130 and 120 to 100
+                            height: maxWidth > 600
+                                ? 130
+                                : 85, // Reduced from 150 to 130 and 120 to 100
+                            child: AspectRatio(
+                              aspectRatio: 1,
+                              child: controller.sportName == 'FB'
+                                  ? player.imageUrl == null
+                                      ? Stack(
+                                          clipBehavior: Clip.hardEdge,
+                                          alignment: Alignment.center,
+                                          children: [
+                                            player.jerseyImageUrl == null
                                                 ? Image.asset(
                                                     excludeFromSemantics: true,
                                                     isAntiAlias: true,
@@ -252,129 +88,209 @@ class Playergrid extends GetView<BullPlayerController> {
                                                     width: maxWidth > 600
                                                         ? Get.width * 0.28
                                                         : Get.width *
-                                                            0.32, // Reduced
+                                                            0.32, // Slightly reduced
                                                   )
-                                                : player.imageUrl!
+                                                : player.jerseyImageUrl!
                                                         .endsWith('svg')
                                                     ? SvgPicture.network(
-                                                        player.imageUrl!,
-                                                        width: maxWidth > 600
-                                                            ? 130
-                                                            : 120, // Reduced
-                                                        placeholderBuilder:
-                                                            (context) =>
-                                                                SizedBox(
-                                                          width: maxWidth > 600
-                                                              ? 130
-                                                              : 120, // Reduced
-                                                          height: maxWidth > 600
-                                                              ? 130
-                                                              : 120, // Reduced
-                                                          child:
-                                                              const PictureShimmer(),
-                                                        ),
-                                                        fit: BoxFit.fill,
-                                                      )
-                                                    : FadeInImage.assetNetwork(
-                                                        placeholder: AppImages
-                                                            .userPlaceHolder,
-                                                        image: player.imageUrl!,
-                                                        width: maxWidth > 600
-                                                            ? 130
-                                                            : 120, // Reduced
-                                                        fadeInDuration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    300),
-                                                        imageErrorBuilder:
-                                                            (context, error,
-                                                                stackTrace) {
-                                                          return Image.asset(
-                                                            AppImages
-                                                                .userPlaceHolder,
-                                                            width: maxWidth >
-                                                                    600
-                                                                ? 130
-                                                                : controller.sportName ==
-                                                                        'FB'
-                                                                    ? 50
-                                                                    : 120, // Reduced
-                                                          );
-                                                        },
-                                                      )
-                                        : player.imageUrl == null
-                                            ? Image.asset(
-                                                excludeFromSemantics: true,
-                                                isAntiAlias: true,
-                                                AppImages.userPlaceHolder,
-                                                width: maxWidth > 600
-                                                    ? Get.width * 0.28
-                                                    : Get.width *
-                                                        0.32, // Reduced
-                                              )
-                                            : player.imageUrl!.endsWith('svg')
-                                                ? controller.sportName == 'CR'
-                                                    ? Container(
-                                                        constraints:
-                                                            BoxConstraints(
-                                                          maxWidth: maxWidth >
-                                                                  600
-                                                              ? 130
-                                                              : 150, // Reduced
-                                                        ),
-                                                        child: Image.network(
-                                                          replaceSvgWithPng(
-                                                              player.imageUrl!),
-                                                        ),
-                                                      )
-                                                    : SvgPicture.network(
-                                                        player.imageUrl!,
-                                                        placeholderBuilder:
-                                                            (context) =>
-                                                                SizedBox(
-                                                          width: maxWidth > 600
-                                                              ? 130
-                                                              : 120, // Reduced
-                                                          height: maxWidth > 600
-                                                              ? 130
-                                                              : 120, // Reduced
-                                                          child:
-                                                              const PictureShimmer(),
-                                                        ),
-                                                        fit: BoxFit.fill,
+                                                        player.jerseyImageUrl!,
                                                         width: maxWidth > 600
                                                             ? 130
                                                             : 120, // Reduced
                                                       )
-                                                : FadeInImage.assetNetwork(
-                                                    placeholder: AppImages
-                                                        .userPlaceHolder,
-                                                    image: player.imageUrl!,
+                                                    : Image.network(
+                                                        player.jerseyImageUrl!,
+                                                        width: maxWidth > 600
+                                                            ? 130
+                                                            : 120, // Reduced
+                                                      ),
+                                            player.jerseyImageUrl == null
+                                                ? const SizedBox()
+                                                : Positioned(
+                                                    top: 14
+                                                        .h, // Adjusted slightly for smaller size
+                                                    child: Container(
+                                                      padding: EdgeInsets.only(
+                                                        left: 2.w,
+                                                        right: 2.w,
+                                                        top: 1.h,
+                                                        bottom: 1.h,
+                                                      ),
+                                                      alignment:
+                                                          Alignment.center,
+                                                      decoration: BoxDecoration(
+                                                          color: AppColors.white
+                                                              .withValues(
+                                                                  alpha: 0.9),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      2.r)),
+                                                      child: Text(
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        player.fullName!
+                                                            .split(' ')
+                                                            .last,
+                                                        style: globalTextStyle(
+                                                            fontSize: 8.sp,
+                                                            color:
+                                                                AppColors.dark),
+                                                      ),
+                                                    ),
+                                                  ),
+                                            player.jerseyImageUrl == null
+                                                ? const SizedBox()
+                                                : Align(
+                                                    alignment: Alignment.center,
+                                                    child: Container(
+                                                      height: 22
+                                                          .h, // Reduced slightly
+                                                      width: 22
+                                                          .w, // Reduced slightly
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        top: 5,
+                                                        right: 5,
+                                                        left: 5,
+                                                        bottom: 5,
+                                                      ),
+                                                      alignment:
+                                                          Alignment.center,
+                                                      decoration: BoxDecoration(
+                                                          color: AppColors.white
+                                                              .withValues(
+                                                                  alpha: 0.9),
+                                                          shape:
+                                                              BoxShape.circle),
+                                                      child: Text(
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        player.jerseyNumber ??
+                                                            'N/A',
+                                                        style: globalTextStyle(
+                                                            fontSize: 10.sp,
+                                                            color:
+                                                                AppColors.dark),
+                                                      ),
+                                                    ),
+                                                  ),
+                                          ],
+                                        )
+                                      : player.jerseyImageUrl == null
+                                          ? Image.asset(
+                                              excludeFromSemantics: true,
+                                              isAntiAlias: true,
+                                              AppImages.userPlaceHolder,
+                                              width: maxWidth > 600
+                                                  ? Get.width * 0.28
+                                                  : Get.width * 0.32, // Reduced
+                                            )
+                                          : player.imageUrl!.endsWith('svg')
+                                              ? SvgPicture.network(
+                                                  player.imageUrl!,
+                                                  width: maxWidth > 600
+                                                      ? 130
+                                                      : 120, // Reduced
+                                                  placeholderBuilder:
+                                                      (context) => SizedBox(
                                                     width: maxWidth > 600
                                                         ? 130
-                                                        : controller.sportName ==
-                                                                'FB'
-                                                            ? 50
-                                                            : 120, // Reduced
-                                                    fadeInDuration:
-                                                        const Duration(
-                                                            milliseconds: 300),
-                                                    imageErrorBuilder: (context,
-                                                        error, stackTrace) {
-                                                      return Image.asset(
-                                                        AppImages
-                                                            .userPlaceHolder,
-                                                        width: maxWidth > 600
-                                                            ? 130
-                                                            : 120, // Reduced
-                                                      );
-                                                    },
+                                                        : 120, // Reduced
+                                                    height: maxWidth > 600
+                                                        ? 130
+                                                        : 120, // Reduced
+                                                    child:
+                                                        const PictureShimmer(),
                                                   ),
-                                  ),
-                                ),
-                              ),
+                                                  fit: BoxFit.fill,
+                                                )
+                                              : FadeInImage.assetNetwork(
+                                                  placeholder:
+                                                      AppImages.userPlaceHolder,
+                                                  image: player.imageUrl!,
+                                                  width: maxWidth > 600
+                                                      ? 130
+                                                      : 120, // Reduced
+                                                  fadeInDuration:
+                                                      const Duration(
+                                                          milliseconds: 300),
+                                                  imageErrorBuilder: (context,
+                                                      error, stackTrace) {
+                                                    return Image.asset(
+                                                      AppImages.userPlaceHolder,
+                                                      width: maxWidth > 600
+                                                          ? 130
+                                                          : controller.sportName ==
+                                                                  'FB'
+                                                              ? 50
+                                                              : 120, // Reduced
+                                                    );
+                                                  },
+                                                )
+                                  : player.imageUrl == null
+                                      ? Image.asset(
+                                          excludeFromSemantics: true,
+                                          isAntiAlias: true,
+                                          AppImages.userPlaceHolder,
+                                          width: maxWidth > 600
+                                              ? Get.width * 0.28
+                                              : Get.width * 0.32, // Reduced
+                                        )
+                                      : player.imageUrl!.endsWith('svg')
+                                          ? controller.sportName == 'CR'
+                                              ? Container(
+                                                  constraints: BoxConstraints(
+                                                    maxWidth: maxWidth > 600
+                                                        ? 130
+                                                        : 150, // Reduced
+                                                  ),
+                                                  child: Image.network(
+                                                    replaceSvgWithPng(
+                                                        player.imageUrl!),
+                                                  ),
+                                                )
+                                              : SvgPicture.network(
+                                                  player.imageUrl!,
+                                                  placeholderBuilder:
+                                                      (context) => SizedBox(
+                                                    width: maxWidth > 600
+                                                        ? 130
+                                                        : 120, // Reduced
+                                                    height: maxWidth > 600
+                                                        ? 130
+                                                        : 120, // Reduced
+                                                    child:
+                                                        const PictureShimmer(),
+                                                  ),
+                                                  fit: BoxFit.fill,
+                                                  width: maxWidth > 600
+                                                      ? 130
+                                                      : 120, // Reduced
+                                                )
+                                          : FadeInImage.assetNetwork(
+                                              placeholder:
+                                                  AppImages.userPlaceHolder,
+                                              image: player.imageUrl!,
+                                              width: maxWidth > 600
+                                                  ? 130
+                                                  : controller.sportName == 'FB'
+                                                      ? 50
+                                                      : 120, // Reduced
+                                              fadeInDuration: const Duration(
+                                                  milliseconds: 300),
+                                              imageErrorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.asset(
+                                                  AppImages.userPlaceHolder,
+                                                  width: maxWidth > 600
+                                                      ? 130
+                                                      : 120, // Reduced
+                                                );
+                                              },
+                                            ),
                             ),
-                          ],
+                          ),
                         ),
                       ),
                       Column(
@@ -420,22 +336,44 @@ class Playergrid extends GetView<BullPlayerController> {
                             ),
                           ),
                           verticalSpace(15),
-                          Expanded(child: Container()),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, bottom: 5, right: 10),
-                            child: SizedBox(
-                              width: Get.width * 0.5,
-                              child: Text(
-                                maxLines: 1,
-                                player.fullName ?? '-',
-                                // player.fullName!.split(' ').join('\n'),
-                                style: globalTextStyle(
-                                    fontSize: maxWidth > 600 ? 8.sp : 12.sp,
+                            padding: EdgeInsets.only(left: 10.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "\$${player.assetIndexPrice!.toStringAsFixed(0)},000",
+                                  style: globalTextStyle(
+                                    fontSize: maxWidth > 600 ? 16.sp : 18.sp,
                                     fontWeight: FontWeight.w700,
-                                    color: AppColors.secondary),
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                                    color: AppColors.secondary,
+                                  ),
+                                ),
+                                Text(
+                                  'SALARY'.tr,
+                                  style: globalTextStyle(
+                                      fontSize: maxWidth > 600 ? 8.sp : 11.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(child: Container()),
+                          Container(
+                            padding: const EdgeInsets.only(right: 10, left: 10),
+                            alignment: Alignment.centerLeft,
+                            decoration: const BoxDecoration(
+                                color: Color.fromRGBO(18, 96, 85, 1)),
+                            child: Text(
+                              maxLines: 1,
+                              player.fullName ?? '-',
+                              // player.fullName!.split(' ').join('\n'),
+                              style: globalTextStyle(
+                                  fontSize: maxWidth > 600 ? 8.sp : 12.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.secondary),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
