@@ -6,6 +6,7 @@ import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/services/authentication_services.dart';
 import 'package:fmlfantasy/ui/widgets/primary_button.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,6 +18,8 @@ class LoginController extends GetxController {
   TextEditingController savedEmailController = TextEditingController();
   TextEditingController savedPasswordController = TextEditingController();
   bool _isLoading = false;
+
+  RxString showDob = ''.obs;
 
   bool _isAgreed = false;
 
@@ -122,6 +125,11 @@ class LoginController extends GetxController {
     log(isBiometricEnabled.toString());
     log(savedEmailController.text);
     log(savedPasswordController.text);
+
+    final DateTime now = DateTime.now();
+    final DateTime initialDate = DateTime(now.year - 18, now.month, now.day);
+
+    showDob.value = DateFormat('dd MMM yyyy').format(initialDate);
   }
 
   void navigateToHome() {
@@ -180,6 +188,50 @@ class LoginController extends GetxController {
       }
     } catch (e) {
       log('Error: $e');
+    }
+  }
+
+  Future<void> pickDateOfBirth(BuildContext context) async {
+    final DateTime now = DateTime.now();
+    final DateTime initialDate = DateTime(now.year - 18, now.month, now.day);
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now().add(const Duration(days: 365 * 100)),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Color.fromRGBO(44, 86, 80, 1),
+              onPrimary: Colors.white,
+              surface: Color.fromRGBO(55, 132, 121, 1),
+            ),
+            textTheme: const TextTheme(
+              headlineMedium: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: AppColors.white,
+              ),
+              bodyMedium: TextStyle(
+                fontSize: 16.0,
+                color: AppColors.white,
+              ),
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white, // Button text color
+                textStyle: const TextStyle(
+                    fontSize: 16.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      showDob.value = DateFormat('yyyy-MM-dd').format(pickedDate);
     }
   }
 }

@@ -77,8 +77,32 @@ class RegisterView extends StatelessWidget {
                         AppTextField(
                             labelText: 'Full Name'.tr, obscureText: false),
                         verticalSpace(20),
-                        AppTextField(
-                            labelText: 'Date of Birth'.tr, obscureText: false),
+                        Obx(
+                          () => GestureDetector(
+                            onTap: () => controller.pickDateOfBirth(context),
+                            child: Container(
+                              width: AppSizing.width(context),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 13.h, horizontal: 15.w),
+                              decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  border:
+                                      Border.all(color: AppColors.secondary)),
+                              child: Text(
+                                style: globalTextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14.sp,
+                                    color: AppColors.dark),
+                                controller.showDob.isEmpty
+                                    ? 'Date of Birth'.tr
+                                    : controller.showDob.value,
+                              ),
+                            ),
+                          ),
+                        ),
+                        // AppTextField(
+                        //     labelText: 'Date of Birth'.tr, obscureText: false),
                         verticalSpace(20),
                         AppTextField(labelText: 'Email'.tr, obscureText: false),
                         verticalSpace(20),

@@ -21,6 +21,7 @@ class RegisterNewController extends GetxController {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController otpController = TextEditingController();
   String _selectedcountryName = '';
+  final RxString showDob = ''.obs;
   String get selectedcountryName => _selectedcountryName;
   var countryCode =
       CountryParser.parseCountryCode('PK').obs; // Observable Country
