@@ -44,7 +44,7 @@ class MyTeamsCard extends GetView<MyTeamsController> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
-                            flex: 3,
+                            flex: 2,
                             child: Row(
                               children: [
                                 Image.asset(
@@ -105,8 +105,8 @@ class MyTeamsCard extends GetView<MyTeamsController> {
                           children: [
                             Container(
                               constraints: BoxConstraints(
-                                maxHeight: 45.h,
-                                maxWidth: 34.w,
+                                maxHeight: 40.h,
+                                maxWidth: 45.w,
                               ),
                               child: myTeams.matchData!.homeImageUrl == null
                                   ? Container()
@@ -158,8 +158,8 @@ class MyTeamsCard extends GetView<MyTeamsController> {
                           children: [
                             Container(
                               constraints: BoxConstraints(
-                                maxHeight: 45.h,
-                                maxWidth: 34.w,
+                                maxHeight: 41.h,
+                                maxWidth: 45.w,
                               ),
                               child: myTeams.matchData!.awayImageUrl == null
                                   ? Container()

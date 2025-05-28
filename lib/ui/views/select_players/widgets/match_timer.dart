@@ -118,7 +118,7 @@ class _MatchTimerState extends State<MatchTimer> {
     int days = timeDifference!.inDays;
     int hours = timeDifference!.inHours.remainder(24);
     int minutes = timeDifference!.inMinutes.remainder(60);
-    int seconds = timeDifference!.inSeconds.remainder(60);
+    // int seconds = timeDifference!.inSeconds.remainder(60);
 
     final textSize = MediaQuery.of(context).size.width > 600 ? 8.sp : 12.sp;
 
@@ -176,14 +176,14 @@ class _MatchTimerState extends State<MatchTimer> {
                     color: AppColors.secondary,
                   ),
                 ),
-              Text(
-                '$seconds SEC',
-                style: globalTextStyle(
-                  fontSize: textSize,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.secondary,
-                ),
-              ),
+              // Text(
+              //   '$seconds SEC',
+              //   style: globalTextStyle(
+              //     fontSize: textSize,
+              //     fontWeight: FontWeight.w700,
+              //     color: AppColors.secondary,
+              //   ),
+              // ),
             ],
           )
         ],

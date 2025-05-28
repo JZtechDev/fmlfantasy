@@ -71,14 +71,17 @@ class LeaderboardListItems extends GetView<MonthlyLeaderboardController> {
                                           : SvgPicture.network(
                                               leaderboard.homeImageUrl!)),
                               horizontalSpace(10.w),
-                              Text(
-                                leaderboard.home!.split(' ').join('\n'),
-                                style: globalTextStyle2(
-                                    fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                                    color: AppColors.primaryVeryDark,
-                                    fontWeight: FontWeight.w700),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
+                              SizedBox(
+                                width: Get.width * 0.2,
+                                child: Text(
+                                  leaderboard.home!.split(' ').join('\n'),
+                                  style: globalTextStyle2(
+                                      fontSize: maxWidth > 600 ? 10.sp : 12.sp,
+                                      color: AppColors.primaryVeryDark,
+                                      fontWeight: FontWeight.w700),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ],
                           ),
@@ -111,15 +114,18 @@ class LeaderboardListItems extends GetView<MonthlyLeaderboardController> {
                                           : SvgPicture.network(
                                               leaderboard.awayImageUrl!)),
                               horizontalSpace(10.w),
-                              Text(
-                                textAlign: TextAlign.start,
-                                leaderboard.away!.split(' ').join('\n'),
-                                style: globalTextStyle2(
-                                    fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                                    color: AppColors.primaryVeryDark,
-                                    fontWeight: FontWeight.w700),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
+                              SizedBox(
+                                width: Get.width * 0.2,
+                                child: Text(
+                                  textAlign: TextAlign.start,
+                                  leaderboard.away!.split(' ').join('\n'),
+                                  style: globalTextStyle2(
+                                      fontSize: maxWidth > 600 ? 10.sp : 12.sp,
+                                      color: AppColors.primaryVeryDark,
+                                      fontWeight: FontWeight.w700),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ],
                           ),

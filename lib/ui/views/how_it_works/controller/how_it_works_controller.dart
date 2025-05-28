@@ -1,8 +1,10 @@
+import 'package:carousel_slider_plus/carousel_controller.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/how_it_works_model.dart';
 import 'package:fmlfantasy/model/sports_type.dart';
+import 'package:fmlfantasy/ui/views/how_it_works/models/intro_cards_model.dart';
 
 class HowItWorksController extends GetxController {
   RxInt selectedIndex = 0.obs;
@@ -13,7 +15,36 @@ class HowItWorksController extends GetxController {
   TextEditingController dropdown = TextEditingController();
   late AnimationController animationController;
   late AnimationController secondaryAnimationController;
-  //RxList<HowItWorkModel> currentList = <HowItWorkModel>[].obs;
+
+  final CarouselSliderController carouselController =
+      CarouselSliderController();
+
+  List<IntroCardsModel> introCards = [
+    IntroCardsModel(
+      title: 'Choose Your Sport',
+      number: '01',
+      description:
+          'Select from a variety of sports including American football, basketball, soccer, cricket, and more.',
+    ),
+    IntroCardsModel(
+      title: 'Draft your Team',
+      number: '02',
+      description:
+          'Use your knowledge and expertise to draft the best team possible within the salary cap.',
+    ),
+    IntroCardsModel(
+      title: 'Play, Score, Win!',
+      number: '03',
+      description:
+          'Watch as your players compete and earn points based on their performance. The better they play, the more points you score!',
+    ),
+    IntroCardsModel(
+      title: 'Cash in Your Prize',
+      number: '04',
+      description:
+          'Win cash prizes based on your teams performance and climb the leaderboard to claim your spot among the fantasy elite.',
+    ),
+  ];
   RxInt publicTournamentCrouselIndex = 0.obs;
   RxInt privateTournamentCrouselIndex = 0.obs;
   RxList<Sport> sportsList = <Sport>[
@@ -128,8 +159,6 @@ class HowItWorksController extends GetxController {
 
   List<HowItWorkModel> basketBall = [
     HowItWorkModel(title: 'allPlayers'.tr, imagePath: '', innerTitle: [
-      InnerTitle(score: '', subtitle: 'weUseFractionalPoints'.tr),
-      InnerTitle(score: '', subtitle: 'weUseNegativePoints'.tr),
       InnerTitle(score: '+3', subtitle: 'threePointsFieldGoal'.tr),
       InnerTitle(score: '+2', subtitle: 'twoPointsFieldGoal'.tr),
       InnerTitle(score: '+1', subtitle: 'threeThrowsMade'.tr),
@@ -143,8 +172,6 @@ class HowItWorksController extends GetxController {
 
   List<HowItWorkModel> nfl = [
     HowItWorkModel(title: 'oFFENSIVEPLAYER'.tr, imagePath: '', innerTitle: [
-      InnerTitle(score: '', subtitle: 'weUseFractionalPoints'.tr),
-      InnerTitle(score: '', subtitle: 'weUseNegativePoints'.tr),
       InnerTitle(score: '+1', subtitle: 'passingyardsper25Yards'.tr),
       InnerTitle(score: '+4', subtitle: 'passingTouchdowns'.tr),
       InnerTitle(score: '-2', subtitle: 'passingInterpolations'.tr),
@@ -158,8 +185,6 @@ class HowItWorksController extends GetxController {
       InnerTitle(score: '+6', subtitle: 'fumblesRecoveredforaTouchdown'.tr),
     ]),
     HowItWorkModel(title: 'tEAMDEFENSE'.tr, imagePath: '', innerTitle: [
-      InnerTitle(score: '', subtitle: 'weUseFractionalPoints'.tr),
-      InnerTitle(score: '', subtitle: 'weUseNegativePoints'.tr),
       InnerTitle(score: '+1', subtitle: 'sacks'.tr),
       InnerTitle(score: '+2', subtitle: 'interceptions'.tr),
       InnerTitle(score: '+2', subtitle: 'fumblesRecoveed'.tr),
@@ -179,8 +204,6 @@ class HowItWorksController extends GetxController {
         title: 'iNDIVIDUALDEFENSEPLAYER'.tr,
         imagePath: '',
         innerTitle: [
-          InnerTitle(score: '', subtitle: 'weUseFractionalPoints'.tr),
-          InnerTitle(score: '', subtitle: 'weUseNegativePoints'.tr),
           InnerTitle(score: '+1', subtitle: 'soloTackles'.tr),
           InnerTitle(score: '+1/2', subtitle: 'assistTackles'.tr),
           InnerTitle(score: '+2', subtitle: 'sacks'.tr),
@@ -225,7 +248,6 @@ class HowItWorksController extends GetxController {
 
   List<HowItWorkModel> cricketHowItWorkT20 = [
     HowItWorkModel(title: 'Batting'.tr, imagePath: '', innerTitle: [
-      InnerTitle(score: '', subtitle: 'We Use Negative Points'),
       InnerTitle(score: '+1', subtitle: 'Run'.tr),
       InnerTitle(score: '+1', subtitle: 'BoundaryBonus'.tr),
       InnerTitle(score: '+2', subtitle: 'SixBonus'.tr),
@@ -242,7 +264,6 @@ class HowItWorksController extends GetxController {
       InnerTitle(score: '-6', subtitle: 'S.RBelow70runsper100balls'.tr),
     ]),
     HowItWorkModel(title: 'Bowling'.tr, imagePath: '', innerTitle: [
-      InnerTitle(score: '', subtitle: 'weUseNegativePoints'.tr),
       InnerTitle(score: '+25', subtitle: 'wicketExcludingRunOut'.tr),
       InnerTitle(score: '+8', subtitle: 'bonusLBWBowled'.tr),
       InnerTitle(score: '+12', subtitle: 'maidenOver'.tr),
@@ -257,7 +278,6 @@ class HowItWorksController extends GetxController {
       InnerTitle(score: '-6', subtitle: 'above10runsperover'.tr),
     ]),
     HowItWorkModel(title: 'Fielding'.tr, imagePath: '', innerTitle: [
-      InnerTitle(score: '', subtitle: 'weUseNegativePoints'.tr),
       InnerTitle(score: '+8', subtitle: 'catch'.tr),
       InnerTitle(score: '+4', subtitle: '3CatchBonus'.tr),
       InnerTitle(score: '+12', subtitle: 'stumping'.tr),
@@ -311,8 +331,6 @@ class HowItWorksController extends GetxController {
 
   List<HowItWorkModel> baseballHowItWorkOdi = [
     HowItWorkModel(title: 'hitting'.tr, imagePath: '', innerTitle: [
-      InnerTitle(score: '', subtitle: 'weusefractionalpoints'.tr),
-      InnerTitle(score: '', subtitle: 'weusenegativepoints'.tr),
       InnerTitle(score: '+1', subtitle: 'singles'.tr),
       InnerTitle(score: '+2', subtitle: 'doubles'.tr),
       InnerTitle(score: '+3', subtitle: 'triples'.tr),
@@ -325,8 +343,6 @@ class HowItWorksController extends GetxController {
       InnerTitle(score: '-1', subtitle: 'caughtStealing'.tr),
     ]),
     HowItWorkModel(title: 'pitching'.tr, imagePath: '', innerTitle: [
-      InnerTitle(score: '', subtitle: 'weusefractionalpoints'.tr),
-      InnerTitle(score: '', subtitle: 'weusenegativepoints'.tr),
       InnerTitle(score: '+4', subtitle: 'wins'.tr),
       InnerTitle(score: '+2', subtitle: 'saves'.tr),
       InnerTitle(score: '+1', subtitle: 'inningsPitched'.tr),
@@ -335,8 +351,6 @@ class HowItWorksController extends GetxController {
   ].obs;
   List<HowItWorkModel> hockeyHowItWorkOdi = [
     HowItWorkModel(title: 'skaters'.tr, imagePath: '', innerTitle: [
-      InnerTitle(score: '', subtitle: 'weusefractionalpoints'.tr),
-      InnerTitle(score: '', subtitle: 'weusenegativepoints'.tr),
       InnerTitle(score: '+3', subtitle: 'goals'.tr),
       InnerTitle(score: '+2', subtitle: 'Assists'.tr),
       InnerTitle(score: '0.5', subtitle: 'shotsonGoal'.tr),
@@ -347,8 +361,6 @@ class HowItWorksController extends GetxController {
       InnerTitle(score: '0.2', subtitle: 'shootoutGoals'.tr),
     ]),
     HowItWorkModel(title: 'goalTenders'.tr, imagePath: '', innerTitle: [
-      InnerTitle(score: '', subtitle: 'weusefractionalpoints'.tr),
-      InnerTitle(score: '', subtitle: 'weusenegativepoints'.tr),
       InnerTitle(score: '+3', subtitle: 'wins'.tr),
       InnerTitle(score: '-1', subtitle: 'goalsAgainst'.tr),
       InnerTitle(score: '0.2', subtitle: 'saves'.tr),

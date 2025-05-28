@@ -1,7 +1,6 @@
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/views/how_it_works/controller/how_it_works_controller.dart';
-import 'package:flutter_svg/svg.dart';
 
 class GameplayPointsGrid extends GetView<HowItWorksController> {
   const GameplayPointsGrid({super.key});
@@ -9,124 +8,83 @@ class GameplayPointsGrid extends GetView<HowItWorksController> {
   @override
   Widget build(BuildContext context) {
     Get.put(HowItWorksController());
-    return Padding(
-      padding: EdgeInsets.only(left: 5.w, right: 5.w, bottom: 5.h),
-      child: Obx(() {
-        final itemCount = controller.innerTitlesList.length;
-        final gridItemCount = itemCount;
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 1050),
-          curve: Curves.fastOutSlowIn,
-          child: Column(
-            key: ValueKey<int>(controller.innerTitlesList.length),
-            children: [
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  final maxWidth = constraints.maxWidth;
-                  final isWideScreen = maxWidth > 600;
-                  final crossAxisCount = isWideScreen ? 3 : 2;
-                  final itemWidth =
-                      (maxWidth - (crossAxisCount - 1) * 10) / crossAxisCount;
-                  return Wrap(
-                    spacing: 10, // Horizontal spacing between children
-                    runSpacing: 10, // Vertical spacing between runs
-                    children: List.generate(gridItemCount, (index) {
-                      final item = controller.innerTitlesList[index];
-                      final isLastItem = index == gridItemCount - 1;
-                      final itemsInLastRow = (gridItemCount % crossAxisCount);
-                      final remainingWidth =
-                          maxWidth - ((itemsInLastRow - 1) * (itemWidth + 10));
-
-                      return Container(
-                        height: Get.height * 0.2,
-                        width: isLastItem && itemsInLastRow != 0
-                            ? remainingWidth
-                            : itemWidth,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          border: Border.all(color: AppColors.borderColor),
-                          color: AppColors.white,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 5, right: 5, top: 5),
-                              child: Container(
-                                height: Get.height * 0.1,
-                                alignment: Alignment.center,
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.r),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      double.tryParse(item.score) != null &&
-                                              double.tryParse(item.score)! < 0
-                                          ? 'assets/images/redBackground.png'
-                                          : 'assets/images/blueBackground.png',
-                                    ),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    item.score == ''
-                                        ? SvgPicture.asset(
-                                            'assets/icons/exclaimationIcon.svg',
-                                            height: 25.h,
-                                            width: 25.w)
-                                        : Text(
-                                            item.score,
-                                            style: globalTextStyle(
-                                                fontSize: isWideScreen
-                                                    ? 20.sp
-                                                    : 25.sp,
-                                                color: AppColors.primary),
-                                          ),
-                                    item.score == ''
-                                        ? verticalSpace(10)
-                                        : const SizedBox(),
-                                    item.score == ''
-                                        ? const SizedBox()
-                                        : Text(
-                                            'points'.tr,
-                                            style: globalTextStyle(
-                                                fontSize:
-                                                    isWideScreen ? 8.sp : 12.sp,
-                                                color: AppColors.dark),
-                                          ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            verticalSpace(20),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 20, right: 20),
-                              child: Text(
-                                maxLines: 2,
-                                textAlign: TextAlign.start,
-                                overflow: TextOverflow.ellipsis,
-                                item.subtitle,
-                                style: globalTextStyle(
-                                    fontSize: isWideScreen ? 8.sp : 12.sp,
-                                    color: AppColors.dark),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
-                  );
-                },
+    return Obx(
+      () => Column(children: [
+        ...controller.innerTitlesList.map((e) => Container(
+              padding: const EdgeInsets.all(1),
+              margin: EdgeInsets.only(bottom: 10.h, left: 10.w, right: 10.w),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.r),
+                color: AppColors.white,
               ),
-            ],
-          ),
-        );
-      }),
+              child: Row(
+                children: [
+                  Container(
+                    height: Get.height * 0.15,
+                    width: Get.width * 0.3,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color.fromRGBO(77, 134, 126, 1),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5.r),
+                        bottomLeft: Radius.circular(5.r),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: Get.height * 0.07,
+                          width: Get.width * 0.2,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: e.score.contains('+')
+                                ? const Color.fromRGBO(102, 203, 61, 1)
+                                : AppColors.errorRed,
+                            borderRadius: BorderRadius.circular(5.r),
+                          ),
+                          child: Text(
+                            e.score.toString(),
+                            style: globalTextStyle(
+                                fontSize: 26.sp, color: AppColors.white),
+                          ),
+                        ),
+                        verticalSpace(5.h),
+                        Text(
+                          'Points',
+                          style: globalTextStyle(
+                              fontSize: 18.sp, color: AppColors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                  horizontalSpace(1),
+                  Expanded(
+                    child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        height: Get.height * 0.15,
+                        width: Get.width * 0.3,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(77, 134, 126, 1),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(5.r),
+                            bottomRight: Radius.circular(5.r),
+                          ),
+                        ),
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          e.subtitle,
+                          style: globalTextStyle2(
+                              fontSize: 16.sp,
+                              color: AppColors.white,
+                              fontWeight: FontWeight.w500),
+                        )),
+                  ),
+                ],
+              ),
+            ))
+      ]),
     );
   }
 }

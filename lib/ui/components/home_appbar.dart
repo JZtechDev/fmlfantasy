@@ -84,10 +84,11 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                             color: AppColors.white)),
                     GestureDetector(
                       onTap: () async {
+                        Get.toNamed(AppRoutes.profile);
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         prefs.remove('token');
-                        Get.offAllNamed(AppRoutes.authentication);
+                        Get.offAllNamed(AppRoutes.loginView);
                       },
                       child: Text('My Account',
                           style: globalTextStyle(

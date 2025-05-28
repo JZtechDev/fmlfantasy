@@ -19,12 +19,8 @@ class TeamStatsView extends GetView<MyTeamsController> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 5.w, vertical: 20.h),
-                  child: TeamStatistics(
-                    myTeams: myTeams,
-                  ),
+                TeamStatistics(
+                  myTeams: myTeams,
                 ),
               ],
             ),

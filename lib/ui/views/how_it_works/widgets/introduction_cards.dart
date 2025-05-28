@@ -1,10 +1,10 @@
+import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
-import 'package:fmlfantasy/app/app_images/app_images.dart';
-import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmlfantasy/ui/views/how_it_works/controller/how_it_works_controller.dart';
 import 'package:get/get.dart';
 
 class IntroductionCards extends StatelessWidget {
@@ -12,260 +12,62 @@ class IntroductionCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      double maxWidth = constraints.maxWidth;
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 15.w, right: 15.w, top: 20.h),
-            child: Text(
-              'howItWorks'.tr,
-              style: globalTextStyle(
-                  fontSize: AppSizing.isMobile(context) ? 21.sp : 16.sp),
+    return GetBuilder<HowItWorksController>(builder: (controller) {
+      return CarouselSlider.builder(
+        controller: controller.carouselController,
+        itemCount: controller.introCards.length,
+        itemBuilder: (context, index, realIndex) {
+          return Container(
+            width: Get.width,
+            padding: const EdgeInsets.all(20),
+            margin: EdgeInsets.only(right: 60.w, left: 60.w),
+            decoration: BoxDecoration(
+                color: const Color.fromRGBO(77, 134, 126, 1),
+                borderRadius: BorderRadius.circular(5.r)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 7.h),
+                    decoration: BoxDecoration(
+                        color: AppColors.secondary,
+                        borderRadius: BorderRadius.circular(5.r)),
+                    child: Text(
+                      controller.introCards[index].number,
+                      style: globalTextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 26.sp,
+                        color: AppColors.backgroud,
+                      ),
+                    )),
+                verticalSpace(15.h),
+                Text(controller.introCards[index].title,
+                    style: globalTextStyle(
+                        fontSize: 20.sp,
+                        color: AppColors.secondary,
+                        fontWeight: FontWeight.w700)),
+                verticalSpace(10.h),
+                Text(controller.introCards[index].description,
+                    style: globalTextStyle(
+                        fontSize: 16.sp,
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w500))
+              ],
             ),
-          ),
-          verticalSpace(20.h),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Container(
-                      //padding:const EdgeInsets.all(5),
-                      height: Get.width > 600
-                          ? Get.height * 0.37
-                          : Get.height * 0.3,
-                      //width: maxWidth > 600 ? Get.width * 0.47 : Get.width * 0.44,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.r),
-                        color: AppColors.white,
-                        border:
-                            Border.all(color: AppColors.borderColor, width: 1),
-                      ),
-
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            AppImages.chooseSports,
-                            fit: BoxFit.fill,
-                            //colorBlendMode: BlendMode.exclusion,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  textAlign: TextAlign.start,
-                                  'chooseYourSports'.tr,
-                                  style: globalTextStyle(
-                                      fontSize: maxWidth > 600 ? 10.sp : 12.sp),
-                                ),
-                                //horizontalSpace(10.w),
-                                Text(
-                                  '01',
-                                  style: globalTextStyle(
-                                      fontSize: 31.sp, color: AppColors.grey),
-                                )
-                              ],
-                            ),
-                          ),
-                          verticalSpace(10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Text(
-                              textAlign: TextAlign.start,
-                              'Paragraph1'.tr,
-                              style: globalTextStyle2(
-                                  fontSize: maxWidth > 600 ? 8.sp : 10.sp,
-                                  color: AppColors.textGray),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  horizontalSpace(5.w),
-                  Expanded(
-                    child: Container(
-                      //padding: EdgeInsets.all(5),
-                      height: Get.width > 600
-                          ? Get.height * 0.37
-                          : Get.height * 0.3,
-                      //width: maxWidth > 600 ? Get.width * 0.47 : Get.width * 0.44,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          color: AppColors.white,
-                          border: Border.all(
-                              color: AppColors.borderColor, width: 1)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            AppImages.draft,
-                            //colorBlendMode: BlendMode.exclusion,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  textAlign: TextAlign.start,
-                                  'draftYourTeam'.tr,
-                                  style: globalTextStyle(
-                                    fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                                  ),
-                                ),
-                                Text(
-                                  '02',
-                                  style: globalTextStyle(
-                                      fontSize: 31.sp, color: AppColors.grey),
-                                )
-                              ],
-                            ),
-                          ),
-                          verticalSpace(10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Text(
-                              textAlign: TextAlign.start,
-                              'Paragraph2'.tr,
-                              style: globalTextStyle2(
-                                  fontSize: maxWidth > 600 ? 8.sp : 10.sp,
-                                  color: AppColors.textGray),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ]),
-          ),
-          verticalSpace(10.h),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Container(
-                      //padding: EdgeInsets.all(5),
-                      height: Get.width > 600
-                          ? Get.height * 0.37
-                          : Get.height * 0.3,
-                      //width: maxWidth > 600 ? Get.width * 0.47 : Get.width * 0.44,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          color: AppColors.white,
-                          border: Border.all(
-                              color: AppColors.borderColor, width: 1)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            AppImages.win,
-                            //colorBlendMode: BlendMode.exclusion,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  textAlign: TextAlign.start,
-                                  'playScoreWin'.tr,
-                                  style: globalTextStyle(
-                                    fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                                  ),
-                                ),
-                                Text(
-                                  '03',
-                                  style: globalTextStyle(
-                                      fontSize: 31.sp, color: AppColors.grey),
-                                )
-                              ],
-                            ),
-                          ),
-                          verticalSpace(10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Text(
-                              textAlign: TextAlign.start,
-                              'Paragraph3'.tr,
-                              style: globalTextStyle2(
-                                  fontSize: maxWidth > 600 ? 8.sp : 10.sp,
-                                  color: AppColors.textGray),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  horizontalSpace(5.w),
-                  Expanded(
-                    child: Container(
-                      //padding: EdgeInsets.all(5),
-                      height: Get.width > 600
-                          ? Get.height * 0.37
-                          : Get.height * 0.3,
-                      //width: maxWidth > 600 ? Get.width * 0.47 : Get.width * 0.44,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.r),
-                        color: AppColors.white,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            AppImages.chooseSports,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  textAlign: TextAlign.start,
-                                  'cashInYourPrize'.tr,
-                                  style: globalTextStyle(
-                                    fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                                  ),
-                                ),
-                                Text(
-                                  '04',
-                                  style: globalTextStyle(
-                                      fontSize: 31.sp, color: AppColors.grey),
-                                )
-                              ],
-                            ),
-                          ),
-                          verticalSpace(10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Text(
-                              textAlign: TextAlign.start,
-                              'Paragraph4'.tr,
-                              style: globalTextStyle2(
-                                  fontSize: maxWidth > 600 ? 8.sp : 10.sp,
-                                  color: AppColors.textGray),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ]),
-          ),
-        ],
+          );
+        },
+        options: CarouselOptions(
+          aspectRatio: 16 / 11,
+          viewportFraction: 1.15,
+          initialPage: 0,
+          enableInfiniteScroll: false,
+          autoPlayInterval: const Duration(seconds: 3),
+          autoPlayAnimationDuration: const Duration(milliseconds: 800),
+          autoPlayCurve: Curves.fastOutSlowIn,
+          scrollDirection: Axis.horizontal,
+        ),
       );
     });
   }

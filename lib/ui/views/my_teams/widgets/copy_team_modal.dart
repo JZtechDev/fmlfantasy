@@ -12,8 +12,8 @@ class CopyTeamDialogue extends GetView<MyTeamsController> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: AppColors.white,
-      surfaceTintColor: AppColors.white,
+      backgroundColor: const Color.fromRGBO(101, 184, 172, 1),
+      surfaceTintColor: const Color.fromRGBO(101, 184, 172, 1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0.r),
       ),

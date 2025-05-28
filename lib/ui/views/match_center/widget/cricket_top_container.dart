@@ -61,15 +61,19 @@ class CricketTopContainer extends GetView<MatchCenterInner> {
                             width: 18,
                           ),
                           horizontalSpace(10.w),
-                          Text(
-                            maxLines: 2,
-                            textAlign: TextAlign.start,
-                            overflow: TextOverflow.ellipsis,
-                            leagueName.toString(),
-                            style: globalTextStyle(
-                                fontSize:
-                                    AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                                fontWeight: FontWeight.w600),
+                          SizedBox(
+                            width: Get.width * 0.35,
+                            child: Text(
+                              maxLines: 1,
+                              textAlign: TextAlign.start,
+                              overflow: TextOverflow.ellipsis,
+                              leagueName.toString(),
+                              style: globalTextStyle(
+                                  fontSize: AppSizing.isMobile(context)
+                                      ? 12.sp
+                                      : 10.sp,
+                                  fontWeight: FontWeight.w600),
+                            ),
                           ),
                         ],
                       )),

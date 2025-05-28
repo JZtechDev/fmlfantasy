@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:fmlfantasy/core/config/global_instances.dart'; // Make sure this is correctly configured
+import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/ui/helpers/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
@@ -25,19 +25,18 @@ class AuthenticationServices {
       if (response.statusCode == 200) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('token', response.data['accessToken']);
-        //String token = prefs.getString('token') ?? '';
+        // Map<String, dynamic> decodedToken =
+        //     JwtDecoder.decode(response.data['accessToken']);
+        // prefs.setString('kycSid', response.data['kycSid']);
+        // userName = decodedToken['name'];
         getKycId(response.data['accessToken']);
         return true;
       } else {
-        // Handle incorrect status codes
-        //Get.snackbar('Error', 'Incorrect Email or Password');
         Snackbars.error('Incorrect Email or Password');
         return false;
       }
     } on DioException catch (e) {
-      // Handle DioErrors (network issues, server responses other than 200)
       if (e.response != null) {
-        // Handle specific error messages from the server
         if (e.response!.statusCode == 401) {
           Snackbars.error('Something went wrong!! Please try again later');
         } else if (e.response!.statusCode == 403) {
@@ -46,12 +45,10 @@ class AuthenticationServices {
           Snackbars.error('Server Error: ${e.response!.data}');
         }
       } else {
-        // When there is no response (network issues, timeouts, etc.)
         Get.snackbar('Error', 'Check Your Internet Connection');
       }
       return false;
     } catch (e) {
-      // Handle any other errors that might occur
       Get.snackbar('Error', 'Server Error');
       return false;
     }
@@ -123,12 +120,10 @@ class AuthenticationServices {
         }
       } else {
         log(response.data.toString() as num);
-        // Handle other status codes or errors accordingly
         return false;
       }
     } catch (e) {
       log(e.toString() as num);
-      // Handle exceptions
       return false;
     }
   }
@@ -270,15 +265,9 @@ class AuthenticationServices {
         return false;
       }
     } on DioException catch (dioError) {
-      if (dioError.response != null) {
-        //   Get.snackbar('Error',
-        //       dioError.response!.data['message'] ?? 'Unknown error occurred');
-        // } else {
-        // Get.snackbar('Error', 'Check Your Internet Connection');
-      }
+      if (dioError.response != null) {}
       return false;
     } catch (e) {
-      //Get.snackbar('Error', e.toString());
       return false;
     }
   }

@@ -1,11 +1,9 @@
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
-import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/how_it_works/controller/how_it_works_controller.dart';
-import 'package:fmlfantasy/ui/views/how_it_works/widgets/points_grid.dart';
-import 'package:fmlfantasy/ui/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmlfantasy/ui/views/how_it_works/widgets/points_grid.dart';
 import 'package:get/get.dart';
 
 class GamePlayRulesContainer extends GetView<HowItWorksController> {
@@ -18,89 +16,64 @@ class GamePlayRulesContainer extends GetView<HowItWorksController> {
       double maxWidth = constraints.maxWidth;
       return Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(5.r),
-          ),
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.r),
-              color: AppColors.grey,
-            ),
-            child: Column(
-              children: [
-                verticalSpace(10),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: 10.w,
-                    right: 10.w,
+        child: Column(
+          children: [
+            Obx(
+              () => Padding(
+                padding: const EdgeInsets.only(
+                    left: 10, right: 10, top: 10, bottom: 10),
+                child: Container(
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(101, 184, 172, 1),
+                    borderRadius: BorderRadius.circular(5.r),
                   ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: AppColors.white,
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 10.w,
-                            right: 10.w,
-                            top: 10.h,
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Obx(
-                                () => Image.asset(
-                                  controller.getIconPath(
-                                      controller.selectedSport.value),
-                                  height: 20.h,
-                                  width: 20.w,
-                                ),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: controller.allTitles.map((title) {
+                        final isSelected =
+                            controller.selectedTitle.value == title;
+                        return GestureDetector(
+                          onTap: () {
+                            controller.selectedTitle.value = title;
+                            controller.updateInnerTitlesList();
+                          },
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 7.w, vertical: 8.h),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 10.h),
+                            decoration: BoxDecoration(
+                              color: isSelected ? AppColors.primary : null,
+                              borderRadius: BorderRadius.circular(5.r),
+                              border: Border.all(
+                                  color: isSelected
+                                      ? AppColors.primary
+                                      : AppColors.primary),
+                            ),
+                            child: Text(
+                              title.toUpperCase(),
+                              style: globalTextStyle(
+                                color: isSelected
+                                    ? AppColors.white
+                                    : AppColors.primary,
+                                fontSize: maxWidth > 600 ? 10.sp : 12.sp,
+                                fontWeight: isSelected
+                                    ? FontWeight.w700
+                                    : FontWeight.w600,
                               ),
-                              horizontalSpace(10.w),
-                              Text(
-                                'gamePlayRules'.tr,
-                                style: globalTextStyle(fontSize: 16.sp),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Obx(
-                          () => Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, top: 10, bottom: 10),
-                            child: AppDropdown(
-                              items: controller.allTitles,
-                              hint: controller.isDropDownOpened.value
-                                  ? 'Selected '
-                                  : 'selectyoursport'.tr,
-                              dropdownColor: AppColors.primary,
-                              titleColor: AppColors.dark,
-                              hintTextColor: AppColors.white,
-                              selectedTextColor: AppColors.white,
-                              trailingColor: AppColors.white,
-                              fontSize: maxWidth > 600 ? 10.sp : 12.sp,
-                              value: controller.selectedTitle.value,
-                              onChanged: (value) {
-                                controller.selectedTitle.value = value!;
-                                controller.updateInnerTitlesList();
-                              },
                             ),
                           ),
-                        ),
-                      ],
+                        );
+                      }).toList(),
                     ),
                   ),
                 ),
-                verticalSpace(10),
-                const GameplayPointsGrid()
-              ],
+              ),
             ),
-          ),
+            const GameplayPointsGrid()
+          ],
         ),
       );
     });

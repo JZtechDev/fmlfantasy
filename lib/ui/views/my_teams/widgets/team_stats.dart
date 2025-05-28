@@ -51,7 +51,10 @@ class TeamStatistics extends GetView<MyTeamsController> {
           ),
         ),
         verticalSpace(10.h),
-        const PlayerGridView(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          child: const PlayerGridView(),
+        ),
         myTeams.matchData!.status == 'not_started'
             ? Container()
             : PrimaryButton(
@@ -63,7 +66,7 @@ class TeamStatistics extends GetView<MyTeamsController> {
                 },
                 isEnabled: true),
         SizedBox(
-          height: Get.height * 0.3,
+          height: Get.height * 0.25,
           child: Obx(
             () => SfCircularChart(
               tooltipBehavior: TooltipBehavior(
@@ -107,9 +110,9 @@ class TeamStatistics extends GetView<MyTeamsController> {
                   ).entries.toList();
 
                   log(groupedData.toString());
-                  final data = groupedData[index].value;
-                  double totalPoints =
-                      data.map((e) => e.investment).reduce((a, b) => a! + b!)!;
+                  // final data = groupedData[index].value;
+                  // double totalPoints =
+                  //     data.map((e) => e.investment).reduce((a, b) => a! + b!)!;
                   List<Color> colors = [
                     const Color.fromRGBO(102, 203, 61, 1),
                     const Color.fromRGBO(249, 207, 88, 1),
@@ -138,21 +141,11 @@ class TeamStatistics extends GetView<MyTeamsController> {
                             style: globalTextStyle(
                               fontSize:
                                   AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          horizontalSpace(5.w),
-                          Text(
-                            "${totalPoints.toStringAsFixed(0)}k",
-                            style: globalTextStyle(
-                              fontSize:
-                                  AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                         ],
                       ),
-                      horizontalSpace(10.h)
                     ],
                   );
                 },
@@ -193,13 +186,14 @@ class TeamStatistics extends GetView<MyTeamsController> {
                               .reduce((a, b) => a! + b!),
                   strokeWidth: 1,
                   innerRadius: '75%',
-                  radius: '90%',
+                  radius: '80%',
                 ),
               ],
               annotations: <CircularChartAnnotation>[
                 CircularChartAnnotation(
                   widget: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         "${controller.calculateTotalPoitns().toStringAsFixed(0)}%",
@@ -209,23 +203,23 @@ class TeamStatistics extends GetView<MyTeamsController> {
                         ),
                       ),
                       Text(
-                        'salaryUsed'.tr,
+                        'SALARY USED'.tr,
                         style: globalTextStyle(
                             fontSize:
                                 AppSizing.isMobile(context) ? 12.sp : 8.sp,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.textGray),
+                            color: AppColors.white),
                       ),
                     ],
                   ),
-                  radius: '0%', // Center of the doughnut
+                  radius: '0%',
                 ),
               ],
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -284,44 +278,55 @@ class TeamStatistics extends GetView<MyTeamsController> {
             ],
           ),
         ),
-        PrimaryButton(
-          buttonText: 'PREVIEW'.tr,
-          onPressed: () {
-            Get.to(() => const TeamPreview());
-          },
-          isEnabled: true,
-        ),
-        verticalSpace(5.h),
-        myTeams.matchData!.status == 'not_started'
-            ? Container()
-            : Row(
-                children: [
-                  Expanded(
-                    child: PrimaryButton(
-                      buttonText: 'LEADERBOARD'.tr,
-                      onPressed: () {
-                        Get.to(() => const MonthlyLeaderboard(),
-                            arguments: {'data': myTeams});
-                      },
-                      isEnabled: true,
-                    ),
-                  ),
-                  Expanded(
-                    child: PrimaryButton(
-                      backgroundColor: AppColors.secondary,
-                      buttonText: 'MATCH CENTER'.tr,
-                      onPressed: () {
-                        Get.toNamed(AppRoutes.matchCenterInner, arguments: {
-                          'sports': controller.selectedSport.value,
-                          'matchKey': controller.matchCode.value,
-                          'SportsName': controller.selectedSport.value,
-                        });
-                      },
-                      isEnabled: true,
-                    ),
-                  )
-                ],
-              )
+        Container(
+          width: Get.width,
+          padding: const EdgeInsets.only(bottom: 20, top: 20),
+          decoration: const BoxDecoration(color: AppColors.darkGreen),
+          child: Column(
+            children: [
+              PrimaryButton(
+                buttonText: 'PREVIEW'.tr,
+                onPressed: () {
+                  Get.to(() => const TeamPreview());
+                },
+                isEnabled: true,
+              ),
+              verticalSpace(5.h),
+              myTeams.matchData!.status == 'not_started'
+                  ? Container()
+                  : Row(
+                      children: [
+                        Expanded(
+                          child: PrimaryButton(
+                            buttonText: 'LEADERBOARD'.tr,
+                            onPressed: () {
+                              Get.to(() => const MonthlyLeaderboard(),
+                                  arguments: {'data': myTeams});
+                            },
+                            isEnabled: true,
+                          ),
+                        ),
+                        Expanded(
+                          child: PrimaryButton(
+                            backgroundColor: AppColors.secondary,
+                            buttonText: 'MATCH CENTER'.tr,
+                            onPressed: () {
+                              Get.toNamed(AppRoutes.matchCenterInner,
+                                  arguments: {
+                                    'sports': controller.selectedSport.value,
+                                    'matchKey': controller.matchCode.value,
+                                    'SportsName':
+                                        controller.selectedSport.value,
+                                  });
+                            },
+                            isEnabled: true,
+                          ),
+                        )
+                      ],
+                    )
+            ],
+          ),
+        )
       ],
     );
   }

@@ -27,18 +27,6 @@ class LabelAndToggle extends GetView<MatchCenterInner> {
                       ? null
                       : controller.onNextPlayerCard();
                 },
-                previousButtonColor: controller.topPlayerCrouselIndex.value < 3
-                    ? AppColors.white
-                    : AppColors.dark,
-                nextButtonColor: controller.topPlayerCrouselIndex.value == 3
-                    ? AppColors.white
-                    : AppColors.dark,
-                previousIconColor: controller.topPlayerCrouselIndex.value < 3
-                    ? AppColors.dark
-                    : AppColors.white,
-                nextIconColor: controller.topPlayerCrouselIndex.value == 3
-                    ? AppColors.dark
-                    : AppColors.white,
               );
             }),
           ],

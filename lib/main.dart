@@ -71,11 +71,11 @@ class MyApp extends StatelessWidget {
       if (timeoutEvent == SessionTimeoutState.userInactivityTimeout) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.remove('token');
-        Get.offAllNamed(AppRoutes.authentication);
+        Get.offAllNamed(AppRoutes.loginView);
       } else if (timeoutEvent == SessionTimeoutState.appFocusTimeout) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.remove('token');
-        Get.offAllNamed(AppRoutes.authentication);
+        Get.offAllNamed(AppRoutes.loginView);
       }
     });
 

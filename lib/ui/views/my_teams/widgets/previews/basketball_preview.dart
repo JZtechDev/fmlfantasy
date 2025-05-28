@@ -5,18 +5,18 @@ import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
-import 'package:fmlfantasy/model/match_center_inner_model.dart';
+import 'package:fmlfantasy/model/my_teams_players_model.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 
-class BasketballGround extends StatelessWidget {
-  final List<PlayersBreakDown> data;
-  const BasketballGround({super.key, required this.data});
+class BasketballPreview extends StatelessWidget {
+  final List<MyTeamPlayersModel> data;
+  const BasketballPreview({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.only(left: 10.w, right: 10.w),
+    return SizedBox(
         width: Get.width,
+        height: Get.height,
         child: Stack(alignment: Alignment.center, children: [
           Positioned.fill(
               child: Container(
@@ -69,17 +69,17 @@ class BasketballGround extends StatelessWidget {
                   children: [
                     selectedSPort.value == 'FB'
                         ? player.imageUrl == null || player.imageUrl!.isEmpty
-                            ? player.jerseyImage == null ||
-                                    player.jerseyImage!.isEmpty
+                            ? player.jerseyImageUrl == null ||
+                                    player.jerseyImageUrl!.isEmpty
                                 ? Container()
-                                : player.jerseyImage!.endsWith('.svg')
+                                : player.jerseyImageUrl!.endsWith('.svg')
                                     ? SvgPicture.network(
-                                        player.jerseyImage!,
+                                        player.jerseyImageUrl!,
                                         height: 25.h,
                                         width: 25.w,
                                       )
                                     : Image.network(
-                                        player.jerseyImage!,
+                                        player.jerseyImageUrl!,
                                         height: 25.h,
                                         width: 25.w,
                                       )

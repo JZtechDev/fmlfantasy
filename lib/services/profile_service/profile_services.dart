@@ -10,7 +10,7 @@ class ProfileServices {
   Future<AccountDetailsModel> getProfile(String token) async {
     try {
       final response = await dio.get(
-        '$clientApi/smartuserprofileapi-uat/profile',
+        '$clientApi/smartuserprofileapi-dev/profile',
         options: Options(
           headers: {
             "Authorization": "Bearer $token",
@@ -39,7 +39,7 @@ class ProfileServices {
       String token, Map<String, dynamic> updatedData) async {
     try {
       final response = await dio.put(
-        '$clientApi/smartuserprofileapi-uat/profile/update',
+        '$clientApi/smartuserprofileapi-dev/profile/update',
         data: updatedData,
         options: Options(
           headers: {

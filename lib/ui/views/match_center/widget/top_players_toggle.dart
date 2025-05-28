@@ -1,18 +1,13 @@
 import 'package:fmlfantasy/ui/helpers/commons.dart';
-import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class TopPlayersToggle extends GetView<MatchCenterInner> {
+class TopPlayersToggle extends StatelessWidget {
   final String iconPathN;
   final String iconPathP;
   final VoidCallback onPrevious;
   final VoidCallback onNext;
-  final Color previousButtonColor;
-  final Color previousIconColor;
-  final Color nextButtonColor;
-  final Color nextIconColor;
 
   const TopPlayersToggle({
     super.key,
@@ -20,15 +15,10 @@ class TopPlayersToggle extends GetView<MatchCenterInner> {
     required this.iconPathP,
     required this.onPrevious,
     required this.onNext,
-    required this.previousButtonColor,
-    required this.nextButtonColor,
-    required this.previousIconColor,
-    required this.nextIconColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MatchCenterInner());
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,

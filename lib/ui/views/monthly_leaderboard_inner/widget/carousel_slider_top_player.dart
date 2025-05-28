@@ -266,7 +266,7 @@ class CarouselSliderTopPlayerToggle
                             fontWeight: FontWeight.w700,
                             color: AppColors.white,
                           ),
-                          maxLines: 2,
+                          maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                         ),
