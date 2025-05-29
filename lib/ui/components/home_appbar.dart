@@ -85,10 +85,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     GestureDetector(
                       onTap: () async {
                         Get.toNamed(AppRoutes.profile);
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.remove('token');
-                        Get.offAllNamed(AppRoutes.loginView);
+                        // SharedPreferences prefs =
+                        //     await SharedPreferences.getInstance();
+                        // prefs.remove('token');
+                        // Get.offAllNamed(AppRoutes.loginView);
                       },
                       child: Text('My Account',
                           style: globalTextStyle(

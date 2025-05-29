@@ -1,4 +1,6 @@
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
+import 'package:fmlfantasy/app/textstyles/textstyle.dart';
+import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/components/inner_appbar.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/profile/controller/profile_controller.dart';
@@ -16,22 +18,115 @@ class ProfileView extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     Get.put(ProfileController());
     return Scaffold(
-        appBar: const AppBarInner(
-          title: 'Profile',
-        ),
-        backgroundColor: AppColors.grey,
+        appBar: HomeAppBar(title: 'Profile'.tr),
         body: Padding(
           padding: const EdgeInsets.only(bottom: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              verticalSpace(30.h),
               const ProfileImage(),
               verticalSpace(10.h),
+              const Divider(
+                color: AppColors.secondary,
+                thickness: 1.0,
+              ),
+              verticalSpace(10.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: GetBuilder<ProfileController>(builder: (controller) {
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            controller.isSeetingEnable = false;
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: controller.isSeetingEnable
+                                  ? AppColors.backgroud
+                                  : AppColors.secondary,
+                              borderRadius: BorderRadius.circular(5.r),
+                              border: Border.all(color: AppColors.secondary),
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/new_images/prefs.png',
+                                  height: 24,
+                                  width: 24,
+                                  color: controller.isSeetingEnable
+                                      ? AppColors.secondary
+                                      : AppColors.dark,
+                                ),
+                                horizontalSpace(10.w),
+                                Text(
+                                  'Preferences',
+                                  style: globalTextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: controller.isSeetingEnable
+                                          ? AppColors.secondary
+                                          : AppColors.dark),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      horizontalSpace(10.w),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            controller.isSeetingEnable = true;
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: controller.isSeetingEnable
+                                  ? AppColors.secondary
+                                  : AppColors.backgroud,
+                              borderRadius: BorderRadius.circular(5.r),
+                              border: Border.all(color: AppColors.secondary),
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/new_images/seetings.png',
+                                  height: 24,
+                                  width: 24,
+                                  color: controller.isSeetingEnable
+                                      ? AppColors.dark
+                                      : AppColors.secondary,
+                                ),
+                                horizontalSpace(10.w),
+                                Text(
+                                  'Settings',
+                                  style: globalTextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: controller.isSeetingEnable
+                                          ? AppColors.dark
+                                          : AppColors.secondary),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+                }),
+              ),
+              verticalSpace(20.h),
               const ProfileTiles(),
-              const Spacer(),
-              PrimaryButton(
-                  buttonText: 'Logout'.tr,
-                  onPressed: () => controller.logout(),
-                  isEnabled: true),
+              // const Spacer(),
+              // PrimaryButton(
+              //     buttonText: 'Logout'.tr,
+              //     onPressed: () => controller.logout(),
+              //     isEnabled: true),
             ],
           ),
         ));

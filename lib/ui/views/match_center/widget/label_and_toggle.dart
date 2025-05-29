@@ -14,21 +14,19 @@ class LabelAndToggle extends GetView<MatchCenterInner> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Obx(() {
-              return TopPlayersToggle(
-                iconPathN: 'assets/icons/arrowright.svg',
-                iconPathP: 'assets/icons/arrowright.svg',
-                onPrevious: () {
-                  controller.onPreviousPlayerCard();
-                },
-                onNext: () {
-                  // ignore: unrelated_type_equality_checks
-                  controller.topPlayerCrouselIndex == 3
-                      ? null
-                      : controller.onNextPlayerCard();
-                },
-              );
-            }),
+            TopPlayersToggle(
+              iconPathN: 'assets/icons/arrowright.svg',
+              iconPathP: 'assets/icons/arrowright.svg',
+              onPrevious: () {
+                controller.onPreviousPlayerCard();
+              },
+              onNext: () {
+                // ignore: unrelated_type_equality_checks
+                controller.topPlayerCrouselIndex == 3
+                    ? null
+                    : controller.onNextPlayerCard();
+              },
+            ),
           ],
         ),
       );

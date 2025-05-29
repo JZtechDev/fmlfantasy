@@ -14,6 +14,8 @@ class ProfileImage extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     Get.put(ProfileController());
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Obx(
           () {
@@ -24,36 +26,42 @@ class ProfileImage extends GetView<ProfileController> {
               );
             }
             final data = controller.accountDetailsList.first;
-            return Column(
-              children: [
-                verticalSpace(60.h),
-                Obx(
-                  () => CircleAvatar(
-                      radius: 40.r,
-                      backgroundColor: AppColors.white,
-                      backgroundImage: NetworkImage(data.imageUrl!.value)),
-                ),
-                verticalSpace(10.h),
-                Text(
-                  data.userName ?? '',
-                  style: globalTextStyle(
-                      fontSize: 16.sp, fontWeight: FontWeight.w600),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.price_change),
-                    horizontalSpace(5.w),
-                    Text(
-                      '235',
-                      style: globalTextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.textGray),
-                    ),
-                  ],
-                ),
-              ],
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: 50.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Obx(
+                    () => CircleAvatar(
+                        radius: 50.r,
+                        backgroundColor: AppColors.white,
+                        backgroundImage: NetworkImage(data.imageUrl!.value)),
+                  ),
+                  horizontalSpace(30.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('My Account',
+                          style: globalTextStyle(
+                              fontSize: 18.sp, fontWeight: FontWeight.w700)),
+                      Text(
+                        data.userName!.capitalizeFirst ?? '',
+                        style: globalTextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.secondary),
+                      ),
+                      Text(
+                        '\$199',
+                        style: globalTextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.white),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             );
           },
         ),

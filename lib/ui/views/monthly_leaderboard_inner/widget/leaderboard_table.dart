@@ -1,7 +1,6 @@
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/monthly_leader_model.dart';
-import 'package:fmlfantasy/ui/components/trapezoid.dart';
 import 'package:fmlfantasy/ui/views/monthly_leaderboard_inner/controller/monthly_inner_leaderboard_controller.dart';
 
 class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
@@ -45,7 +44,10 @@ class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
                   width: Get.width * 0.9,
                   padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.r),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5.r),
+                      topRight: Radius.circular(5.r),
+                    ),
                     color: AppColors.primary,
                   ),
                   child: Text(
@@ -57,63 +59,66 @@ class LeaderBoardTable extends GetView<MonthlyInnerLeaderboardController> {
                   ),
                 ),
                 SizedBox(
-                  width: Get.width,
-                  child: ClipPath(
-                    clipper: TrapezoidClipper(),
-                    child: Container(
-                        width: Get.width,
-                        height: 25.h,
+                  width: Get.width * 0.9,
+                  child: Container(
+                      width: Get.width,
+                      height: 25.h,
+                      decoration: BoxDecoration(
                         color: AppColors.secondary,
-                        padding: EdgeInsets.only(
-                          left: 35.w,
-                          right: 35.w,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(5.r),
+                          bottomRight: Radius.circular(5.r),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: Get.width * 0.3,
-                              child: Text(
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                home,
-                                style: globalTextStyle(
-                                    fontSize: 12.sp,
-                                    color: AppColors.darkGreen,
-                                    fontWeight: FontWeight.w600),
-                              ),
+                      ),
+                      padding: EdgeInsets.only(
+                        left: 35.w,
+                        right: 35.w,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: Get.width * 0.3,
+                            child: Text(
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              home,
+                              style: globalTextStyle(
+                                  fontSize: 12.sp,
+                                  color: AppColors.darkGreen,
+                                  fontWeight: FontWeight.w600),
                             ),
-                            Container(
-                              alignment: Alignment.center,
-                              height: 20.h,
-                              width: 20.w,
-                              decoration: const BoxDecoration(
-                                color: AppColors.backgroud,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Text(
-                                'VS',
-                                style: globalTextStyle(
-                                    fontSize: 10.sp,
-                                    color: AppColors.secondary,
-                                    fontWeight: FontWeight.w700),
-                              ),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 20.h,
+                            width: 20.w,
+                            decoration: const BoxDecoration(
+                              color: AppColors.backgroud,
+                              shape: BoxShape.circle,
                             ),
-                            SizedBox(
-                              width: Get.width * 0.3,
-                              child: Text(
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                away,
-                                style: globalTextStyle(
-                                    fontSize: 12.sp,
-                                    color: AppColors.darkGreen,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            )
-                          ],
-                        )),
-                  ),
+                            child: Text(
+                              'VS',
+                              style: globalTextStyle(
+                                  fontSize: 10.sp,
+                                  color: AppColors.secondary,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                          SizedBox(
+                            width: Get.width * 0.3,
+                            child: Text(
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              away,
+                              style: globalTextStyle(
+                                  fontSize: 12.sp,
+                                  color: AppColors.darkGreen,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          )
+                        ],
+                      )),
                 ),
                 verticalSpace(20.h),
                 Container(

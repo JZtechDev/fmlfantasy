@@ -13,6 +13,15 @@ class ProfileController extends GetxController {
 
   RxBool isBiometricEnabled = false.obs;
 
+  bool _isSeetingEnable = false;
+
+  bool get isSeetingEnable => _isSeetingEnable;
+
+  set isSeetingEnable(bool value) {
+    _isSeetingEnable = value;
+    update();
+  }
+
   @override
   void onInit() async {
     getLocal();
