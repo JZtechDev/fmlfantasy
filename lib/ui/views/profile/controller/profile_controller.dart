@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fmlfantasy/app/app%20routes/app_routes.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/model/account_details_model.dart';
@@ -33,9 +34,12 @@ class ProfileController extends GetxController {
 
   Future<void> fetchProfile() async {
     try {
+      EasyLoading.show();
       final data = await profileServices.getProfile(token);
       accountDetailsList.add(data);
+      EasyLoading.dismiss();
     } catch (e) {
+      EasyLoading.dismiss();
       throw Exception('Failed to fetch profile');
     }
   }

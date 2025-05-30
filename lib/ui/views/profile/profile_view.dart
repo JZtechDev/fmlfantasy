@@ -1,14 +1,14 @@
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
+import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/ui/components/home_appbar.dart';
-import 'package:fmlfantasy/ui/components/inner_appbar.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/profile/controller/profile_controller.dart';
 import 'package:fmlfantasy/ui/views/profile/widgets/profile_image.dart';
 import 'package:fmlfantasy/ui/views/profile/widgets/profile_tiles.dart';
-import 'package:fmlfantasy/ui/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
 import 'package:get/get.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -24,6 +24,8 @@ class ProfileView extends GetView<ProfileController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              verticalSpace(10.h),
+              const DashboardButton(),
               verticalSpace(30.h),
               const ProfileImage(),
               verticalSpace(10.h),
@@ -122,11 +124,28 @@ class ProfileView extends GetView<ProfileController> {
               ),
               verticalSpace(20.h),
               const ProfileTiles(),
-              // const Spacer(),
-              // PrimaryButton(
-              //     buttonText: 'Logout'.tr,
-              //     onPressed: () => controller.logout(),
-              //     isEnabled: true),
+              const Spacer(),
+              GestureDetector(
+                onTap: () => controller.logout(),
+                child: Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.symmetric(horizontal: 20.w),
+                  width: AppSizing.width(context),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                  decoration: BoxDecoration(
+                    color: AppColors.errorRed,
+                    borderRadius: BorderRadius.circular(5.r),
+                  ),
+                  child: Text(
+                    'Logout',
+                    style: globalTextStyle(
+                        fontSize: 16.sp,
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ),
+              )
             ],
           ),
         ));

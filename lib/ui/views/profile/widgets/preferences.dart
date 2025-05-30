@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/views/profile/controller/profile_controller.dart';
@@ -50,6 +52,7 @@ class Preferences extends GetView<ProfileController> {
               children: [
                 GestureDetector(
                   onTap: () {
+                    log(controller.accountDetailsList.toString());
                     Get.toNamed(AppRoutes.accountDetailsView, arguments: {
                       'details': controller.accountDetailsList,
                     });
@@ -94,7 +97,8 @@ class Preferences extends GetView<ProfileController> {
                 verticalSpace(10.h),
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(AppRoutes.statementView);
+                    Get.toNamed(AppRoutes.statementView,
+                        arguments: {'details': controller.accountDetailsList});
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10.w),

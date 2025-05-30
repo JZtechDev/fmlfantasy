@@ -1,7 +1,6 @@
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
-import 'package:fmlfantasy/ui/helpers/picture_shimmer.dart';
 import 'package:fmlfantasy/ui/views/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,9 +19,8 @@ class ProfileImage extends GetView<ProfileController> {
         Obx(
           () {
             if (controller.accountDetailsList.isEmpty) {
-              return Padding(
-                padding: EdgeInsets.only(top: 60.h),
-                child: SizedBox(height: 80.h, child: const AvatarShimmer()),
+              return Container(
+                height: 100,
               );
             }
             final data = controller.accountDetailsList.first;
@@ -31,12 +29,15 @@ class ProfileImage extends GetView<ProfileController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Obx(
-                    () => CircleAvatar(
-                        radius: 50.r,
-                        backgroundColor: AppColors.white,
-                        backgroundImage: NetworkImage(data.imageUrl!.value)),
-                  ),
+                  data.imageUrl == null || data.imageUrl == ''
+                      ? Container()
+                      : Obx(
+                          () => CircleAvatar(
+                              radius: 50.r,
+                              backgroundColor: AppColors.white,
+                              backgroundImage:
+                                  NetworkImage(data.imageUrl!.value)),
+                        ),
                   horizontalSpace(30.w),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

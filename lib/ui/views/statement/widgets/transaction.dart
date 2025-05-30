@@ -5,6 +5,7 @@ import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/views/statement/controller/statement_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fmlfantasy/ui/views/statement/widgets/transactions_tab.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -15,126 +16,11 @@ class TransactionView extends GetView<StatementController> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Text('TRANSACTIONS'.tr,
+            style:
+                globalTextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700)),
         verticalSpace(10.h),
-        Text('Transactions'.tr, style: globalTextStyle(fontSize: 16.sp)),
-        verticalSpace(5.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Obx(
-              () => GestureDetector(
-                onTap: () {
-                  controller.loadData('all');
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  width: Get.width * 0.22,
-                  padding: EdgeInsets.only(
-                      left: 8.w, right: 8.w, top: 8.h, bottom: 8.h),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: AppColors.borderColor),
-                      color: controller.selectedButtonIndex.value == 'all'
-                          ? AppColors.primary
-                          : AppColors.white),
-                  child: Text(
-                    'All'.tr,
-                    style: globalTextStyle(
-                        fontSize: 10.sp,
-                        color: controller.selectedButtonIndex.value == 'all'
-                            ? AppColors.white
-                            : AppColors.dark),
-                  ),
-                ),
-              ),
-            ),
-            horizontalSpace(2.w),
-            Obx(
-              () => GestureDetector(
-                onTap: () {
-                  controller.loadData('0');
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  width: Get.width * 0.22,
-                  padding: EdgeInsets.only(
-                      left: 8.w, right: 8.w, top: 8.h, bottom: 8.h),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: AppColors.borderColor),
-                      color: controller.selectedButtonIndex.value == '0'
-                          ? AppColors.primary
-                          : AppColors.white),
-                  child: Text(
-                    'Entry Paid'.tr,
-                    style: globalTextStyle(
-                        fontSize: 10.sp,
-                        color: controller.selectedButtonIndex.value == '0'
-                            ? AppColors.white
-                            : AppColors.dark),
-                  ),
-                ),
-              ),
-            ),
-            horizontalSpace(2.w),
-            Obx(
-              () => GestureDetector(
-                onTap: () {
-                  controller.loadData('4');
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  width: Get.width * 0.22,
-                  padding: EdgeInsets.only(
-                      left: 8.w, right: 8.w, top: 8.h, bottom: 8.h),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: AppColors.borderColor),
-                      color: controller.selectedButtonIndex.value == '4'
-                          ? AppColors.primary
-                          : AppColors.white),
-                  child: Text(
-                    'Prize Money'.tr,
-                    style: globalTextStyle(
-                        fontSize: 10.sp,
-                        color: controller.selectedButtonIndex.value == '4'
-                            ? AppColors.white
-                            : AppColors.dark),
-                  ),
-                ),
-              ),
-            ),
-            horizontalSpace(2.w),
-            Obx(
-              () => GestureDetector(
-                onTap: () {
-                  controller.loadData('2');
-                },
-                child: Container(
-                  width: Get.width * 0.22,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(
-                      left: 8.w, right: 8.w, top: 8.h, bottom: 8.h),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: AppColors.borderColor),
-                      color: controller.selectedButtonIndex.value == '2'
-                          ? AppColors.primary
-                          : AppColors.white),
-                  child: Text(
-                    'Deposit'.tr,
-                    style: globalTextStyle(
-                        fontSize: 10.sp,
-                        color: controller.selectedButtonIndex.value == '2'
-                            ? AppColors.white
-                            : AppColors.dark),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+        TransactionsTab(),
         verticalSpace(20.h),
         Obx(
           () => ListView.builder(
@@ -144,49 +30,114 @@ class TransactionView extends GetView<StatementController> {
             itemBuilder: (context, index) {
               TransactionModel data = controller.selectedData[index];
               return Container(
-                color: AppColors.white,
-                padding: EdgeInsets.only(
-                    left: 10.w, right: 10.w, top: 5.h, bottom: 5.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                clipBehavior: Clip.hardEdge,
+                margin: EdgeInsets.only(left: 15.w, right: 15.w, bottom: 10.h),
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(243, 243, 243, 1),
+                  borderRadius: BorderRadius.circular(5.r),
+                ),
+                child: Stack(
                   children: [
-                    Text(
-                      data.description ?? '',
-                      style: globalTextStyle(fontSize: 12.sp),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          '\$${data.amount.toString()}',
-                          style: globalTextStyle2(
-                              fontSize: 12.sp, color: AppColors.textGray),
+                    Positioned(
+                      left: Get.width * 0.15,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: 10.w, right: 10.w, top: 10.h, bottom: 10.h),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  'assets/new_images/trophy.png',
+                                  height: 18,
+                                  width: 18,
+                                ),
+                                horizontalSpace(5.w),
+                                SizedBox(
+                                  width: Get.width * 0.8,
+                                  child: Text(data.tournamentId ?? '',
+                                      textAlign: TextAlign.start,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: globalTextStyle(
+                                          color: AppColors.dark,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w600)),
+                                ),
+                              ],
+                            ),
+                            verticalSpace(5.h),
+                            SizedBox(
+                              width: Get.width,
+                              child: const Divider(
+                                color: AppColors.dark,
+                                thickness: 1.0,
+                              ),
+                            ),
+                            verticalSpace(5.h),
+                            Row(
+                              children: [
+                                Image.asset(
+                                  'assets/new_images/calender.png',
+                                  height: 18,
+                                  width: 18,
+                                  color: AppColors.dark,
+                                ),
+                                horizontalSpace(5.w),
+                                SizedBox(
+                                  width: Get.width * 0.8,
+                                  child: Text(
+                                      '${DateFormat.y().format(DateTime.parse(data.transactionTime ?? ''))} ${DateFormat('h:mm a').format(DateTime.parse(data.transactionTime ?? '').toLocal())}',
+                                      textAlign: TextAlign.start,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: globalTextStyle(
+                                          color: AppColors.dark,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w600)),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        horizontalSpace(5.w),
-                        Expanded(child: Container()),
-                        Text(
-                          '${DateFormat.y().format(DateTime.parse(data.transactionTime ?? ''))} ${DateFormat('h:mm a').format(DateTime.parse(data.transactionTime ?? '').toLocal())}',
-                          style: globalTextStyle2(
-                              fontSize: 12.sp, color: AppColors.textGray),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            left: 10.w, right: 10.w, top: 5.h, bottom: 5.h),
+                        height: Get.height * 0.1,
+                        width: Get.width * 0.22,
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                            color: const Color.fromRGBO(77, 134, 126, 1)),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/new_images/dollar.png',
+                              height: 18,
+                              width: 18,
+                            ),
+                            verticalSpace(5.h),
+                            Text(
+                              'Entry fee',
+                              style: globalTextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              '\$${data.amount!.toStringAsFixed(0)}',
+                              style: globalTextStyle2(
+                                  fontSize: 16.sp,
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                    Text(
-                      data.transactionType ?? '',
-                      style: globalTextStyle2(
-                          fontSize: 12.sp,
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    verticalSpace(2.h),
-                    Divider(
-                      thickness: 2,
-                      color: AppColors.borderColor,
-                      height: 2.h,
-                    ),
-                    verticalSpace(10.h),
                   ],
                 ),
               );

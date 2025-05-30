@@ -15,27 +15,42 @@ class StatementController extends GetxController {
   RxList<TransactionModel> withdrawList = <TransactionModel>[].obs;
   RxList<TransactionModel> prizeMoneyList = <TransactionModel>[].obs;
 
-  var selectedButtonIndex = 'all'.obs;
+  String _selectedButtonIndex = 'all';
+
+  String get selectedButtonIndex => _selectedButtonIndex;
+
+  set selectedButtonIndex(String value) {
+    _selectedButtonIndex = value;
+    update();
+  }
+
   var selectedData = <TransactionModel>[].obs;
   RxList graphData = [].obs;
-  var selectedFilter = '7Days'.obs;
+  String _selectedFilter = '7Days';
+  String get selectedFilter => _selectedFilter;
+
+  set selectedFilter(String value) {
+    _selectedFilter = value;
+    update();
+  }
+
   RxString local = ''.obs;
 
   @override
   void onInit() async {
-    accountDetailsList = Get.arguments['details'];
+    accountDetailsList = Get.arguments['details'] ?? [];
     token = await getStringValuesSF();
     await getTransactions();
-    filterGraphDateValue(selectedFilter.value);
+    filterGraphDateValue(selectedFilter);
     // await initializeGraphData();
     super.onInit();
   }
 
   RxList filterList = [].obs;
   void filterGraphDateValue(String range) {
-    selectedFilter.value = range;
+    selectedFilter = range;
     if (graphData.isEmpty) {
-      getTransactionsGraph(selectedFilter.value);
+      getTransactionsGraph(selectedFilter);
     }
     DateTime now = DateTime.now();
     List<Map<String, dynamic>> tempData = [];
@@ -57,7 +72,7 @@ class StatementController extends GetxController {
   }
 
   void loadData(String buttonIndex) {
-    selectedButtonIndex.value = buttonIndex;
+    selectedButtonIndex = buttonIndex;
     switch (buttonIndex) {
       case '0':
         selectedData.value = entryPaidList.toList(); // No casting needed
@@ -120,18 +135,17 @@ class StatementController extends GetxController {
         }
       }
 
-      loadData(selectedButtonIndex.value);
+      loadData(selectedButtonIndex);
     } catch (e) {
       throw Exception('Failed to fetch transactions');
-      // print("Error fetching profile: $e");
     }
   }
 
   Future<void> getTransactionsGraph(var selected) async {
     try {
       graphData.value = await profileServices.fetchTransactionGraphData(token);
-      selectedFilter.value = selected;
-      filterGraphDateValue(selectedFilter.value);
+      selectedFilter = selected;
+      filterGraphDateValue(selectedFilter);
     } catch (e) {
       throw Exception('Failed to fetch transactions');
       //  print("Error fetching profile: $e");
