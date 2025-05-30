@@ -17,6 +17,7 @@ class StatementView extends GetView<StatementController> {
     return Scaffold(
       appBar: HomeAppBar(title: 'Statement'.tr),
       body: ListView(
+        controller: controller.scrollController,
         children: [
           Padding(
             padding: EdgeInsets.only(top: 10.h, left: 15.w, right: 15.w),

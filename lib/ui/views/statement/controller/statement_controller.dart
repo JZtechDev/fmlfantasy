@@ -9,11 +9,24 @@ class StatementController extends GetxController {
   String token = '';
   RxList<AccountDetailsModel> accountDetailsList = <AccountDetailsModel>[].obs;
 
+  RxInt displayedItems = 30.obs;
+
   RxList<TransactionModel> entryPaidList = <TransactionModel>[].obs;
   RxList<TransactionModel> winningList = <TransactionModel>[].obs;
   RxList<TransactionModel> depositList = <TransactionModel>[].obs;
   RxList<TransactionModel> withdrawList = <TransactionModel>[].obs;
   RxList<TransactionModel> prizeMoneyList = <TransactionModel>[].obs;
+
+  final ScrollController scrollController = ScrollController();
+
+  void _scrollListener() {
+    if (scrollController.position.pixels >=
+        scrollController.position.maxScrollExtent - 200) {
+      if (displayedItems.value < selectedData.length) {
+        displayedItems.value += 30;
+      }
+    }
+  }
 
   String _selectedButtonIndex = 'all';
 
@@ -44,6 +57,7 @@ class StatementController extends GetxController {
     filterGraphDateValue(selectedFilter);
     // await initializeGraphData();
     super.onInit();
+    scrollController.addListener(_scrollListener);
   }
 
   RxList filterList = [].obs;
