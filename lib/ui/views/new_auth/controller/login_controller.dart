@@ -58,8 +58,8 @@ class LoginController extends GetxController {
           navigateToHome();
         } else {
           Get.dialog(Dialog(
-              backgroundColor: AppColors.white,
-              surfaceTintColor: AppColors.white,
+              backgroundColor: AppColors.primary,
+              surfaceTintColor: AppColors.primary,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
               child: Padding(
@@ -69,7 +69,8 @@ class LoginController extends GetxController {
                       'Do you want to enable biometric authentication?',
                       style: globalTextStyle(
                           fontSize:
-                              AppSizing.isMobile(Get.context!) ? 18.sp : 12.sp),
+                              AppSizing.isMobile(Get.context!) ? 18.sp : 12.sp,
+                          color: AppColors.secondary),
                     ),
                     verticalSpace(10.h),
                     Row(

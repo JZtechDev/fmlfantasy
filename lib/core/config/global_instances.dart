@@ -43,4 +43,6 @@ RxString selectedSPort = 'CR'.obs;
 
 RxString selectedTab = 'Fantasy Sports'.obs;
 
+RxString selectedModule = 'dashboard'.obs;
+
 String? userName;

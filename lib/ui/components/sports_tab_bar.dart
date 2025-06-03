@@ -52,6 +52,14 @@ class SportsTabBarState extends State<SportsTabBar> {
     });
   }
 
+  void navigateToHome() {
+    if (selectedModule.value != 'dashboard') {
+      Get.offAllNamed(AppRoutes.dashboardView);
+      log(selectedSPort.value);
+      selectedTab.value = 'dashboard';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -112,7 +120,10 @@ class SportsTabBarState extends State<SportsTabBar> {
                         bool isSelected = index == widget.selectedIndex;
                         return Expanded(
                           child: GestureDetector(
-                            onTap: () => widget.onTap(index),
+                            onTap: () {
+                              widget.onTap(index);
+                              navigateToHome();
+                            },
                             child: Container(
                               alignment: Alignment.center,
                               width: containerWidth,

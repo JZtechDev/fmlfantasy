@@ -34,6 +34,7 @@ class DashboardView extends GetView<DashboardController> {
               child: GestureDetector(
                 onTap: () {
                   Get.toNamed(e.route);
+                  selectedModule.value = e.title;
                 },
                 child: Container(
                   width: Get.width * 0.3,

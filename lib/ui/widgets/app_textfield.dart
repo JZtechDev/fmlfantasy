@@ -61,7 +61,7 @@ class AppTextField extends StatelessWidget {
         style: globalTextStyle2(
           fontSize: AppSizing.isMobile(context) ? 14.sp : 8.sp,
           color: textColor ?? AppColors.dark,
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w600,
         ),
         decoration: InputDecoration(
           filled: true,

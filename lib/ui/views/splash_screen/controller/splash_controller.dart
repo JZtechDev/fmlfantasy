@@ -54,7 +54,7 @@ class SplashController extends GetxController {
   void startTimer() async {
     timer = Timer(const Duration(seconds: 4), () async {
       if (token == '' || token.isEmpty) {
-        Get.offAllNamed(AppRoutes.registerUser);
+        Get.offAllNamed(AppRoutes.loginView);
       } else {
         log('Token is not empty');
         log(token);

@@ -31,7 +31,6 @@ class HowItWorksView extends GetView<HowItWorksController> {
                       controller.selectedIndex.value = index;
                       controller.selectedSport.value =
                           controller.sportsList[index].title;
-                      //controller.animation();
                       controller.publicTournamentCrouselIndex.value = 0;
                       controller.privateTournamentCrouselIndex.value = 0;
                       controller.combineTitles();
