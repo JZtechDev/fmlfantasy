@@ -23,68 +23,72 @@ class DashboardView extends GetView<DashboardController> {
             },
           ),
         ),
-        child: Wrap(
-          runSpacing: 10,
-          alignment: WrapAlignment.start,
-          children: List.generate(controller.cardsList.length, (index) {
-            final e = controller.cardsList[index];
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 5), // Adjust spacing between items
-              child: GestureDetector(
-                onTap: () {
-                  Get.toNamed(e.route);
-                  selectedModule.value = e.title;
-                },
-                child: Container(
-                  width: Get.width * 0.3,
-                  height: Get.height * 0.15,
-                  padding: const EdgeInsets.only(top: 10, bottom: 0),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      stops: [0.1, 0.5, 1],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        AppColors.primaryVeryDark,
-                        AppColors.primaryDark,
-                        AppColors.primary,
-                      ],
+        child: Obx(() {
+          selectedTab.value == 'Daily Match Pick'
+              ? controller.filteredList.value = controller.sportyPickList
+              : controller.filteredList.value = controller.cardsList;
+          return Wrap(
+            runSpacing: 10,
+            alignment: WrapAlignment.start,
+            children: List.generate(controller.filteredList.length, (index) {
+              final e = controller.filteredList[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.toNamed(e.route);
+                    selectedModule.value = e.title;
+                  },
+                  child: Container(
+                    width: Get.width * 0.3,
+                    height: Get.height * 0.15,
+                    padding: const EdgeInsets.only(top: 10, bottom: 0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        stops: [0.1, 0.5, 1],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          AppColors.primaryVeryDark,
+                          AppColors.primaryDark,
+                          AppColors.primary,
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          e.icon,
-                          height: 35,
-                          width: 35,
-                          color: AppColors.secondary,
-                        ),
-                        verticalSpace(15),
-                        Text(
-                          textAlign: TextAlign.center,
-                          e.title,
-                          style: globalTextStyle(
-                            color: AppColors.white,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w700,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            e.icon,
+                            height: 35,
+                            width: 35,
+                            color: AppColors.secondary,
                           ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+                          verticalSpace(15),
+                          Text(
+                            textAlign: TextAlign.center,
+                            e.title,
+                            style: globalTextStyle(
+                              color: AppColors.white,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            );
-          }),
-        ));
+              );
+            }),
+          );
+        }));
   }
 }

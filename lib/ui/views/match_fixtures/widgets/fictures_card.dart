@@ -1,7 +1,5 @@
-import 'dart:math';
-import 'package:fmlfantasy/app/app%20routes/app_routes.dart';
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
-import 'package:fmlfantasy/app/app_images/app_images.dart';
+import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
@@ -33,191 +31,213 @@ class FixturesCard extends GetView<MatchFixturesController> {
     final String formattedDateTime = formatEndDateTime(endDate);
     return LayoutBuilder(
       builder: (context, constraints) {
-        final width = constraints.maxWidth;
-        return Stack(
-          children: [
-            Container(
-              clipBehavior: Clip.hardEdge,
-              margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-              padding: EdgeInsets.only(
-                  top: 10.h, left: 10.w, right: 10.w, bottom: 10.h),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                border: Border.all(color: AppColors.borderColor, width: 1.0),
-                borderRadius: BorderRadius.circular(5.r),
-              ),
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Transform.rotate(
-                      origin: const Offset(50, 30),
-                      angle: pi / 4.5,
-                      child: Container(
-                        height: 140.0,
-                        width: 60.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          gradient: const LinearGradient(
-                            colors: [
-                              Color.fromRGBO(219, 231, 255, 1),
-                              Color.fromRGBO(219, 231, 255, 0),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                      ),
+        return Container(
+          clipBehavior: Clip.hardEdge,
+          margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          decoration: BoxDecoration(
+            color: AppColors.primary,
+            borderRadius: BorderRadius.circular(10.r),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.only(
+                    top: 10.h, left: 10.w, right: 10.w, bottom: 10.h),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryVeryDark,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5.r),
+                    topRight: Radius.circular(5.r),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      color: AppColors.secondary,
+                      'assets/new_images/calender.png',
+                      height: 24.h,
+                      width: 24.w,
                     ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/icons/clock.svg',
-                                height: 15.h,
-                              ),
-                              horizontalSpace(5.w),
-                              Text(
-                                formattedDateTime,
-                                style: globalTextStyle(
-                                    fontSize: width > 500 ? 8.sp : 12.sp,
-                                    color: AppColors.primary),
-                              ),
-                            ],
-                          ),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  constraints: BoxConstraints(
-                                    maxHeight: 27.h,
-                                    minHeight: 27.h,
-                                    maxWidth: 35.w,
-                                    minWidth: 35.w,
-                                  ),
-                                  child: tournament.matches![0].homeImageUrl!
-                                          .endsWith('svg')
-                                      ? controller.selectedSport.value ==
-                                                  'CR' ||
-                                              controller.selectedSport.value ==
-                                                  'FB'
-                                          ? Image.network(
-                                              replaceSvgWithPng(tournament
-                                                  .matches![0].homeImageUrl
-                                                  .toString()),
-                                              fit: BoxFit.fill,
-                                            )
-                                          : SvgPicture.network(
-                                              tournament
-                                                  .matches![0].homeImageUrl
-                                                  .toString(),
-                                              fit: BoxFit.fill,
-                                            )
-                                      : Image.network(
-                                          tournament.matches![0].homeImageUrl
-                                              .toString(),
-                                          fit: BoxFit.fill,
-                                        ),
-                                ),
-                                horizontalSpace(10.w),
-                                Container(
-                                    constraints: BoxConstraints(
-                                      maxHeight: 27.h,
-                                      minHeight: 27.h,
-                                      maxWidth: 35.w,
-                                      minWidth: 35.w,
-                                    ),
-                                    child: tournament.matches![0].awayImageUrl!
-                                            .endsWith('svg')
-                                        ? controller.selectedSport.value ==
-                                                    'CR' ||
-                                                controller
-                                                        .selectedSport.value ==
-                                                    'FB'
-                                            ? Image.network(
-                                                replaceSvgWithPng(tournament
-                                                    .matches![0].awayImageUrl
-                                                    .toString()),
-                                                fit: BoxFit.fill,
-                                              )
-                                            : SvgPicture.network(
-                                                tournament
-                                                    .matches![0].awayImageUrl!,
-                                                fit: BoxFit.fill,
-                                              )
-                                        : Image.network(
-                                            tournament
-                                                .matches![0].awayImageUrl!,
-                                            fit: BoxFit.fill,
-                                          )),
-                              ]),
-                        ],
-                      ),
-                      verticalSpace(30.h),
-                      Text(
-                        textAlign: TextAlign.start,
-                        tournament.name.toString().split('vs ').join('\n'),
-                        style: globalTextStyle(
-                            fontSize: width > 500 ? 10.sp : 14.sp,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              bottom: 20.h,
-              right: 20.w,
-              child: GestureDetector(
-                onTap: () {
-                  Get.toNamed(
-                    AppRoutes.lotoView,
-                    arguments: {
-                      'matchID': tournament.matches![0].matchCode,
-                      'sport': controller.selectedSport.value,
-                      'tournamentId': tournament.id,
-                      'joinCode': tournament.joinCode
-                    },
-                  );
-                },
-                child: Image.asset(
-                  AppImages.loto,
-                  fit: BoxFit.fill,
-                  height: 60.h,
+                    horizontalSpace(10.w),
+                    Text(
+                      formattedDateTime,
+                      style: globalTextStyle(
+                          fontSize: AppSizing.isMobile(context) ? 14.sp : 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.secondary),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            // Positioned(
-            //   bottom: 10,
-            //   left: 20.w,
-            //   right: 20.w,
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Text(
-            //         'Enter  your Draw \$${tournament.entryFee}',
-            //         style: globalTextStyle(
-            //             fontSize: width > 500 ? 10.sp : 12.sp,
-            //             fontWeight: FontWeight.w600),
-            //       ),
-            //       SvgPicture.asset(
-            //         'assets/icons/cardright.svg',
-            //         height: 20.h,
-            //         width: 20.w,
-            //       )
-            //     ],
-            //   ),
-            // ),
-          ],
+              Padding(
+                padding: EdgeInsets.only(
+                    left: 10, right: 10, bottom: 20.h, top: 20.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          constraints: BoxConstraints(
+                            maxHeight: 27.h,
+                            minHeight: 27.h,
+                            maxWidth: 35.w,
+                            minWidth: 35.w,
+                          ),
+                          child: tournament.matches![0].homeImageUrl!
+                                  .endsWith('svg')
+                              ? controller.selectedSport.value == 'CR' ||
+                                      controller.selectedSport.value == 'FB'
+                                  ? Image.network(
+                                      replaceSvgWithPng(tournament
+                                          .matches![0].homeImageUrl
+                                          .toString()),
+                                      fit: BoxFit.fill,
+                                    )
+                                  : SvgPicture.network(
+                                      tournament.matches![0].homeImageUrl
+                                          .toString(),
+                                      fit: BoxFit.fill,
+                                    )
+                              : Image.network(
+                                  tournament.matches![0].homeImageUrl
+                                      .toString(),
+                                  fit: BoxFit.fill,
+                                ),
+                        ),
+                        verticalSpace(10.h),
+                        Text(
+                          textAlign: TextAlign.start,
+                          tournament.matches![0].home.toString(),
+                          style: globalTextStyle(
+                              color: AppColors.secondary,
+                              fontSize:
+                                  AppSizing.isMobile(context) ? 14.sp : 12.sp,
+                              fontWeight: FontWeight.w700),
+                        )
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 10.h),
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                          color: AppColors.backgroud, shape: BoxShape.circle),
+                      child: Text(
+                        'vs',
+                        style: globalTextStyle2(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12.sp,
+                            color: AppColors.secondary),
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                            constraints: BoxConstraints(
+                              maxHeight: 27.h,
+                              minHeight: 27.h,
+                              maxWidth: 35.w,
+                              minWidth: 35.w,
+                            ),
+                            child: tournament.matches![0].awayImageUrl!
+                                    .endsWith('svg')
+                                ? controller.selectedSport.value == 'CR' ||
+                                        controller.selectedSport.value == 'FB'
+                                    ? Image.network(
+                                        replaceSvgWithPng(tournament
+                                            .matches![0].awayImageUrl
+                                            .toString()),
+                                        fit: BoxFit.fill,
+                                      )
+                                    : SvgPicture.network(
+                                        tournament.matches![0].awayImageUrl!,
+                                        fit: BoxFit.fill,
+                                      )
+                                : Image.network(
+                                    tournament.matches![0].awayImageUrl!,
+                                    fit: BoxFit.fill,
+                                  )),
+                        verticalSpace(10.h),
+                        Text(
+                          textAlign: TextAlign.start,
+                          tournament.matches![0].away.toString(),
+                          style: globalTextStyle(
+                              color: AppColors.secondary,
+                              fontSize:
+                                  AppSizing.isMobile(context) ? 14.sp : 12.sp,
+                              fontWeight: FontWeight.w700),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              )
+              // Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              //   Container(
+              //     constraints: BoxConstraints(
+              //       maxHeight: 27.h,
+              //       minHeight: 27.h,
+              //       maxWidth: 35.w,
+              //       minWidth: 35.w,
+              //     ),
+              //     child: tournament.matches![0].homeImageUrl!.endsWith('svg')
+              //         ? controller.selectedSport.value == 'CR' ||
+              //                 controller.selectedSport.value == 'FB'
+              //             ? Image.network(
+              //                 replaceSvgWithPng(tournament
+              //                     .matches![0].homeImageUrl
+              //                     .toString()),
+              //                 fit: BoxFit.fill,
+              //               )
+              //             : SvgPicture.network(
+              //                 tournament.matches![0].homeImageUrl.toString(),
+              //                 fit: BoxFit.fill,
+              //               )
+              //         : Image.network(
+              //             tournament.matches![0].homeImageUrl.toString(),
+              //             fit: BoxFit.fill,
+              //           ),
+              //   ),
+              //   horizontalSpace(10.w),
+              //   Container(
+              //       constraints: BoxConstraints(
+              //         maxHeight: 27.h,
+              //         minHeight: 27.h,
+              //         maxWidth: 35.w,
+              //         minWidth: 35.w,
+              //       ),
+              //       child: tournament.matches![0].awayImageUrl!.endsWith('svg')
+              //           ? controller.selectedSport.value == 'CR' ||
+              //                   controller.selectedSport.value == 'FB'
+              //               ? Image.network(
+              //                   replaceSvgWithPng(tournament
+              //                       .matches![0].awayImageUrl
+              //                       .toString()),
+              //                   fit: BoxFit.fill,
+              //                 )
+              //               : SvgPicture.network(
+              //                   tournament.matches![0].awayImageUrl!,
+              //                   fit: BoxFit.fill,
+              //                 )
+              //           : Image.network(
+              //               tournament.matches![0].awayImageUrl!,
+              //               fit: BoxFit.fill,
+              //             )),
+              // ]),
+              // verticalSpace(30.h),
+              // Text(
+              //   textAlign: TextAlign.start,
+              //   tournament.name.toString().split('vs ').join('\n'),
+              //   style: globalTextStyle(
+              //       fontSize: width > 500 ? 10.sp : 14.sp,
+              //       fontWeight: FontWeight.w600),
+              // ),
+            ],
+          ),
         );
       },
     );

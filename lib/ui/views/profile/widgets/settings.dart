@@ -32,13 +32,13 @@ class SeetingsTiles extends GetView<ProfileController> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Image.asset(
-                  'assets/new_images/details.png',
+                  'assets/new_images/language.png',
                   height: 24,
                   width: 24,
                 ),
                 // verticalSpace(40.h),
                 Image.asset(
-                  'assets/new_images/statment.png',
+                  'assets/new_images/biometric.png',
                   height: 24,
                   width: 24,
                 )

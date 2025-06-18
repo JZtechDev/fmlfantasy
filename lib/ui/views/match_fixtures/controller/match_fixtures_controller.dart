@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
@@ -24,14 +25,17 @@ class MatchFixturesController extends GetxController {
   Future<List<Tournaments>> fetchedTournaments() async {
     try {
       isLoading.value = true;
+      EasyLoading.show(status: 'Loading fixtures...');
       List<Tournaments> fetchedTournaments = await TournamentServices()
           .fetchTournamentsAndMatches(selectedSport.value);
       fixtures.value = fetchedTournaments;
+      EasyLoading.dismiss();
       isLoading.value = false;
       return fixtures;
     } catch (error) {
+      EasyLoading.dismiss();
       isLoading.value = false;
-      rethrow; // Rethrow the error to handle it in the FutureBuilder
+      rethrow;
     }
   }
 

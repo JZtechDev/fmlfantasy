@@ -35,11 +35,11 @@ class SportsTabBarState extends State<SportsTabBar> {
       'icon': 'assets/icons/fantasy_sports.png',
     },
     {
-      'name': 'Sporty Pick',
+      'name': 'Daily Match Pick',
       'icon': 'assets/icons/sporty_pick.png',
     },
     {
-      'name': 'Daily Match Pick',
+      'name': 'Sporty Pick',
       'icon': 'assets/icons/daily_match.png',
     },
   ];
@@ -56,7 +56,7 @@ class SportsTabBarState extends State<SportsTabBar> {
     if (selectedModule.value != 'dashboard') {
       Get.offAllNamed(AppRoutes.dashboardView);
       log(selectedSPort.value);
-      selectedTab.value = 'dashboard';
+      selectedModule.value = 'dashboard';
     }
   }
 
@@ -210,9 +210,10 @@ class SportsTabBarState extends State<SportsTabBar> {
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
-                              color: isSelected
-                                  ? AppColors.secondary
-                                  : Colors.transparent,
+                              color:
+                                  selectedTab.value == tabOptions[index]['name']
+                                      ? AppColors.secondary
+                                      : Colors.transparent,
                               width: 2,
                             ),
                           ),
@@ -223,9 +224,10 @@ class SportsTabBarState extends State<SportsTabBar> {
                             fontSize:
                                 AppSizing.width(context) > 600 ? 8.sp : 12.sp,
                             fontWeight: FontWeight.w800,
-                            color: isSelected
-                                ? AppColors.secondary
-                                : AppColors.white,
+                            color:
+                                selectedTab.value == tabOptions[index]['name']
+                                    ? AppColors.secondary
+                                    : AppColors.white,
                           ),
                         ),
                       ),

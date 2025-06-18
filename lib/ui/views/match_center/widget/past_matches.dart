@@ -2,6 +2,7 @@ import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/match_center_model.dart';
+import 'package:fmlfantasy/ui/helpers/format_competition_name.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
@@ -161,11 +162,8 @@ class PastMatchesSlider extends StatelessWidget {
                             children: [
                               Text(
                                 matches.competitionName != null
-                                    ? matches.competitionName!
-                                        .split(' ')
-                                        .where((word) => word.isNotEmpty)
-                                        .map((word) => word[0].toUpperCase())
-                                        .join()
+                                    ? formatCompetitionName(
+                                        matches.competitionName)
                                     : '',
                                 style: globalTextStyle(
                                   fontSize: AppSizing.isMobile(context)

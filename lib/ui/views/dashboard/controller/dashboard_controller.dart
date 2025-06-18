@@ -16,6 +16,8 @@ class DashboardController extends GetxController {
   RxInt selectedIndex = 0.obs;
   double scrollOffset = 0.0;
 
+  RxList<Cards> filteredList = <Cards>[].obs;
+
   List<Cards> cardsList = [
     Cards(
       image: 'assets/images/dashboardcards.png',
@@ -72,4 +74,37 @@ class DashboardController extends GetxController {
         icon: 'assets/new_images/create team.svg',
         route: AppRoutes.friendsView),
   ];
+
+  List<Cards> sportyPickList = [
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'CREATE A DRAW',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: 'assets/new_images/create team.svg',
+      route: AppRoutes.matchFixturesView,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MY DRAWS',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.matchCenter,
+      route: AppRoutes.myDrawsView,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'DRAWS LEADERBOARD',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.leaderboard,
+      route: AppRoutes.sportPickLeaderboard,
+    ),
+  ];
+
+  @override
+  void onInit() {
+    filteredList.addAll(cardsList);
+    super.onInit();
+  }
 }
