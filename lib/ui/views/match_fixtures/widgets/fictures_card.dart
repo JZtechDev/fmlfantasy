@@ -45,12 +45,16 @@ class FixturesCard extends GetView<MatchFixturesController> {
                 padding: EdgeInsets.only(
                     top: 10.h, left: 10.w, right: 10.w, bottom: 10.h),
                 decoration: BoxDecoration(
-                  color: AppColors.primaryVeryDark,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5.r),
-                    topRight: Radius.circular(5.r),
-                  ),
-                ),
+                    color: AppColors.primaryVeryDark,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5.r),
+                      topRight: Radius.circular(5.r),
+                    ),
+                    border: Border(
+                        bottom: BorderSide(
+                      color: AppColors.white,
+                      width: 1.w,
+                    ))),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

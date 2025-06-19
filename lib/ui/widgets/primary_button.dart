@@ -6,6 +6,7 @@ class PrimaryButton extends StatelessWidget {
   final String buttonText;
   final String? iconPath;
   final Color textColor;
+  final Color borderColor;
   final Color iconColor;
   final double iconHeight;
   final double iconWidth;
@@ -29,6 +30,7 @@ class PrimaryButton extends StatelessWidget {
     this.iconHeight = 25,
     this.iconWidth = 25,
     this.backgroundColor = AppColors.secondary,
+    this.borderColor = AppColors.secondary,
     required this.onPressed,
     this.height = 48,
     this.isLoading = false,
@@ -59,8 +61,8 @@ class PrimaryButton extends StatelessWidget {
                     left: 10.w, right: 10.w, top: 5.h, bottom: 5.h),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.r),
-                  side: const BorderSide(
-                    color: AppColors.secondary,
+                  side: BorderSide(
+                    color: borderColor,
                     width: 1,
                   ),
                 ),

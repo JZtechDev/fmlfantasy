@@ -13,34 +13,30 @@ class LotoTopContainer extends GetView<LotoController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 5.h, right: 10.w),
-      decoration: const BoxDecoration(
+      clipBehavior: Clip.hardEdge,
+      //padding: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 5.h, right: 10.w),
+      decoration: BoxDecoration(
         color: AppColors.white,
+        borderRadius: BorderRadius.circular(10.0),
       ),
       child: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: 10.w, right: 10.w, bottom: 10.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Container(
+                  height: Get.height * 0.09,
+                  padding: const EdgeInsets.only(
+                      top: 20, left: 10, bottom: 20, right: 10),
+                  decoration:
+                      const BoxDecoration(color: AppColors.primaryLight),
                   child: Row(
                     children: [
-                      SizedBox(
-                        width: Get.width * 0.25,
-                        child: Text(
-                          selectTeam.homeTeam!.name!,
-                          style: globalTextStyle(
-                              fontSize:
-                                  AppSizing.isMobile(context) ? 14.sp : 12.sp),
-                        ),
-                      ),
-                      horizontalSpace(10.w),
                       selectTeam.homeTeam!.imageUrl == null
                           ? Container()
                           : SizedBox(
-                              width: 45.w,
+                              width: 35.w,
                               child: selectTeam.homeTeam!.imageUrl!
                                       .endsWith('.svg')
                                   ? controller.sportName == 'CR'
@@ -62,16 +58,39 @@ class LotoTopContainer extends GetView<LotoController> {
                                       width: 40.w,
                                     ),
                             ),
+                      horizontalSpace(10.w),
+                      SizedBox(
+                        width: Get.width * 0.2,
+                        child: Text(
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          selectTeam.homeTeam!.name!,
+                          style: globalTextStyle(
+                              color: AppColors.secondary,
+                              fontWeight: FontWeight.w700,
+                              fontSize:
+                                  AppSizing.isMobile(context) ? 14.sp : 12.sp),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                Expanded(
+              ),
+              horizontalSpace(1),
+              Expanded(
+                child: Container(
+                  height: Get.height * 0.09,
+                  padding: const EdgeInsets.only(
+                      top: 20, left: 10, bottom: 20, right: 10),
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(18, 96, 85, 1),
+                  ),
                   child: Row(
                     children: [
                       selectTeam.awayTeam!.imageUrl == null
                           ? Container()
                           : SizedBox(
-                              width: 45.w,
+                              width: 35.w,
                               child: selectTeam.awayTeam!.imageUrl!
                                       .endsWith('svg')
                                   ? controller.sportName == 'CR'
@@ -101,6 +120,8 @@ class LotoTopContainer extends GetView<LotoController> {
                           overflow: TextOverflow.ellipsis,
                           selectTeam.awayTeam!.name!,
                           style: globalTextStyle(
+                              color: AppColors.secondary,
+                              fontWeight: FontWeight.w700,
                               fontSize:
                                   AppSizing.isMobile(context) ? 14.sp : 12.sp),
                         ),
@@ -108,26 +129,24 @@ class LotoTopContainer extends GetView<LotoController> {
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.only(right: 5.w),
-                  padding: const EdgeInsets.all(2.5),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.borderColor),
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: AppColors.grey),
+          verticalSpace(1),
+          Container(
+            padding:
+                const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
+            decoration: const BoxDecoration(color: AppColors.primary),
+            child: Row(
+              children: [
+                Expanded(
                   child: Container(
                     padding: EdgeInsets.only(
                         top: 8.h, bottom: 8.h, left: 10.w, right: 10.w),
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.borderColor),
-                      borderRadius: BorderRadius.circular(2.5.r),
-                      color: AppColors.white,
+                      borderRadius:
+                          BorderRadius.only(bottomLeft: Radius.circular(10.r)),
+                      color: AppColors.secondary,
                     ),
                     child: Column(children: [
                       Text(
@@ -135,10 +154,10 @@ class LotoTopContainer extends GetView<LotoController> {
                         style: globalTextStyle2(
                             fontSize:
                                 AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.textGray),
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.backgroud),
                       ),
-                      verticalSpace(5.h),
+                      verticalSpace(2.h),
                       Obx(
                         () => Text(
                           controller.drawsList.length
@@ -146,30 +165,21 @@ class LotoTopContainer extends GetView<LotoController> {
                               .padLeft(2, '0'),
                           style: globalTextStyle(
                               fontSize:
-                                  AppSizing.isMobile(context) ? 22.sp : 18.sp,
+                                  AppSizing.isMobile(context) ? 18.sp : 18.sp,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.dark),
+                              color: AppColors.backgroud),
                         ),
                       ),
                     ]),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.only(right: 5.w),
-                  padding: const EdgeInsets.all(2.5),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.borderColor),
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: AppColors.grey),
+                horizontalSpace(2),
+                Expanded(
                   child: Container(
                     padding: EdgeInsets.only(
                         top: 8.h, bottom: 8.h, left: 10.w, right: 10.w),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.borderColor),
-                      borderRadius: BorderRadius.circular(2.5.r),
-                      color: AppColors.white,
+                    decoration: const BoxDecoration(
+                      color: AppColors.secondary,
                     ),
                     child: Column(children: [
                       Text(
@@ -177,40 +187,34 @@ class LotoTopContainer extends GetView<LotoController> {
                         style: globalTextStyle2(
                             fontSize:
                                 AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.textGray),
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.backgroud),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      verticalSpace(5.h),
+                      verticalSpace(2.h),
                       Obx(
                         () => Text(
                           "\$${controller.prizePool.value.toStringAsFixed(0)}",
                           style: globalTextStyle(
                               fontSize:
-                                  AppSizing.isMobile(context) ? 22.sp : 18.sp,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.dark),
+                                  AppSizing.isMobile(context) ? 18.sp : 18.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.backgroud),
                         ),
                       ),
                     ]),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(2.5),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.borderColor),
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: AppColors.grey),
+                horizontalSpace(2),
+                Expanded(
                   child: Container(
                     padding: EdgeInsets.only(
                         top: 8.h, bottom: 8.h, left: 10.w, right: 10.w),
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.borderColor),
-                      borderRadius: BorderRadius.circular(2.5.r),
-                      color: AppColors.white,
+                      color: AppColors.secondary,
+                      borderRadius:
+                          BorderRadius.only(bottomRight: Radius.circular(10.r)),
                     ),
                     child: Column(children: [
                       Text(
@@ -218,25 +222,25 @@ class LotoTopContainer extends GetView<LotoController> {
                         style: globalTextStyle2(
                             fontSize:
                                 AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.textGray),
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.backgroud),
                       ),
-                      verticalSpace(5.h),
+                      verticalSpace(2.h),
                       Obx(
                         () => Text(
                           "\$${controller.entryFee.value.toStringAsFixed(0)}",
                           style: globalTextStyle(
                               fontSize:
-                                  AppSizing.isMobile(context) ? 22.sp : 18.sp,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.dark),
+                                  AppSizing.isMobile(context) ? 18.sp : 18.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.backgroud),
                         ),
                       ),
                     ]),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           )
         ],
       ),

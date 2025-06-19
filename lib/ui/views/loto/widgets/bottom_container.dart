@@ -15,10 +15,10 @@ class BottomContainer extends GetView<LotoController> {
     return LayoutBuilder(builder: (context, constraints) {
       double maxWidth = constraints.maxWidth;
       return Container(
-          padding: const EdgeInsets.only(top: 10, bottom: 10),
-          color: AppColors.white,
+          padding: const EdgeInsets.only(top: 5, bottom: 5),
+          color: AppColors.primary,
           child: SizedBox(
-            height: maxWidth > 600 ? 110.h : 90.h,
+            height: maxWidth > 600 ? 100.h : 80.h,
             width: Get.width,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -38,17 +38,17 @@ class BottomContainer extends GetView<LotoController> {
                                     fontSize: AppSizing.isMobile(context)
                                         ? 14.sp
                                         : 12.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.dark),
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.white),
                               ),
                               Text(
                                 " \$${controller.drawFees.value.toString()}",
                                 style: globalTextStyle(
                                     fontSize: AppSizing.isMobile(context)
-                                        ? 14.sp
+                                        ? 16.sp
                                         : 12.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.dark),
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.white),
                               ),
                             ],
                           ),
@@ -56,33 +56,25 @@ class BottomContainer extends GetView<LotoController> {
                             onTap: () {
                               Get.to(() => const PrizeDistribution());
                             },
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  left: 15.h,
-                                  top: 10.h,
-                                  bottom: 10.h,
-                                  right: 15.h),
-                              decoration: BoxDecoration(
-                                color: AppColors.grey,
-                                borderRadius: BorderRadius.circular(5.r),
-                              ),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    AppImages.questionIcon,
-                                    height: 15.h,
-                                    width: 15.h,
-                                  ),
-                                  horizontalSpace(5.w),
-                                  Text(
-                                    'prizeDistribution'.tr,
-                                    style: globalTextStyle2(
-                                        fontSize: AppSizing.isMobile(context)
-                                            ? 12.sp
-                                            : 10.sp),
-                                  ),
-                                ],
-                              ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  AppImages.questionIcon,
+                                  height: 15.h,
+                                  width: 15.h,
+                                  color: AppColors.white,
+                                ),
+                                horizontalSpace(5.w),
+                                Text(
+                                  'prizeDistribution'.tr,
+                                  style: globalTextStyle2(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: AppSizing.isMobile(context)
+                                          ? 12.sp
+                                          : 10.sp),
+                                ),
+                              ],
                             ),
                           )
                         ],

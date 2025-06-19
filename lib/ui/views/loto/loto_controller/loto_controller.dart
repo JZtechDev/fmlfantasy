@@ -75,6 +75,15 @@ class LotoController extends GetxController {
     }
   }
 
+  void removePlayer(int index, int drawIndex) {
+    drawsList[drawIndex].players[index] = Players(
+      assetCode: '',
+      imageUrl: '',
+    );
+    drawsList.refresh();
+    update();
+  }
+
   RxList<List<Players>> draws = <List<Players>>[
     List<Players>.generate(5, (index) {
       return Players(
