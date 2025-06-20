@@ -1,5 +1,4 @@
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
-import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/model/select_player_model.dart';
@@ -108,14 +107,15 @@ class DrawContainer extends GetView<LotoController> {
                     Container(
                         padding: EdgeInsets.only(
                             left: 10.h, right: 10.h, top: 10.h, bottom: 10.h),
-                        margin: EdgeInsets.only(top: 10.h),
                         width: AppSizing.isMobile(context)
                             ? Get.width * 0.42
                             : Get.width * 0.28,
                         decoration: BoxDecoration(
-                          color: AppColors.grey,
-                          borderRadius: BorderRadius.circular(2.5.r),
-                        ),
+                            color: AppColors.primaryLight,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(5.r),
+                              topRight: Radius.circular(5.r),
+                            )),
                         child: winner.id == 3
                             ? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -145,7 +145,7 @@ class DrawContainer extends GetView<LotoController> {
                                   teams.awayTeam!.imageUrl == null
                                       ? Container()
                                       : SizedBox(
-                                          width: 45.w,
+                                          width: 45.h,
                                           child: teams.awayTeam!.imageUrl!
                                                   .endsWith('svg')
                                               ? controller.sportName == 'CR'
@@ -170,8 +170,8 @@ class DrawContainer extends GetView<LotoController> {
                               )
                             : winner.imageUrl == ''
                                 ? Image.asset(
-                                    AppImages.winnerPlaceholder,
-                                    height: 60.h,
+                                    'assets/new_images/placeholder.png',
+                                    height: 90.h,
                                   )
                                 : winner.imageUrl.endsWith('svg')
                                     ? controller.sportName == 'CR'
@@ -184,67 +184,114 @@ class DrawContainer extends GetView<LotoController> {
                                         winner.imageUrl,
                                         height: 60.h,
                                       )),
-                    verticalSpace(2.h),
-                    Container(
-                      width: AppSizing.isMobile(context)
-                          ? Get.width * 0.42
-                          : Get.width * 0.28,
-                      alignment: Alignment.center,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
-                      decoration: BoxDecoration(
-                        color: AppColors.navyBlue,
-                        borderRadius: BorderRadius.circular(5.r),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            AppImages.reward,
-                            // ignore: deprecated_member_use
-                            color: AppColors.white,
-                            height: 15.h,
-                            width: 15.w,
-                          ),
-                          horizontalSpace(5.w),
-                          Text(
-                            winner.id == 3 ? 'draws'.tr : 'winner'.tr,
-                            style: globalTextStyle(
-                                fontSize:
-                                    AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                    verticalSpace(5.h),
+                    // verticalSpace(2.h),
+                    // Container(
+                    //   width: AppSizing.isMobile(context)
+                    //       ? Get.width * 0.42
+                    //       : Get.width * 0.28,
+                    //   alignment: Alignment.center,
+                    //   padding:
+                    //       EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
+                    //   decoration: BoxDecoration(
+                    //     color: AppColors.navyBlue,
+                    //     borderRadius: BorderRadius.circular(5.r),
+                    //   ),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                    //       SvgPicture.asset(
+                    //         AppImages.reward,
+                    //         // ignore: deprecated_member_use
+                    //         color: AppColors.white,
+                    //         height: 15.h,
+                    //         width: 15.w,
+                    //       ),
+                    //       horizontalSpace(5.w),
+                    //       Text(
+                    //         winner.id == 3 ? 'draws'.tr : 'winner'.tr,
+                    //         style: globalTextStyle(
+                    //             fontSize:
+                    //                 AppSizing.isMobile(context) ? 12.sp : 10.sp,
+                    //             fontWeight: FontWeight.w600,
+                    //             color: AppColors.white),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     drawId.value == 0
-                        ? PrimaryButton(
-                            iconPath: AppImages.addIcon,
-                            padding: 0,
-                            buttonWidth: AppSizing.isMobile(context)
-                                ? Get.width * 0.42
-                                : Get.width * 0.28,
-                            buttonText: 'select'.tr,
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return WinnerModal(
-                                      teams: teams,
-                                      drawIndex: drawIndex,
-                                    );
-                                  });
+                        ? GestureDetector(
+                            onTap: () {
+                              if (controller.drawsList[drawIndex].players
+                                      .where(
+                                          (element) => element.assetCode != '')
+                                      .length ==
+                                  5) {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return WinnerModal(
+                                        teams: teams,
+                                        drawIndex: drawIndex,
+                                      );
+                                    });
+                              } else {
+                                Get.snackbar(
+                                  'error'.tr,
+                                  'First Select the Players'.tr,
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  backgroundColor: AppColors.errorRed,
+                                  colorText: AppColors.white,
+                                );
+                              }
                             },
-                            isEnabled: controller.drawsList[drawIndex].players
-                                        .where((element) =>
-                                            element.assetCode != '')
-                                        .length ==
-                                    5
-                                ? true
-                                : false,
+                            child: Container(
+                              width: AppSizing.isMobile(context)
+                                  ? Get.width * 0.42
+                                  : Get.width * 0.28,
+                              height: AppSizing.isMobile(context) ? 20.h : 15.h,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: AppColors.secondary,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(5.r),
+                                    bottomRight: Radius.circular(5.r),
+                                  )),
+                              child: Text(
+                                'Select Winner'.tr,
+                                style: globalTextStyle(
+                                    fontSize: AppSizing.isMobile(context)
+                                        ? 12.sp
+                                        : 8.sp,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.backgroud),
+                              ),
+                            ),
                           )
+                        // PrimaryButton(
+                        //     iconPath: AppImages.addIcon,
+                        //     padding: 0,
+                        //     buttonWidth: AppSizing.isMobile(context)
+                        //         ? Get.width * 0.42
+                        //         : Get.width * 0.28,
+                        //     buttonText: 'select'.tr,
+                        //     onPressed: () {
+                        //       showDialog(
+                        //           context: context,
+                        //           builder: (BuildContext context) {
+                        //             return WinnerModal(
+                        //               teams: teams,
+                        //               drawIndex: drawIndex,
+                        //             );
+                        //           });
+                        //     },
+                        //     isEnabled: controller.drawsList[drawIndex].players
+                        //                 .where((element) =>
+                        //                     element.assetCode != '')
+                        //                 .length ==
+                        //             5
+                        //         ? true
+                        //         : false,
+                        //   )
                         : Container(
                             width: Get.width * 0.42,
                           )

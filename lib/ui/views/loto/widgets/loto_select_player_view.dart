@@ -1,11 +1,10 @@
-import 'dart:math';
-
+import 'package:flutter/cupertino.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/select_player_model.dart';
-import 'package:fmlfantasy/ui/components/inner_appbar.dart';
+import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/helpers/get_initials.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 import 'package:fmlfantasy/ui/views/loto/loto_controller/loto_controller.dart';
@@ -25,17 +24,14 @@ class LotoSelectPlayerView extends GetView<LotoController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.grey,
-      appBar: const AppBarInner(title: 'Loto Select Player'),
+      appBar: const HomeAppBar(title: 'Home'),
       body: LayoutBuilder(builder: (context, constraints) {
         final width = constraints.maxWidth;
-        double secondLineHeight = constraints.maxWidth > 600 ? 245 : 135;
-        double secondLineWidth = constraints.maxWidth > 600 ? 42 : 42;
         return CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: 45.h,
-              collapsedHeight: 45.h,
+              expandedHeight: 60.h,
+              collapsedHeight: 60.h,
               automaticallyImplyLeading: false,
               pinned: true,
               backgroundColor: Colors.transparent,
@@ -47,7 +43,7 @@ class LotoSelectPlayerView extends GetView<LotoController> {
                   padding: EdgeInsets.only(
                       bottom: 5.h, top: 5.h, left: 5.w, right: 5.w),
                   decoration: BoxDecoration(
-                    color: AppColors.white,
+                    color: AppColors.backgroud,
                     borderRadius: BorderRadius.circular(5.r),
                   ),
                   child: Row(
@@ -105,7 +101,6 @@ class LotoSelectPlayerView extends GetView<LotoController> {
                           ),
                         ),
                       ),
-                      horizontalSpace(10.w),
                       Expanded(
                         child: Obx(
                           () => GestureDetector(
@@ -216,15 +211,15 @@ class LotoSelectPlayerView extends GetView<LotoController> {
                                 border: Border.all(
                                     color: AppColors.borderColor, width: 1),
                                 color: isSelected
-                                    ? AppColors.primary
-                                    : AppColors.white,
+                                    ? AppColors.dark
+                                    : AppColors.primaryLight,
                                 borderRadius: BorderRadius.circular(5.r),
                               ),
                               child: Stack(
                                 children: [
                                   Positioned(
-                                      bottom: -2,
-                                      right: 0,
+                                      bottom: 10,
+                                      right: 10,
                                       child: controller.sportName == 'FB'
                                           ? player.imageUrl == null
                                               ? Stack(
@@ -409,7 +404,7 @@ class LotoSelectPlayerView extends GetView<LotoController> {
                                   Padding(
                                     padding: EdgeInsets.only(
                                       left: 10.w,
-                                      top: 10.h,
+                                      top: 5.h,
                                     ),
                                     child: Column(
                                       mainAxisAlignment:
@@ -420,126 +415,118 @@ class LotoSelectPlayerView extends GetView<LotoController> {
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             SizedBox(
                                               width: 70.w,
                                               child: Text(
                                                 teamName,
                                                 style: globalTextStyle(
-                                                  fontSize: width > 600
-                                                      ? 8.sp
-                                                      : 12.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: isSelected
-                                                      ? AppColors.white
-                                                      : AppColors.textGray,
-                                                ),
+                                                    fontSize: width > 600
+                                                        ? 8.sp
+                                                        : 12.sp,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: AppColors.secondary),
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 5.h),
-                                              child: SvgPicture.asset(
-                                                AppImages.howItWork,
-                                                // ignore: deprecated_member_use
-                                                color: AppColors.textGray,
-                                              ),
-                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      right: 5),
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                      color:
+                                                          AppColors.backgroud,
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      5.r))),
+                                                  child: const Icon(
+                                                    CupertinoIcons
+                                                        .exclamationmark,
+                                                    color: AppColors.white,
+                                                    size: 18,
+                                                  ),
+                                                ),
+                                                verticalSpace(5.h),
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      right: 5),
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                      color:
+                                                          AppColors.backgroud,
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      5.r))),
+                                                  child: Text(
+                                                    getInitials(
+                                                        player.position!),
+                                                    style: globalTextStyle(
+                                                        fontSize: width > 600
+                                                            ? 8.sp
+                                                            : 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: AppColors
+                                                            .secondary),
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                            // Padding(
+                                            //   padding:
+                                            //       EdgeInsets.only(right: 5.h),
+                                            //   child: SvgPicture.asset(
+                                            //     AppImages.howItWork,
+                                            //     // ignore: deprecated_member_use
+                                            //     color: AppColors.textGray,
+                                            //   ),
+                                            // ),
                                           ],
-                                        ),
-                                        verticalSpace(10.h),
-                                        Text(
-                                          maxLines: 2,
-                                          player.fullName!
-                                              .split(' ')
-                                              .join('\n'),
-                                          style: globalTextStyle(
-                                            fontSize:
-                                                width > 600 ? 8.sp : 14.sp,
-                                            fontWeight: FontWeight.w700,
-                                            color: isSelected
-                                                ? AppColors.white
-                                                : AppColors.dark,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ],
                                     ),
                                   ),
-                                  Align(
-                                    alignment: Alignment.topRight,
-                                    child: Transform.rotate(
-                                      origin: const Offset(30, -30),
-                                      angle: pi / 4.5,
-                                      child: Container(
-                                        height: secondLineHeight,
-                                        width: secondLineWidth,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              AppColors.primary
-                                                  .withValues(alpha: 0.2),
-                                              AppColors.primary
-                                                  .withValues(alpha: 0.2)
-                                                  .withValues(alpha: 0.0),
-                                            ],
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                                   Positioned(
-                                      bottom: 10.h,
-                                      left: 5.w,
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 5.h, horizontal: 15.w),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.grey,
-                                          borderRadius:
-                                              BorderRadius.circular(5.r),
-                                        ),
-                                        child: Text(
-                                          player.position == null
-                                              ? '-'
-                                              : getInitials(player.position!),
-                                          style: globalTextStyle2(
-                                              fontSize: 10.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      )),
-                                  Align(
-                                    alignment: Alignment.topRight,
-                                    child: Transform.rotate(
-                                      origin: const Offset(50, -50),
-                                      angle: pi / 4.5,
-                                      child: Container(
-                                        height: secondLineHeight,
-                                        width: secondLineWidth,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              AppColors.primary
-                                                  .withValues(alpha: 0.2),
-                                              AppColors.primary
-                                                  .withValues(alpha: 0.2)
-                                                  .withValues(alpha: 0.0),
-                                            ],
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                          ),
-                                        ),
+                                    bottom: 0.h,
+                                    left: 0,
+                                    right: 0,
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.only(
+                                          top: 1.h, bottom: 1.h),
+                                      decoration: BoxDecoration(
+                                        color: Color.fromRGBO(18, 96, 85, 1),
+                                      ),
+                                      child: Text(
+                                        player.fullName ?? '',
+                                        style: globalTextStyle(
+                                            fontSize:
+                                                width > 600 ? 8.sp : 12.sp,
+                                            fontWeight: FontWeight.w700,
+                                            color: AppColors.secondary),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
-                                  ),
+                                  )
                                 ],
                               ),
                             ),

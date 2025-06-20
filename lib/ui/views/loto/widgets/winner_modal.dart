@@ -16,131 +16,97 @@ class WinnerModal extends GetView<LotoController> {
     return Dialog(
       insetAnimationCurve: Curves.easeInOutCubicEmphasized,
       insetAnimationDuration: const Duration(seconds: 3),
-      backgroundColor: AppColors.white,
-      surfaceTintColor: AppColors.white,
+      backgroundColor: AppColors.primary,
+      surfaceTintColor: AppColors.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0.r),
       ),
-      child: Padding(
-          padding: EdgeInsets.only(
-            left: 10.w,
-            right: 10.w,
-            bottom: 10.h,
-            top: 10.h,
-          ),
-          child: SizedBox(
-            height: Get.height * 0.55,
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 0.h,
-                  right: 0.w,
-                  child: GestureDetector(
+      child: SizedBox(
+        height: Get.height * 0.55,
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0.h,
+              right: 0.w,
+              left: 0.w,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: 50,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: const Color.fromRGBO(18, 96, 85, 1),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10.r),
+                          )),
+                      child: Image.asset(
+                        'assets/new_images/trophy.png',
+                        height: 25,
+                        width: 25,
+                        color: AppColors.secondary,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 50,
+                    padding: const EdgeInsets.all(10),
+                    color: AppColors.primaryLight,
+                    child: Text(
+                      'Select Match Outcome',
+                      style: globalTextStyle(
+                          fontSize: 14.sp,
+                          color: AppColors.secondary,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  GestureDetector(
                     onTap: () {
                       Get.back();
                     },
                     child: Container(
+                      height: 50,
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r),
-                        color: AppColors.grey,
-                      ),
+                          color: const Color.fromRGBO(18, 96, 85, 1),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10.r),
+                          )),
                       child: Image.asset(
                         AppImages.crossIcon,
-                        color: AppColors.dark,
+                        color: AppColors.secondary,
                         height: 20.h,
                         width: 20.h,
                       ),
                     ),
                   ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/publictournament.svg',
-                      height: 60.h,
-                      width: 60.h,
-                    ),
-                    verticalSpace(10.h),
-                    Text(
-                      'Select Match Outcome',
-                      style: globalTextStyle(
-                        fontSize: 14.sp,
-                      ),
-                    ),
-                    verticalSpace(20.h),
-                    Text(
-                      'Select Winner',
-                      style: globalTextStyle2(
-                          fontSize: 8.sp, color: AppColors.textGray),
-                    ),
-                    verticalSpace(10.h),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: GestureDetector(
-                          onTap: () {
-                            controller.drawIndexs.value = drawIndex;
-                            controller.matchOutcome.value = 1;
-                            controller.selectWinner(
-                                teams.homeTeam!.assetCode!,
-                                teams.homeTeam!.name!,
-                                teams.homeTeam!.imageUrl!,
-                                1);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: AppColors.grey,
-                              borderRadius: BorderRadius.circular(5.r),
-                              border: Border.all(
-                                  color: AppColors.borderColor, width: 1),
-                            ),
-                            child: teams.homeTeam!.imageUrl == null
-                                ? Container()
-                                : teams.homeTeam!.imageUrl!.endsWith('.svg')
-                                    ? controller.sportName == 'CR'
-                                        ? Image.network(
-                                            replaceSvgWithPng(
-                                                teams.homeTeam!.imageUrl!),
-                                            height: 50.h,
-                                            width: 50.h,
-                                          )
-                                        : SvgPicture.network(
-                                            teams.homeTeam!.imageUrl!,
-                                            height: 50.h,
-                                            width: 50.w,
-                                          )
-                                    : Image.network(
-                                        teams.homeTeam!.imageUrl!,
-                                        height: 50.h,
-                                        width: 50.w,
-                                      ),
-                          ),
-                        )),
-                        horizontalSpace(10.w),
-                        Expanded(
-                            child: GestureDetector(
-                          onTap: () {
-                            controller.matchOutcome.value = 2;
-                            controller.drawIndexs.value = drawIndex;
-                            controller.selectWinner(
-                                teams.awayTeam!.assetCode!,
-                                teams.awayTeam!.name!,
-                                teams.awayTeam!.imageUrl!,
-                                2);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: AppColors.grey,
-                              borderRadius: BorderRadius.circular(5.r),
-                              border: Border.all(
-                                  color: AppColors.borderColor, width: 1),
-                            ),
-                            child: teams.awayTeam!.imageUrl == null
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10.w, right: 10.w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      controller.matchOutcome.value = 2;
+                      controller.drawIndexs.value = drawIndex;
+                      controller.selectWinner(teams.awayTeam!.assetCode!,
+                          teams.awayTeam!.name!, teams.awayTeam!.imageUrl!, 2);
+                    },
+                    child: Container(
+                        width: Get.width,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(44, 86, 80, 1),
+                          borderRadius: BorderRadius.circular(5.r),
+                        ),
+                        child: Column(
+                          children: [
+                            teams.awayTeam!.imageUrl == null
                                 ? Container()
                                 : teams.awayTeam!.imageUrl!.endsWith('svg')
                                     ? controller.sportName == 'CR'
@@ -160,114 +126,169 @@ class WinnerModal extends GetView<LotoController> {
                                         height: 50.h,
                                         width: 50.w,
                                       ),
-                          ),
+                            verticalSpace(5.h),
+                            Text(
+                              "${teams.awayTeam!.name!} Winner ",
+                              style: globalTextStyle(
+                                  fontSize: 14.sp,
+                                  color: AppColors.secondary,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
                         )),
-                      ],
-                    ),
-                    verticalSpace(5.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Expanded(
-                            child: Divider(
-                          endIndent: 30,
-                          color: AppColors.grey,
-                          thickness: 1,
-                        )),
-                        horizontalSpace(5.w),
-                        Text(
-                          'OR',
-                          style: globalTextStyle(
-                              color: AppColors.textGray, fontSize: 10.sp),
+                  ),
+                  verticalSpace(5.h),
+                  GestureDetector(
+                    onTap: () {
+                      controller.drawIndexs.value = drawIndex;
+                      controller.matchOutcome.value = 1;
+                      controller.selectWinner(teams.homeTeam!.assetCode!,
+                          teams.homeTeam!.name!, teams.homeTeam!.imageUrl!, 1);
+                    },
+                    child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(44, 86, 80, 1),
+                          borderRadius: BorderRadius.circular(5.r),
                         ),
-                        horizontalSpace(5.w),
-                        const Expanded(
-                            child: Divider(
-                          indent: 30,
-                          color: AppColors.grey,
-                          thickness: 1,
+                        child: Column(
+                          children: [
+                            teams.homeTeam!.imageUrl == null
+                                ? Container()
+                                : teams.homeTeam!.imageUrl!.endsWith('.svg')
+                                    ? controller.sportName == 'CR'
+                                        ? Image.network(
+                                            replaceSvgWithPng(
+                                                teams.homeTeam!.imageUrl!),
+                                            height: 50.h,
+                                            width: 50.h,
+                                          )
+                                        : SvgPicture.network(
+                                            teams.homeTeam!.imageUrl!,
+                                            height: 50.h,
+                                            width: 50.w,
+                                          )
+                                    : Image.network(
+                                        teams.homeTeam!.imageUrl!,
+                                        height: 50.h,
+                                        width: 50.w,
+                                      ),
+                            verticalSpace(5.h),
+                            Text(
+                              "${teams.homeTeam!.name!} Winner ",
+                              style: globalTextStyle(
+                                  fontSize: 14.sp,
+                                  color: AppColors.secondary,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
                         )),
-                      ],
-                    ),
-                    verticalSpace(5.h),
-                    GestureDetector(
-                      onTap: () {
-                        controller.matchOutcome.value = 3;
-                        controller.drawIndexs.value = drawIndex;
-                        controller.selectWinner('', '', '', 3);
-                      },
-                      child: Container(
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: AppColors.grey,
-                            borderRadius: BorderRadius.circular(5.r),
-                            border: Border.all(
-                                color: AppColors.borderColor, width: 1),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  teams.homeTeam!.imageUrl == null
-                                      ? Container()
-                                      : controller.sportName == 'CR'
-                                          ? Image.network(
-                                              replaceSvgWithPng(
-                                                  teams.homeTeam!.imageUrl!),
-                                              height: 50.h,
-                                              width: 50.h)
-                                          : teams.homeTeam!.imageUrl!
-                                                  .endsWith('svg')
-                                              ? SvgPicture.network(
-                                                  teams.homeTeam!.imageUrl!,
-                                                  height: 50.h,
-                                                  width: 50.w,
-                                                )
-                                              : Image.network(
-                                                  teams.homeTeam!.imageUrl!,
-                                                  height: 50.h,
-                                                  width: 50.w,
-                                                ),
-                                  horizontalSpace(10.w),
-                                  teams.awayTeam!.imageUrl == null
-                                      ? Container()
-                                      : controller.sportName == 'CR'
-                                          ? Image.network(
-                                              replaceSvgWithPng(
-                                                  teams.awayTeam!.imageUrl!),
-                                              height: 50.h,
-                                              width: 50.h,
-                                            )
-                                          : teams.awayTeam!.imageUrl!
-                                                  .endsWith('svg')
-                                              ? SvgPicture.network(
-                                                  teams.awayTeam!.imageUrl!,
-                                                  height: 50.h,
-                                                  width: 50.w,
-                                                )
-                                              : Image.network(
-                                                  teams.awayTeam!.imageUrl!,
-                                                  height: 50.h,
-                                                  width: 50.w,
-                                                ),
-                                ],
-                              ),
-                              verticalSpace(10.h),
-                              Text(
-                                'Match Draw',
-                                style: globalTextStyle(fontSize: 12.sp),
-                              )
-                            ],
-                          )),
-                    )
-                  ],
-                ),
-              ],
+                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     const Expanded(
+                  //         child: Divider(
+                  //       endIndent: 30,
+                  //       color: AppColors.grey,
+                  //       thickness: 1,
+                  //     )),
+                  //     horizontalSpace(5.w),
+                  //     Text(
+                  //       'OR',
+                  //       style: globalTextStyle(
+                  //           color: AppColors.textGray, fontSize: 10.sp),
+                  //     ),
+                  //     horizontalSpace(5.w),
+                  //     const Expanded(
+                  //         child: Divider(
+                  //       indent: 30,
+                  //       color: AppColors.grey,
+                  //       thickness: 1,
+                  //     )),
+                  //   ],
+                  // ),
+                  verticalSpace(5.h),
+                  GestureDetector(
+                    onTap: () {
+                      controller.matchOutcome.value = 3;
+                      controller.drawIndexs.value = drawIndex;
+                      controller.selectWinner('', '', '', 3);
+                    },
+                    child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(44, 86, 80, 1),
+                          borderRadius: BorderRadius.circular(5.r),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                teams.homeTeam!.imageUrl == null
+                                    ? Container()
+                                    : controller.sportName == 'CR'
+                                        ? Image.network(
+                                            replaceSvgWithPng(
+                                                teams.homeTeam!.imageUrl!),
+                                            height: 50.h,
+                                            width: 50.h)
+                                        : teams.homeTeam!.imageUrl!
+                                                .endsWith('svg')
+                                            ? SvgPicture.network(
+                                                teams.homeTeam!.imageUrl!,
+                                                height: 50.h,
+                                                width: 50.w,
+                                              )
+                                            : Image.network(
+                                                teams.homeTeam!.imageUrl!,
+                                                height: 50.h,
+                                                width: 50.w,
+                                              ),
+                                horizontalSpace(10.w),
+                                teams.awayTeam!.imageUrl == null
+                                    ? Container()
+                                    : controller.sportName == 'CR'
+                                        ? Image.network(
+                                            replaceSvgWithPng(
+                                                teams.awayTeam!.imageUrl!),
+                                            height: 50.h,
+                                            width: 50.h,
+                                          )
+                                        : teams.awayTeam!.imageUrl!
+                                                .endsWith('svg')
+                                            ? SvgPicture.network(
+                                                teams.awayTeam!.imageUrl!,
+                                                height: 50.h,
+                                                width: 50.w,
+                                              )
+                                            : Image.network(
+                                                teams.awayTeam!.imageUrl!,
+                                                height: 50.h,
+                                                width: 50.w,
+                                              ),
+                              ],
+                            ),
+                            verticalSpace(10.h),
+                            Text(
+                              'Match Draw',
+                              style: globalTextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.secondary),
+                            )
+                          ],
+                        )),
+                  )
+                ],
+              ),
             ),
-          )),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
@@ -6,7 +5,6 @@ import 'package:fmlfantasy/model/select_player_model.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 import 'package:fmlfantasy/ui/views/loto/loto_controller/loto_controller.dart';
 import 'package:fmlfantasy/ui/views/loto/widgets/loto_select_player_view.dart';
-import 'package:fmlfantasy/ui/widgets/primary_button.dart';
 import 'package:flutter_svg/svg.dart';
 
 class PlayersWidget extends GetView<LotoController> {
