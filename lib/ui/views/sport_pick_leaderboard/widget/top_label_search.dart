@@ -12,14 +12,9 @@ class TopLabelAndSearch extends GetView<SportPickLeaderboardController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Image.asset(
-          AppImages.loto,
-          height: 40.h,
-        ),
-        horizontalSpace(10.w),
         Text(
           'Leaderboard',
-          style: globalTextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+          style: globalTextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700),
         ),
         Expanded(child: Container()),
         GestureDetector(
@@ -36,8 +31,8 @@ class TopLabelAndSearch extends GetView<SportPickLeaderboardController> {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: controller.isSearch.value
-                        ? AppColors.dark
-                        : AppColors.white),
+                        ? AppColors.secondary
+                        : AppColors.primaryVeryDark),
                 child: SvgPicture.asset(
                   AppImages.search,
                   height: 25.h,
@@ -45,7 +40,7 @@ class TopLabelAndSearch extends GetView<SportPickLeaderboardController> {
                   // ignore: deprecated_member_use
                   color: controller.isSearch.value
                       ? AppColors.white
-                      : AppColors.dark,
+                      : AppColors.white,
                 ),
               ),
             )),

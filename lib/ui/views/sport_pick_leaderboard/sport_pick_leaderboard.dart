@@ -2,11 +2,14 @@ import 'dart:developer';
 
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
+import 'package:fmlfantasy/ui/components/custom_sliver.dart';
+import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/views/sport_pick_leaderboard/controller/sport_pick_leaderboard_controller.dart';
 import 'package:fmlfantasy/ui/views/sport_pick_leaderboard/widget/sport_leaderboard_list_item.dart';
 import 'package:fmlfantasy/ui/views/sport_pick_leaderboard/widget/top_label_search.dart';
 import 'package:fmlfantasy/ui/widgets/app_textfield.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
 
 class SportPickLeaderboard extends GetView<SportPickLeaderboardController> {
   const SportPickLeaderboard({super.key});
@@ -16,18 +19,10 @@ class SportPickLeaderboard extends GetView<SportPickLeaderboardController> {
     Get.put(SportPickLeaderboardController());
     return Scaffold(
         //resizeToAvoidBottomInset: true,
-        backgroundColor: AppColors.grey,
-        appBar: const AppBarGeneral(
-          title: 'Sport Pick Leaderboard',
-        ),
+        appBar: HomeAppBar(title: 'Sport Pick Leaderboard'),
         body: CustomScrollView(slivers: [
-          SliverAppBar(
-            expandedHeight: 45.h,
-            automaticallyImplyLeading: false,
-            pinned: true,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            flexibleSpace: Obx(
+          CustomSliver(
+            appBar: Obx(
               () => SportsTabBar(
                 sportsList: controller.sportsList,
                 selectedIndex: controller.sportsList
@@ -49,7 +44,7 @@ class SportPickLeaderboard extends GetView<SportPickLeaderboardController> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Column(
                 children: [
-                  verticalSpace(20.h),
+                  DashboardButton(),
                   const TopLabelAndSearch(),
                   verticalSpace(20.h),
                   Obx(

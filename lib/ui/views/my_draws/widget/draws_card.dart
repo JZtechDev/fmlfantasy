@@ -1,5 +1,3 @@
-import 'dart:math';
-import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/my_draws_model.dart';
@@ -29,275 +27,209 @@ class MyDrawsCard extends GetView<MyDrawsController> {
         return Container(
           margin: EdgeInsets.only(bottom: 10.h),
           clipBehavior: Clip.hardEdge,
-          padding: const EdgeInsets.all(5),
           width: Get.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.r),
-            color: AppColors.white,
-            border: Border.all(
-              color: controller.selectedCard.value
-                  ? AppColors.primary
-                  : AppColors.grey,
-              width: 2,
-            ),
+            color: const Color.fromRGBO(18, 96, 85, 1),
           ),
-          child: Stack(
+          child: Column(
             children: [
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Transform.rotate(
-                  origin: const Offset(30, -20),
-                  angle: pi / 4.5, // Rotate 60 degrees clockwise
-                  child: Container(
-                    height: 150.0, // Adjust height of the bar
-                    width: 40.0, // Adjust width of the bar
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromRGBO(219, 231, 255, 1),
-                          Color.fromRGBO(219, 231, 255, 0)
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Transform.rotate(
-                  origin: const Offset(0, 60),
-                  angle: pi / 4.5, // Rotate 60 degrees clockwise
-                  child: Container(
-                    height: 100.0, // Adjust height of the bar
-                    width: 60.0, // Adjust width of the bar
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromRGBO(219, 231, 255, 1),
-                          Color.fromRGBO(219, 231, 255, 0)
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Column(
+              verticalSpace(10.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 5.w),
-                        child: Text(
-                          myDraws.competition!,
-                          style: globalTextStyle2(
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: 10.w, right: 15.w, top: 5.h, bottom: 5.h),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          color: AppColors.grey,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              AppImages.calender,
-                              // ignore: deprecated_member_use
-                              color: AppColors.dark,
-                              width: maxWidth > 600 ? 12.w : 15.w,
-                              height: maxWidth > 600 ? 12.h : 15.h,
-                            ),
-                            horizontalSpace(10.w),
-                            Text(
-                              formattedDifference,
-                              style: globalTextStyle(
-                                fontSize: maxWidth > 600 ? 8.sp : 10.sp,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.dark,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  Image.asset(
+                    'assets/new_images/calender.png',
+                    color: AppColors.secondary,
+                    width: maxWidth > 600 ? 24.w : 20.w,
+                    height: maxWidth > 600 ? 24.h : 20.h,
                   ),
-                  verticalSpace(20.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              constraints: BoxConstraints(
-                                maxHeight: 27.h,
-                                maxWidth: 35.w,
-                              ),
-                              child: myDraws.homeTeamImageUrl == null
-                                  ? Container()
-                                  : myDraws.homeTeamImageUrl!.endsWith('.svg')
-                                      ? controller.selectedSport.value == 'CR'
-                                          ? Image.network(
-                                              replaceSvgWithPng(
-                                                  myDraws.homeTeamImageUrl!),
-                                            )
-                                          : SvgPicture.network(
-                                              myDraws.homeTeamImageUrl!,
-                                            )
-                                      : Image.network(myDraws.homeTeamImageUrl!,
-                                          height: 45.h, width: 45.w),
-                            ),
-                            verticalSpace(10.h),
-                            Text(
-                              textAlign: TextAlign.center,
-                              myDraws.homeTeamName!,
-                              style: globalTextStyle(
-                                fontSize: maxWidth > 600 ? 12.sp : 14.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                              'vs',
-                              style: globalTextStyle2(
-                                fontSize: maxWidth > 600 ? 14.sp : 16.sp,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.textGray,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              constraints: BoxConstraints(
-                                maxHeight: 27.h,
-                                maxWidth: 35.w,
-                              ),
-                              child: myDraws.awayTeamImageUrl == null
-                                  ? Container()
-                                  : myDraws.awayTeamImageUrl!.endsWith('.svg')
-                                      ? controller.selectedSport.value == 'CR'
-                                          ? Image.network(
-                                              replaceSvgWithPng(
-                                                  myDraws.awayTeamImageUrl!),
-                                            )
-                                          : SvgPicture.network(
-                                              myDraws.awayTeamImageUrl!,
-                                            )
-                                      : Image.network(myDraws.awayTeamImageUrl!,
-                                          height: 45.h, width: 45.w),
-                            ),
-                            verticalSpace(10.h),
-                            Text(
-                              textAlign: TextAlign.center,
-                              myDraws.awayTeamName!,
-                              style: globalTextStyle(
-                                fontSize: maxWidth > 600 ? 12.sp : 14.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  horizontalSpace(10.w),
+                  Text(
+                    formattedDifference,
+                    style: globalTextStyle(
+                      fontSize: maxWidth > 600 ? 8.sp : 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.secondary,
+                    ),
                   ),
-                  verticalSpace(10.h),
-                  Row(
-                    children: [
-                      Expanded(
-                          child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 5.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          color: AppColors.white,
-                          border: Border.all(color: AppColors.borderColor),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              myDraws.homeTeamName!.split(' ').join('\n'),
-                              style: globalTextStyle2(
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w, vertical: 5.h),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.r),
-                                color: AppColors.grey,
-                              ),
-                              child: Text(
-                                'won'.tr,
-                                style: globalTextStyle(
-                                    fontSize: 12.sp, color: AppColors.primary),
-                              ),
-                            )
-                          ],
-                        ),
-                      )),
-                      horizontalSpace(5.w),
-                      Expanded(
-                          child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 5.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          color: AppColors.white,
-                          border: Border.all(color: AppColors.borderColor),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'totalwinning'.tr,
-                              style: globalTextStyle2(
-                                  fontSize: 12.sp, color: AppColors.textGray),
-                            ),
-                            Text(
-                              '\$500',
-                              style: globalTextStyle(
-                                  fontSize: 24.sp, fontWeight: FontWeight.w700),
-                            )
-                          ],
-                        ),
-                      ))
-                    ],
-                  )
                 ],
               ),
+              verticalSpace(20.h),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
+                    color: AppColors.primary,
+                    border: Border(
+                      top: BorderSide(color: AppColors.borderColor, width: 1),
+                    )),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          constraints: BoxConstraints(
+                            maxHeight: 27.h,
+                            maxWidth: 35.w,
+                          ),
+                          child: myDraws.homeTeamImageUrl == null
+                              ? Container()
+                              : myDraws.homeTeamImageUrl!.endsWith('.svg')
+                                  ? controller.selectedSport.value == 'CR'
+                                      ? Image.network(
+                                          replaceSvgWithPng(
+                                              myDraws.homeTeamImageUrl!),
+                                        )
+                                      : SvgPicture.network(
+                                          myDraws.homeTeamImageUrl!,
+                                        )
+                                  : Image.network(myDraws.homeTeamImageUrl!,
+                                      height: 45.h, width: 45.w),
+                        ),
+                        verticalSpace(10.h),
+                        SizedBox(
+                          width: Get.width * 0.3,
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            myDraws.homeTeamName!,
+                            style: globalTextStyle(
+                                fontSize: maxWidth > 600 ? 12.sp : 14.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.secondary),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 10.h),
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(
+                              color: AppColors.backgroud,
+                              shape: BoxShape.circle),
+                          child: Text(
+                            'vs',
+                            style: globalTextStyle2(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12.sp,
+                                color: AppColors.secondary),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          constraints: BoxConstraints(
+                            maxHeight: 27.h,
+                            maxWidth: 35.w,
+                          ),
+                          child: myDraws.awayTeamImageUrl == null
+                              ? Container()
+                              : myDraws.awayTeamImageUrl!.endsWith('.svg')
+                                  ? controller.selectedSport.value == 'CR'
+                                      ? Image.network(
+                                          replaceSvgWithPng(
+                                              myDraws.awayTeamImageUrl!),
+                                        )
+                                      : SvgPicture.network(
+                                          myDraws.awayTeamImageUrl!,
+                                        )
+                                  : Image.network(myDraws.awayTeamImageUrl!,
+                                      height: 45.h, width: 45.w),
+                        ),
+                        verticalSpace(10.h),
+                        SizedBox(
+                          width: Get.width * 0.3,
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            myDraws.awayTeamName!,
+                            style: globalTextStyle(
+                                fontSize: maxWidth > 600 ? 12.sp : 14.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.secondary),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              verticalSpace(10.h),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          'assets/new_images/medal.png',
+                          height: 20,
+                          width: 20,
+                          fit: BoxFit.cover,
+                        ),
+                        horizontalSpace(20),
+                        // Text(
+                        //   maxLines: 1,
+                        //   overflow: TextOverflow.ellipsis,
+                        //   myDraws.homeTeamName!.split(' ').join('\n'),
+                        //   style: globalTextStyle2(
+                        //       fontSize: 14.sp, fontWeight: FontWeight.w700),
+                        // ),
+                        Text(
+                          'won'.tr,
+                          style: globalTextStyle(
+                              fontSize: 12.sp,
+                              color: AppColors.white,
+                              fontWeight: FontWeight.w700),
+                        )
+                      ],
+                    ),
+                    horizontalSpace(20.w),
+                    const SizedBox(
+                      height: 20,
+                      child: VerticalDivider(
+                        thickness: 1,
+                        color: AppColors.white,
+                      ),
+                    ),
+                    horizontalSpace(20.w),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Total Winnings'.tr,
+                            style: globalTextStyle2(
+                                fontSize: 14.sp,
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          horizontalSpace(10.w),
+                          Text(
+                            '\$500',
+                            style: globalTextStyle(
+                                fontSize: 24.sp, fontWeight: FontWeight.w700),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              verticalSpace(10.h),
             ],
           ),
         );

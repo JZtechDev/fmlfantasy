@@ -13,31 +13,28 @@ class MyDrawsTeams extends GetView<MyDrawsController> {
   Widget build(BuildContext context) {
     Get.put(MyDrawsController());
     return Obx(
-      () => controller.isLoading.value
-          ? const DrawsTeamsSkeleton()
-          : LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-                return Obx(() => ListView.builder(
-                      reverse: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.myDrawsTeams.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (BuildContext context, int index) {
-                        DrawTeamsModel myDraws = controller.myDrawsTeams[index];
-                        return GestureDetector(
-                          onTap: () {
-                            controller
-                                .fetchDrawsDetails(myDraws.drawID.toString());
-                            Get.to(() =>
-                                DrawsLeaderboardTable(myDrawsTeams: myDraws));
-                          },
-                          child: MyDrawsCard(index, myDraws),
-                        );
-                      },
-                    ));
-              },
-            ),
+      () => LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return Obx(() => ListView.builder(
+                reverse: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: controller.myDrawsTeams.length,
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (BuildContext context, int index) {
+                  DrawTeamsModel myDraws = controller.myDrawsTeams[index];
+                  return GestureDetector(
+                    onTap: () {
+                      controller.fetchDrawsDetails(myDraws.drawID.toString());
+                      Get.to(
+                          () => DrawsLeaderboardTable(myDrawsTeams: myDraws));
+                    },
+                    child: MyDrawsCard(index, myDraws),
+                  );
+                },
+              ));
+        },
+      ),
     );
   }
 }

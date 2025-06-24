@@ -30,138 +30,139 @@ class LotoSelectPlayerView extends GetView<LotoController> {
         return CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: 60.h,
-              collapsedHeight: 60.h,
+              expandedHeight: 50.h,
+              collapsedHeight: 50.h,
               automaticallyImplyLeading: false,
               pinned: true,
               backgroundColor: Colors.transparent,
               elevation: 0,
               flexibleSpace: Padding(
                 padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 5.h),
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 5.h),
-                  padding: EdgeInsets.only(
-                      bottom: 5.h, top: 5.h, left: 5.w, right: 5.w),
-                  decoration: BoxDecoration(
-                    color: AppColors.backgroud,
-                    borderRadius: BorderRadius.circular(5.r),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Obx(
-                          () => GestureDetector(
-                            onTap: () {
-                              controller.isloadingSelectPlayer.value = true;
-                            },
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  left: 10.w,
-                                  right: 10.w,
-                                  top: 5.h,
-                                  bottom: 5.h),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.r),
-                                color: controller.isloadingSelectPlayer.value
-                                    ? AppColors.grey
-                                    : Colors.transparent,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Obx(
+                        () => GestureDetector(
+                          onTap: () {
+                            controller.isloadingSelectPlayer.value = true;
+                          },
+                          child: Container(
+                            height: 60.h,
+                            padding: EdgeInsets.only(
+                                left: 10.w, right: 10.w, top: 5.h, bottom: 5.h),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10.r),
                               ),
-                              child: Row(
-                                children: [
-                                  selectplayer.homeTeam!.imageUrl == null
-                                      ? Container()
-                                      : controller.sportName == 'CR'
-                                          ? Image.network(replaceSvgWithPng(
-                                              selectplayer.homeTeam!.imageUrl!))
-                                          : SvgPicture.network(
-                                              selectplayer.homeTeam!.imageUrl ??
-                                                  '',
-                                              height: 22.h,
-                                              width: 22.w,
-                                            ),
-                                  horizontalSpace(5.w),
-                                  SizedBox(
-                                    width: width * 0.26,
-                                    child: Text(
-                                      selectplayer.homeTeam!.name ??
-                                          'Home Team',
-                                      style: globalTextStyle(
-                                          fontSize: AppSizing.isMobile(context)
-                                              ? 12.sp
-                                              : 10.sp,
-                                          fontWeight: FontWeight.w500),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  )
-                                ],
-                              ),
+                              border: const Border(
+                                  bottom: BorderSide(color: AppColors.white)),
+                              color: controller.isloadingSelectPlayer.value
+                                  ? const Color.fromRGBO(18, 96, 85, 1)
+                                  : AppColors.primaryLight,
+                            ),
+                            child: Row(
+                              children: [
+                                selectplayer.homeTeam!.imageUrl == null
+                                    ? Container()
+                                    : controller.sportName == 'CR'
+                                        ? Image.network(
+                                            replaceSvgWithPng(selectplayer
+                                                .homeTeam!.imageUrl!),
+                                            height: 22.h,
+                                            width: 22.w,
+                                          )
+                                        : SvgPicture.network(
+                                            selectplayer.homeTeam!.imageUrl ??
+                                                '',
+                                            height: 22.h,
+                                            width: 22.w,
+                                          ),
+                                horizontalSpace(5.w),
+                                SizedBox(
+                                  width: width * 0.2,
+                                  child: Text(
+                                    selectplayer.homeTeam!.name ?? 'Home Team',
+                                    style: globalTextStyle(
+                                        fontSize: AppSizing.isMobile(context)
+                                            ? 12.sp
+                                            : 10.sp,
+                                        fontWeight: FontWeight.w500),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Obx(
-                          () => GestureDetector(
-                            onTap: () {
-                              controller.isloadingSelectPlayer.value = false;
-                            },
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  left: 10.w,
-                                  right: 10.w,
-                                  top: 5.h,
-                                  bottom: 5.h),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.r),
+                    ),
+                    Expanded(
+                      child: Obx(
+                        () => GestureDetector(
+                          onTap: () {
+                            controller.isloadingSelectPlayer.value = false;
+                          },
+                          child: Container(
+                            height: 60.h,
+                            padding: EdgeInsets.only(
+                                left: 10.w, right: 10.w, top: 5.h, bottom: 5.h),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(10.r),
+                                ),
+                                border: const Border(
+                                    left: BorderSide(
+                                      color: AppColors.white,
+                                    ),
+                                    bottom: BorderSide(color: AppColors.white)),
                                 color: !controller.isloadingSelectPlayer.value
-                                    ? AppColors.grey
-                                    : Colors.transparent,
-                              ),
-                              child: Row(
-                                children: [
-                                  selectplayer.awayTeam!.imageUrl == null
-                                      ? Container()
-                                      : controller.sportName == 'CR'
-                                          ? Image.network(
-                                              replaceSvgWithPng(
-                                                selectplayer
-                                                    .awayTeam!.imageUrl!,
-                                              ),
-                                            )
-                                          : SvgPicture.network(
-                                              selectplayer.awayTeam!.imageUrl ??
-                                                  '',
-                                              height:
-                                                  AppSizing.isMobile(context)
-                                                      ? 22.h
-                                                      : 40.h,
-                                              width: 22.w,
+                                    ? const Color.fromRGBO(18, 96, 85, 1)
+                                    : AppColors.primaryLight),
+                            child: Row(
+                              children: [
+                                selectplayer.awayTeam!.imageUrl == null
+                                    ? Container()
+                                    : controller.sportName == 'CR'
+                                        ? Image.network(
+                                            replaceSvgWithPng(
+                                              selectplayer.awayTeam!.imageUrl!,
                                             ),
-                                  horizontalSpace(5.w),
-                                  SizedBox(
-                                    width: width * 0.26,
-                                    child: Text(
-                                      selectplayer.awayTeam!.name ??
-                                          'Away Team',
-                                      style: globalTextStyle(
-                                          fontSize: AppSizing.isMobile(context)
-                                              ? 12.sp
-                                              : 10.sp,
-                                          fontWeight: FontWeight.w500),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  )
-                                ],
-                              ),
+                                            height: AppSizing.isMobile(context)
+                                                ? 22.h
+                                                : 40.h,
+                                            width: 40.w,
+                                          )
+                                        : SvgPicture.network(
+                                            selectplayer.awayTeam!.imageUrl ??
+                                                '',
+                                            height: AppSizing.isMobile(context)
+                                                ? 22.h
+                                                : 40.h,
+                                            width: 40.w,
+                                          ),
+                                horizontalSpace(5.w),
+                                SizedBox(
+                                  width: width * 0.2,
+                                  child: Text(
+                                    selectplayer.awayTeam!.name ?? 'Away Team',
+                                    style: globalTextStyle(
+                                        fontSize: AppSizing.isMobile(context)
+                                            ? 12.sp
+                                            : 10.sp,
+                                        fontWeight: FontWeight.w500),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
