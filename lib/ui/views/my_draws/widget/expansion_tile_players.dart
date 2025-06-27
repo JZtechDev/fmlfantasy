@@ -31,7 +31,7 @@ class ExpansionTilePlayers extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: AppColors.grey,
+                  color: AppColors.primaryDark,
                   borderRadius: BorderRadius.circular(5.r),
                 ),
                 child: playerImageUrl.isEmpty
@@ -56,7 +56,7 @@ class ExpansionTilePlayers extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: AppColors.grey,
+                      color: AppColors.secondary,
                       borderRadius: BorderRadius.circular(5.r),
                     ),
                     child: Column(
@@ -67,21 +67,22 @@ class ExpansionTilePlayers extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               vertical: 5.h, horizontal: 6.w),
                           decoration: BoxDecoration(
-                            color: AppColors.grey,
+                            color: AppColors.secondary,
                             borderRadius: BorderRadius.circular(5.r),
                           ),
                           child: Column(
                             children: [
-                              SvgPicture.asset(
-                                  'assets/icons/publictournament.svg',
-                                  height: 15.h),
+                              Image.asset(
+                                'assets/new_images/trophy.png',
+                                height: 15,
+                              ),
                               verticalSpace(5.h),
                               Text(
                                 rank,
                                 style: globalTextStyle(
                                     fontSize: 12.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.dark),
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.backgroud),
                               ),
                             ],
                           ),
@@ -94,7 +95,7 @@ class ExpansionTilePlayers extends StatelessWidget {
                     padding:
                         EdgeInsets.symmetric(vertical: 2.h, horizontal: 6.w),
                     decoration: BoxDecoration(
-                      color: AppColors.grey,
+                      color: AppColors.primaryDark,
                       borderRadius: BorderRadius.circular(5.r),
                     ),
                     child: Text(
@@ -102,7 +103,7 @@ class ExpansionTilePlayers extends StatelessWidget {
                       style: globalTextStyle(
                           fontSize: 10.sp,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.dark),
+                          color: AppColors.white),
                     ),
                   ),
                 ],
@@ -112,7 +113,10 @@ class ExpansionTilePlayers extends StatelessWidget {
         ),
         Text(
           playerName.isEmpty ? '-' : playerName,
-          style: globalTextStyle2(fontSize: 10.sp),
+          style: globalTextStyle2(
+              fontSize: 10.sp,
+              color: AppColors.white,
+              fontWeight: FontWeight.w700),
         ),
         SizedBox(
           width: Get.width * 0.28,
@@ -121,7 +125,10 @@ class ExpansionTilePlayers extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
             playerTeam.isEmpty ? '-' : playerTeam,
-            style: globalTextStyle2(fontSize: 10.sp, color: AppColors.textGray),
+            style: globalTextStyle2(
+                fontSize: 10.sp,
+                color: AppColors.white,
+                fontWeight: FontWeight.w700),
           ),
         )
       ],

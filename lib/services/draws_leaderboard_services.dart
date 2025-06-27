@@ -15,6 +15,7 @@ class DrawsLeaderboardServices {
           headers: {
             'Authorization': 'Bearer $token',
             'X-Cid': 'aliv',
+            'Ocp-Apim-Subscription-Key': dailyMatchPickKey,
           },
         ),
       );
@@ -45,6 +46,7 @@ class DrawsLeaderboardServices {
           headers: {
             'Authorization': 'Bearer $token',
             'X-Cid': 'aliv',
+            'Ocp-Apim-Subscription-Key': dailyMatchPickKey,
           },
         ),
       );

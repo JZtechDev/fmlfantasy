@@ -4,10 +4,12 @@ import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/my_draws_model.dart';
+import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/helpers/local_time.dart';
 import 'package:fmlfantasy/ui/views/my_draws/controller/my_draws_controller.dart';
 import 'package:fmlfantasy/ui/views/my_draws/widget/expansion_tile_players.dart';
 import 'package:fmlfantasy/ui/views/my_draws/widget/table_skeleton.dart';
+import 'package:fmlfantasy/ui/widgets/navigation_buttons.dart';
 import 'package:fmlfantasy/ui/widgets/primary_button.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,217 +22,178 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
   Widget build(BuildContext context) {
     Get.put(MyDrawsController());
     return Scaffold(
-        backgroundColor: AppColors.grey,
-        appBar: const AppBarGeneral(
-          title: 'Draws Leaderboard',
-          enableBorder: false,
-        ),
+        appBar: const HomeAppBar(title: 'Draws Leaderboard'),
         body: CustomScrollView(slivers: [
-          SliverAppBar(
-              expandedHeight: 45.h,
-              automaticallyImplyLeading: false,
-              pinned: true,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              flexibleSpace: Container(
-                color: AppColors.white,
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.r),
-                        color: AppColors.white,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            myDrawsTeams.homeTeamName!.split(' ').join('\n'),
-                            style: globalTextStyle2(
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10.w, vertical: 5.h),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5.r),
-                              color: AppColors.grey,
-                            ),
-                            child: Text(
-                              'won'.tr,
-                              style: globalTextStyle(
-                                  fontSize: 12.sp, color: AppColors.primary),
-                            ),
-                          )
-                        ],
-                      ),
-                    )),
-                    horizontalSpace(5.w),
-                    Expanded(
-                        child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.r),
-                        color: AppColors.white,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'totalwinning'.tr,
-                            style: globalTextStyle2(
-                                fontSize: 12.sp, color: AppColors.textGray),
-                          ),
-                          Text(
-                            '\$500',
-                            style: globalTextStyle(
-                                fontSize: 24.sp, fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      ),
-                    ))
-                  ],
-                ),
-              )),
+          const NavigationButtons(),
           SliverToBoxAdapter(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                verticalSpace(10.h),
+                verticalSpace(20.h),
                 Container(
-                  alignment: Alignment.center,
-                  width: Get.width,
-                  margin: EdgeInsets.symmetric(horizontal: 15.w),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+                  margin: const EdgeInsets.only(left: 20, right: 20),
                   decoration: BoxDecoration(
-                    color: AppColors.white,
+                    color: const Color.fromRGBO(18, 96, 85, 1),
                     borderRadius: BorderRadius.circular(5.r),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
                     children: [
-                      Image.asset(AppImages.calender, height: 10.h),
-                      horizontalSpace(5.w),
-                      Text(
-                        formatEndDateTime(DateTime.parse(
-                                myDrawsTeams.matchStartsAt.toString())
-                            .toLocal()),
-                        style: globalTextStyle2(fontSize: 12.sp),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.dark,
+                          borderRadius: BorderRadius.circular(5.r),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  height: 60.h,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        const Color.fromRGBO(77, 134, 126, 1),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(5.r),
+                                      bottomLeft: Radius.circular(5.r),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              'assets/new_images/medal.png',
+                                              color: AppColors.secondary,
+                                              height: 20.h,
+                                              width: 20.w,
+                                            ),
+                                            verticalSpace(5.h),
+                                            Text(
+                                              'WINNER',
+                                              style: globalTextStyle(
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: AppColors.secondary),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 50.h,
+                                        child: const VerticalDivider(
+                                          color: AppColors.secondary,
+                                          thickness: 1,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 10),
+                                        child: Text(
+                                          myDrawsTeams.homeTeamName.toString(),
+                                          style: globalTextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppColors.white),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                horizontalSpace(1),
+                                Expanded(
+                                  child: Container(
+                                    height: 60.h,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromRGBO(
+                                          217, 217, 217, 1),
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(5.r),
+                                        bottomRight: Radius.circular(5.r),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '\$1200',
+                                          style: globalTextStyle(
+                                              fontSize: 28.sp,
+                                              fontWeight: FontWeight.w500,
+                                              color: AppColors.dark),
+                                        ),
+                                        horizontalSpace(5.w),
+                                        Text(
+                                          'Winning\nPrize',
+                                          style: globalTextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppColors.dark),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            verticalSpace(10.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/new_images/calender.png',
+                                  height: 20.h,
+                                  color: AppColors.secondary,
+                                ),
+                                horizontalSpace(10.w),
+                                Text(
+                                  formatEndDateTime(DateTime.parse(
+                                          myDrawsTeams.matchStartsAt.toString())
+                                      .toLocal()),
+                                  style: globalTextStyle2(
+                                      fontSize: 14.sp,
+                                      color: AppColors.secondary),
+                                ),
+                              ],
+                            ),
+                            verticalSpace(10.h)
+                          ],
+                        ),
                       ),
+                      verticalSpace(10.h),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15, right: 15, bottom: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              myDrawsTeams.homeTeamName ?? '',
+                              style: globalTextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w700),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                              child: const VerticalDivider(
+                                color: AppColors.secondary,
+                                thickness: 1.0,
+                              ),
+                            ),
+                            Text(
+                              myDrawsTeams.homeTeamName ?? '',
+                              style: globalTextStyle(
+                                  fontSize: 12.sp, fontWeight: FontWeight.w700),
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
-                verticalSpace(10.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: Get.width,
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.circular(5.r),
-                          ),
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.center,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.r),
-                                  color: AppColors.grey,
-                                ),
-                                child: Text(
-                                  'TBD',
-                                  style: globalTextStyle(
-                                      fontSize: 24.sp,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                              verticalSpace(10.h),
-                              Image.asset(
-                                'assets/images/team.png',
-                                height: 45,
-                              ),
-                              verticalSpace(10),
-                              SizedBox(
-                                width: Get.width * 0.41,
-                                child: Text(
-                                  'Los Angeles Clippers',
-                                  style: globalTextStyle(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w600),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              verticalSpace(5.h),
-                            ],
-                          ),
-                        ),
-                      ),
-                      horizontalSpace(5.w),
-                      Expanded(
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: Get.width,
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.circular(5.r),
-                          ),
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.center,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.r),
-                                  color: AppColors.grey,
-                                ),
-                                child: Text(
-                                  'TBD',
-                                  style: globalTextStyle(
-                                      fontSize: 24.sp,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                              verticalSpace(10.h),
-                              Image.asset(
-                                'assets/images/team.png',
-                                height: 45,
-                              ),
-                              verticalSpace(10),
-                              SizedBox(
-                                width: Get.width * 0.41,
-                                child: Text(
-                                  'Los Angeles Clippers',
-                                  style: globalTextStyle(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w600),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              verticalSpace(5.h),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                verticalSpace(5.h),
                 Obx(
                   () => Container(
                     padding: EdgeInsets.only(
@@ -238,14 +201,13 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                     margin: EdgeInsets.only(left: 10.w, right: 10.w),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.r),
-                      color: AppColors.white,
+                      color: AppColors.backgroud,
                     ),
                     child: Column(children: [
                       Container(
-                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.r),
-                          color: AppColors.grey,
+                          color: AppColors.primaryLight,
                         ),
                         child: controller.isLoading.value
                             ? const TableSkeleton()
@@ -267,12 +229,12 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                         duration:
                                             const Duration(milliseconds: 400),
                                         margin: EdgeInsets.only(bottom: 5.h),
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 5.h),
+                                        // padding:
+                                        //     EdgeInsets.symmetric(vertical: 5.h),
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(5.r),
-                                            color: AppColors.white),
+                                            color: AppColors.primaryLight),
                                         child: OverflowBox(
                                           alignment: Alignment.topCenter,
                                           minHeight: 40.h,
@@ -286,7 +248,7 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           5.r),
-                                                  color: AppColors.navyBlue,
+                                                  color: AppColors.secondary,
                                                 ),
                                               ),
                                               Column(
@@ -299,7 +261,8 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                     padding: EdgeInsets.only(
                                                         left: 5.w,
                                                         right: 5.w,
-                                                        bottom: 10.h),
+                                                        bottom: 10.h,
+                                                        top: 10),
                                                     child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -312,10 +275,12 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                         Expanded(
                                                           child: Text(
                                                               draws.rank!,
-                                                              style:
-                                                                  globalTextStyle(
-                                                                      fontSize:
-                                                                          10.sp)),
+                                                              style: globalTextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  fontSize:
+                                                                      14.sp)),
                                                         ),
                                                         Expanded(
                                                           child: Column(
@@ -330,15 +295,23 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                                       : draws
                                                                           .winLevel!,
                                                                   style: globalTextStyle(
+                                                                      color: AppColors
+                                                                          .secondary,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w700,
                                                                       fontSize:
-                                                                          10.sp)),
+                                                                          14.sp)),
                                                               Text(
                                                                 '#${draws.drawUserEntryID}',
                                                                 style: globalTextStyle2(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
                                                                     fontSize:
-                                                                        10.sp,
+                                                                        12.sp,
                                                                     color: AppColors
-                                                                        .textGray),
+                                                                        .white),
                                                               ),
                                                             ],
                                                           ),
@@ -349,16 +322,24 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                               Text(
                                                                   "${draws.dmpPoints.toString()} Pts",
                                                                   style: globalTextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w700,
+                                                                      color: AppColors
+                                                                          .secondary,
                                                                       fontSize:
-                                                                          10.sp)),
+                                                                          14.sp)),
                                                               Text(
                                                                   "dMPPoints"
                                                                       .tr,
                                                                   style: globalTextStyle2(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
                                                                       fontSize:
-                                                                          8.sp,
+                                                                          12.sp,
                                                                       color: AppColors
-                                                                          .textGray)),
+                                                                          .white)),
                                                             ],
                                                           ),
                                                         ),
@@ -368,14 +349,19 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                               Text(
                                                                   " \$${draws.winning!.toStringAsFixed(0)}",
                                                                   style: globalTextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w700,
+                                                                      color: AppColors
+                                                                          .secondary,
                                                                       fontSize:
-                                                                          10.sp)),
+                                                                          14.sp)),
                                                               Text("winning".tr,
                                                                   style: globalTextStyle2(
                                                                       fontSize:
-                                                                          8.sp,
+                                                                          12.sp,
                                                                       color: AppColors
-                                                                          .textGray)),
+                                                                          .white)),
                                                             ],
                                                           ),
                                                         ),
@@ -401,7 +387,7 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                               decoration:
                                                                   BoxDecoration(
                                                                 color: AppColors
-                                                                    .grey,
+                                                                    .secondary,
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(
@@ -417,6 +403,8 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                                     : AppImages
                                                                         .arrowDown,
                                                                 height: 20,
+                                                                color: AppColors
+                                                                    .darkGreen,
                                                               )),
                                                         ),
                                                       ],
@@ -520,7 +508,7 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                                         borderRadius:
                                                                             BorderRadius.circular(5.r),
                                                                         color: AppColors
-                                                                            .grey,
+                                                                            .primaryDark,
                                                                       ),
                                                                       child: Container(
                                                                           padding: const EdgeInsets.all(5),
@@ -528,7 +516,7 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                                             borderRadius:
                                                                                 BorderRadius.circular(2.5.r),
                                                                             color:
-                                                                                AppColors.white,
+                                                                                AppColors.primaryDark,
                                                                           ),
                                                                           child: e.value.winnerTeamImageUrl == '' || e.value.winnerTeamImageUrl == null
                                                                               ? Image.asset(
@@ -559,7 +547,7 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                                     width: 20.w,
                                                                     decoration: BoxDecoration(
                                                                         color: AppColors
-                                                                            .navyBlue,
+                                                                            .secondary,
                                                                         borderRadius:
                                                                             BorderRadius.circular(2.5.r)),
                                                                     child: RotatedBox(
@@ -569,7 +557,7 @@ class DrawsLeaderboardTable extends GetView<MyDrawsController> {
                                                                           style: globalTextStyle(
                                                                               fontSize: 10.sp,
                                                                               fontWeight: FontWeight.w600,
-                                                                              color: AppColors.white),
+                                                                              color: AppColors.backgroud),
                                                                         )),
                                                                   )
                                                                 ],
