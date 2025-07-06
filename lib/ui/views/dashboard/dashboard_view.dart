@@ -26,7 +26,9 @@ class DashboardView extends GetView<DashboardController> {
         child: Obx(() {
           selectedTab.value == 'Daily Match Pick'
               ? controller.filteredList.value = controller.sportyPickList
-              : controller.filteredList.value = controller.cardsList;
+              : selectedTab.value == 'Sporty Pick'
+                  ? controller.filteredList.value = controller.sportyPickEmList
+                  : controller.filteredList.value = controller.cardsList;
           return Wrap(
             runSpacing: 10,
             alignment: WrapAlignment.start,

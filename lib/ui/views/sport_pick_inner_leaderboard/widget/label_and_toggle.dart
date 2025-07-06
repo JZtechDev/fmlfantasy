@@ -2,7 +2,6 @@ import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/top_players_toggle.dart';
 import 'package:fmlfantasy/ui/views/sport_pick_inner_leaderboard/controller/sport_pick_inner_leaderboard_controller.dart';
-import 'package:fmlfantasy/ui/views/sport_pick_inner_leaderboard/widget/sport_pick_toggle.dart';
 
 class SportPickInnerLabelAndToggle
     extends GetView<SportPickInnerLeaderboardController> {

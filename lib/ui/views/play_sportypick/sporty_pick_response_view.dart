@@ -1,11 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
+import 'package:fmlfantasy/ui/components/custom_sliver.dart';
+import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/views/play_sportypick/controller/play_sportypick_responses_controller.dart';
 import 'package:fmlfantasy/ui/views/play_sportypick/widgets/teams_responses.dart';
-import 'package:flutter_svg/svg.dart';
-
-import '../../../app/app_images/app_images.dart';
+import 'package:fmlfantasy/ui/widgets/dashboard_button.dart';
 
 class PlaySportyResponses extends GetView<PlaySportypickResponsesController> {
   const PlaySportyResponses({super.key});
@@ -14,43 +15,39 @@ class PlaySportyResponses extends GetView<PlaySportypickResponsesController> {
   Widget build(BuildContext context) {
     Get.put(PlaySportypickResponsesController());
     return Scaffold(
-      backgroundColor: AppColors.grey,
-      appBar: const AppBarGeneral(
-        title: 'Play Sportypick Responses',
-      ),
+      appBar: HomeAppBar(title: 'SportyPick\'em'.tr),
+      backgroundColor: AppColors.backgroud,
+      resizeToAvoidBottomInset: false,
+      extendBody: true,
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 45.h,
-            automaticallyImplyLeading: false,
-            pinned: true,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            flexibleSpace: Obx(() => SportsTabBar(
-                sportsList: controller.sportsList,
-                selectedIndex: controller.sportsList
-                    .indexWhere((sport) => sport.title == selectedSPort.value),
-                onTap: (index) {
-                  selectedSPort.value = controller.sportsList[index].title;
-                  controller.selectedIndex.value = index;
-                  controller.selectedSport.value =
-                      controller.sportsList[index].title;
-                })),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.only(left: 15.w, right: 15.w, top: 15.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  verticalSpace(10.h),
-                  Row(
+          CustomSliver(
+            height: 140.h,
+            appBar: Column(
+              children: [
+                Obx(() => SportsTabBar(
+                    sportsList: controller.sportsList,
+                    selectedIndex: controller.sportsList.indexWhere(
+                        (sport) => sport.title == selectedSPort.value),
+                    onTap: (index) {
+                      selectedSPort.value = controller.sportsList[index].title;
+                      controller.selectedIndex.value = index;
+                      controller.selectedSport.value =
+                          controller.sportsList[index].title;
+                    })),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                  decoration: const BoxDecoration(color: AppColors.darkGreen),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'My SportyPick\'em'.tr,
                         style: globalTextStyle(
-                            fontSize: 26.sp, fontWeight: FontWeight.w600),
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.secondary),
                       ),
                       GestureDetector(
                           onTap: () {
@@ -59,10 +56,25 @@ class PlaySportyResponses extends GetView<PlaySportypickResponsesController> {
                             //   delegate: SearchDraws(),
                             // );
                           },
-                          child: SvgPicture.asset(AppImages.searchMenu)),
+                          child: Icon(CupertinoIcons.search,
+                              color: AppColors.secondary, size: 20.h)),
                     ],
                   ),
-                  verticalSpace(15.h),
+                ),
+              ],
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 15.w,
+                right: 15.w,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const DashboardButton(),
+                  verticalSpace(10.h),
                   const MyResponsesTeams(),
                 ],
               ),

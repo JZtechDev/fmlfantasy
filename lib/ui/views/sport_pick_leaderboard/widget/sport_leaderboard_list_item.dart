@@ -1,5 +1,4 @@
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
-import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/model/lotto_leaderboard_models.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
@@ -113,7 +112,7 @@ class SportLeaderboardListItem extends GetView<SportPickLeaderboardController> {
                             SizedBox(
                               width: Get.width * 0.2,
                               child: Text(
-                                matches.homeTeamName! ?? '',
+                                matches.homeTeamName ?? '',
                                 style: globalTextStyle2(
                                     fontSize: maxWidth > 600 ? 10.sp : 14.sp,
                                     color: AppColors.secondary,
@@ -145,7 +144,7 @@ class SportLeaderboardListItem extends GetView<SportPickLeaderboardController> {
                               width: Get.width * 0.2,
                               child: Text(
                                 textAlign: TextAlign.end,
-                                matches.awayTeamName! ?? '',
+                                matches.awayTeamName ?? '',
                                 style: globalTextStyle2(
                                     fontSize: maxWidth > 600 ? 10.sp : 14.sp,
                                     color: AppColors.secondary,

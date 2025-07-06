@@ -1,6 +1,5 @@
 import 'package:fmlfantasy/model/my_draws_model.dart';
 import 'package:fmlfantasy/ui/views/my_draws/controller/my_draws_controller.dart';
-import 'package:fmlfantasy/ui/views/my_draws/widget/draw_teams_skeleton.dart';
 import 'package:fmlfantasy/ui/views/my_draws/widget/draws_leaderboard_table.dart';
 import 'package:fmlfantasy/ui/views/play_sportypick/widgets/team_response_card.dart';
 import 'package:flutter/material.dart';
@@ -12,32 +11,26 @@ class MyResponsesTeams extends GetView<MyDrawsController> {
   @override
   Widget build(BuildContext context) {
     Get.put(MyDrawsController());
-    return Obx(
-      () => controller.isLoading.value
-          ? const DrawsTeamsSkeleton()
-          : LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-                return Obx(() => ListView.builder(
-                      reverse: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.myDrawsTeams.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (BuildContext context, int index) {
-                        DrawTeamsModel myDraws = controller.myDrawsTeams[index];
-                        return GestureDetector(
-                          onTap: () {
-                            controller
-                                .fetchDrawsDetails(myDraws.drawID.toString());
-                            Get.to(() =>
-                                DrawsLeaderboardTable(myDrawsTeams: myDraws));
-                          },
-                          child: TeamResponseCard(index, myDraws),
-                        );
-                      },
-                    ));
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Obx(() => ListView.builder(
+              reverse: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: controller.myDrawsTeams.length,
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (BuildContext context, int index) {
+                DrawTeamsModel myDraws = controller.myDrawsTeams[index];
+                return GestureDetector(
+                  onTap: () {
+                    controller.fetchDrawsDetails(myDraws.drawID.toString());
+                    Get.to(() => DrawsLeaderboardTable(myDrawsTeams: myDraws));
+                  },
+                  child: TeamResponseCard(index, myDraws),
+                );
               },
-            ),
+            ));
+      },
     );
   }
 }

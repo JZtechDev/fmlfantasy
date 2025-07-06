@@ -102,6 +102,33 @@ class DashboardController extends GetxController {
     ),
   ];
 
+  List<Cards> sportyPickEmList = [
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'Play SportyPick\'Em',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: 'assets/new_images/create team.svg',
+      route: AppRoutes.playSportyPick,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MY SportyPick\'Em',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.matchCenter,
+      route: AppRoutes.playSportyResponses,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'SportyPick\'Em LEADERBOARD',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.leaderboard,
+      route: AppRoutes.sportPickLeaderboard,
+    ),
+  ];
+
   @override
   void onInit() {
     filteredList.addAll(cardsList);
