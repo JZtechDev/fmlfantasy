@@ -59,7 +59,7 @@ class AppTextField extends StatelessWidget {
         controller: controller,
         validator: validator,
         style: globalTextStyle2(
-          fontSize: AppSizing.isMobile(context) ? 14.sp : 8.sp,
+          fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
           color: textColor ?? AppColors.dark,
           fontWeight: FontWeight.w600,
         ),
@@ -68,12 +68,12 @@ class AppTextField extends StatelessWidget {
           prefixText: preText,
           fillColor: fillColor ?? AppColors.white,
           labelStyle: globalTextStyle2(
-            fontSize: AppSizing.isMobile(context) ? 14.sp : 14.sp,
+            fontSize: AppSizing.isMobile(context) ? 12.sp : 14.sp,
             color: textColor ?? AppColors.dark,
             fontWeight: FontWeight.w500,
           ),
           hintStyle: globalTextStyle2(
-            fontSize: AppSizing.isMobile(context) ? 14.sp : 12.sp,
+            fontSize: AppSizing.isMobile(context) ? 12.sp : 12.sp,
             color: textColor ?? AppColors.dark,
             fontWeight: FontWeight.w500,
           ),

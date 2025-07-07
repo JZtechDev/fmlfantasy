@@ -63,7 +63,7 @@ class TwoFactorAuthController extends GetxController {
   Future<void> resendOTP() async {}
   final defaultPinTheme = PinTheme(
     width: 80,
-    height: 65,
+    height: 50,
     textStyle: globalTextStyle(
       fontSize: AppSizing.isMobile(Get.context!) ? 18.sp : 12.sp,
       color: AppColors.dark,

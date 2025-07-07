@@ -86,7 +86,7 @@ class OtpController extends GetxController {
 
   final defaultPinTheme = PinTheme(
     width: 80,
-    height: 65,
+    height: 60,
     textStyle: globalTextStyle(
       fontSize: AppSizing.isMobile(Get.context!) ? 18.sp : 14.sp,
       color: AppColors.dark,

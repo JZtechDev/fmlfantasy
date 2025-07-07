@@ -83,7 +83,9 @@ class RegisterForm extends StatelessWidget {
                         color: controller.hasMinLength
                             ? Colors.green
                             : AppColors.textGray,
-                        fontWeight: FontWeight.w400)),
+                        fontWeight: controller.hasMinLength
+                            ? FontWeight.w700
+                            : FontWeight.w400)),
               ],
             ),
             Row(
@@ -101,7 +103,9 @@ class RegisterForm extends StatelessWidget {
                         color: controller.hasNumber
                             ? Colors.green
                             : AppColors.textGray,
-                        fontWeight: FontWeight.w400)),
+                        fontWeight: controller.hasNumber
+                            ? FontWeight.w700
+                            : FontWeight.w400)),
               ],
             ),
             verticalSpace(5),
@@ -121,7 +125,9 @@ class RegisterForm extends StatelessWidget {
                         color: controller.hasSpecialChar
                             ? Colors.green
                             : AppColors.textGray,
-                        fontWeight: FontWeight.w400)),
+                        fontWeight: controller.hasSpecialChar
+                            ? FontWeight.w700
+                            : FontWeight.w400)),
               ],
             ),
             verticalSpace(5),
@@ -141,7 +147,9 @@ class RegisterForm extends StatelessWidget {
                         color: controller.hasUppercase
                             ? Colors.green
                             : AppColors.textGray,
-                        fontWeight: FontWeight.w400)),
+                        fontWeight: controller.hasUppercase
+                            ? FontWeight.w700
+                            : FontWeight.w400)),
               ],
             ),
             verticalSpace(10),
@@ -186,8 +194,8 @@ class RegisterForm extends StatelessWidget {
                                   fontSize: AppSizing.isMobile(context)
                                       ? 12.sp
                                       : 8.sp,
-                                  color: AppColors.textGray,
-                                  fontWeight: FontWeight.w500),
+                                  color: AppColors.dark,
+                                  fontWeight: FontWeight.w600),
                             ),
                             Expanded(child: Container()),
                             Icon(

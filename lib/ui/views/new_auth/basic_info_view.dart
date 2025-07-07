@@ -1,4 +1,6 @@
+import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/app/app_sizings.dart';
+import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/ui/views/new_auth/controller/register_controller.dart';
 import 'package:fmlfantasy/ui/widgets/app_textfield.dart';
 import 'package:fmlfantasy/ui/widgets/primary_button.dart';
@@ -13,36 +15,51 @@ class BasicInfoView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(RegisterNewController());
     return Scaffold(
-      backgroundColor: AppColors.grey,
+      backgroundColor: Color.fromRGBO(44, 86, 80, 1),
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding:
-            const EdgeInsets.only(left: 20, right: 10, bottom: 30, top: 100),
+            const EdgeInsets.only(left: 20, right: 20, bottom: 30, top: 100),
         child: GetBuilder<RegisterNewController>(builder: (controller) {
           return Form(
             key: controller.basicInfoFormKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Image.asset(
+                    AppImages.logo,
+                    height: AppSizing.isMobile(context) ? 50.h : 40.h,
+                  ),
+                ),
+                verticalSpace(10),
                 GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: const Icon(CupertinoIcons.arrow_left)),
-                verticalSpace(20.h),
-                Text(
-                  'Hi!\nGreat To Have You',
-                  style: TextStyle(
-                      fontSize: AppSizing.isMobile(context) ? 30.sp : 24.sp),
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Image.asset(
+                    'assets/logo/back.png',
+                    height: AppSizing.isMobile(context) ? 22.h : 20.h,
+                  ),
                 ),
                 verticalSpace(10.h),
                 Text(
-                  'What is your full name name?',
-                  style: TextStyle(
-                      fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                      color: AppColors.textGray),
+                  'Hi! Great To Have You',
+                  style: globalTextStyle(
+                      fontSize: AppSizing.isMobile(context) ? 22.sp : 18.sp,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.white),
                 ),
-                verticalSpace(70.h),
+                verticalSpace(5.h),
+                Text(
+                  'What is your full name name?',
+                  style: globalTextStyle(
+                      fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600),
+                ),
+                verticalSpace(40.h),
                 AppTextField(
                   labelText: 'First Name'.tr,
                   fillColor: AppColors.white,
@@ -68,7 +85,7 @@ class BasicInfoView extends StatelessWidget {
                 ),
                 verticalSpace(20.h),
                 PrimaryButton(
-                    buttonText: 'Next'.tr,
+                    buttonText: 'Continue'.tr,
                     onPressed: () {
                       if (controller.basicInfoFormKey.currentState!
                           .validate()) {

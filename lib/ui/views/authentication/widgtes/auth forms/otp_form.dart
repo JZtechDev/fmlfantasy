@@ -17,37 +17,44 @@ class OtpForm extends GetView<OtpController> {
             child: Text(
               'Game On! Verify Playful Side'.tr,
               style: globalTextStyle(
-                  fontSize: AppSizing.isMobile(context) ? 28.sp : 16.sp,
+                  fontSize: AppSizing.isMobile(context) ? 18.sp : 16.sp,
                   fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,
             ),
           ),
-          RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              style: globalTextStyle2(
-                  fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                  color: AppColors.textGray),
-              children: [
-                TextSpan(
-                    text: 'An OTP is sent to your Email'.tr,
+          verticalSpace(20.h),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: globalTextStyle2(
+                    fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
+                    color: AppColors.textGray),
+                children: [
+                  TextSpan(
+                      text: 'An Verification code is sent to your Email '.tr,
+                      style: globalTextStyle2(
+                          fontSize: AppSizing.isMobile(context) ? 14.sp : 8.sp,
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w600)),
+                  TextSpan(
+                    text:
+                        '${controller.email[0]}${controller.email[1]}${controller.email[2]}**********',
                     style: globalTextStyle2(
-                        fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                        color: AppColors.textGray)),
-                TextSpan(
-                  text:
-                      '${controller.email[0]}${controller.email[1]}${controller.email[2]}**********',
-                  style: globalTextStyle2(
-                      fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                      color: AppColors
-                          .primary), // Use a different color for the email
-                ),
-                TextSpan(
-                    text: 'Please enter the OTP to continue'.tr,
-                    style: globalTextStyle2(
-                        fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                        color: AppColors.textGray)),
-              ],
+                        fontSize: AppSizing.isMobile(context) ? 14.sp : 8.sp,
+                        color: AppColors.secondary,
+                        fontWeight: FontWeight
+                            .w600), // Use a different color for the email
+                  ),
+                  TextSpan(
+                      text: 'Please enter the Code to continue'.tr,
+                      style: globalTextStyle2(
+                          fontSize: AppSizing.isMobile(context) ? 14.sp : 8.sp,
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w600)),
+                ],
+              ),
             ),
           ),
           verticalSpace(40.h),
@@ -57,7 +64,7 @@ class OtpForm extends GetView<OtpController> {
                 : Container(
                     margin: EdgeInsets.only(left: 20.w, right: 20.w),
                     alignment: Alignment.center,
-                    height: 35.h,
+                    height: 30.h,
                     width: Get.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.r),
@@ -88,15 +95,11 @@ class OtpForm extends GetView<OtpController> {
                   defaultPinTheme: controller.defaultPinTheme.copyWith(
                       decoration: BoxDecoration(
                           color: AppColors.grey,
-                          border: Border.all(
-                              color: AppColors.borderColor, width: 1.w),
                           borderRadius: BorderRadius.circular(5.r))),
                   separatorBuilder: (index) => Container(
                     width: 5.w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.r),
-                      border:
-                          Border.all(color: AppColors.borderColor, width: 1.w),
                     ),
                   ),
                   hapticFeedbackType: HapticFeedbackType.lightImpact,

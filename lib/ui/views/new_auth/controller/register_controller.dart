@@ -175,44 +175,40 @@ class RegisterNewController extends GetxController {
         context: context,
         countryListTheme: CountryListThemeData(
           flagSize: 25,
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.backgroud,
           textStyle: globalTextStyle(
               fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
-              color: AppColors.textGray),
-          bottomSheetHeight: 500, // Optional. Country list modal height
-          //Optional. Sets the border radius for the bottomsheet.
+              color: AppColors.white),
+          bottomSheetHeight: 500,
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
           ),
-          //Optional. Styles the search field.
           inputDecoration: InputDecoration(
+            fillColor: AppColors.white,
             labelText: 'Search Country',
-            labelStyle:
-                globalTextStyle(fontSize: 12.sp, color: AppColors.textGray),
-            fillColor: AppColors.grey,
+            labelStyle: globalTextStyle(fontSize: 12.sp, color: AppColors.dark),
             filled: true,
             hintText: 'Search Country',
-            hintStyle:
-                globalTextStyle(fontSize: 12.sp, color: AppColors.textGray),
+            hintStyle: globalTextStyle(fontSize: 12.sp, color: AppColors.dark),
             prefixIcon: const Icon(
               Icons.search,
-              color: AppColors.textGray,
+              color: AppColors.secondary,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5.0.r),
               borderSide:
-                  const BorderSide(color: AppColors.borderColor, width: 1),
+                  const BorderSide(color: AppColors.secondary, width: 1),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5.0.r),
               borderSide:
-                  const BorderSide(color: AppColors.borderColor, width: 1),
+                  const BorderSide(color: AppColors.secondary, width: 1),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5.0.r),
               borderSide:
-                  const BorderSide(color: AppColors.borderColor, width: 1),
+                  const BorderSide(color: AppColors.secondary, width: 1),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5.0.r),

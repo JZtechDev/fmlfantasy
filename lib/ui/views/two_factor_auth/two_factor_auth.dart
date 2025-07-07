@@ -16,7 +16,7 @@ class TwoFactorAuth extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(TwoFactorAuthController());
     return Scaffold(
-      backgroundColor: AppColors.grey,
+      backgroundColor: Color.fromRGBO(44, 86, 80, 1),
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding:
@@ -24,19 +24,38 @@ class TwoFactorAuth extends StatelessWidget {
         child: GetBuilder<TwoFactorAuthController>(builder: (controller) {
           return Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 70),
+                child: Image.asset(
+                  AppImages.logo,
+                  height: AppSizing.isMobile(context) ? 50.h : 40.h,
+                ),
+              ),
+              Text(
+                'Welcome to FMLFantasy'.tr,
+                style: globalTextStyle(
+                    fontSize: AppSizing.isMobile(context) ? 16.sp : 18.sp,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.secondary),
+              ),
               Text(
                 'Your mobile phone number'.tr,
                 style: globalTextStyle(
-                    fontSize: AppSizing.isMobile(context) ? 28.sp : 18.sp,
-                    fontWeight: FontWeight.w500),
+                    fontSize: AppSizing.isMobile(context) ? 22.sp : 18.sp,
+                    fontWeight: FontWeight.w800),
               ),
               verticalSpace(20.h),
-              Text(
-                'To make your account fully secure, please let us know to what phone number we can send a security code.'
-                    .tr,
-                style: globalTextStyle2(
-                    fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                    color: AppColors.textGray),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  textAlign: TextAlign.center,
+                  'To make your account fully secure, please let us know to what phone number we can send a security code.'
+                      .tr,
+                  style: globalTextStyle2(
+                      fontSize: AppSizing.isMobile(context) ? 14.sp : 8.sp,
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600),
+                ),
               ),
               verticalSpace(40.h),
               GetBuilder<RegisterNewController>(builder: (regController) {
@@ -46,14 +65,14 @@ class TwoFactorAuth extends StatelessWidget {
                   style: globalTextStyle2(
                     fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
                     color: AppColors.dark,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w600,
                   ),
                   pickerDialogStyle: PickerDialogStyle(
                     backgroundColor: AppColors.white,
                     countryNameStyle: globalTextStyle2(
                       fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
                       color: AppColors.dark,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   decoration: InputDecoration(
@@ -61,8 +80,8 @@ class TwoFactorAuth extends StatelessWidget {
                     fillColor: AppColors.white,
                     labelStyle: globalTextStyle2(
                       fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                      color: AppColors.textGray,
-                      fontWeight: FontWeight.w500,
+                      color: AppColors.dark,
+                      fontWeight: FontWeight.w600,
                     ),
                     labelText: 'Phone Number'.tr,
                     border: OutlineInputBorder(
@@ -107,6 +126,73 @@ class TwoFactorAuth extends StatelessWidget {
                 );
               }),
               verticalSpace(20),
+              GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: AppColors.white,
+                        context: Get.context!,
+                        builder: (BuildContext context) {
+                          return Container(
+                            padding: const EdgeInsets.all(20),
+                            height: Get.height * 0.7,
+                            width: Get.width,
+                            child: Column(
+                              spacing: 10,
+                              children: [
+                                Image.asset(
+                                  AppImages.introModalImage,
+                                  height: 100,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Text(
+                                    'Why we ask for phone number verification'
+                                        .tr,
+                                    style: globalTextStyle2(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                                verticalSpace(20),
+                                Text(
+                                  'To keep your account safe and protect your funds from malicious actors, we will send you a short security code to confirm it’s really you using your account.'
+                                      .tr,
+                                  style: globalTextStyle(
+                                      letterSpacing: 5,
+                                      fontSize: 12.sp,
+                                      color: AppColors.textGray,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                verticalSpace(10),
+                                Text(
+                                  'This adds an extra layer of security to your account in case your password is stolen.'
+                                      .tr,
+                                  style: globalTextStyle(
+                                      letterSpacing: 5,
+                                      fontSize: 12.sp,
+                                      color: AppColors.textGray,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                const Spacer(),
+                                PrimaryButton(
+                                    buttonText: 'Okay'.tr,
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    isEnabled: true),
+                              ],
+                            ),
+                          );
+                        });
+                  },
+                  child: Text(
+                    'Why Did We Ask For This?'.tr,
+                    style: globalTextStyle2(
+                        fontSize: 14.sp, fontWeight: FontWeight.w600),
+                  )),
+              verticalSpace(20),
               PrimaryButton(
                   buttonText: 'Continue'.tr,
                   onPressed: () {
@@ -115,71 +201,6 @@ class TwoFactorAuth extends StatelessWidget {
                   },
                   isEnabled: true),
               verticalSpace(20),
-              GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: AppColors.white,
-                      context: Get.context!,
-                      builder: (BuildContext context) {
-                        return Container(
-                          padding: const EdgeInsets.all(20),
-                          height: Get.height * 0.7,
-                          width: Get.width,
-                          child: Column(
-                            spacing: 10,
-                            children: [
-                              Image.asset(
-                                AppImages.introModalImage,
-                                height: 100,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Text(
-                                  'Why we ask for phone number verification'.tr,
-                                  style: globalTextStyle2(fontSize: 18.sp),
-                                ),
-                              ),
-                              verticalSpace(20),
-                              Text(
-                                'To keep your account safe and protect your funds from malicious actors, we will send you a short security code to confirm it’s really you using your account.'
-                                    .tr,
-                                style: globalTextStyle(
-                                    letterSpacing: 5,
-                                    fontSize: 12.sp,
-                                    color: AppColors.textGray,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              verticalSpace(10),
-                              Text(
-                                'This adds an extra layer of security to your account in case your password is stolen.'
-                                    .tr,
-                                style: globalTextStyle(
-                                    letterSpacing: 5,
-                                    fontSize: 12.sp,
-                                    color: AppColors.textGray,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              const Spacer(),
-                              PrimaryButton(
-                                  buttonText: 'Okay'.tr,
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  isEnabled: true),
-                            ],
-                          ),
-                        );
-                      });
-                },
-                child: Text(
-                  'Why Did We Ask For This?'.tr,
-                  style: globalTextStyle2(
-                      fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                      color: AppColors.primary),
-                ),
-              ),
             ],
           );
         }),

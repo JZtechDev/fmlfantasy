@@ -15,126 +15,91 @@ class OtpView extends GetView<OtpController> {
   Widget build(BuildContext context) {
     Get.put(OtpController());
     return Scaffold(
+      backgroundColor: Color.fromRGBO(44, 86, 80, 1),
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.white,
       body: LayoutBuilder(builder: (context, constraints) {
         final maxWidth = constraints.maxWidth;
-        return Stack(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const LineContainer(),
-            Align(
-              alignment: Alignment.center,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  verticalSpace(maxWidth > 600 ? 50.h : 100.h),
-                  SvgPicture.asset(
-                    AppImages.logo,
-                    height: maxWidth > 600 ? 65.h : 50.h,
-                    width: maxWidth > 600 ? 65.w : 50.w,
-                  ),
-                  verticalSpace(50.h),
-                  const OtpForm(),
-                  verticalSpace(10.h),
-                  Obx(() {
-                    return controller.resenOtp.value == true
-                        ? Column(
-                            children: [
-                              Text(
-                                'Did not receive the OTP?'.tr,
-                                style: globalTextStyle2(
-                                    fontSize: AppSizing.isMobile(context)
-                                        ? 12.sp
-                                        : 8.sp,
-                                    color: AppColors.textGray),
-                              ),
-                              Obx(
-                                () => RichText(
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: 'Request New one in '.tr,
-                                        style: globalTextStyle2(
-                                            fontSize:
-                                                AppSizing.isMobile(context)
-                                                    ? 12.sp
-                                                    : 8.sp,
-                                            color: AppColors.textGray),
-                                      ),
-                                      TextSpan(
-                                        text: controller.countdown.value
-                                            .toString(),
-                                        style: globalTextStyle2(
-                                            fontSize:
-                                                AppSizing.isMobile(context)
-                                                    ? 12.sp
-                                                    : 8.sp,
-                                            color: AppColors.dark,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
-                        : Container();
-                  })
-                ],
+            verticalSpace(maxWidth > 600 ? 50.h : 100.h),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: Image.asset(
+                AppImages.logo,
               ),
             ),
-            Positioned(
-              bottom: 20.h,
-              right: 10.h,
-              left: 10.h,
-              child: Column(
-                children: [
-                  Obx(
-                    () {
-                      return controller.resenOtp.value == false
-                          ? PrimaryButton(
-                              buttonText: 'Resend'.tr,
-                              onPressed: () {
-                                controller.resendOTP();
-                              },
-                              isEnabled: true,
-                              backgroundColor: AppColors.grey,
-                              textColor: AppColors.dark,
-                            )
-                          : Container();
-                    },
-                  ),
-                  verticalSpace(10.h),
-                  PrimaryButton(
-                      buttonText: 'Submit'.tr,
-                      onPressed: () {
-                        controller.signUp();
-                      },
-                      isEnabled: true),
-                  verticalSpace(10.h),
-                  RichText(
-                    text: TextSpan(
+            verticalSpace(20.h),
+            const OtpForm(),
+            verticalSpace(20.h),
+            Obx(() {
+              return controller.resenOtp.value == true
+                  ? Column(
                       children: [
-                        TextSpan(
-                          text: 'Facing Issue? '.tr,
+                        Text(
+                          'Did not receive the OTP?'.tr,
                           style: globalTextStyle2(
                               fontSize:
                                   AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                              color: AppColors.textGray),
+                              color: AppColors.white,
+                              fontWeight: FontWeight.w600),
                         ),
-                        TextSpan(
-                          text: 'Contact us'.tr,
-                          style: globalTextStyle2(
-                              fontSize:
-                                  AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                              color: AppColors.dark,
-                              fontWeight: FontWeight.bold),
-                        ),
+                        Obx(
+                          () => RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Request New one in '.tr,
+                                  style: globalTextStyle2(
+                                      fontSize: AppSizing.isMobile(context)
+                                          ? 12.sp
+                                          : 8.sp,
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                TextSpan(
+                                  text: controller.countdown.value.toString(),
+                                  style: globalTextStyle2(
+                                      fontSize: AppSizing.isMobile(context)
+                                          ? 12.sp
+                                          : 8.sp,
+                                      color: AppColors.secondary,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                       ],
-                    ),
-                  ),
-                ],
-              ),
+                    )
+                  : Container();
+            }),
+            Column(
+              children: [
+                Obx(
+                  () {
+                    return controller.resenOtp.value == false
+                        ? PrimaryButton(
+                            buttonText: 'Resend'.tr,
+                            onPressed: () {
+                              controller.resendOTP();
+                            },
+                            isEnabled: true,
+                            backgroundColor: AppColors.grey,
+                            textColor: AppColors.dark,
+                          )
+                        : Container();
+                  },
+                ),
+                verticalSpace(10.h),
+                PrimaryButton(
+                    buttonText: 'Submit'.tr,
+                    onPressed: () {
+                      controller.signUp();
+                    },
+                    isEnabled: true),
+                verticalSpace(10.h),
+              ],
             ),
           ],
         );

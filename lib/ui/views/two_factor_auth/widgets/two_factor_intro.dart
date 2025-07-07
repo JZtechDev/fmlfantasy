@@ -15,32 +15,41 @@ class TwoFactorIntro extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(TwoFactorAuthController());
     return Scaffold(
-      backgroundColor: AppColors.grey,
+      backgroundColor: Color.fromRGBO(44, 86, 80, 1),
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: EdgeInsets.only(top: 100.h, left: 20.w, right: 20.w),
+        padding: EdgeInsets.only(top: 70.h, left: 20.w, right: 20.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           spacing: 10.h,
           children: [
-            Text('Your privacy is important'.tr,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Image.asset(
+                AppImages.logo,
+                height: AppSizing.isMobile(context) ? 50.h : 40.h,
+              ),
+            ),
+            Text('We respect your Privacy.'.tr,
                 style: globalTextStyle(
-                    fontSize: AppSizing.isMobile(context) ? 28.sp : 18.sp)),
+                    fontSize: AppSizing.isMobile(context) ? 18.sp : 18.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.white)),
             Text(
               'At Fantasy Bulls, we value you are in control of your data.'.tr,
               style: globalTextStyle(
                   fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                  color: AppColors.textGray,
-                  fontWeight: FontWeight.w400),
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w600),
             ),
             Text(
               'Please confirm that you have read and acknowledged the conditions and information.'
                   .tr,
               style: globalTextStyle(
                   fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
-                  color: AppColors.textGray,
-                  fontWeight: FontWeight.w400),
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w600),
             ),
             verticalSpace(30.h),
             Row(
@@ -48,14 +57,14 @@ class TwoFactorIntro extends StatelessWidget {
               children: [
                 const Icon(
                   CupertinoIcons.link,
-                  color: AppColors.primary,
+                  color: AppColors.secondary,
                   size: 15,
                 ),
                 Text(
                   'Data Privacy Declaration'.tr,
                   style: globalTextStyle(
                       fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                      color: AppColors.primary),
+                      color: AppColors.secondary),
                 )
               ],
             ),
@@ -65,14 +74,14 @@ class TwoFactorIntro extends StatelessWidget {
               children: [
                 const Icon(
                   CupertinoIcons.link,
-                  color: AppColors.primary,
+                  color: AppColors.secondary,
                   size: 15,
                 ),
                 Text(
                   'General Terms and Conditions'.tr,
                   style: globalTextStyle(
                       fontSize: AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                      color: AppColors.primary),
+                      color: AppColors.secondary),
                 )
               ],
             ),
@@ -123,17 +132,17 @@ class TwoFactorIntro extends StatelessWidget {
                             style: globalTextStyle(
                                 fontSize:
                                     AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                                color: AppColors.textGray,
-                                fontWeight: FontWeight.w500),
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w600),
                           ),
                           TextSpan(
-                              text: 'newsletter terms'.tr,
-                              style: globalTextStyle(
+                            text: 'newsletter terms'.tr,
+                            style: globalTextStyle(
                                 fontSize:
                                     AppSizing.isMobile(context) ? 12.sp : 8.sp,
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w500,
-                              )),
+                                color: AppColors.secondary,
+                                fontWeight: FontWeight.w600),
+                          ),
                         ],
                       ),
                     ),
@@ -148,33 +157,22 @@ class TwoFactorIntro extends StatelessWidget {
                   onPressed: () {
                     showModalBottomSheet(
                         isScrollControlled: true,
-                        backgroundColor: AppColors.white,
+                        backgroundColor: AppColors.darkGreen,
                         context: Get.context!,
                         builder: (BuildContext context) {
                           return Container(
                             padding: const EdgeInsets.all(20),
                             height: AppSizing.isMobile(context)
-                                ? Get.height * 0.7
+                                ? Get.height * 0.55
                                 : Get.height * 0.55,
                             width: Get.width,
                             child: Column(
                               spacing: 10,
                               children: [
+                                verticalSpace(30),
                                 Image.asset(
-                                  AppImages.introModalImage,
-                                  height: 100,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: Text(
-                                    'Stay up to date via email, SMS, phone or mail.'
-                                        .tr,
-                                    style: globalTextStyle2(
-                                        fontSize: AppSizing.isMobile(context)
-                                            ? 18.sp
-                                            : 12.sp),
-                                  ),
+                                  'assets/logo/notification-white.png',
+                                  height: 50,
                                 ),
                                 verticalSpace(20),
                                 Text(
@@ -183,10 +181,10 @@ class TwoFactorIntro extends StatelessWidget {
                                   style: globalTextStyle(
                                       letterSpacing: 5,
                                       fontSize: AppSizing.isMobile(context)
-                                          ? 12.sp
+                                          ? 14.sp
                                           : 8.sp,
-                                      color: AppColors.textGray,
-                                      fontWeight: FontWeight.w400),
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w500),
                                 ),
                                 const Spacer(),
                                 PrimaryButton(
@@ -195,15 +193,15 @@ class TwoFactorIntro extends StatelessWidget {
                                       Get.to(() => const TwoFactorAuth());
                                     },
                                     isEnabled: true),
-                                verticalSpace(10),
-                                Text(
-                                  'No I am not interested'.tr,
-                                  style: globalTextStyle2(
-                                      fontSize: AppSizing.isMobile(context)
-                                          ? 14.sp
-                                          : 10.sp,
-                                      color: AppColors.primary),
-                                )
+                                PrimaryButton(
+                                    backgroundColor: AppColors.darkGreen,
+                                    borderColor: AppColors.secondary,
+                                    textColor: AppColors.secondary,
+                                    buttonText: 'No I am not interested'.tr,
+                                    onPressed: () {
+                                      Get.to(() => const TwoFactorAuth());
+                                    },
+                                    isEnabled: true),
                               ],
                             ),
                           );
