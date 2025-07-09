@@ -14,48 +14,51 @@ class MakeGroupModal extends GetView<FriendsController> {
       builder: (controller) => Dialog(
         insetAnimationCurve: Curves.easeInOutCubicEmphasized,
         insetAnimationDuration: const Duration(seconds: 3),
-        backgroundColor: AppColors.white,
-        surfaceTintColor: AppColors.white,
+        backgroundColor: AppColors.primary,
+        surfaceTintColor: AppColors.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0.r),
         ),
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: 10.w,
-            right: 10.w,
-            bottom: 15.h,
-            top: 15.h,
-          ),
-          child: Stack(
-            children: [
-              Positioned(
-                right: 0,
-                child: GestureDetector(
-                  onTap: () {
-                    Get.close(1);
-                  },
-                  child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                      padding: const EdgeInsets.all(5.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.r),
-                        border: Border.all(
-                          color: AppColors.borderColor,
-                        ),
-                        color: AppColors.grey,
-                      ),
-                      child: const Icon(FlutterRemix.close_line)),
+        child: Stack(
+          children: [
+            Positioned(
+              right: 0,
+              child: GestureDetector(
+                onTap: () {
+                  controller.nameController.clear();
+                  controller.emailController.clear();
+                  controller.phoneController.clear();
+                  Get.back();
+                },
+                child: Container(
+                    padding: const EdgeInsets.all(7.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.r),
+                      color: AppColors.secondary,
+                    ),
+                    child: const Icon(FlutterRemix.close_line)),
+              ),
+            ),
+            Positioned(
+              left: 0,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: AppColors.backgroud,
+                    borderRadius: BorderRadius.circular(5)),
+                child: Text(
+                  "Create Group".tr,
+                  style: globalTextStyle2(
+                      fontSize: 12.sp, fontWeight: FontWeight.w600),
                 ),
               ),
-              Column(
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    "Create Group".tr,
-                    style: globalTextStyle2(
-                        fontSize: 16.sp, fontWeight: FontWeight.w600),
-                  ),
-                  verticalSpace(20.h),
+                  verticalSpace(40.h),
                   Form(
                     key: controller.formKeyGroup,
                     child: AppTextField(
@@ -73,7 +76,7 @@ class MakeGroupModal extends GetView<FriendsController> {
                   GestureDetector(
                     onTap: () {
                       showModalBottomSheet(
-                          backgroundColor: Colors.white,
+                          backgroundColor: AppColors.primaryLight,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10.r),
@@ -96,7 +99,7 @@ class MakeGroupModal extends GetView<FriendsController> {
                                       Text('Add Contacts'.tr,
                                           style: globalTextStyle(
                                               fontSize: 12.sp,
-                                              fontWeight: FontWeight.w500)),
+                                              fontWeight: FontWeight.w700)),
                                       verticalSpace(20.h),
                                       ...controller.filteredData.map((e) {
                                         bool isSelected = controller
@@ -109,13 +112,9 @@ class MakeGroupModal extends GetView<FriendsController> {
                                           child: Container(
                                             width: Get.width,
                                             decoration: BoxDecoration(
-                                              color: AppColors.white,
+                                              color: AppColors.primaryDark,
                                               borderRadius:
                                                   BorderRadius.circular(5.r),
-                                              border: Border.all(
-                                                color: AppColors.borderColor,
-                                                width: 1,
-                                              ),
                                             ),
                                             padding: const EdgeInsets.all(10),
                                             margin: const EdgeInsets.only(
@@ -132,7 +131,7 @@ class MakeGroupModal extends GetView<FriendsController> {
                                                             FontWeight.w400)),
                                                 Icon(FlutterRemix.check_line,
                                                     color: isSelected
-                                                        ? AppColors.primary
+                                                        ? AppColors.secondary
                                                         : AppColors.borderColor)
                                               ],
                                             ),
@@ -151,8 +150,9 @@ class MakeGroupModal extends GetView<FriendsController> {
                                             child: Text('Select All'.tr,
                                                 style: globalTextStyle(
                                                     fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: AppColors.primary)),
+                                                    fontWeight: FontWeight.w800,
+                                                    color:
+                                                        AppColors.secondary)),
                                           ),
                                           GestureDetector(
                                             onTap: () {
@@ -161,7 +161,7 @@ class MakeGroupModal extends GetView<FriendsController> {
                                             child: Text('Remove All'.tr,
                                                 style: globalTextStyle(
                                                     fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w500,
+                                                    fontWeight: FontWeight.w800,
                                                     color: AppColors.errorRed)),
                                           ),
                                         ],
@@ -196,132 +196,6 @@ class MakeGroupModal extends GetView<FriendsController> {
                               fontWeight: FontWeight.w500),
                         )),
                   ),
-                  // Obx(
-                  //   () => MultiDropdown<GetContacts>(
-                  //     items: controller.items
-                  //         .toList(), // Bind to the reactive list
-                  //     controller: controller.controller,
-                  //     enabled: true,
-                  //     searchEnabled: true,
-                  //     chipDecoration: ChipDecoration(
-                  //       deleteIcon: Icon(
-                  //         size: 15.sp,
-                  //         FlutterRemix.close_line,
-                  //         color: AppColors.white,
-                  //       ),
-                  //       labelStyle: globalTextStyle2(
-                  //           fontSize: 10.sp, color: AppColors.white),
-                  //       borderRadius:
-                  //           const BorderRadius.all(Radius.circular(5)),
-                  //       backgroundColor: AppColors.primary,
-                  //       wrap: true,
-                  //       runSpacing: 2,
-                  //       spacing: 10,
-                  //     ),
-                  //     fieldDecoration: FieldDecoration(
-                  //         backgroundColor: AppColors.grey,
-                  //         borderRadius: 5,
-                  //         hintText: 'Friends'.tr,
-                  //         hintStyle: globalTextStyle2(
-                  //           fontSize: 12.sp,
-                  //           color: AppColors.textGray,
-                  //         ),
-                  //         showClearIcon: false,
-                  //         border: OutlineInputBorder(
-                  //           borderRadius: BorderRadius.circular(5),
-                  //           borderSide:
-                  //               const BorderSide(color: AppColors.borderColor),
-                  //         ),
-                  //         focusedBorder: OutlineInputBorder(
-                  //           borderRadius: BorderRadius.circular(5),
-                  //           borderSide: const BorderSide(
-                  //             color: AppColors.borderColor,
-                  //           ),
-                  //         ),
-                  //         disabledBorder: OutlineInputBorder(
-                  //           borderRadius: BorderRadius.circular(5),
-                  //           borderSide: const BorderSide(
-                  //             color: AppColors.borderColor,
-                  //           ),
-                  //         )),
-                  //     dropdownDecoration: DropdownDecoration(
-                  //       borderRadius: const BorderRadius.all(
-                  //         Radius.circular(5),
-                  //       ),
-                  //       marginTop: 2,
-                  //       maxHeight: 400,
-                  //       header: Padding(
-                  //         padding: const EdgeInsets.all(8),
-                  //         child: Text('Select Friends'.tr,
-                  //             textAlign: TextAlign.start,
-                  //             style: globalTextStyle2(
-                  //               fontSize: 12.sp,
-                  //               color: AppColors.textGray,
-                  //             )),
-                  //       ),
-                  //     ),
-                  //     dropdownItemDecoration: DropdownItemDecoration(
-                  //       selectedBackgroundColor: AppColors.white,
-                  //       selectedIcon:
-                  //           Icon(Icons.check, color: Colors.green.shade300),
-                  //       disabledIcon:
-                  //           Icon(Icons.lock, color: Colors.grey.shade300),
-                  //     ),
-                  //     validator: (value) {
-                  //       if (value == null || value.isEmpty) {
-                  //         return 'Please select friends'.tr;
-                  //       }
-                  //       return null;
-                  //     },
-                  //     onSelectionChange: (selectedItems) {
-                  //       controller.selectContacts = selectedItems;
-                  //     },
-                  //   ),
-                  // ),
-
-                  // const SizedBox(height: 12),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     GestureDetector(
-                  //       onTap: () {
-                  //         controller.controller.selectAll();
-                  //       },
-                  //       child: Text(
-                  //         'Select all'.tr,
-                  //         style: globalTextStyle2(
-                  //             fontSize: 12.sp, color: AppColors.primary),
-                  //       ),
-                  //     ),
-                  //     GestureDetector(
-                  //       onTap: () {
-                  //         controller.controller.clearAll();
-                  //       },
-                  //       child: Text(
-                  //         'Clear all'.tr,
-                  //         style: globalTextStyle2(
-                  //             fontSize: 12.sp, color: AppColors.errorRed),
-                  //       ),
-                  //     )
-                  //   ],
-                  // ),
-                  // Wrap(
-                  //   children: [
-                  //     ...controller.items.map((item) {
-                  //       return Padding(
-                  //         padding: const EdgeInsets.all(5.0),
-                  //         child: Chip(
-                  //           backgroundColor: AppColors.primary,
-                  //           label: Text(
-                  //             item.label,
-                  //             style: globalTextStyle2(
-                  //                 fontSize: 10.sp, color: AppColors.white),
-                  //           ),
-                  //         ),
-                  //       );
-                  //     })
-                  //   ],
-                  // ),
                   verticalSpace(20.h),
                   GetBuilder<FriendsController>(
                     builder: (controller) => PrimaryButton(
@@ -331,11 +205,12 @@ class MakeGroupModal extends GetView<FriendsController> {
                           controller.creatGroup();
                         },
                         isEnabled: true),
-                  )
+                  ),
+                  verticalSpace(20),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

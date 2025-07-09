@@ -18,8 +18,8 @@ class DeleteModal extends GetView<FriendsController> {
     return Dialog(
       insetAnimationCurve: Curves.easeInOutCubicEmphasized,
       insetAnimationDuration: const Duration(seconds: 3),
-      backgroundColor: AppColors.white,
-      surfaceTintColor: AppColors.white,
+      backgroundColor: AppColors.primary,
+      surfaceTintColor: AppColors.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0.r),
       ),
@@ -65,6 +65,8 @@ class DeleteModal extends GetView<FriendsController> {
                     Expanded(
                       child: PrimaryButton(
                           height: 10,
+                          borderColor: AppColors.errorRed,
+                          textColor: AppColors.white,
                           backgroundColor: AppColors.errorRed,
                           buttonText: 'Cancel'.tr,
                           onPressed: onPressedCancle,

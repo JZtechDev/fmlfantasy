@@ -13,8 +13,8 @@ class AddRemoveMembersModal extends GetView<FriendsController> {
       builder: (controller) => Dialog(
         insetAnimationCurve: Curves.easeInOutCubicEmphasized,
         insetAnimationDuration: const Duration(seconds: 3),
-        backgroundColor: AppColors.white,
-        surfaceTintColor: AppColors.white,
+        backgroundColor: AppColors.primary,
+        surfaceTintColor: AppColors.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0.r),
         ),
@@ -38,10 +38,7 @@ class AddRemoveMembersModal extends GetView<FriendsController> {
                       padding: const EdgeInsets.all(5.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.r),
-                        border: Border.all(
-                          color: AppColors.borderColor,
-                        ),
-                        color: AppColors.grey,
+                        color: AppColors.secondary,
                       ),
                       child: const Icon(FlutterRemix.close_line)),
                 ),
@@ -53,7 +50,7 @@ class AddRemoveMembersModal extends GetView<FriendsController> {
                     Text(
                       "Add New Members".tr,
                       style: globalTextStyle2(
-                          fontSize: 16.sp, fontWeight: FontWeight.w600),
+                          fontSize: 16.sp, fontWeight: FontWeight.w700),
                     ),
                     verticalSpace(20.h),
                     ...controller.groupMembers.map((e) {
@@ -62,10 +59,8 @@ class AddRemoveMembersModal extends GetView<FriendsController> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 10.w, vertical: 10.h),
                         decoration: BoxDecoration(
+                          color: AppColors.primaryDark,
                           borderRadius: BorderRadius.circular(5.r),
-                          border: Border.all(
-                            color: AppColors.borderColor,
-                          ),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,7 +81,7 @@ class AddRemoveMembersModal extends GetView<FriendsController> {
                                   e.fullName ?? '',
                                   style: globalTextStyle(
                                       fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w700),
                                 ),
                               ],
                             ),
@@ -112,7 +107,7 @@ class AddRemoveMembersModal extends GetView<FriendsController> {
                     GestureDetector(
                       onTap: () {
                         showModalBottomSheet(
-                            backgroundColor: Colors.white,
+                            backgroundColor: AppColors.primaryLight,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10.r),
@@ -133,10 +128,10 @@ class AddRemoveMembersModal extends GetView<FriendsController> {
                                     child: GetBuilder<FriendsController>(
                                       builder: (controller) =>
                                           Column(children: [
-                                        Text('Add Contacts'.tr,
+                                        Text('Add Member'.tr,
                                             style: globalTextStyle(
                                                 fontSize: 12.sp,
-                                                fontWeight: FontWeight.w500)),
+                                                fontWeight: FontWeight.w700)),
                                         verticalSpace(20.h),
                                         ...controller.filteredData.map((e) {
                                           bool isSelected = controller
@@ -150,13 +145,9 @@ class AddRemoveMembersModal extends GetView<FriendsController> {
                                             child: Container(
                                               width: Get.width,
                                               decoration: BoxDecoration(
-                                                color: AppColors.white,
+                                                color: AppColors.primaryDark,
                                                 borderRadius:
                                                     BorderRadius.circular(5.r),
-                                                border: Border.all(
-                                                  color: AppColors.borderColor,
-                                                  width: 1,
-                                                ),
                                               ),
                                               padding: const EdgeInsets.all(10),
                                               margin: const EdgeInsets.only(
@@ -174,7 +165,7 @@ class AddRemoveMembersModal extends GetView<FriendsController> {
                                                   Icon(
                                                     Icons.check,
                                                     color: isSelected
-                                                        ? AppColors.primary
+                                                        ? AppColors.secondary
                                                         : Colors.transparent,
                                                   )
                                                 ],
@@ -191,23 +182,21 @@ class AddRemoveMembersModal extends GetView<FriendsController> {
                           width: Get.width * 0.3,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5.r),
-                            color: AppColors.primary,
-                            border: Border.all(
-                                color: AppColors.borderColor, width: 1),
+                            color: AppColors.secondary,
                           ),
                           padding: EdgeInsets.symmetric(
                               horizontal: 15.w, vertical: 15),
                           child: Row(
                             children: [
                               Icon(FlutterRemix.add_line,
-                                  color: AppColors.white, size: 15.sp),
+                                  color: AppColors.backgroud, size: 15.sp),
                               verticalSpace(5.h),
                               Text(
                                 'Add More'.tr,
                                 style: globalTextStyle2(
                                     fontSize: 12.sp,
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.w500),
+                                    color: AppColors.backgroud,
+                                    fontWeight: FontWeight.w700),
                               ),
                             ],
                           )),

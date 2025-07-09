@@ -14,61 +14,62 @@ class FriendsTab extends GetView<FriendsController> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 5.w, right: 5.w, top: 5, bottom: 5),
+      margin: EdgeInsets.only(
+        left: 10.w,
+        right: 10.w,
+      ),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.primaryLight,
         borderRadius: BorderRadius.circular(5.r),
       ),
       child: GetBuilder<FriendsController>(
-        builder: (friends) => Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: AppColors.grey,
-            borderRadius: BorderRadius.circular(2.5.r),
+        builder: (friends) => Row(children: [
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                friends.isContactSet = true;
+              },
+              child: Container(
+                alignment: Alignment.center,
+                padding:
+                    EdgeInsets.only(left: 10.w, right: 10.w, top: 5, bottom: 5),
+                decoration: BoxDecoration(
+                  color: friends.isContact
+                      ? AppColors.secondary
+                      : AppColors.primaryDark,
+                  borderRadius: BorderRadius.circular(2.5.r),
+                ),
+                child: Text(
+                  'Contacts'.tr,
+                  style: globalTextStyle2(fontSize: 12.sp),
+                ),
+              ),
+            ),
           ),
-          child: Row(children: [
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  friends.isContactSet = true;
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(
-                      left: 10.w, right: 10.w, top: 5, bottom: 5),
-                  decoration: BoxDecoration(
-                    color: friends.isContact ? AppColors.white : AppColors.grey,
-                    borderRadius: BorderRadius.circular(2.5.r),
-                  ),
-                  child: Text(
-                    'Contacts'.tr,
-                    style: globalTextStyle2(fontSize: 12.sp),
-                  ),
+          horizontalSpace(10.w),
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                friends.isContactSet = false;
+              },
+              child: Container(
+                alignment: Alignment.center,
+                padding:
+                    EdgeInsets.only(left: 10.w, right: 10.w, top: 5, bottom: 5),
+                decoration: BoxDecoration(
+                  color: friends.isContact
+                      ? AppColors.primaryDark
+                      : AppColors.secondary,
+                  borderRadius: BorderRadius.circular(2.5.r),
+                ),
+                child: Text(
+                  'Groups'.tr,
+                  style: globalTextStyle2(fontSize: 12.sp),
                 ),
               ),
             ),
-            horizontalSpace(10.w),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  friends.isContactSet = false;
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(
-                      left: 10.w, right: 10.w, top: 5, bottom: 5),
-                  decoration: BoxDecoration(
-                    color: friends.isContact ? AppColors.grey : AppColors.white,
-                    borderRadius: BorderRadius.circular(2.5.r),
-                  ),
-                  child: Text(
-                    'Groups'.tr,
-                    style: globalTextStyle2(fontSize: 12.sp),
-                  ),
-                ),
-              ),
-            ),
-          ]),
-        ),
+          ),
+        ]),
       ),
     );
   }

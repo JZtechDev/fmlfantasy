@@ -21,47 +21,50 @@ class EditGroupModal extends GetView<FriendsController> {
     return Dialog(
       insetAnimationCurve: Curves.easeInOutCubicEmphasized,
       insetAnimationDuration: const Duration(seconds: 3),
-      backgroundColor: AppColors.white,
-      surfaceTintColor: AppColors.white,
+      backgroundColor: AppColors.primary,
+      surfaceTintColor: AppColors.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0.r),
       ),
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: 10.w,
-          right: 10.w,
-          bottom: 15.h,
-          top: 15.h,
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              right: 0,
-              child: GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    padding: const EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      border: Border.all(
-                        color: AppColors.borderColor,
-                      ),
-                      color: AppColors.grey,
-                    ),
-                    child: const Icon(FlutterRemix.close_line)),
+      child: Stack(
+        children: [
+          Positioned(
+            right: 0,
+            child: GestureDetector(
+              onTap: () {
+                controller.nameController.clear();
+                controller.emailController.clear();
+                controller.phoneController.clear();
+                Get.back();
+              },
+              child: Container(
+                  padding: const EdgeInsets.all(7.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: AppColors.secondary,
+                  ),
+                  child: const Icon(FlutterRemix.close_line)),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: AppColors.backgroud,
+                  borderRadius: BorderRadius.circular(5)),
+              child: Text(
+                "Edit Group".tr,
+                style: globalTextStyle2(
+                    fontSize: 12.sp, fontWeight: FontWeight.w600),
               ),
             ),
-            Column(
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  "Edit Group".tr,
-                  style: globalTextStyle2(
-                      fontSize: 16.sp, fontWeight: FontWeight.w600),
-                ),
                 verticalSpace(20.h),
                 AppTextField(
                     labelText: 'Group Name'.tr,
@@ -78,8 +81,8 @@ class EditGroupModal extends GetView<FriendsController> {
                 )
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

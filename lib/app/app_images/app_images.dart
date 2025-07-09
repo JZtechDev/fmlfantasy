@@ -88,4 +88,6 @@ class AppImages {
   static const String shield = 'assets/images/security.png';
   static const String clock = 'assets/images/clockImage.png';
   static const String camera = 'assets/images/Camera.png';
+  static const String addContact = 'assets/icons/add-contact.png';
+  static const String addGroup = 'assets/icons/create-group.png';
 }
