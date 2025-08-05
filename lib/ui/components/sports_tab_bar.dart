@@ -27,8 +27,6 @@ class SportsTabBar extends StatefulWidget {
 }
 
 class SportsTabBarState extends State<SportsTabBar> {
-  int _secondarySelectedIndex = 0;
-
   final List<Map<String, dynamic>> tabOptions = [
     {
       'name': 'Fantasy Sports',
@@ -47,9 +45,7 @@ class SportsTabBarState extends State<SportsTabBar> {
   void _onSecondaryTabTap(int index) {
     selectedTab.value = tabOptions[index]['name'];
     log(selectedTab.value);
-    setState(() {
-      _secondarySelectedIndex = index;
-    });
+    setState(() {});
   }
 
   void navigateToHome() {
@@ -200,7 +196,6 @@ class SportsTabBarState extends State<SportsTabBar> {
               children: List.generate(
                 tabOptions.length,
                 (index) {
-                  bool isSelected = index == _secondarySelectedIndex;
                   return Expanded(
                     child: GestureDetector(
                       onTap: () => _onSecondaryTabTap(index),

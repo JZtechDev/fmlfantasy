@@ -1,21 +1,25 @@
-import 'package:fmlfantasy/app/textstyles/textstyle.dart';
-import 'package:fmlfantasy/core/imports/imports.dart';
-import 'package:fmlfantasy/model/match_center_inner_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:fmlfantasy/app/textstyles/textstyle.dart'; // Adjust import path as needed
+import 'package:fmlfantasy/core/imports/imports.dart'; // Adjust import path as needed
+import 'package:fmlfantasy/new_model/match_center_inner_new.dart'; // Use the provided model
 
 class PointsGrid extends StatelessWidget {
-  final PlayersBreakDown playersdata;
+  final PlayerMatchStatistic playersdata;
   const PointsGrid({super.key, required this.playersdata});
 
   @override
   Widget build(BuildContext context) {
-    // Sort stats by value in descending order (highest first)
-    List<StatsBreakDown> sortedStats = List.from(playersdata.statsBreakDown)
-      ..sort((a, b) => b.value!.compareTo(a.value!));
+    // Sort fantasyPointsBreakdowns by fantasyPoints in descending order (highest first)
+    List<FantasyPointsBreakdown> sortedStats =
+        List.from(playersdata.fantasyPointsBreakdowns)
+          ..sort((a, b) => b.fantasyPoints.compareTo(a.fantasyPoints));
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       width: Get.width,
-      color: AppColors.primaryLight,
+      color: AppColors.primaryLight, // Ensure AppColors.primaryLight is defined
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.w),
         child: GridView.builder(
@@ -29,7 +33,7 @@ class PointsGrid extends StatelessWidget {
           ),
           itemCount: sortedStats.length,
           itemBuilder: (context, index) {
-            StatsBreakDown data = sortedStats[index];
+            FantasyPointsBreakdown data = sortedStats[index];
 
             Color containerColor =
                 (index < 3) ? AppColors.secondary : AppColors.primaryLight;
@@ -43,7 +47,8 @@ class PointsGrid extends StatelessWidget {
                 color: containerColor,
                 borderRadius: BorderRadius.circular(5.r),
                 border: Border.all(
-                  color: AppColors.secondary,
+                  color: AppColors
+                      .secondary, // Ensure AppColors.secondary is defined
                   width: 1.5,
                 ),
               ),
@@ -52,20 +57,22 @@ class PointsGrid extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    data.value!.toStringAsFixed(0).padLeft(2, "0"),
+                    data.fantasyPoints.toStringAsFixed(0).padLeft(2, "0"),
                     style: globalTextStyle(
-                        fontSize: 24.sp,
-                        color: textColor,
-                        fontWeight: FontWeight.w700),
+                      fontSize: 24.sp,
+                      color: textColor,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   Text(
                     textAlign: TextAlign.center,
-                    data.name!,
+                    data.fantasyPointDescription, // Using fantasyPointDescription as name
                     style: globalTextStyle2(
-                        fontSize: 12.sp,
-                        color: textColor,
-                        fontWeight: FontWeight.w700),
-                  )
+                      fontSize: 12.sp,
+                      color: textColor,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ],
               ),
             );
