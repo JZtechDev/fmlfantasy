@@ -41,4 +41,6 @@ class AppRoutes {
   static const String teamsView = '/teams_view';
   static const String playSportyPick = '/play_sportypick_view';
   static const String playSportyResponses = '/play_sportypick_response_view';
+  static const String cric3PicksView = '/cric3pick_view';
+  static const String selectCric3PlayersView = '/select_cric3_players_view';
 }

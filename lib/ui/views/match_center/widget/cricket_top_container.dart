@@ -4,7 +4,6 @@ import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 
 class CricketTopContainer extends GetView<MatchCenterInner> {
   final String? homename;
@@ -37,7 +36,7 @@ class CricketTopContainer extends GetView<MatchCenterInner> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      double maxWidth = constraints.maxWidth;
+      //   double maxWidth = constraints.maxWidth;
       return Container(
         decoration: const BoxDecoration(
           color: Color.fromRGBO(18, 96, 85, 1),

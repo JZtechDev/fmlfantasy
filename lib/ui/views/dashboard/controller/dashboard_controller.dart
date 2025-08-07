@@ -73,6 +73,13 @@ class DashboardController extends GetxController {
             'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
         icon: 'assets/new_images/create team.svg',
         route: AppRoutes.friendsView),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'Cric3Picks',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: 'assets/images/cric3picks.svg',
+        route: AppRoutes.cric3PicksView),
   ];
 
   List<Cards> sportyPickList = [
