@@ -39,7 +39,7 @@ class SelectedPlayersView extends StatelessWidget {
                   ),
                 ),
               ),
-              Text('Who will score the highest runs? ',
+              Text('Good Job. May your selected players win.',
                   style: globalTextStyle(
                       fontSize: 12.sp,
                       color: AppColors.white,
@@ -111,7 +111,17 @@ class SelectedPlayersView extends StatelessWidget {
                   Expanded(
                     child: PrimaryButton(
                         buttonText: 'Continue'.tr,
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.showSnackbar(
+                            const GetSnackBar(
+                              backgroundColor: AppColors.errorRed,
+                              margin: EdgeInsets.all(20),
+                              borderRadius: 10,
+                              message: 'Coming Soon!!',
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                        },
                         isEnabled: true),
                   ),
                 ],

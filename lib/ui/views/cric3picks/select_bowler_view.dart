@@ -30,7 +30,7 @@ class SelectBowlerView extends StatelessWidget {
                 ),
               ),
             ),
-            Text('Who will score the highest runs? ',
+            Text('Who will take the most wickets? ',
                 style: globalTextStyle(
                     fontSize: 12.sp,
                     color: AppColors.white,

@@ -30,7 +30,7 @@ class SelectFielderView extends StatelessWidget {
                 ),
               ),
             ),
-            Text('Who will score the highest runs? ',
+            Text('Who will be the best in the fielding?',
                 style: globalTextStyle(
                     fontSize: 12.sp,
                     color: AppColors.white,
