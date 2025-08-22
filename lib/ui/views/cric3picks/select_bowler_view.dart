@@ -112,10 +112,12 @@ class SelectBowlerView extends StatelessWidget {
                       return Builder(
                         builder: (BuildContext context) {
                           final isSelected =
-                              controller.selectedHomeBowler == player;
+                              controller.selectedBowler == player;
                           return GestureDetector(
                             onTap: () {
-                              controller.onSelectedBowler(player, true);
+                              controller.onSelectedBowler(
+                                player,
+                              );
                             },
                             child: CustomPlayerCard(
                               player: player,
@@ -207,13 +209,12 @@ class SelectBowlerView extends StatelessWidget {
                     items: controller.awayPlayers
                         .where((player) => player.position == 'Bowler')
                         .map((player) {
-                      final isSelected =
-                          controller.selectedAwayBowler == player;
+                      final isSelected = controller.selectedBowler == player;
                       return Builder(
                         builder: (BuildContext context) {
                           return GestureDetector(
                             onTap: () {
-                              controller.onSelectedBowler(player, false);
+                              controller.onSelectedBowler(player);
                             },
                             child: CustomPlayerCard(
                               player: player,

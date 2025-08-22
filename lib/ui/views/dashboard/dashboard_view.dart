@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
@@ -20,15 +22,21 @@ class DashboardView extends GetView<DashboardController> {
             onTap: (index) {
               selectedSPort.value = controller.sportsList[index].title;
               controller.selectedIndex.value = index;
+              log(selectedSPort.value);
             },
           ),
         ),
         child: Obx(() {
+          final originalList = controller.cardsList; // always the full list
           selectedTab.value == 'Daily Match Pick'
               ? controller.filteredList.value = controller.sportyPickList
               : selectedTab.value == 'Sporty Pick'
                   ? controller.filteredList.value = controller.sportyPickEmList
-                  : controller.filteredList.value = controller.cardsList;
+                  : controller.filteredList.value = selectedSPort.value != 'CR'
+                      ? (List.from(originalList)
+                        ..removeLast()
+                        ..removeLast())
+                      : List.from(originalList);
           return Wrap(
             runSpacing: 10,
             alignment: WrapAlignment.start,

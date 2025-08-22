@@ -112,10 +112,10 @@ class SelectCric3PlayersView extends StatelessWidget {
                       return Builder(
                         builder: (BuildContext context) {
                           final isSelected =
-                              controller.selectedHomeBatsman == player;
+                              controller.selectedBatsman == player;
                           return GestureDetector(
                             onTap: () {
-                              controller.onSelectedHomeBatsman(player, true);
+                              controller.onSelectBatsman(player);
                             },
                             child: CustomPlayerCard(
                               player: player,
@@ -208,13 +208,12 @@ class SelectCric3PlayersView extends StatelessWidget {
                     items: controller.awayPlayers
                         .where((player) => player.position == 'Batsman')
                         .map((player) {
-                      final isSelected =
-                          controller.selectedAwayBatsman == player;
+                      final isSelected = controller.selectedBatsman == player;
                       return Builder(
                         builder: (BuildContext context) {
                           return GestureDetector(
                             onTap: () {
-                              controller.onSelectedHomeBatsman(player, false);
+                              controller.onSelectBatsman(player);
                             },
                             child: CustomPlayerCard(
                               player: player,

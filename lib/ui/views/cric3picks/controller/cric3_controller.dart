@@ -21,57 +21,30 @@ class Cric3Controller extends GetxController {
   CarouselSliderController homeFielderController = CarouselSliderController();
   CarouselSliderController awayFielderController = CarouselSliderController();
 
-  Players? _selectedHomeBatsman;
+  Players? _selectedBatsman;
 
-  Players? get selectedHomeBatsman => _selectedHomeBatsman;
+  Players? get selectedBatsman => _selectedBatsman;
 
-  set selectedHomeBatsman(Players? value) {
-    _selectedHomeBatsman = value;
+  set selectedBatsman(Players? value) {
+    _selectedBatsman = value;
     update();
   }
 
-  Players? _selectedAwayBatsman;
+  Players? _selectedBowler;
 
-  Players? get selectedAwayBatsman => _selectedAwayBatsman;
+  Players? get selectedBowler => _selectedBowler;
 
-  set selectedAwayBatsman(Players? value) {
-    _selectedAwayBatsman = value;
+  set selectedBowler(Players? value) {
+    _selectedBowler = value;
     update();
   }
 
-  Players? _selectedHomeBowler;
+  Players? _selectedFielder;
 
-  Players? get selectedHomeBowler => _selectedHomeBowler;
+  Players? get selectedFielder => _selectedFielder;
 
-  set selectedHomeBowler(Players? value) {
-    _selectedHomeBowler = value;
-    update();
-  }
-
-  Players? _selectedAwayBowler;
-
-  Players? get selectedAwayBowler => _selectedAwayBowler;
-
-  set selectedAwayBowler(Players? value) {
-    _selectedAwayBowler = value;
-    update();
-  }
-
-  Players? _selectedHomeFielder;
-
-  Players? get selectedHomeFielder => _selectedHomeFielder;
-
-  set selectedHomeFielder(Players? value) {
-    _selectedHomeFielder = value;
-    update();
-  }
-
-  Players? _selectedAwayFielder;
-
-  Players? get selectedAwayFielder => _selectedAwayFielder;
-
-  set selectedAwayFielder(Players? value) {
-    _selectedAwayFielder = value;
+  set selectedFielder(Players? value) {
+    _selectedFielder = value;
     update();
   }
 
@@ -148,90 +121,48 @@ class Cric3Controller extends GetxController {
     }
   }
 
-  void onSelectedHomeBatsman(
+  void onSelectBatsman(
     Players player,
-    bool isHome,
   ) {
-    if (isHome) {
-      if (player == selectedHomeBatsman) {
-        selectedHomeBatsman = null;
-        update();
-        EasyLoading.showToast('Home Batsman deselected');
-        return;
-      } else {
-        selectedHomeBatsman = player;
-        EasyLoading.showToast('Home Batsman selected');
-        update();
-      }
+    if (player == selectedBatsman) {
+      selectedBatsman = null;
+      update();
+      EasyLoading.showToast('Batsman deselected');
+      return;
     } else {
-      if (player == selectedAwayBatsman) {
-        selectedAwayBatsman = null;
-        update();
-        EasyLoading.showToast('Away Batsman deselected');
-        return;
-      } else {
-        selectedAwayBatsman = player;
-        EasyLoading.showToast('Away Batsman selected');
-        update();
-      }
+      selectedBatsman = player;
+      EasyLoading.showToast('Batsman selected');
+      update();
     }
   }
 
   void onSelectedFielder(
     Players player,
-    bool isHome,
   ) {
-    if (isHome) {
-      if (player == selectedHomeFielder) {
-        selectedHomeFielder = null;
-        update();
-        EasyLoading.showToast('Home Fielder deselected');
-        return;
-      } else {
-        selectedHomeFielder = player;
-        EasyLoading.showToast('Home Fielder selected');
-        update();
-      }
+    if (player == selectedFielder) {
+      selectedFielder = null;
+      update();
+      EasyLoading.showToast('Fielder deselected');
+      return;
     } else {
-      if (player == selectedAwayFielder) {
-        selectedAwayFielder = null;
-        update();
-        EasyLoading.showToast('Away Fielder deselected');
-        return;
-      } else {
-        selectedAwayFielder = player;
-        EasyLoading.showToast('Away Fielder selected');
-        update();
-      }
+      selectedFielder = player;
+      EasyLoading.showToast('Fielder selected');
+      update();
     }
   }
 
   void onSelectedBowler(
     Players player,
-    bool isHome,
   ) {
-    if (isHome) {
-      if (player == selectedHomeBowler) {
-        selectedHomeBowler = null;
-        update();
-        EasyLoading.showToast('Home Bowler deselected');
-        return;
-      } else {
-        selectedHomeBowler = player;
-        EasyLoading.showToast('Home Bowler selected');
-        update();
-      }
+    if (player == selectedBowler) {
+      selectedBowler = null;
+      update();
+      EasyLoading.showToast('Bowler deselected');
+      return;
     } else {
-      if (player == selectedAwayBowler) {
-        selectedAwayBowler = null;
-        update();
-        EasyLoading.showToast('Away Bowler deselected');
-        return;
-      } else {
-        selectedAwayBowler = player;
-        EasyLoading.showToast('Away Bowler selected');
-        update();
-      }
+      selectedBowler = player;
+      EasyLoading.showToast('Bowler selected');
+      update();
     }
   }
 

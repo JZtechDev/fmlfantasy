@@ -45,11 +45,16 @@ class SportLeaderboardListItem extends GetView<SportPickLeaderboardController> {
                             width: 20,
                           ),
                           horizontalSpace(5.w),
-                          Text(matches.competition ?? '',
-                              style: globalTextStyle(
-                                  fontSize: 14.sp,
-                                  color: AppColors.secondary,
-                                  fontWeight: FontWeight.w600)),
+                          SizedBox(
+                            width: maxWidth * 0.6,
+                            child: Text(matches.competition ?? '',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: globalTextStyle(
+                                    fontSize: 14.sp,
+                                    color: AppColors.secondary,
+                                    fontWeight: FontWeight.w600)),
+                          ),
                         ],
                       ),
                       Row(

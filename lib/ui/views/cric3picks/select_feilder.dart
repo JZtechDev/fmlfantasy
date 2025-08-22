@@ -109,10 +109,12 @@ class SelectFielderView extends StatelessWidget {
                       return Builder(
                         builder: (BuildContext context) {
                           final isSelected =
-                              controller.selectedHomeFielder == player;
+                              controller.selectedFielder == player;
                           return GestureDetector(
                             onTap: () {
-                              controller.onSelectedFielder(player, true);
+                              controller.onSelectedFielder(
+                                player,
+                              );
                             },
                             child: CustomPlayerCard(
                               player: player,
@@ -202,13 +204,14 @@ class SelectFielderView extends StatelessWidget {
                       padEnds: false,
                     ),
                     items: controller.awayPlayers.map((player) {
-                      final isSelected =
-                          controller.selectedAwayFielder == player;
+                      final isSelected = controller.selectedFielder == player;
                       return Builder(
                         builder: (BuildContext context) {
                           return GestureDetector(
                             onTap: () {
-                              controller.onSelectedFielder(player, false);
+                              controller.onSelectedFielder(
+                                player,
+                              );
                             },
                             child: CustomPlayerCard(
                               player: player,

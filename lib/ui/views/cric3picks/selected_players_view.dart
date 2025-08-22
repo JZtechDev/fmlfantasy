@@ -13,16 +13,21 @@ class SelectedPlayersView extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: GetBuilder<Cric3Controller>(builder: (controller) {
-          final selectedHomePlayers = [
-            controller.selectedHomeBatsman,
-            controller.selectedHomeBowler,
-            controller.selectedHomeFielder
+          final selectedPlayers = [
+            controller.selectedBatsman,
+            controller.selectedBowler,
+            controller.selectedFielder
           ];
-          final selectedAwayPlayers = [
-            controller.selectedAwayBatsman,
-            controller.selectedAwayBowler,
-            controller.selectedAwayFielder
-          ];
+          // final selectedHomePlayers = [
+          //   controller.selectedHomeBatsman,
+          //   controller.selectedHomeBowler,
+          //   controller.selectedHomeFielder
+          // ];
+          // final selectedAwayPlayers = [
+          //   controller.selectedAwayBatsman,
+          //   controller.selectedAwayBowler,
+          //   controller.selectedAwayFielder
+          // ];
           return Column(
             children: [
               Padding(
@@ -63,33 +68,7 @@ class SelectedPlayersView extends StatelessWidget {
               Wrap(
                 spacing: 10,
                 runSpacing: 10,
-                children: selectedHomePlayers
-                    .map((player) => CustomPlayerCard(
-                          player: player,
-                          widthFactor: 0.4,
-                        ))
-                    .toList(),
-              ),
-              verticalSpace(30),
-              Container(
-                alignment: Alignment.center,
-                width: Get.width,
-                color: AppColors.primaryDark,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    controller.selectedTournament!.matches![0].away!,
-                    style: globalTextStyle(
-                        fontSize: 14.sp,
-                        color: AppColors.white,
-                        fontWeight: FontWeight.w800),
-                  ),
-                ),
-              ),
-              Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                children: selectedAwayPlayers
+                children: selectedPlayers
                     .map((player) => CustomPlayerCard(
                           player: player,
                           widthFactor: 0.4,

@@ -8,6 +8,7 @@ import 'package:fmlfantasy/ui/views/create_contest/create_contest_view.dart';
 import 'package:fmlfantasy/ui/views/create_contest/private_tournament_view.dart';
 import 'package:fmlfantasy/ui/views/create_contest/widgets/private_contest_success_view.dart';
 import 'package:fmlfantasy/ui/views/cric3picks/cric3pick_view.dart';
+import 'package:fmlfantasy/ui/views/my_cric3pick/my_cric3picks_view.dart';
 import 'package:fmlfantasy/ui/views/cric3picks/select_cric3_players_view.dart';
 import 'package:fmlfantasy/ui/views/dashboard/dashboard_view.dart';
 import 'package:fmlfantasy/ui/views/friends/friends_view.dart';
@@ -131,5 +132,6 @@ class AppPages {
     GetPage(
         name: AppRoutes.selectCric3PlayersView,
         page: () => const SelectCric3PlayersView()),
+    GetPage(name: AppRoutes.myCric3PicksView, page: () => const MyCric3picks()),
   ];
 }
