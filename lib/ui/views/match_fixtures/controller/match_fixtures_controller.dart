@@ -20,13 +20,13 @@ class MatchFixturesController extends GetxController {
     Sport(title: 'HK', icon: AppImages.iceHockeysvg, name: 'Hockey'),
   ].obs;
 
-  RxList<Tournaments> fixtures = <Tournaments>[].obs;
+  RxList<TournamentModel> fixtures = <TournamentModel>[].obs;
 
-  Future<List<Tournaments>> fetchedTournaments() async {
+  Future<List<TournamentModel>> fetchedTournaments() async {
     try {
       isLoading.value = true;
       EasyLoading.show(status: 'Loading fixtures...');
-      List<Tournaments> fetchedTournaments = await TournamentServices()
+      List<TournamentModel> fetchedTournaments = await TournamentServices()
           .fetchTournamentsAndMatches(selectedSport.value);
       fixtures.value = fetchedTournaments;
       EasyLoading.dismiss();

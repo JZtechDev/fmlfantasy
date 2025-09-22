@@ -17,9 +17,9 @@ class HomeController extends GetxController {
   RxString selectedSport = 'BB'.obs;
   MatchCenterServices matchCenterServices = MatchCenterServices();
   String token = '';
-  RxList<Tournaments> tournaments = <Tournaments>[].obs;
-  RxList<Tournaments> filteredTournaments = <Tournaments>[].obs;
-  RxList<Tournaments> privateTournaments = <Tournaments>[].obs;
+  RxList<TournamentModel> tournaments = <TournamentModel>[].obs;
+  RxList<TournamentModel> filteredTournaments = <TournamentModel>[].obs;
+  RxList<TournamentModel> privateTournaments = <TournamentModel>[].obs;
   TournamentServices tournamentServices = TournamentServices();
   MyteamServices getMyTeamServices = MyteamServices();
   RxBool isPublicSelected = true.obs;
@@ -97,15 +97,15 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<List<Tournaments>> fetchData() async {
+  Future<List<TournamentModel>> fetchData() async {
     try {
       EasyLoading.show(status: 'Loading...');
-      List<Tournaments> fetchedTournaments = await tournamentServices
+      List<TournamentModel> fetchedTournaments = await tournamentServices
           .fetchTournamentsAndMatches(selectedSport.value);
       tournaments.value = fetchedTournaments.where((tournament) {
         DateTime? endDate;
         try {
-          endDate = DateTime.parse(tournament.endDate!);
+          endDate = DateTime.parse(tournament.endDate ?? '');
         } catch (e) {
           return false;
         }

@@ -52,7 +52,7 @@ class PrivateTournamentView extends GetView<PrivateTournamentController> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: controller.tournamentCardList.length,
                           itemBuilder: (context, index) {
-                            Tournaments tournaments =
+                            TournamentModel tournaments =
                                 controller.tournamentCardList[index];
                             return Padding(
                               padding: EdgeInsets.only(
@@ -63,7 +63,7 @@ class PrivateTournamentView extends GetView<PrivateTournamentController> {
                                       AppRoutes.createContest,
                                       arguments: {
                                         'matchID':
-                                            tournaments.matches![0].matchCode,
+                                            tournaments.matches![0].matchId,
                                         'sport': controller.selectedSport.value,
                                         'tournamentId': tournaments.id,
                                         'joinCode': tournaments.joinCode,

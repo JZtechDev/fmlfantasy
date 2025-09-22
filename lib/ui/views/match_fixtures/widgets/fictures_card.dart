@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class FixturesCard extends GetView<MatchFixturesController> {
-  final Tournaments tournament;
+  final TournamentModel tournament;
   const FixturesCard({super.key, required this.tournament});
 
   String formatEndDateTime(DateTime endDate) {

@@ -29,7 +29,7 @@ class SelectPlayerView extends GetView<SelectPlayerController> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Container();
                     } else if (snapshot.hasError) {
-                      return const Center(child: Text('Server Error'));
+                      return Center(child: Text(snapshot.error.toString()));
                     } else if (!snapshot.hasData) {
                       return const Center(child: Text('No data available.'));
                     } else {

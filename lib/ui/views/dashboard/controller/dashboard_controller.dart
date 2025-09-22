@@ -1,4 +1,5 @@
 import 'package:fmlfantasy/app/app_images/app_images.dart';
+import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/sports_type.dart';
 import 'package:fmlfantasy/ui/views/dashboard/models/cards_model.dart';
@@ -18,7 +19,7 @@ class DashboardController extends GetxController {
 
   RxList<Cards> filteredList = <Cards>[].obs;
 
-  List<Cards> cardsList = [
+  List<Cards> fantasySportsCricket = [
     Cards(
       image: 'assets/images/dashboardcards.png',
       title: 'CREATE NEW TEAM',
@@ -89,6 +90,303 @@ class DashboardController extends GetxController {
         route: AppRoutes.myCric3PicksView),
   ];
 
+  List<Cards> fantadsySportsFootball = [
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'CREATE NEW TEAM',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: 'assets/new_images/create team.svg',
+      route: AppRoutes.home,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MATCH CENTER',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.matchCenter,
+      route: AppRoutes.matchCenter,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'LEADERBOARD',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.leaderboard,
+      route: AppRoutes.leaderboard,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'HOW IT WORKS',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.howItWork,
+      route: AppRoutes.howItWorks,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MY TEAMS',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.myTeam,
+      route: AppRoutes.myTeams,
+    ),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'MY CONTESTS',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: AppImages.myTeam,
+        route: AppRoutes.myContestView),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'FRIENDS',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: 'assets/new_images/create team.svg',
+        route: AppRoutes.friendsView),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'Foot3Picks',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: 'assets/images/cric3picks.svg',
+        route: AppRoutes.cric3PicksView),
+    Cards(
+        image: 'assets/icons/my-cric3.png',
+        title: 'MyFoot3Picks',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: 'assets/icons/my-cric3.svg',
+        route: AppRoutes.myCric3PicksView),
+  ];
+
+  List<Cards> fantasySportsBasketball = [
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'CREATE NEW TEAM',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: 'assets/new_images/create team.svg',
+      route: AppRoutes.home,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MATCH CENTER',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.matchCenter,
+      route: AppRoutes.matchCenter,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'LEADERBOARD',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.leaderboard,
+      route: AppRoutes.leaderboard,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'HOW IT WORKS',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.howItWork,
+      route: AppRoutes.howItWorks,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MY TEAMS',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.myTeam,
+      route: AppRoutes.myTeams,
+    ),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'MY CONTESTS',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: AppImages.myTeam,
+        route: AppRoutes.myContestView),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'FRIENDS',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: 'assets/new_images/create team.svg',
+        route: AppRoutes.friendsView),
+  ];
+
+  List<Cards> fantasySportsAmericanFootball = [
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'CREATE NEW TEAM',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: 'assets/new_images/create team.svg',
+      route: AppRoutes.home,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MATCH CENTER',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.matchCenter,
+      route: AppRoutes.matchCenter,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'LEADERBOARD',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.leaderboard,
+      route: AppRoutes.leaderboard,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'HOW IT WORKS',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.howItWork,
+      route: AppRoutes.howItWorks,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MY TEAMS',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.myTeam,
+      route: AppRoutes.myTeams,
+    ),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'MY CONTESTS',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: AppImages.myTeam,
+        route: AppRoutes.myContestView),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'FRIENDS',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: 'assets/new_images/create team.svg',
+        route: AppRoutes.friendsView),
+  ];
+  List<Cards> fantasySportBaseball = [
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'CREATE NEW TEAM',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: 'assets/new_images/create team.svg',
+      route: AppRoutes.home,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MATCH CENTER',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.matchCenter,
+      route: AppRoutes.matchCenter,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'LEADERBOARD',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.leaderboard,
+      route: AppRoutes.leaderboard,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'HOW IT WORKS',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.howItWork,
+      route: AppRoutes.howItWorks,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MY TEAMS',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.myTeam,
+      route: AppRoutes.myTeams,
+    ),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'MY CONTESTS',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: AppImages.myTeam,
+        route: AppRoutes.myContestView),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'FRIENDS',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: 'assets/new_images/create team.svg',
+        route: AppRoutes.friendsView),
+  ];
+
+  List<Cards> fantasySportHockey = [
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'CREATE NEW TEAM',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: 'assets/new_images/create team.svg',
+      route: AppRoutes.home,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MATCH CENTER',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.matchCenter,
+      route: AppRoutes.matchCenter,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'LEADERBOARD',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.leaderboard,
+      route: AppRoutes.leaderboard,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'HOW IT WORKS',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.howItWork,
+      route: AppRoutes.howItWorks,
+    ),
+    Cards(
+      image: 'assets/images/dashboardcards.png',
+      title: 'MY TEAMS',
+      subtitle:
+          'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+      icon: AppImages.myTeam,
+      route: AppRoutes.myTeams,
+    ),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'MY CONTESTS',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: AppImages.myTeam,
+        route: AppRoutes.myContestView),
+    Cards(
+        image: 'assets/images/dashboardcards.png',
+        title: 'FRIENDS',
+        subtitle:
+            'Amet id felis ut nulla eget vitae. Tortor, risus lacus, cras elementum commodo metus. Sed velit varius tortor amet, adipiscing in.',
+        icon: 'assets/new_images/create team.svg',
+        route: AppRoutes.friendsView),
+  ];
   List<Cards> sportyPickList = [
     Cards(
       image: 'assets/images/dashboardcards.png',
@@ -143,9 +441,47 @@ class DashboardController extends GetxController {
     ),
   ];
 
+  void updateFilteredList() {
+    // If Daily Match Pick
+    if (selectedTab.value == 'Daily Match Pick') {
+      filteredList.value = sportyPickList;
+      return;
+    }
+
+    // If Sporty Pick
+    if (selectedTab.value == 'Sporty Pick') {
+      filteredList.value = sportyPickEmList;
+      return;
+    }
+
+    // Otherwise, filter according to sport
+    switch (selectedSPort.value) {
+      case 'CR':
+        filteredList.value = List.from(fantasySportsCricket);
+        break;
+      case 'FB':
+        filteredList.value = List.from(fantadsySportsFootball);
+        break;
+      case 'BB':
+        filteredList.value = List.from(fantasySportsBasketball);
+        break;
+      case 'AF':
+        filteredList.value = List.from(fantasySportsAmericanFootball);
+        break;
+      case 'BL':
+        filteredList.value = List.from(fantasySportBaseball);
+        break;
+      case 'HK':
+        filteredList.value = List.from(fantasySportHockey);
+        break;
+      default:
+        filteredList.value = List.from(fantasySportsCricket);
+    }
+  }
+
   @override
   void onInit() {
-    filteredList.addAll(cardsList);
+    filteredList.addAll(fantasySportsCricket);
     super.onInit();
   }
 }

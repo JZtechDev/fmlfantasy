@@ -90,7 +90,7 @@ class SearchPrivateTournament extends SearchDelegate {
                           Get.toNamed(
                             AppRoutes.createContest,
                             arguments: {
-                              'matchID': results[index].matches![0].matchCode,
+                              'matchID': results[index].matches![0].matchId,
                               'sport': controller.selectedSport.value,
                               'tournamentId': results[index].id,
                               'joinCode': results[index].joinCode,
@@ -138,7 +138,7 @@ class SearchPrivateTournament extends SearchDelegate {
                         Get.toNamed(
                           AppRoutes.createContest,
                           arguments: {
-                            'matchID': suggestions[index].matches![0].matchCode,
+                            'matchID': suggestions[index].matches![0].matchId,
                             'sport': controller.selectedSport.value,
                             'tournamentId': suggestions[index].id,
                             'joinCode': suggestions[index].joinCode,

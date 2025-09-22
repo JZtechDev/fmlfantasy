@@ -40,6 +40,10 @@
 	<string>We need access to your microphone for recording videos.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to your photo library for picking images.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Allow saving PDFs to Photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow access to Photos for saving PDFs</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>

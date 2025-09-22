@@ -54,6 +54,9 @@ dependencies:
   device_preview: ^1.2.0
   flutter_easyloading: ^3.0.5
   video_player: ^2.9.5
+  pdf: ^3.11.3
+  printing: ^5.14.2
+  share_plus: ^10.0.3
   
 
 dev_dependencies:

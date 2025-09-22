@@ -15,15 +15,15 @@ class TournamentServices {
     dio.options.headers['Ocp-Apim-Subscription-Key'] = subscriptionkey;
   }
 
-  Future<List<Tournaments>> fetchTournamentsAndMatches(
+  Future<List<TournamentModel>> fetchTournamentsAndMatches(
       String sportsCode) async {
     try {
-      final response =
-          await dio.get('$baseURL/tournaments/daily?sportCode=$sportsCode');
+      final response = await dio.get(
+          'http://40.113.171.107:50086/tournaments/daily?sportCode=$sportsCode');
 
       if (response.statusCode == 200) {
-        List<Tournaments> tournaments = (response.data as List)
-            .map((json) => Tournaments.fromJson(json))
+        List<TournamentModel> tournaments = (response.data as List)
+            .map((json) => TournamentModel.fromJson(json))
             .toList();
         return tournaments;
       } else {
@@ -58,7 +58,8 @@ class TournamentServices {
         subKey = cricketSubscriptionKeyUs;
         break;
       case 'AF':
-        uri = "$baseURL/matchcenter/americanfootball/match/$matchId/line-up";
+        uri =
+            "http://40.113.171.107:50086/api/matchcenter/americanfootball/match/$matchId/line-up";
         subKey = americanFootballSubscriptionKeyUs;
         break;
       case 'BL':

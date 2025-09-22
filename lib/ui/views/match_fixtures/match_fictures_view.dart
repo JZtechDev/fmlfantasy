@@ -52,7 +52,7 @@ class MatchFixturesView extends GetView<MatchFixturesController> {
                                           AppRoutes.lotoView,
                                           arguments: {
                                             'matchID':
-                                                fixture.matches![0].matchCode,
+                                                fixture.matches![0].matchId,
                                             'sport':
                                                 controller.selectedSport.value,
                                             'tournamentId': fixture.id,

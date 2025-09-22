@@ -9,7 +9,7 @@ import 'package:fmlfantasy/ui/widgets/primary_button.dart';
 import 'package:intl/intl.dart';
 
 class TournamentCardSlider extends GetView<HomeController> {
-  final Tournaments tournament;
+  final TournamentModel tournament;
 
   const TournamentCardSlider({super.key, required this.tournament});
 
@@ -82,12 +82,12 @@ class TournamentCardSlider extends GetView<HomeController> {
                               maxWidth: 15.w,
                               minWidth: 15.w,
                             ),
-                            child: tournament.matches![0].homeImageUrl == null
+                            child: tournament.matches[0].homeImageUrl == null
                                 ? Container()
-                                : tournament.matches![0].homeImageUrl!
+                                : tournament.matches[0].homeImageUrl
                                         .endsWith('.svg.png')
                                     ? Container()
-                                    : tournament.matches![0].homeImageUrl!
+                                    : tournament.matches![0].homeImageUrl
                                             .endsWith('svg')
                                         ? controller.selectedSport.value ==
                                                     'CR' ||
@@ -96,13 +96,13 @@ class TournamentCardSlider extends GetView<HomeController> {
                                                     'FB'
                                             ? Image.network(
                                                 replaceSvgWithPng(tournament
-                                                    .matches![0].homeImageUrl
+                                                    .matches[0].homeImageUrl
                                                     .toString()),
                                                 fit: BoxFit.fill,
                                               )
                                             : SvgPicture.network(
                                                 tournament
-                                                    .matches![0].homeImageUrl
+                                                    .matches[0].homeImageUrl
                                                     .toString(),
                                                 fit: BoxFit.fill,
                                               )
@@ -115,7 +115,7 @@ class TournamentCardSlider extends GetView<HomeController> {
                           horizontalSpace(5.w),
                           Text(
                             textAlign: TextAlign.start,
-                            tournament.matches![0].home.toString(),
+                            tournament.matches[0].home.toString(),
                             style: globalTextStyle(
                                 fontSize: width > 500 ? 10.sp : 14.sp,
                                 fontWeight: FontWeight.w700),
@@ -131,12 +131,12 @@ class TournamentCardSlider extends GetView<HomeController> {
                                 maxWidth: 15.w,
                                 minWidth: 15.w,
                               ),
-                              child: tournament.matches![0].awayImageUrl == null
+                              child: tournament.matches[0].awayImageUrl == null
                                   ? Container()
-                                  : tournament.matches![0].awayImageUrl!
+                                  : tournament.matches![0].awayImageUrl
                                           .endsWith('.svg.png')
                                       ? Container()
-                                      : tournament.matches![0].awayImageUrl!
+                                      : tournament.matches![0].awayImageUrl
                                               .endsWith('svg')
                                           ? controller.selectedSport.value ==
                                                       'CR' ||
@@ -145,7 +145,7 @@ class TournamentCardSlider extends GetView<HomeController> {
                                                       'FB'
                                               ? Image.network(
                                                   replaceSvgWithPng(tournament
-                                                      .matches![0].awayImageUrl
+                                                      .matches[0].awayImageUrl
                                                       .toString()),
                                                   fit: BoxFit.fill,
                                                 )
@@ -156,7 +156,7 @@ class TournamentCardSlider extends GetView<HomeController> {
                                                 )
                                           : Image.network(
                                               tournament
-                                                  .matches![0].awayImageUrl!,
+                                                  .matches![0].awayImageUrl,
                                               fit: BoxFit.fill,
                                             )),
                           horizontalSpace(5.w),
@@ -218,8 +218,7 @@ class TournamentCardSlider extends GetView<HomeController> {
                               onPressed: () {
                                 Get.toNamed(AppRoutes.selectPlayers,
                                     arguments: {
-                                      'matchID':
-                                          tournament.matches![0].matchCode,
+                                      'matchID': tournament.matches[0].matchId,
                                       'sport': controller.selectedSport.value,
                                       'tournamentId': tournament.id
                                     });

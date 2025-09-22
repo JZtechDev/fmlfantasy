@@ -5,6 +5,7 @@ import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/sports_type.dart';
+import 'package:fmlfantasy/ui/views/dashboard/controller/dashboard_controller.dart';
 
 class SportsTabBar extends StatefulWidget {
   final List<Sport> sportsList;
@@ -45,6 +46,8 @@ class SportsTabBarState extends State<SportsTabBar> {
   void _onSecondaryTabTap(int index) {
     selectedTab.value = tabOptions[index]['name'];
     log(selectedTab.value);
+
+    Get.find<DashboardController>().updateFilteredList();
     setState(() {});
   }
 

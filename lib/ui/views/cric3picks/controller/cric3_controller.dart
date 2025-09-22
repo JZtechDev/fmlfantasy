@@ -2,15 +2,16 @@ import 'dart:developer';
 
 import 'package:carousel_slider_plus/carousel_controller.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/model/select_player_model.dart';
 import 'package:fmlfantasy/model/tournament_model.dart';
 import 'package:fmlfantasy/services/tournament_services.dart';
 import '../../../../core/imports/imports.dart';
 
 class Cric3Controller extends GetxController {
-  List<Tournaments> _tournamnets = [];
+  List<TournamentModel> _tournamnets = [];
 
-  Tournaments? selectedTournament;
+  TournamentModel? selectedTournament;
   late Future<SelectTeam> selectTeam;
   List<Players> _players = [];
 
@@ -72,9 +73,9 @@ class Cric3Controller extends GetxController {
     update();
   }
 
-  List<Tournaments> get tournaments => _tournamnets;
+  List<TournamentModel> get tournaments => _tournamnets;
 
-  set tournaments(List<Tournaments> value) {
+  set tournaments(List<TournamentModel> value) {
     _tournamnets = value;
     update();
   }
@@ -168,22 +169,21 @@ class Cric3Controller extends GetxController {
 
   Future<void> fetchTournaments() async {
     EasyLoading.show(status: 'Loading tournaments...');
-    tournaments = await TournamentServices().fetchTournamentsAndMatches('CR');
+    tournaments = await TournamentServices()
+        .fetchTournamentsAndMatches(selectedSPort.value);
     EasyLoading.dismiss();
   }
 
-  void onTournamentSelected(Tournaments tournament) {
+  void onTournamentSelected(TournamentModel tournament) {
     selectedTournament = tournament;
     update();
     log('Selected Tournament: ${tournament.name}');
 
     selectTeam = TournamentServices()
-        .fetchPlayers('CR', tournament.matches![0].matchCode!);
+        .fetchPlayers(selectedSPort.value, tournament.matches![0].matchId);
 
     selectTeam.then((team) {
       EasyLoading.showSuccess('Players fetched successfully');
-
-      // Combine both home and away players
       players = [
         ...team.homeTeam?.players ?? [],
         ...team.awayTeam?.players ?? [],

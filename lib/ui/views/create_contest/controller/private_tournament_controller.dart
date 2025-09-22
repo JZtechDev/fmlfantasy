@@ -11,7 +11,7 @@ class PrivateTournamentController extends GetxController {
 
   //String token = '';
   RxBool tournamentLoading = false.obs;
-  RxList<Tournaments> tournamentCardList = <Tournaments>[].obs;
+  RxList<TournamentModel> tournamentCardList = <TournamentModel>[].obs;
 
   RxList<Sport> sportsList = <Sport>[
     Sport(title: 'BB', icon: AppImages.baseketball, name: 'B-ball'),
@@ -22,10 +22,10 @@ class PrivateTournamentController extends GetxController {
     Sport(title: 'HK', icon: AppImages.iceHockeysvg, name: 'Hockey'),
   ].obs;
 
-  Future<List<Tournaments>> fetchedTournaments() async {
+  Future<List<TournamentModel>> fetchedTournaments() async {
     try {
       tournamentLoading.value = true;
-      List<Tournaments> fetchedTournaments = await TournamentServices()
+      List<TournamentModel> fetchedTournaments = await TournamentServices()
           .fetchTournamentsAndMatches(selectedSport.value);
       tournamentCardList.value = fetchedTournaments;
       tournamentLoading.value = false;
