@@ -282,10 +282,11 @@ class LotoController extends GetxController {
 
   @override
   void onInit() async {
-    selectTeam = tournamentServices.fetchPlayers(sportName, matchID);
+    token = await getStringValuesSF();
+    selectTeam = tournamentServices.fetchPlayers(sportName, matchID, token);
     fetchMatchTime(matchID);
     scrollController.addListener(onScroll);
-    token = await getStringValuesSF();
+
     getSportsName();
     await CreateLottoServices.getSports(token).then(
       (response) {

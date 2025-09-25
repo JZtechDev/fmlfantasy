@@ -22,6 +22,7 @@ class SplashController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token') ?? '';
     local = prefs.getString('local') ?? '';
+    authToken = token;
     lang = Get.deviceLocale?.languageCode;
     log(lang.toString());
     if (local == '') {

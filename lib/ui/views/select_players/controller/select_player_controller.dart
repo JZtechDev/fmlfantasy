@@ -1,5 +1,6 @@
 import 'package:fmlfantasy/app/app%20routes/app_routes.dart';
 import 'package:fmlfantasy/app/app_images/app_images.dart';
+import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/model/select_player_model.dart';
 import 'package:fmlfantasy/services/tournament_services.dart';
 import 'package:fmlfantasy/ui/helpers/get_initials.dart';
@@ -193,8 +194,8 @@ class SelectPlayerController extends GetxController {
   @override
   void onInit() async {
     getPlayers == null ? null : players.value = [...getPlayers!];
-    selectTeam = tournamentServices.fetchPlayers(sportName, matchID);
-
+    selectTeam = tournamentServices.fetchPlayers(sportName, matchID, authToken);
+    //  token = await getStringValuesSF();
     fetchMatchTime(matchID);
     filter();
     filterPlayersByPosition();

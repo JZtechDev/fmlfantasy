@@ -80,6 +80,8 @@ class Cric3Controller extends GetxController {
     update();
   }
 
+  String token = '';
+
   void onNextPlayerCard(
       bool isHome, bool isBatsman, bool isBowler, bool isFielder) {
     if (isHome) {
@@ -170,7 +172,7 @@ class Cric3Controller extends GetxController {
   Future<void> fetchTournaments() async {
     EasyLoading.show(status: 'Loading tournaments...');
     tournaments = await TournamentServices()
-        .fetchTournamentsAndMatches(selectedSPort.value);
+        .fetchTournamentsAndMatches(selectedSPort.value, token);
     EasyLoading.dismiss();
   }
 
@@ -179,8 +181,8 @@ class Cric3Controller extends GetxController {
     update();
     log('Selected Tournament: ${tournament.name}');
 
-    selectTeam = TournamentServices()
-        .fetchPlayers(selectedSPort.value, tournament.matches![0].matchId);
+    selectTeam = TournamentServices().fetchPlayers(
+        selectedSPort.value, tournament.matches![0].matchId, token);
 
     selectTeam.then((team) {
       EasyLoading.showSuccess('Players fetched successfully');
@@ -223,8 +225,9 @@ class Cric3Controller extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    token = await getStringValuesSF();
     fetchTournaments();
   }
 }

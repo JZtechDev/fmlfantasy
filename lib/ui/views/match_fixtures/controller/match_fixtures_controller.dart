@@ -22,12 +22,14 @@ class MatchFixturesController extends GetxController {
 
   RxList<TournamentModel> fixtures = <TournamentModel>[].obs;
 
+  String token = '';
+
   Future<List<TournamentModel>> fetchedTournaments() async {
     try {
       isLoading.value = true;
       EasyLoading.show(status: 'Loading fixtures...');
       List<TournamentModel> fetchedTournaments = await TournamentServices()
-          .fetchTournamentsAndMatches(selectedSport.value);
+          .fetchTournamentsAndMatches(selectedSport.value, token);
       fixtures.value = fetchedTournaments;
       EasyLoading.dismiss();
       isLoading.value = false;
@@ -40,8 +42,9 @@ class MatchFixturesController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     selectedSport.value = selectedSPort.value;
+    token = await getStringValuesSF();
     fetchedTournaments();
     super.onInit();
   }

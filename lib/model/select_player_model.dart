@@ -76,12 +76,12 @@ class Players {
   String? jerseyImageUrl;
   String? jerseyNumber;
   String? jerseyName;
-  int? matchPoints;
-  int? indexPoints;
-  int? assetIndexPrice;
+  num? matchPoints;
+  num? indexPoints;
+  num? assetIndexPrice;
   bool? involved;
-  int? rank;
-  int? formationPosition;
+  num? rank;
+  num? formationPosition;
   String? statistics;
   String? pointBreakDown;
   String? position;

@@ -9,17 +9,22 @@ class TournamentServices {
   final token = getStringValuesSF();
 
   TournamentServices() {
-    // Add headers to the Dio instance
-    dio.options.headers['Authorization'] = token;
-    dio.options.headers['X-Cid'] = 'aliv';
+    dio.options.headers['Authorization'] = "Bearer $token";
+    dio.options.headers['x-cid'] = 'aliv';
     dio.options.headers['Ocp-Apim-Subscription-Key'] = subscriptionkey;
   }
 
   Future<List<TournamentModel>> fetchTournamentsAndMatches(
-      String sportsCode) async {
+      String sportsCode, String authToken) async {
     try {
       final response = await dio.get(
-          'http://40.113.171.107:50086/tournaments/daily?sportCode=$sportsCode');
+        'http://40.113.171.107:50086/tournaments/daily/$sportsCode',
+        options: Options(headers: {
+          'Authorization': 'Bearer $authToken',
+          'X-Cid': 'aliv',
+          'Ocp-Apim-Subscription-Key': subscriptionkey,
+        }),
+      );
 
       if (response.statusCode == 200) {
         List<TournamentModel> tournaments = (response.data as List)
@@ -41,7 +46,8 @@ class TournamentServices {
     }
   }
 
-  Future<SelectTeam> fetchPlayers(String sports, String matchId) async {
+  Future<SelectTeam> fetchPlayers(
+      String sports, String matchId, String authToken) async {
     String uri;
     String subKey;
     switch (sports) {
@@ -59,7 +65,7 @@ class TournamentServices {
         break;
       case 'AF':
         uri =
-            "http://40.113.171.107:50086/api/matchcenter/americanfootball/match/$matchId/line-up";
+            "http://40.113.171.107:50086/matchcenter/americanfootball/match/$matchId/line-up";
         subKey = americanFootballSubscriptionKeyUs;
         break;
       case 'BL':
@@ -79,7 +85,7 @@ class TournamentServices {
       final response = await dio.get(
         uri.toString(),
         options: Options(headers: {
-          'Authorization': token,
+          'Authorization': "Bearer $authToken",
           'X-Cid': 'aliv',
           'Ocp-Apim-Subscription-Key': subKey,
         }),

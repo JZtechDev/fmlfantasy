@@ -12,6 +12,8 @@ Future<String> getStringValuesSF() async {
   return token!;
 }
 
+String authToken = '';
+
 Future<String> getLocal() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   //Return String
@@ -19,12 +21,19 @@ Future<String> getLocal() async {
   return local!;
 }
 
+const String baseURL = 'http://40.113.171.107:57001';
+const String clientApi = ' http://88.208.197.30:65006';
+const String dailyMatchPickUrl = 'http://40.113.171.107:55016';
+const String authenticationUrl = 'http://40.113.171.107:55004';
+const String onBoardingUrl = 'http://40.113.171.107:55002';
+const String userProfileUrl = 'http://40.113.171.107:55005';
+
 //API URLS
-const String baseURL =
-    'https://smartabgapimanagement.azure-api.net/smartfantasybullsapi-dev';
-const String clientApi = 'https://smartabgapimanagement.azure-api.net';
-const String dailyMatchPickUrl =
-    'https://smartabgapimanagement.azure-api.net/smartdailymatchpickapi-dev';
+// const String baseURL =
+//     'https://smartabgapimanagement.azure-api.net/smartfantasybullsapi-dev';
+// const String clientApi = 'https://smartabgapimanagement.azure-api.net';
+// const String dailyMatchPickUrl =
+//   'https://smartabgapimanagement.azure-api.net/smartdailymatchpickapi-dev';
 
 //Subscription Keys
 const String subscriptionkey = 'f175b60f0df541faaddd9371997cf5d8';

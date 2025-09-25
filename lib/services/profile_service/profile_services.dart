@@ -1,16 +1,16 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/account_details_model.dart';
 import 'package:fmlfantasy/model/transaction_model.dart';
-import 'package:dio/dio.dart';
 
 class ProfileServices {
   Future<AccountDetailsModel> getProfile(String token) async {
     try {
       final response = await dio.get(
-        '$clientApi/smartuserprofileapi-dev/profile',
+        '$userProfileUrl/profile',
         options: Options(
           headers: {
             "Authorization": "Bearer $token",
@@ -39,7 +39,7 @@ class ProfileServices {
       String token, Map<String, dynamic> updatedData) async {
     try {
       final response = await dio.put(
-        '$clientApi/smartuserprofileapi-dev/profile/update',
+        '$userProfileUrl/profile/update',
         data: updatedData,
         options: Options(
           headers: {
@@ -144,7 +144,7 @@ class ProfileServices {
   static Future<List<dynamic>> fetchAvatars(String token) async {
     try {
       final response = await dio.get(
-        '$clientApi/smartuserprofileapi-uat/avatars',
+        '$userProfileUrl/avatars',
         options: Options(
           headers: {
             "Authorization": "Bearer $token",
@@ -154,11 +154,8 @@ class ProfileServices {
         ),
       );
       if (response.statusCode == 200) {
-        // print(response.data);
         return response.data;
       } else {
-        // print('TEsting');
-        //print( 'Failed to fetch transactions. Status code: ${response.statusCode}');
         throw Exception('Failed to fetch transactions');
       }
     } catch (e) {

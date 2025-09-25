@@ -59,7 +59,7 @@ class AuthenticationServices {
         "https://smartabgapimanagement.azure-api.net/smartonboadingapi-uat";
     try {
       final response = await Dio().post(
-        '$basePath/signup/live',
+        '$onBoardingUrl/signup/live',
         data: postData,
         options: Options(
           headers: {
@@ -97,7 +97,7 @@ class AuthenticationServices {
   Future<bool> emailCheck(String email, String otp) async {
     String basePath =
         "https://smartabgapimanagement.azure-api.net/smartonboadingapi-uat";
-    var endpoint = "$basePath/code/email/verify";
+    var endpoint = "$onBoardingUrl/code/email/verify";
     try {
       final response = await dio.post(endpoint,
           data: {
@@ -131,7 +131,7 @@ class AuthenticationServices {
   Future<bool> sendEmailOTP(String email) async {
     String basePath =
         "https://smartabgapimanagement.azure-api.net/smartonboadingapi-uat";
-    var endpoint = "$basePath/code/email/send";
+    var endpoint = "$onBoardingUrl/code/email/send";
     try {
       final response = await dio.post(
         endpoint,
@@ -165,7 +165,7 @@ class AuthenticationServices {
   Future<bool> forgetPasswordSendEmail(String email) async {
     String basePath =
         "https://smartabgapimanagement.azure-api.net/smartauthenticationapi-uat";
-    var endpoint = "$basePath/forgot-password";
+    var endpoint = "$authenticationUrl/forgot-password";
     try {
       final response = await dio.post(
         endpoint,
@@ -204,7 +204,7 @@ class AuthenticationServices {
   ) async {
     String basePath =
         "https://smartabgapimanagement.azure-api.net/smartauthenticationapi-uat";
-    var endpoint = "$basePath/forgot-password/confirm";
+    var endpoint = "$authenticationUrl/forgot-password/confirm";
     try {
       final response = await dio.post(
         endpoint,
@@ -247,7 +247,7 @@ class AuthenticationServices {
   ) async {
     String basePath =
         "https://smartabgapimanagement.azure-api.net/smartauthenticationapi-uat";
-    var endpoint = "$basePath/external";
+    var endpoint = "$authenticationUrl/external";
     try {
       final response = await dio.post(
         endpoint,
@@ -275,7 +275,7 @@ class AuthenticationServices {
   Future<bool> getKycId(String token) async {
     String basePath =
         "https://smartabgapimanagement.azure-api.net/smartuserprofileapi-uat";
-    var endpoint = "$basePath/kyc";
+    var endpoint = "$userProfileUrl/kyc";
     try {
       final response = await dio.get(
         endpoint,

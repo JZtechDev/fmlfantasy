@@ -13,7 +13,7 @@ class ProfileServiceUploadAvatar {
         'AvatarUrl': imageUrl,
       });
       final response = await dio.put(
-        'https://smartabgapimanagement.azure-api.net/smartuserprofileapi-dev/profile/update/avatar',
+        '$userProfileUrl/profile/update/avatar',
         data: formData,
         options: Options(
           headers: {

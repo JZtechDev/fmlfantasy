@@ -4,12 +4,12 @@ class Tournaments {
   List<String>? leagues;
   String? startDate;
   String? endDate;
-  int? maxParticipants;
-  int? prize;
-  int? entryFee;
+  num? maxParticipants;
+  num? prize;
+  num? entryFee;
   double? investment;
   bool? isPublic;
-  int? type;
+  num? type;
   String? sportCode;
   String? joinCode;
   List<Matches>? matches;
@@ -143,11 +143,11 @@ class TournamentModel {
   final List<String> leagues;
   final DateTime startDate;
   final String endDate;
-  final int maxParticipants;
-  final int prize;
-  final int entryFee;
+  final num maxParticipants;
+  final num prize;
+  final num entryFee;
   final bool isPublic;
-  final int type;
+  final num type;
   final String sportCode;
   final String? joinCode;
   final List<Match> matches;
@@ -178,11 +178,11 @@ class TournamentModel {
       leagues: List<String>.from(json['leagues'] as List),
       startDate: DateTime.parse(json['startDate'] as String),
       endDate: json['endDate'] as String,
-      maxParticipants: json['maxParticipants'] as int,
-      prize: json['prize'] as int,
-      entryFee: json['entryFee'] as int,
+      maxParticipants: json['maxParticipants'] as num,
+      prize: json['prize'] as num,
+      entryFee: json['entryFee'] as num,
       isPublic: json['isPublic'] as bool,
-      type: json['type'] as int,
+      type: json['type'] as num,
       sportCode: json['sportCode'] as String,
       joinCode: json['joinCode'] as String?,
       matches: (json['matches'] as List)
@@ -216,30 +216,30 @@ class TournamentModel {
 // Match model representing the nested matches array
 class Match {
   final String matchId;
-  final int seqId;
+  final num seqId;
   final DateTime validAt;
   final String home;
   final String away;
   final String competitionId;
   final String competitionName;
-  final int seasonYear;
+  final num seasonYear;
   final DateTime expStartDate;
   final DateTime? expEndDate;
   final String status;
   final bool isLive;
   final bool close;
-  final int? homeScore;
-  final int? homeHalfTimeScore;
+  final num? homeScore;
+  final num? homeHalfTimeScore;
   final String homeImageUrl;
   final String homeAssetCode;
   final String homeShortName;
   final String? awayTeam;
-  final int? awayScore;
-  final int? awayHalfTimeScore;
+  final num? awayScore;
+  final num? awayHalfTimeScore;
   final String awayImageUrl;
   final String awayAssetCode;
   final String awayShortName;
-  final int? minutesPlayed;
+  final num? minutesPlayed;
   final String matchVenue;
   final String matchCity;
   final String matchCountry;
@@ -285,13 +285,13 @@ class Match {
   factory Match.fromJson(Map<String, dynamic> json) {
     return Match(
       matchId: json['matchId'] as String,
-      seqId: json['seqId'] as int,
+      seqId: json['seqId'] as num,
       validAt: DateTime.parse(json['validAt'] as String),
       home: json['home'] as String,
       away: json['away'] as String,
       competitionId: json['competitionId'] as String,
       competitionName: json['competitionName'] as String,
-      seasonYear: json['seasonYear'] as int,
+      seasonYear: json['seasonYear'] as num,
       expStartDate: DateTime.parse(json['expStartDate'] as String),
       expEndDate: json['expEndDate'] != null
           ? DateTime.parse(json['expEndDate'] as String)
@@ -299,18 +299,18 @@ class Match {
       status: json['status'] as String,
       isLive: json['isLive'] as bool,
       close: json['close'] as bool,
-      homeScore: json['homeScore'] as int?,
-      homeHalfTimeScore: json['homeHalfTimeScore'] as int?,
+      homeScore: json['homeScore'] as num?,
+      homeHalfTimeScore: json['homeHalfTimeScore'] as num?,
       homeImageUrl: json['homeImageUrl'] as String,
       homeAssetCode: json['homeAssetCode'] as String,
       homeShortName: json['homeShortName'] as String,
       awayTeam: json['awayTeam'] as String?,
-      awayScore: json['awayScore'] as int?,
-      awayHalfTimeScore: json['awayHalfTimeScore'] as int?,
+      awayScore: json['awayScore'] as num?,
+      awayHalfTimeScore: json['awayHalfTimeScore'] as num?,
       awayImageUrl: json['awayImageUrl'] as String,
       awayAssetCode: json['awayAssetCode'] as String,
       awayShortName: json['awayShortName'] as String,
-      minutesPlayed: json['minutesPlayed'] as int?,
+      minutesPlayed: json['minutesPlayed'] as num?,
       matchVenue: json['matchVenue'] as String,
       matchCity: json['matchCity'] as String,
       matchCountry: json['matchCountry'] as String,

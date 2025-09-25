@@ -9,7 +9,7 @@ class PrivateTournamentController extends GetxController {
   RxString selectedSport = 'BB'.obs;
   RxInt selectedIndex = 0.obs;
 
-  //String token = '';
+  String token = '';
   RxBool tournamentLoading = false.obs;
   RxList<TournamentModel> tournamentCardList = <TournamentModel>[].obs;
 
@@ -26,7 +26,7 @@ class PrivateTournamentController extends GetxController {
     try {
       tournamentLoading.value = true;
       List<TournamentModel> fetchedTournaments = await TournamentServices()
-          .fetchTournamentsAndMatches(selectedSport.value);
+          .fetchTournamentsAndMatches(selectedSport.value, token);
       tournamentCardList.value = fetchedTournaments;
       tournamentLoading.value = false;
       return tournamentCardList;
@@ -37,8 +37,9 @@ class PrivateTournamentController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     selectedSport.value = selectedSPort.value;
+    token = await getStringValuesSF();
     fetchedTournaments();
     super.onInit();
   }
