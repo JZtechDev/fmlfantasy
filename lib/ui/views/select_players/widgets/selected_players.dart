@@ -1,6 +1,7 @@
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
+import 'package:fmlfantasy/ui/helpers/price_formater.dart';
 import 'package:fmlfantasy/ui/views/select_players/controller/select_player_controller.dart';
 
 class SelectedPlayer extends GetView<SelectPlayerController> {
@@ -78,7 +79,7 @@ class SelectedPlayer extends GetView<SelectPlayerController> {
                         Obx(
                           () => Text(
                               textAlign: TextAlign.center,
-                              '${controller.totalPoints.value.toStringAsFixed(0)},000/100,000',
+                              '${formatPrice(controller.totalPoints.value.toStringAsFixed(0))}/100,000',
                               style: globalTextStyle(
                                   fontSize: textSize,
                                   color: AppColors.white,

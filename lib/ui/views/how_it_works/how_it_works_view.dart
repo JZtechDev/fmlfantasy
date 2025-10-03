@@ -47,18 +47,7 @@ class HowItWorksView extends GetView<HowItWorksController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        const DashboardButton(),
-                        GestureDetector(
-                          onTap: () {
-                            generatePdfFromWidget(pdfKey,
-                                fileName: 'how_it_works.pdf');
-                          },
-                          child: Text('Create a pdf'),
-                        )
-                      ],
-                    ),
+                    const DashboardButton(),
                     verticalSpace(10.h),
                     Container(
                       padding: const EdgeInsets.all(2),

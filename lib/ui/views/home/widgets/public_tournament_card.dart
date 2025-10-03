@@ -214,7 +214,7 @@ class TournamentCardSlider extends GetView<HomeController> {
                               buttonTextSize:
                                   AppSizing.isMobile(context) ? 12.sp : 8.sp,
                               backgroundColor: AppColors.secondary,
-                              buttonText: 'Join for \$${tournament.prize}',
+                              buttonText: 'Join for \$${tournament.entryFee}',
                               onPressed: () {
                                 Get.toNamed(AppRoutes.selectPlayers,
                                     arguments: {

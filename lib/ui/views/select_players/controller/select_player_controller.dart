@@ -13,7 +13,7 @@ class SelectPlayerController extends GetxController {
   var searchVisible = false.obs;
   bool isDelayApplied = false;
   var showMatchTimer = false.obs;
-  RxDouble totalPoints = 100.0.obs;
+  RxDouble totalPoints = 100000.0.obs;
   String matchID = Get.arguments['matchID'];
   String sportName = Get.arguments['sport'];
   String tournamentId = Get.arguments['tournamentId'];
@@ -221,7 +221,7 @@ class SelectPlayerController extends GetxController {
   }
 
   double getSalaryPercentage() {
-    return (occupiedPoints.value / 100) * 1;
+    return (occupiedPoints.value / 100000) * 1;
   }
 
   String getIconPath(String sportName) {

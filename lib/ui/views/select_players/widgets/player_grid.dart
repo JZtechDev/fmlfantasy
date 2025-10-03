@@ -4,6 +4,7 @@ import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/select_player_model.dart';
 import 'package:fmlfantasy/ui/helpers/get_initials.dart';
 import 'package:fmlfantasy/ui/helpers/picture_shimmer.dart';
+import 'package:fmlfantasy/ui/helpers/price_formater.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 import 'package:fmlfantasy/ui/views/select_players/controller/select_player_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -41,6 +42,11 @@ class PlayersGrid extends GetView<SelectPlayerController> {
           return player.fullName!.toLowerCase().contains(query) ||
               teamName.contains(query);
         }).toList();
+        filteredList.sort((a, b) {
+          final playerA = a[0] as Players;
+          final playerB = b[0] as Players;
+          return playerB.assetIndexPrice!.compareTo(playerA.assetIndexPrice!);
+        });
 
         return GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
@@ -114,7 +120,7 @@ class PlayersGrid extends GetView<SelectPlayerController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "\$${player.assetIndexPrice!.toStringAsFixed(0)},000",
+                                    "\$${formatPrice(player.assetIndexPrice!.toStringAsFixed(0))}",
                                     style: globalTextStyle(
                                       fontSize: width > 600 ? 16.sp : 18.sp,
                                       fontWeight: FontWeight.w700,

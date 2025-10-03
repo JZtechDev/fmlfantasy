@@ -102,6 +102,7 @@ class HomeController extends GetxController {
       EasyLoading.show(status: 'Loading...');
       List<TournamentModel> fetchedTournaments = await tournamentServices
           .fetchTournamentsAndMatches(selectedSport.value, token);
+      // tournaments.value = fetchedTournaments;
       tournaments.value = fetchedTournaments.where((tournament) {
         DateTime? endDate;
         try {

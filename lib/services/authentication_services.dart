@@ -25,6 +25,9 @@ class AuthenticationServices {
       if (response.statusCode == 200) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('token', response.data['accessToken']);
+
+        authToken = prefs.getString('token') ?? '';
+
         // Map<String, dynamic> decodedToken =
         //     JwtDecoder.decode(response.data['accessToken']);
         // prefs.setString('kycSid', response.data['kycSid']);
