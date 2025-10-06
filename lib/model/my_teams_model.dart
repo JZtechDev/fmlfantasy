@@ -7,28 +7,38 @@ class MyTeamsModel {
   int? rank;
   MatchData? matchData;
   String? userId;
+  DateTime? createdAt;
+  bool? isPrivate;
 
-  MyTeamsModel(
-      {this.id,
-      this.name,
-      this.tournamentId,
-      this.type,
-      this.cost,
-      this.rank,
-      this.matchData,
-      this.userId});
+  MyTeamsModel({
+    this.id,
+    this.name,
+    this.tournamentId,
+    this.type,
+    this.cost,
+    this.rank,
+    this.matchData,
+    this.userId,
+    this.createdAt,
+    this.isPrivate,
+  });
 
   MyTeamsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     tournamentId = json['tournamentId'];
     type = json['type'];
-    cost = json['cost'];
+    cost = (json['cost'] is int)
+        ? (json['cost'] as int).toDouble()
+        : json['cost']?.toDouble();
     rank = json['rank'];
     matchData = json['matchData'] != null
         ? MatchData.fromJson(json['matchData'])
         : null;
     userId = json['userId'];
+    createdAt =
+        json['createdAt'] != null ? DateTime.tryParse(json['createdAt']) : null;
+    isPrivate = json['isPrivate'] ?? false;
   }
 
   Map<String, dynamic> toJson() {
@@ -43,79 +53,146 @@ class MyTeamsModel {
       data['matchData'] = matchData!.toJson();
     }
     data['userId'] = userId;
+    data['createdAt'] = createdAt?.toIso8601String();
+    data['isPrivate'] = isPrivate;
     return data;
   }
 }
 
 class MatchData {
-  String? tournamentId;
-  String? competition;
-  String? sportCode;
-  String? matchCode;
+  String? matchId;
+  int? seqId;
+  String? validAt;
   String? home;
+  String? away;
+  String? competitionId;
+  String? competitionName;
+  int? seasonYear;
+  String? expStartDate;
+  String? expEndDate;
+  String? status;
+  bool? isLive;
+  bool? close;
+  dynamic homeScore;
+  dynamic homeHalfTimeScore;
+  String? homeImageUrl;
   String? homeAssetCode;
   String? homeShortName;
-  String? homeImageUrl;
-  String? homeScore;
-  String? away;
+  dynamic awayTeam;
+  dynamic awayScore;
+  dynamic awayHalfTimeScore;
+  String? awayImageUrl;
   String? awayAssetCode;
   String? awayShortName;
-  String? awayImageUrl;
-  String? awayScore;
-  String? status;
+  dynamic minutesPlayed;
+  String? matchVenue;
+  String? matchCity;
+  String? matchCountry;
+  String? playerOfTheMatchId;
+  String? playerOfTheMatchAssetCode;
+  String? playerOfTheMatchName;
 
-  MatchData(
-      {this.tournamentId,
-      this.sportCode,
-      this.competition,
-      this.matchCode,
-      this.home,
-      this.homeAssetCode,
-      this.homeShortName,
-      this.homeImageUrl,
-      this.homeScore,
-      this.away,
-      this.awayAssetCode,
-      this.awayShortName,
-      this.awayImageUrl,
-      this.awayScore,
-      this.status});
+  MatchData({
+    this.matchId,
+    this.seqId,
+    this.validAt,
+    this.home,
+    this.away,
+    this.competitionId,
+    this.competitionName,
+    this.seasonYear,
+    this.expStartDate,
+    this.expEndDate,
+    this.status,
+    this.isLive,
+    this.close,
+    this.homeScore,
+    this.homeHalfTimeScore,
+    this.homeImageUrl,
+    this.homeAssetCode,
+    this.homeShortName,
+    this.awayTeam,
+    this.awayScore,
+    this.awayHalfTimeScore,
+    this.awayImageUrl,
+    this.awayAssetCode,
+    this.awayShortName,
+    this.minutesPlayed,
+    this.matchVenue,
+    this.matchCity,
+    this.matchCountry,
+    this.playerOfTheMatchId,
+    this.playerOfTheMatchAssetCode,
+    this.playerOfTheMatchName,
+  });
 
   MatchData.fromJson(Map<String, dynamic> json) {
-    tournamentId = json['tournamentId'];
-    competition = json['competition'];
-    sportCode = json['sportCode'];
-    matchCode = json['matchCode'];
+    matchId = json['matchId'];
+    seqId = json['seqId'];
+    validAt = json['validAt'];
     home = json['home'];
+    away = json['away'];
+    competitionId = json['competitionId'];
+    competitionName = json['competitionName'];
+    seasonYear = json['seasonYear'];
+    expStartDate = json['expStartDate'];
+    expEndDate = json['expEndDate'];
+    status = json['status'];
+    isLive = json['isLive'] ?? false;
+    close = json['close'] ?? false;
+    homeScore = json['homeScore'];
+    homeHalfTimeScore = json['homeHalfTimeScore'];
+    homeImageUrl = json['homeImageUrl'];
     homeAssetCode = json['homeAssetCode'];
     homeShortName = json['homeShortName'];
-    homeImageUrl = json['homeImageUrl'];
-    homeScore = json['homeScore'];
-    away = json['away'];
+    awayTeam = json['awayTeam'];
+    awayScore = json['awayScore'];
+    awayHalfTimeScore = json['awayHalfTimeScore'];
+    awayImageUrl = json['awayImageUrl'];
     awayAssetCode = json['awayAssetCode'];
     awayShortName = json['awayShortName'];
-    awayImageUrl = json['awayImageUrl'];
-    awayScore = json['awayScore'];
-    status = json['status'];
+    minutesPlayed = json['minutesPlayed'];
+    matchVenue = json['matchVenue'];
+    matchCity = json['matchCity'];
+    matchCountry = json['matchCountry'];
+    playerOfTheMatchId = json['playerOfTheMatchId'];
+    playerOfTheMatchAssetCode = json['playerOfTheMatchAssetCode'];
+    playerOfTheMatchName = json['playerOfTheMatchName'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['tournamentId'] = tournamentId;
-    data['competition'] = competition;
-    data['sportCode'] = sportCode;
-    data['matchCode'] = matchCode;
+    data['matchId'] = matchId;
+    data['seqId'] = seqId;
+    data['validAt'] = validAt;
     data['home'] = home;
+    data['away'] = away;
+    data['competitionId'] = competitionId;
+    data['competitionName'] = competitionName;
+    data['seasonYear'] = seasonYear;
+    data['expStartDate'] = expStartDate;
+    data['expEndDate'] = expEndDate;
+    data['status'] = status;
+    data['isLive'] = isLive;
+    data['close'] = close;
+    data['homeScore'] = homeScore;
+    data['homeHalfTimeScore'] = homeHalfTimeScore;
+    data['homeImageUrl'] = homeImageUrl;
     data['homeAssetCode'] = homeAssetCode;
     data['homeShortName'] = homeShortName;
-    data['homeImageUrl'] = homeImageUrl;
-    data['homeScore'] = homeScore;
-    data['away'] = away;
+    data['awayTeam'] = awayTeam;
+    data['awayScore'] = awayScore;
+    data['awayHalfTimeScore'] = awayHalfTimeScore;
+    data['awayImageUrl'] = awayImageUrl;
     data['awayAssetCode'] = awayAssetCode;
     data['awayShortName'] = awayShortName;
-    data['awayImageUrl'] = awayImageUrl;
-    data['awayScore'] = awayScore;
-    data['status'] = status;
+    data['minutesPlayed'] = minutesPlayed;
+    data['matchVenue'] = matchVenue;
+    data['matchCity'] = matchCity;
+    data['matchCountry'] = matchCountry;
+    data['playerOfTheMatchId'] = playerOfTheMatchId;
+    data['playerOfTheMatchAssetCode'] = playerOfTheMatchAssetCode;
+    data['playerOfTheMatchName'] = playerOfTheMatchName;
     return data;
   }
 }

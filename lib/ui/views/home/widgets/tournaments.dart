@@ -65,13 +65,20 @@ class Tournaments extends GetView<HomeController> {
                             fontWeight: FontWeight.w800,
                             color: AppColors.white)),
                     verticalSpace(5),
-                    Text(
-                        'Explore  Premier League, La Liga,Serie A (Italy), Bundesliga and Ligue 1 (France)',
-                        style: globalTextStyle(
-                            fontSize:
-                                AppSizing.isMobile(context) ? 14.sp : 10.sp,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.white)),
+                    selectedSPort.value == 'AF'
+                        ? Text('Explore National American Football League',
+                            style: globalTextStyle(
+                                fontSize:
+                                    AppSizing.isMobile(context) ? 14.sp : 10.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.white))
+                        : Text(
+                            'Explore  Premier League, La Liga,Serie A (Italy), Bundesliga and Ligue 1 (France)',
+                            style: globalTextStyle(
+                                fontSize:
+                                    AppSizing.isMobile(context) ? 14.sp : 10.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.white)),
                     verticalSpace(10),
                     GetBuilder<HomeController>(builder: (controller) {
                       return AppDropdown(

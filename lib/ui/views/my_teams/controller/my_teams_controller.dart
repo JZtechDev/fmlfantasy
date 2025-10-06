@@ -116,8 +116,8 @@ class MyTeamsController extends GetxController
     selectedTeamId.value = myTeams[0].id.toString();
     team.value = myTeams[0].name.toString();
     teamId.value = myTeams[0].id.toString();
-    tournamentId.value = myTeams[0].matchData!.tournamentId.toString();
-    matchCode.value = myTeams[0].matchData!.matchCode.toString();
+    tournamentId.value = myTeams[0].tournamentId.toString();
+    matchCode.value = myTeams[0].matchData!.matchId.toString();
   }
 
   RxList<Sport> sportsList = <Sport>[

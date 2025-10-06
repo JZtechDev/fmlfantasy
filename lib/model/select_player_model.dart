@@ -119,7 +119,7 @@ class Players {
   Players.fromJson(Map<String, dynamic> json) {
     assetCode = json['assetCode'];
     fullName = json['fullName'];
-    imageUrl = json['imageUrl'];
+    imageUrl = json['photoUrl'];
     jerseyImageUrl = json['jerseyImageUrl'];
     jerseyNumber = json['jerseyNumber'];
     jerseyName = json['jerseyName'];

@@ -37,12 +37,14 @@ class CreateTeamServices {
 
     try {
       final response = await dio.post(
-        "$baseURL/teams/with-players",
+        "http://40.113.171.107:50086/teams/with-players",
         data: {
           "name": teamName,
           "players": postData,
-          "TournamentId": tournamentId,
-          "type": '1',
+          "tournamentId": tournamentId,
+          "sportCode": sports,
+          "isPrivate": false,
+          "joinCode": '',
         },
         options: Options(
           headers: {

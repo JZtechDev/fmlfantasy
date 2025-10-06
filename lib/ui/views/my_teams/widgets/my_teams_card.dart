@@ -59,7 +59,7 @@ class MyTeamsCard extends GetView<MyTeamsController> {
                                   child: Text(
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    myTeams.matchData!.competition ?? '-',
+                                    myTeams.matchData!.competitionName ?? '-',
                                     style: globalTextStyle2(
                                         fontSize: 12.sp,
                                         color: AppColors.secondary,

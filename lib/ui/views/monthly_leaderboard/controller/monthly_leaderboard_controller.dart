@@ -71,10 +71,10 @@ class MonthlyLeaderboardController extends GetxController
       leaderboard.assignAll(data);
       log('Fetched leaderboard: ${leaderboard.length} items.');
       if (selectedMatch != null) {
-        log('Selected match: ${selectedMatch!.matchData!.matchCode}');
+        log('Selected match: ${selectedMatch!.matchData!.matchId}');
         MonthlyLeaderBoardModel? matchedLeaderboard =
             leaderboard.firstWhereOrNull(
-          (match) => match.matchCode == selectedMatch!.matchData!.matchCode,
+          (match) => match.matchCode == selectedMatch!.matchData!.matchId,
         );
 
         if (matchedLeaderboard != null) {

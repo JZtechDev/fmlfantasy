@@ -33,9 +33,9 @@ class MyTeams extends GetView<MyTeamsController> {
             .map((myTeams) => GestureDetector(
                   onTap: () {
                     controller.teamId.value = myTeams.id!;
-                    controller.matchCode.value = myTeams.matchData!.matchCode!;
+                    controller.matchCode.value = myTeams.matchData!.matchId!;
                     controller.tournamentId.value =
-                        myTeams.matchData!.tournamentId!;
+                        myTeams.tournamentId.toString();
                     controller.team.value = myTeams.name!;
                     controller.selectTeam(
                         controller.filteredData.indexOf(myTeams),

@@ -8,10 +8,10 @@ class MatchCenterServiceNew {
   Future<List<MatchCenterMatches>> fetchMatchCenterMatches() async {
     try {
       final response = await dio.get(
-          'https://smartabgapimanagement.azure-api.net/smartabgcricketrestapi-dev/matches/recent-fixtures',
+          'http://40.113.171.107:50086/matchcenter/recent-fixtures/${selectedSPort.value}/15',
           options: Options(
             headers: {
-              'Authorization': 'Bearer $token',
+              'Authorization': 'Bearer $authToken',
               'x-cid': 'aliv',
               'Ocp-Apim-Subscription-Key': cricketSubscriptionKeyUs,
             },
@@ -31,11 +31,11 @@ class MatchCenterServiceNew {
   Future fetchMatchCenterData(String matchKey) async {
     try {
       final response = await dio.get(
-          queryParameters: {'matchKey': matchKey},
-          'https://smartabgapimanagement.azure-api.net/smartabgcricketrestapi-dev/matches/matchcentermatch-details',
+          //  queryParameters: {'matchKey': matchKey},
+          'http://40.113.171.107:50086/matchcenter/matchcentermatch-details/$matchKey',
           options: Options(
             headers: {
-              'Authorization': 'Bearer $token',
+              'Authorization': 'Bearer $authToken',
               'x-cid': 'aliv',
               'Ocp-Apim-Subscription-Key': cricketSubscriptionKeyUs,
             },

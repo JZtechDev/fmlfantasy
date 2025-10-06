@@ -46,13 +46,9 @@ class TournamentCardSlider extends GetView<HomeController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('Tournament Name Here',
-                              style: globalTextStyle(
-                                  fontSize: width > 500 ? 8.sp : 12.sp,
-                                  fontWeight: FontWeight.w600)),
                           Row(
                             children: [
                               SvgPicture.asset(
@@ -107,7 +103,7 @@ class TournamentCardSlider extends GetView<HomeController> {
                                                 fit: BoxFit.fill,
                                               )
                                         : Image.network(
-                                            tournament.matches![0].homeImageUrl
+                                            tournament.matches[0].homeImageUrl
                                                 .toString(),
                                             fit: BoxFit.fill,
                                           ),
@@ -133,10 +129,10 @@ class TournamentCardSlider extends GetView<HomeController> {
                               ),
                               child: tournament.matches[0].awayImageUrl == null
                                   ? Container()
-                                  : tournament.matches![0].awayImageUrl
+                                  : tournament.matches[0].awayImageUrl
                                           .endsWith('.svg.png')
                                       ? Container()
-                                      : tournament.matches![0].awayImageUrl
+                                      : tournament.matches[0].awayImageUrl
                                               .endsWith('svg')
                                           ? controller.selectedSport.value ==
                                                       'CR' ||
@@ -150,13 +146,13 @@ class TournamentCardSlider extends GetView<HomeController> {
                                                   fit: BoxFit.fill,
                                                 )
                                               : SvgPicture.network(
-                                                  tournament.matches![0]
-                                                      .awayImageUrl!,
+                                                  tournament
+                                                      .matches[0].awayImageUrl,
                                                   fit: BoxFit.fill,
                                                 )
                                           : Image.network(
                                               tournament
-                                                  .matches![0].awayImageUrl,
+                                                  .matches[0].awayImageUrl,
                                               fit: BoxFit.fill,
                                             )),
                           horizontalSpace(5.w),

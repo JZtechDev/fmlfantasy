@@ -5,6 +5,7 @@ import 'package:fmlfantasy/model/select_player_model.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/helpers/get_initials.dart';
 import 'package:fmlfantasy/ui/helpers/picture_shimmer.dart';
+import 'package:fmlfantasy/ui/helpers/price_formater.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 import 'package:fmlfantasy/ui/views/bull_player/controller/bull_player_controller.dart';
 import 'package:flutter/material.dart';
@@ -342,7 +343,7 @@ class Playergrid extends GetView<BullPlayerController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "\$${player.assetIndexPrice!.toStringAsFixed(0)},000",
+                                  "\$${formatPrice(player.assetIndexPrice!.toStringAsFixed(0))}",
                                   style: globalTextStyle(
                                     fontSize: maxWidth > 600 ? 16.sp : 18.sp,
                                     fontWeight: FontWeight.w700,

@@ -37,9 +37,9 @@ class MyTeamsView extends GetView<MyTeamsController> {
                         controller.teamId.value = controller.myTeams[0].id!;
                         controller.team.value = controller.myTeams[0].name!;
                         controller.matchCode.value =
-                            controller.myTeams[0].matchData!.matchCode!;
+                            controller.myTeams[0].matchData!.matchId!;
                         controller.tournamentId.value =
-                            controller.myTeams[0].matchData!.tournamentId!;
+                            controller.myTeams[0].tournamentId!;
                         controller.selectedCard.value = 0;
                         controller.fetchMyTeamsPlayers();
                       });

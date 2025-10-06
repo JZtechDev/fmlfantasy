@@ -48,7 +48,7 @@ const String dailyMatchPickKey = 'f175b60f0df541faaddd9371997cf5d8';
 
 RxList<GetContacts> contacts = <GetContacts>[].obs;
 
-RxString selectedSPort = 'CR'.obs;
+RxString selectedSPort = 'AF'.obs;
 
 RxString selectedTab = 'Fantasy Sports'.obs;
 
