@@ -65,7 +65,7 @@ class MyteamServices {
     String subKey;
     switch (sports) {
       case "BB":
-        url = "$baseURL/teams/$teamId/players?sportCode=$sports";
+        url = "$baseURL/teams/${sports}/$teamId/players?sportCode=$sports";
         subKey = basketballSubscriptionKeyUs;
         break;
       case "FB":
@@ -77,7 +77,7 @@ class MyteamServices {
         subKey = cricketSubscriptionKeyUs;
         break;
       case 'AF':
-        url = "$baseURL/teams/$teamId/players?sportCode=$sports";
+        url = "http://40.113.171.107:50086/teams/${sports}/$teamId/players";
 
         subKey = americanFootballSubscriptionKeyUs;
         break;

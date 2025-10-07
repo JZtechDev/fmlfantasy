@@ -333,7 +333,7 @@ class PlayerGridView extends GetView<MyTeamsController> {
                                         topRight: Radius.circular(5.r),
                                       )),
                                   child: Text(
-                                    getInitials(player.position!),
+                                    getInitials(player.position ?? ''),
                                     style: globalTextStyle(
                                         fontSize: AppSizing.isTablet(context)
                                             ? 8.sp
