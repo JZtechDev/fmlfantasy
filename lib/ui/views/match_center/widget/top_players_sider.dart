@@ -2,13 +2,12 @@ import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/match_center_inner.dart';
 import 'package:fmlfantasy/model/match_center_inner_model.dart';
-import 'package:fmlfantasy/new_model/match_center_inner_new.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/top_players_card.dart';
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 
 class TopPlayersSider extends GetView<MatchCenterInner> {
-  final MatchCenterInnerNew data;
+  final InnerMatchCenterModel data;
   const TopPlayersSider({super.key, required this.data});
 
   @override
@@ -16,7 +15,7 @@ class TopPlayersSider extends GetView<MatchCenterInner> {
     Get.put(MatchCenterInner());
     return Column(
       children: [
-        data.playerMatchStatistics == null
+        data.playersBreakDown.isEmpty
             ? Text('notAvailable'.tr)
             : Padding(
                 padding: EdgeInsets.only(left: 10.w),
@@ -24,10 +23,11 @@ class TopPlayersSider extends GetView<MatchCenterInner> {
                   controller: controller.carouselController,
                   itemCount: 5,
                   itemBuilder: (context, index, realIndex) {
-                    PlayerMatchStatistic topPlayers =
-                        data.playerMatchStatistics![index];
+                    PlayersBreakDown topPlayers = data.playersBreakDown[index];
                     return TopPlayersCard(
-                        topPlayers: topPlayers, indexs: index);
+                      topPlayers: topPlayers,
+                      indexs: index,
+                    );
                   },
                   options: CarouselOptions(
                     clipBehavior: Clip.hardEdge,

@@ -2,7 +2,6 @@ import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/match_center_model.dart';
-import 'package:fmlfantasy/new_model/match_center_matches_new.dart';
 import 'package:fmlfantasy/ui/helpers/format_competition_name.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
@@ -21,11 +20,9 @@ class PastMatchesSlider extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         color: AppColors.primaryVeryDark,
         child: CarouselSlider.builder(
-          itemCount:
-              controller.matchCenterController.newMatchCenterMatches.length,
+          itemCount: controller.pastMatches.length,
           itemBuilder: (BuildContext context, int index, int realIndex) {
-            MatchCenterMatches matches =
-                controller.matchCenterController.newMatchCenterMatches[index];
+            PastMatches matches = controller.pastMatches[index];
             bool isSelected =
                 controller.selectedMatch.matchKey == matches.matchKey;
             return GestureDetector(
@@ -61,26 +58,25 @@ class PastMatchesSlider extends StatelessWidget {
                                   children: [
                                     Column(
                                       children: [
-                                        matches.homeTeamImageUrl == null
+                                        matches.homeImageUrl == null ||
+                                                matches.homeImageUrl!.isEmpty
                                             ? Container()
                                             : controller.sportsCode == 'CR'
                                                 ? Image.network(
-                                                    replaceSvgWithPng(matches
-                                                        .homeTeamImageUrl!),
+                                                    replaceSvgWithPng(
+                                                        matches.homeImageUrl!),
                                                     height: 35.h,
                                                     width: 35.w,
                                                   )
-                                                : matches.homeTeamImageUrl!
+                                                : matches.homeImageUrl!
                                                         .endsWith('.svg')
                                                     ? SvgPicture.network(
-                                                        matches
-                                                            .homeTeamImageUrl!,
+                                                        matches.homeImageUrl!,
                                                         height: 35.h,
                                                         width: 35.w,
                                                       )
                                                     : Image.network(
-                                                        matches
-                                                            .homeTeamImageUrl!,
+                                                        matches.homeImageUrl!,
                                                         height: 35.h,
                                                         width: 35.w,
                                                       ),
@@ -89,7 +85,7 @@ class PastMatchesSlider extends StatelessWidget {
                                           width: Get.width * 0.25,
                                           child: Text(
                                             textAlign: TextAlign.center,
-                                            matches.homeTeamName ?? '',
+                                            matches.home ?? '',
                                             style: globalTextStyle2(
                                               fontSize:
                                                   AppSizing.isMobile(context)
@@ -116,28 +112,25 @@ class PastMatchesSlider extends StatelessWidget {
                                     ),
                                     Column(
                                       children: [
-                                        matches.awayTeamImageUrl == null ||
-                                                matches
-                                                    .awayTeamImageUrl!.isEmpty
+                                        matches.awayImageUrl == null ||
+                                                matches.awayImageUrl!.isEmpty
                                             ? Container()
                                             : controller.sportsCode == 'CR'
                                                 ? Image.network(
-                                                    replaceSvgWithPng(matches
-                                                        .awayTeamImageUrl!),
+                                                    replaceSvgWithPng(
+                                                        matches.awayImageUrl!),
                                                     height: 35.h,
                                                     width: 35.w,
                                                   )
-                                                : matches.awayTeamImageUrl!
+                                                : matches.awayImageUrl!
                                                         .endsWith('.svg')
                                                     ? SvgPicture.network(
-                                                        matches
-                                                            .awayTeamImageUrl!,
+                                                        matches.awayImageUrl!,
                                                         height: 35.h,
                                                         width: 35.w,
                                                       )
                                                     : Image.network(
-                                                        matches
-                                                            .awayTeamImageUrl!,
+                                                        matches.awayImageUrl!,
                                                         height: 35.h,
                                                         width: 35.w,
                                                       ),
@@ -146,7 +139,7 @@ class PastMatchesSlider extends StatelessWidget {
                                           width: Get.width * 0.25,
                                           child: Text(
                                             textAlign: TextAlign.center,
-                                            matches.awayTeamName ?? '',
+                                            matches.away ?? '',
                                             style: globalTextStyle2(
                                               fontSize:
                                                   AppSizing.isMobile(context)
@@ -167,19 +160,19 @@ class PastMatchesSlider extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              // Text(
-                              //   matches. != null
-                              //       ? formatCompetitionName(
-                              //           matches.competitionName)
-                              //       : '',
-                              //   style: globalTextStyle(
-                              //     fontSize: AppSizing.isMobile(context)
-                              //         ? 14.sp
-                              //         : 8.sp,
-                              //     fontWeight: FontWeight.w700,
-                              //     color: AppColors.darkGreen,
-                              //   ),
-                              // ),
+                              Text(
+                                matches.competitionName != null
+                                    ? formatCompetitionName(
+                                        matches.competitionName)
+                                    : '',
+                                style: globalTextStyle(
+                                  fontSize: AppSizing.isMobile(context)
+                                      ? 14.sp
+                                      : 8.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.darkGreen,
+                                ),
+                              ),
                               verticalSpace(5),
                               Row(
                                 children: [
@@ -191,9 +184,11 @@ class PastMatchesSlider extends StatelessWidget {
                                   ),
                                   horizontalSpace(5.w),
                                   Text(
-                                      matches.matchStartDate != null
+                                      matches.start != null
                                           ? DateFormat('d MMM hh:mm a').format(
-                                              matches.matchStartDate!.toLocal())
+                                              DateTime.parse(
+                                                      matches.start ?? '')
+                                                  .toLocal())
                                           : '',
                                       style: globalTextStyle2(
                                           fontSize: AppSizing.isTablet(context)

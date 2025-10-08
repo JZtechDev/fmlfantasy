@@ -1,6 +1,6 @@
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
-import 'package:fmlfantasy/new_model/match_center_matches_new.dart';
+import 'package:fmlfantasy/model/match_center_model.dart';
 import 'package:fmlfantasy/ui/helpers/commons.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_controller.dart';
@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class MatchCenterTiles extends GetView<MatchCenterController> {
-  final MatchCenterMatches matches;
+  final PastMatches matches;
   const MatchCenterTiles({super.key, required this.matches});
 
   @override
@@ -54,24 +54,24 @@ class MatchCenterTiles extends GetView<MatchCenterController> {
                               decoration: const BoxDecoration(
                                   color: Color.fromRGBO(217, 217, 217, 1),
                                   shape: BoxShape.circle),
-                              child: matches.homeTeamImageUrl == null
+                              child: matches.homeImageUrl == null ||
+                                      matches.homeImageUrl!.isEmpty
                                   ? Container()
                                   : controller.selectedSport.value == 'CR'
                                       ? Image.network(
                                           replaceSvgWithPng(
-                                              matches.homeTeamImageUrl ?? ''),
+                                              matches.homeImageUrl!),
                                           height: 30.h,
                                           width: 30.w,
                                         )
-                                      : matches.homeTeamImageUrl!
-                                              .endsWith('.svg')
+                                      : matches.homeImageUrl!.endsWith('.svg')
                                           ? SvgPicture.network(
-                                              matches.homeTeamImageUrl!,
+                                              matches.homeImageUrl!,
                                               height: 30.h,
                                               width: 30.w,
                                             )
                                           : Image.network(
-                                              matches.homeTeamImageUrl!,
+                                              matches.homeImageUrl!,
                                               height: 30.h,
                                               width: 30.w,
                                             ),
@@ -80,7 +80,7 @@ class MatchCenterTiles extends GetView<MatchCenterController> {
                             SizedBox(
                               width: Get.width * 0.3,
                               child: Text(
-                                matches.homeTeamName ?? '',
+                                matches.home ?? 'Team 2 large name here',
                                 textAlign: TextAlign.center,
                                 style: globalTextStyle2(
                                   fontSize: 12.sp,
@@ -111,24 +111,24 @@ class MatchCenterTiles extends GetView<MatchCenterController> {
                                 color: AppColors.white,
                                 shape: BoxShape.circle,
                               ),
-                              child: matches.awayTeamImageUrl == null
+                              child: matches.awayImageUrl == null ||
+                                      matches.awayImageUrl!.isEmpty
                                   ? Container()
                                   : controller.selectedSport.value == 'CR'
                                       ? Image.network(
                                           replaceSvgWithPng(
-                                              matches.awayTeamImageUrl!),
+                                              matches.awayImageUrl!),
                                           height: 30.h,
                                           width: 30.w,
                                         )
-                                      : matches.awayTeamImageUrl!
-                                              .endsWith('.svg')
+                                      : matches.awayImageUrl!.endsWith('.svg')
                                           ? SvgPicture.network(
-                                              matches.awayTeamImageUrl!,
+                                              matches.awayImageUrl!,
                                               height: 30.h,
                                               width: 30.w,
                                             )
                                           : Image.network(
-                                              matches.awayTeamImageUrl!,
+                                              matches.awayImageUrl!,
                                               height: 30.h,
                                               width: 30.w,
                                             ),
@@ -137,7 +137,7 @@ class MatchCenterTiles extends GetView<MatchCenterController> {
                             SizedBox(
                               width: Get.width * 0.3,
                               child: Text(
-                                matches.awayTeamName ?? '',
+                                matches.away ?? 'Team 1 large name here',
                                 textAlign: TextAlign.center,
                                 style: globalTextStyle2(
                                   fontSize: 12.sp,
@@ -168,9 +168,9 @@ class MatchCenterTiles extends GetView<MatchCenterController> {
                           height: 15.h, width: 15.w),
                       horizontalSpace(5.w),
                       Text(
-                        matches.matchStartDate != null
-                            ? DateFormat('d MMM yyyy')
-                                .format(matches.matchStartDate!.toLocal())
+                        matches.start != null
+                            ? DateFormat('d MMM yyyy').format(
+                                DateTime.parse(matches.start ?? '').toLocal())
                             : '6th May 1430',
                         style: globalTextStyle2(
                           fontSize: 12.sp,
@@ -183,7 +183,7 @@ class MatchCenterTiles extends GetView<MatchCenterController> {
                     ],
                   ),
                   Text(
-                    matches.matchFormat ?? '',
+                    matches.competitionName ?? 'English Premier League',
                     style: globalTextStyle2(
                       fontSize: 12.sp,
                       color: AppColors.white,

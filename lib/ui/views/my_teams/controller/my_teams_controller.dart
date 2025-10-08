@@ -95,7 +95,9 @@ class MyTeamsController extends GetxController
     for (var element in myTeamPlayers) {
       totalPoints.value = totalPoints.value + element.investment!.toInt();
     }
-    return totalPoints.value;
+
+    var points = totalPoints.value / 1000;
+    return points.toInt();
   }
 
   @override

@@ -1,11 +1,13 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
+import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
-import 'package:fmlfantasy/new_model/match_center_inner_new.dart';
+import 'package:fmlfantasy/model/match_center_inner_model.dart';
+import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 
 class CricketGround extends StatelessWidget {
-  final List<PlayerMatchStatistic> data;
+  final List<PlayersBreakDown> data;
   const CricketGround({super.key, required this.data});
 
   @override
@@ -63,17 +65,56 @@ class CricketGround extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        player.headshotImageUrl.endsWith('.svg')
-                            ? SvgPicture.network(
-                                player.headshotImageUrl,
-                                height: 50,
-                                width: 50,
-                              )
-                            : Image.network(
-                                player.headshotImageUrl,
-                                height: 50,
-                                width: 50,
-                              ),
+                        selectedSPort.value == 'FB'
+                            ? player.imageUrl == null ||
+                                    player.imageUrl!.isEmpty
+                                ? player.jerseyImage == null ||
+                                        player.jerseyImage!.isEmpty
+                                    ? Container()
+                                    : player.jerseyImage!.endsWith('.svg')
+                                        ? SvgPicture.network(
+                                            player.jerseyImage!,
+                                            height: 25.h,
+                                            width: 25.w,
+                                          )
+                                        : Image.network(
+                                            player.jerseyImage!,
+                                            height: 25.h,
+                                            width: 25.w,
+                                          )
+                                : player.imageUrl == null ||
+                                        player.imageUrl!.isEmpty
+                                    ? Container()
+                                    : player.imageUrl!.endsWith('.svg')
+                                        ? SvgPicture.network(
+                                            player.imageUrl!,
+                                            height: 25.h,
+                                            width: 25.w,
+                                          )
+                                        : Image.network(
+                                            player.imageUrl!,
+                                            height: 25.h,
+                                            width: 25.w,
+                                          )
+                            : player.imageUrl == null ||
+                                    player.imageUrl!.isEmpty
+                                ? Container()
+                                : player.imageUrl!.endsWith('.svg')
+                                    ? selectedSPort.value == 'CR'
+                                        ? Image.network(
+                                            replaceSvgWithPng(player.imageUrl!),
+                                            height: 25.h,
+                                          )
+                                        : SvgPicture.network(
+                                            player.imageUrl!,
+                                            height: 25.h,
+                                            width: 25.w,
+                                          )
+                                    : Image.network(
+                                        player.imageUrl!,
+                                        height: 25.h,
+                                        width: 25.w,
+                                      ),
                         verticalSpace(5.h),
                         Container(
                           padding: const EdgeInsets.symmetric(
@@ -83,7 +124,7 @@ class CricketGround extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5.r),
                           ),
                           child: Text(
-                            player.playerName,
+                            player.name ?? '-',
                             style: globalTextStyle(
                               fontSize:
                                   AppSizing.isMobile(context) ? 10.sp : 10.sp,

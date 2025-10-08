@@ -1,7 +1,7 @@
 import 'package:fmlfantasy/app/app%20routes/app_routes.dart';
 import 'package:fmlfantasy/app/app_colors/app_colors.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
-import 'package:fmlfantasy/new_model/match_center_matches_new.dart';
+import 'package:fmlfantasy/model/match_center_model.dart';
 import 'package:fmlfantasy/ui/components/custom_sliver.dart';
 import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/components/sports_tab_bar.dart';
@@ -47,7 +47,7 @@ class MatchCenter extends GetView<MatchCenterController> {
                 SingleChildScrollView(
                   child: Column(
                     children: [
-                      FutureBuilder<List<MatchCenterMatches>>(
+                      Obx(() => FutureBuilder<List<PastMatches>>(
                           future: controller.fetchMatchCenterData(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
@@ -61,12 +61,13 @@ class MatchCenter extends GetView<MatchCenterController> {
                                     controller.searchQuery.value.toLowerCase();
                                 final filteredList =
                                     snapshot.data!.where((item) {
-                                  return item.homeTeamName!
+                                  return item.competitionName!
                                           .toLowerCase()
                                           .contains(query) ||
-                                      item.awayTeamName!
+                                      item.home!
                                           .toLowerCase()
-                                          .contains(query);
+                                          .contains(query) ||
+                                      item.away!.toLowerCase().contains(query);
                                 }).toList();
                                 return ListView.builder(
                                     itemCount: filteredList.length,
@@ -74,8 +75,7 @@ class MatchCenter extends GetView<MatchCenterController> {
                                     physics:
                                         const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
-                                      MatchCenterMatches data =
-                                          filteredList[index];
+                                      PastMatches data = filteredList[index];
                                       return GestureDetector(
                                           onTap: () {
                                             Get.toNamed(
@@ -83,7 +83,7 @@ class MatchCenter extends GetView<MatchCenterController> {
                                                 arguments: {
                                                   'sports': controller
                                                       .selectedSport.value,
-                                                  'matchKey': data.matchKey,
+                                                  'matchKey': data.matchKey!,
                                                   'SportsName': controller
                                                       .selectedSport.value,
                                                 });
@@ -97,7 +97,7 @@ class MatchCenter extends GetView<MatchCenterController> {
                                     });
                               });
                             }
-                          }),
+                          })),
                     ],
                   ),
                 )

@@ -1,6 +1,5 @@
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/match_center_inner_model.dart';
-import 'package:fmlfantasy/new_model/match_center_inner_new.dart';
 import 'package:fmlfantasy/ui/components/home_appbar.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/doughnut_chart.dart';
 import 'package:fmlfantasy/ui/views/match_center/widget/players_card.dart';
@@ -8,7 +7,7 @@ import 'package:fmlfantasy/ui/views/match_center/widget/points_grid.dart';
 import 'package:fmlfantasy/ui/widgets/navigation_buttons.dart';
 
 class PlayerDetails extends StatelessWidget {
-  final PlayerMatchStatistic playersdata;
+  final PlayersBreakDown playersdata;
   const PlayerDetails({
     super.key,
     required this.playersdata,

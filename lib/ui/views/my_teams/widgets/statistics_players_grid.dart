@@ -352,7 +352,7 @@ class PlayerGridView extends GetView<MyTeamsController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "\$${player.investment!.toStringAsFixed(0)},000",
+                                  "\$${player.investment!.toStringAsFixed(0)}",
                                   style: globalTextStyle(
                                     fontSize: AppSizing.isTablet(context)
                                         ? 16.sp

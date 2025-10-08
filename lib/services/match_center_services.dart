@@ -13,6 +13,8 @@ class MatchCenterServices {
       String match, String formattedDate, String formattedPastDate) async {
     String uri;
     String subKey;
+
+    log('Test');
     switch (match) {
       case "BB":
         uri = '$clientApi/aquabasketballmonitorapi-dev/matches/ended/recent';
@@ -92,7 +94,8 @@ class MatchCenterServices {
         subKey = cricketSubscriptionKeyUs;
         break;
       case 'AF':
-        uri = '$baseURL/matchcenter/americanfootball/match/$matchKey';
+        uri =
+            'http://40.113.171.107:57001/matchcenter/americanfootball/match/$matchKey';
         subKey = americanFootballSubscriptionKeyUs;
         break;
       case 'BL':
@@ -158,6 +161,7 @@ class MatchCenterServices {
     String uri;
     String subKey;
 
+    log('Testing');
     switch (sportsCode) {
       case "BB":
         uri =
@@ -191,7 +195,7 @@ class MatchCenterServices {
 
     try {
       final response = await dio.get(
-        uri,
+        'http://88.208.197.30:65008/matches/ended/recent-info',
         options: Options(
           headers: {
             'X-Cid': 'aliv',

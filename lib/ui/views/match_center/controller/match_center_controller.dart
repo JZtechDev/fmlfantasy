@@ -4,18 +4,12 @@ import 'package:fmlfantasy/app/app_images/app_images.dart';
 import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/model/match_center_model.dart';
 import 'package:fmlfantasy/model/sports_type.dart';
-import 'package:fmlfantasy/new_model/match_center_matches_new.dart';
-import 'package:fmlfantasy/new_services/match_center/match_center_service.dart';
 import 'package:fmlfantasy/services/match_center_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MatchCenterController extends GetxController {
   MatchCenterServices matchCenterServices = MatchCenterServices();
-  MatchCenterServiceNew matchCenterServiceNew = MatchCenterServiceNew();
-
-  RxList<MatchCenterMatches> newMatchCenterMatches = <MatchCenterMatches>[].obs;
-
   RxList<MatchCenterModel> matchData = <MatchCenterModel>[].obs;
   RxList<PastMatches> tournaments = <PastMatches>[].obs;
   RxBool isSearch = false.obs;
@@ -41,14 +35,15 @@ class MatchCenterController extends GetxController {
   DateTime pastDate = DateTime.now().subtract(const Duration(days: 15));
   String formattedPastDate = '';
 
-  Future<List<MatchCenterMatches>> fetchMatchCenterData() async {
+
+  Future<List<PastMatches>> fetchMatchCenterData() async {
     try {
       EasyLoading.show(status: 'Loading...');
-      List<MatchCenterMatches> fetchedTournaments =
-          await matchCenterServiceNew.fetchMatchCenterMatches();
-      newMatchCenterMatches.value = fetchedTournaments;
+      List<PastMatches> fetchedTournaments =
+          await matchCenterServices.pastMatches(selectedSport.value);
+      tournaments.value = fetchedTournaments;
       EasyLoading.dismiss();
-      return newMatchCenterMatches;
+      return tournaments;
     } catch (error) {
       EasyLoading.dismiss();
       rethrow;
@@ -57,7 +52,6 @@ class MatchCenterController extends GetxController {
 
   @override
   void onInit() {
-    matchCenterServiceNew.fetchMatchCenterMatches();
     selectedSport.value = selectedSPort.value;
     formattedPastDate =
         '${pastDate.year}${pastDate.month.toString().padLeft(2, '0')}${pastDate.day.toString().padLeft(2, '0')}';
