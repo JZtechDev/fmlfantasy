@@ -3,13 +3,14 @@ import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/match_center_inner_model.dart';
+import 'package:fmlfantasy/new_model/match_center_inner_new.dart';
 import 'package:fmlfantasy/ui/helpers/get_initials.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
 import 'package:flutter_svg/svg.dart';
 
 class PlayersCard extends GetView<MatchCenterInner> {
-  final PlayersBreakDown topPlayers;
+  final PlayerMatchStatistic topPlayers;
   const PlayersCard({super.key, required this.topPlayers});
 
   @override
@@ -42,7 +43,7 @@ class PlayersCard extends GetView<MatchCenterInner> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            topPlayers.teamName ?? '-',
+                            topPlayers.name,
                             style: globalTextStyle2(
                                 fontWeight: FontWeight.w700,
                                 fontSize: maxWidth > 600 ? 12.sp : 12.sp,
@@ -57,7 +58,7 @@ class PlayersCard extends GetView<MatchCenterInner> {
                                   topRight: Radius.circular(5.r),
                                 )),
                             child: Text(
-                              getInitials(topPlayers.position!),
+                              getInitials(topPlayers.role),
                               style: globalTextStyle(
                                   fontSize: AppSizing.isTablet(context)
                                       ? 8.sp
@@ -112,7 +113,7 @@ class PlayersCard extends GetView<MatchCenterInner> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            topPlayers.fantasyPoints!.toStringAsFixed(2),
+                            topPlayers.fantasyPoints.toString(),
                             style: globalTextStyle(
                                 fontSize: 24.sp,
                                 color: AppColors.secondary,
@@ -131,134 +132,134 @@ class PlayersCard extends GetView<MatchCenterInner> {
                     )
                   ],
                 ),
-                Positioned(
-                    right: 0.w,
-                    bottom: 0.h,
-                    child: Hero(
-                      tag: topPlayers.assetCode!,
-                      transitionOnUserGestures: true,
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 1000),
-                        curve: Curves.easeInOut,
-                        constraints:
-                            const BoxConstraints(maxHeight: 171, maxWidth: 155),
-                        width: Get.width * 0.4,
-                        child: controller.sportsCode == 'FB'
-                            ? topPlayers.imageUrl == null
-                                ? Stack(
-                                    clipBehavior: Clip.hardEdge,
-                                    alignment: Alignment.center,
-                                    children: [
-                                      topPlayers.jerseyImage == null
-                                          ? Image.asset(
-                                              excludeFromSemantics: true,
-                                              isAntiAlias: true,
-                                              AppImages.userPlaceHolder,
-                                            )
-                                          : topPlayers.jerseyImage!
-                                                  .endsWith('svg')
-                                              ? SvgPicture.network(
-                                                  topPlayers.jerseyImage!,
-                                                )
-                                              : Image.network(
-                                                  topPlayers.jerseyImage!,
-                                                ),
-                                      topPlayers.jerseyImage == null
-                                          ? const SizedBox()
-                                          : Positioned(
-                                              top: 20.h,
-                                              child: Container(
-                                                padding: EdgeInsets.only(
-                                                  left: 2.w,
-                                                  right: 2.w,
-                                                  top: 1.h,
-                                                  bottom: 1.h,
-                                                ),
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                    color: AppColors.white
-                                                        .withValues(alpha: 0.9),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            2.r)),
-                                                child: Text(
-                                                  textAlign: TextAlign.center,
-                                                  topPlayers.name!
-                                                      .split(' ')
-                                                      .last
-                                                      .split(' ')
-                                                      .last,
-                                                  style: globalTextStyle(
-                                                      fontSize: 8.sp,
-                                                      color: AppColors.dark),
-                                                ),
-                                              ),
-                                            ),
-                                      topPlayers.jerseyImage == null
-                                          ? const SizedBox()
-                                          : Align(
-                                              alignment: Alignment.center,
-                                              child: Container(
-                                                height: 30.h,
-                                                width: 30.w,
-                                                padding: const EdgeInsets.only(
-                                                  top: 5,
-                                                  right: 5,
-                                                  left: 5,
-                                                  bottom: 5,
-                                                ),
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                    color: AppColors.white
-                                                        .withValues(alpha: 0.9),
-                                                    shape: BoxShape.circle),
-                                                child: Text(
-                                                  textAlign: TextAlign.center,
-                                                  topPlayers.fantasyNumnber ??
-                                                      '-',
-                                                  style: globalTextStyle(
-                                                      fontSize: 10.sp,
-                                                      color: AppColors.dark),
-                                                ),
-                                              ),
-                                            ),
-                                    ],
-                                  )
-                                : topPlayers.jerseyImage == null
-                                    ? Image.asset(
-                                        excludeFromSemantics: true,
-                                        isAntiAlias: true,
-                                        AppImages.userPlaceHolder,
-                                      )
-                                    : topPlayers.imageUrl!.endsWith('svg')
-                                        ? SvgPicture.network(
-                                            topPlayers.imageUrl!,
-                                            height: 150.h,
-                                          )
-                                        : Image.network(
-                                            topPlayers.imageUrl!,
-                                            height: 150.h,
-                                          )
-                            : topPlayers.imageUrl == null
-                                ? Image.asset(
-                                    excludeFromSemantics: true,
-                                    isAntiAlias: true,
-                                    AppImages.userPlaceHolder,
-                                  )
-                                : topPlayers.imageUrl!.endsWith('svg')
-                                    ? controller.sportsCode == 'CR'
-                                        ? Image.network(
-                                            replaceSvgWithPng(
-                                                topPlayers.imageUrl!),
-                                          )
-                                        : SvgPicture.network(
-                                            topPlayers.imageUrl!,
-                                          )
-                                    : Image.network(
-                                        topPlayers.imageUrl!,
-                                      ),
-                      ),
-                    ))
+                // Positioned(
+                //     right: 0.w,
+                //     bottom: 0.h,
+                //     child: Hero(
+                //       tag: topPlayers.playerKey,
+                //       transitionOnUserGestures: true,
+                //       child: AnimatedContainer(
+                //         duration: const Duration(milliseconds: 1000),
+                //         curve: Curves.easeInOut,
+                //         constraints:
+                //             const BoxConstraints(maxHeight: 171, maxWidth: 155),
+                //         width: Get.width * 0.4,
+                //         child: controller.sportsCode == 'FB'
+                //             ? topPlayers.pla == null
+                //                 ? Stack(
+                //                     clipBehavior: Clip.hardEdge,
+                //                     alignment: Alignment.center,
+                //                     children: [
+                //                       topPlayers.jerseyImage == null
+                //                           ? Image.asset(
+                //                               excludeFromSemantics: true,
+                //                               isAntiAlias: true,
+                //                               AppImages.userPlaceHolder,
+                //                             )
+                //                           : topPlayers.jerseyImage!
+                //                                   .endsWith('svg')
+                //                               ? SvgPicture.network(
+                //                                   topPlayers.jerseyImage!,
+                //                                 )
+                //                               : Image.network(
+                //                                   topPlayers.jerseyImage!,
+                //                                 ),
+                //                       topPlayers.jerseyImage == null
+                //                           ? const SizedBox()
+                //                           : Positioned(
+                //                               top: 20.h,
+                //                               child: Container(
+                //                                 padding: EdgeInsets.only(
+                //                                   left: 2.w,
+                //                                   right: 2.w,
+                //                                   top: 1.h,
+                //                                   bottom: 1.h,
+                //                                 ),
+                //                                 alignment: Alignment.center,
+                //                                 decoration: BoxDecoration(
+                //                                     color: AppColors.white
+                //                                         .withValues(alpha: 0.9),
+                //                                     borderRadius:
+                //                                         BorderRadius.circular(
+                //                                             2.r)),
+                //                                 child: Text(
+                //                                   textAlign: TextAlign.center,
+                //                                   topPlayers.name!
+                //                                       .split(' ')
+                //                                       .last
+                //                                       .split(' ')
+                //                                       .last,
+                //                                   style: globalTextStyle(
+                //                                       fontSize: 8.sp,
+                //                                       color: AppColors.dark),
+                //                                 ),
+                //                               ),
+                //                             ),
+                //                       topPlayers.jerseyImage == null
+                //                           ? const SizedBox()
+                //                           : Align(
+                //                               alignment: Alignment.center,
+                //                               child: Container(
+                //                                 height: 30.h,
+                //                                 width: 30.w,
+                //                                 padding: const EdgeInsets.only(
+                //                                   top: 5,
+                //                                   right: 5,
+                //                                   left: 5,
+                //                                   bottom: 5,
+                //                                 ),
+                //                                 alignment: Alignment.center,
+                //                                 decoration: BoxDecoration(
+                //                                     color: AppColors.white
+                //                                         .withValues(alpha: 0.9),
+                //                                     shape: BoxShape.circle),
+                //                                 child: Text(
+                //                                   textAlign: TextAlign.center,
+                //                                   topPlayers.fantasyNumnber ??
+                //                                       '-',
+                //                                   style: globalTextStyle(
+                //                                       fontSize: 10.sp,
+                //                                       color: AppColors.dark),
+                //                                 ),
+                //                               ),
+                //                             ),
+                //                     ],
+                //                   )
+                //                 : topPlayers.jerseyImage == null
+                //                     ? Image.asset(
+                //                         excludeFromSemantics: true,
+                //                         isAntiAlias: true,
+                //                         AppImages.userPlaceHolder,
+                //                       )
+                //                     : topPlayers.imageUrl!.endsWith('svg')
+                //                         ? SvgPicture.network(
+                //                             topPlayers.imageUrl!,
+                //                             height: 150.h,
+                //                           )
+                //                         : Image.network(
+                //                             topPlayers.imageUrl!,
+                //                             height: 150.h,
+                //                           )
+                //             : topPlayers.imageUrl == null
+                //                 ? Image.asset(
+                //                     excludeFromSemantics: true,
+                //                     isAntiAlias: true,
+                //                     AppImages.userPlaceHolder,
+                //                   )
+                //                 : topPlayers.imageUrl!.endsWith('svg')
+                //                     ? controller.sportsCode == 'CR'
+                //                         ? Image.network(
+                //                             replaceSvgWithPng(
+                //                                 topPlayers.imageUrl!),
+                //                           )
+                //                         : SvgPicture.network(
+                //                             topPlayers.imageUrl!,
+                //                           )
+                //                     : Image.network(
+                //                         topPlayers.imageUrl!,
+                //                       ),
+                //       ),
+                //     ))
               ],
             ),
           ),

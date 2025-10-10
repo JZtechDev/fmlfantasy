@@ -32,7 +32,7 @@ class MatchCenterServiceNew {
     try {
       final response = await dio.get(
           //  queryParameters: {'matchKey': matchKey},
-          'http://40.113.171.107:50086/matchcenter/matchcentermatch-details/$matchKey',
+          'http://40.113.171.107:50086/matchcenter/matchcentermatch-details/${selectedSPort.value}/$matchKey',
           options: Options(
             headers: {
               'Authorization': 'Bearer $authToken',

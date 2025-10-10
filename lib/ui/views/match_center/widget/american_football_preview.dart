@@ -1,37 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
+import 'package:fmlfantasy/core/config/global_instances.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
+import 'package:fmlfantasy/new_model/match_center_inner_new.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
-import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class CricketTopContainer extends GetView<MatchCenterInner> {
-  final String? homename;
-  final String? awayname;
-  final String? homeimageurl;
-  final String? awayimageurl;
-  final String? homeScore;
-  final String? awayScore;
-  final String? playerOfTheMatch;
-  final String? leagueName;
-  final String? time;
-  final String? homeOvers;
-  final String? awayOvers;
-
-  const CricketTopContainer(
-    this.homename,
-    this.awayname,
-    this.homeimageurl,
-    this.awayimageurl,
-    this.homeScore,
-    this.awayScore,
-    this.playerOfTheMatch,
-    this.leagueName,
-    this.time,
-    this.homeOvers,
-    this.awayOvers, {
-    super.key,
-  });
+class AmericanFootballPreview extends StatelessWidget {
+  final MatchCenterInnerNew data;
+  const AmericanFootballPreview({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -51,22 +29,16 @@ class CricketTopContainer extends GetView<MatchCenterInner> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                      width: Get.width * 0.45,
+                      width: Get.width * 0.7,
                       child: Row(
                         children: [
-                          Image.asset(
-                            'assets/new_images/cricket_ball.png',
-                            height: 18,
-                            width: 18,
-                          ),
-                          horizontalSpace(10.w),
                           SizedBox(
-                            width: Get.width * 0.35,
+                            width: Get.width * 0.7,
                             child: Text(
                               maxLines: 1,
                               textAlign: TextAlign.start,
                               overflow: TextOverflow.ellipsis,
-                              leagueName.toString(),
+                              data.competitionName,
                               style: globalTextStyle(
                                   fontSize: AppSizing.isMobile(context)
                                       ? 12.sp
@@ -111,27 +83,28 @@ class CricketTopContainer extends GetView<MatchCenterInner> {
                             padding: const EdgeInsets.only(
                                 left: 10, right: 10, top: 10, bottom: 10),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                homeimageurl == null
+                                data.homeTeamImageUrl == null
                                     ? const SizedBox(
                                         height: 50,
                                         width: 100,
                                       )
-                                    : homeimageurl!.endsWith('.png')
+                                    : data.homeTeamImageUrl.endsWith('.png')
                                         ? Image.network(
-                                            homeimageurl!,
+                                            data.homeTeamImageUrl,
                                             height: 45.h,
                                             width: 45.w,
                                           )
-                                        : controller.sportsCode == 'CR'
+                                        : selectedSPort.value == 'CR'
                                             ? Image.network(
                                                 replaceSvgWithPng(
-                                                    homeimageurl!),
+                                                    data.homeTeamImageUrl),
                                                 height: 45.h,
                                                 width: 45.w,
                                               )
                                             : SvgPicture.network(
-                                                homeimageurl!,
+                                                data.homeTeamImageUrl,
                                                 height: 30.h,
                                                 width: 30.w,
                                               ),
@@ -146,7 +119,7 @@ class CricketTopContainer extends GetView<MatchCenterInner> {
                                   ),
                                   child: Column(
                                     children: [
-                                      Text(homeScore == null ? '' : homeScore!,
+                                      Text(data.homeScore.toString(),
                                           style: globalTextStyle(
                                               color: AppColors.darkGreen,
                                               fontWeight: FontWeight.w700,
@@ -170,7 +143,7 @@ class CricketTopContainer extends GetView<MatchCenterInner> {
                                   bottomLeft: Radius.circular(5.w),
                                   bottomRight: Radius.circular(5.w),
                                 )),
-                            child: Text(homename == null ? '-' : homename!,
+                            child: Text(data.homeTeamName.toString(),
                                 style: globalTextStyle(
                                     fontWeight: FontWeight.w700,
                                     fontSize: AppSizing.isMobile(context)
@@ -194,27 +167,28 @@ class CricketTopContainer extends GetView<MatchCenterInner> {
                             padding: const EdgeInsets.only(
                                 left: 10, right: 10, top: 10, bottom: 10),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                awayimageurl == null
+                                data.awayTeamImageUrl == null
                                     ? const SizedBox(
                                         height: 50,
                                         width: 100,
                                       )
-                                    : homeimageurl!.endsWith('.png')
+                                    : data.awayTeamImageUrl.endsWith('.png')
                                         ? Image.network(
-                                            awayimageurl!,
+                                            data.awayTeamImageUrl,
                                             height: 45.h,
                                             width: 45.w,
                                           )
-                                        : controller.sportsCode == 'CR'
+                                        : selectedSPort.value == 'CR'
                                             ? Image.network(
                                                 replaceSvgWithPng(
-                                                    awayimageurl!),
+                                                    data.awayTeamImageUrl),
                                                 height: 45.h,
                                                 width: 45.w,
                                               )
                                             : SvgPicture.network(
-                                                awayimageurl!,
+                                                data.awayTeamImageUrl,
                                                 height: 30.h,
                                                 width: 30.w,
                                               ),
@@ -229,7 +203,7 @@ class CricketTopContainer extends GetView<MatchCenterInner> {
                                   ),
                                   child: Column(
                                     children: [
-                                      Text(awayScore == null ? '' : awayScore!,
+                                      Text(data.awayScore.toString(),
                                           style: globalTextStyle(
                                               color: AppColors.darkGreen,
                                               fontWeight: FontWeight.w700,
@@ -253,7 +227,7 @@ class CricketTopContainer extends GetView<MatchCenterInner> {
                                   bottomLeft: Radius.circular(5.w),
                                   bottomRight: Radius.circular(5.w),
                                 )),
-                            child: Text(awayname == null ? '-' : awayname!,
+                            child: Text(data.awayTeamName,
                                 style: globalTextStyle(
                                     fontWeight: FontWeight.w700,
                                     fontSize: AppSizing.isMobile(context)

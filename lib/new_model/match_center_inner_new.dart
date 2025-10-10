@@ -1,93 +1,116 @@
 class MatchCenterInnerNew {
-  final String? matchKey;
-  final String? matchTitle;
-  final String? result;
-  final String? resultType;
-  final String? resultMsg;
-  final String? teamWon;
-  final String? winnerTeamKey;
-  final String? playerOfTheMatch;
-  final String? matchStatus;
-  final String? status;
-  final String? playStatus;
-  final String? homeTeamKey;
-  final String? homeTeamName;
-  final String? homeTeamImageUrl;
-  final String? awayTeamKey;
-  final String? awayTeamName;
-  final String? awayTeamImageUrl;
-  final List<String>? homeTeamScores;
-  final List<String>? awayTeamScores;
-  final List<PlayerMatchStatistic>? playerMatchStatistics;
-  final List<TopPerformer>? topPerformers;
+  final String matchKey;
+  final String matchTitle;
+  final String result;
+  final String resultType;
+  final String resultMsg;
+  final String teamWon;
+  final String winnerTeamKey;
+  final String poM1;
+  final String poM2;
+  final String poM3;
+  final String status;
+  final String homeTeamKey;
+  final String homeTeamName;
+  final String homeTeamImageUrl;
+  final String awayTeamKey;
+  final String awayTeamName;
+  final String awayTeamImageUrl;
   final DateTime? matchStartDate;
-  final DateTime? expiryDate;
-  final String? tournamentName;
-  final String? competitionName;
+  final DateTime? expiryTime;
+  final String tournamentName;
+  final String competitionName;
+  final int homeScore;
+  final int awayScore;
+  final String city;
+  final String country;
+  final String stadiumName;
+  final String playingSurface;
+  final List<String> homeTeamScores;
+  final List<String> awayTeamScores;
+  final List<PlayerOfTheMatch> playersOfTheMatch;
+  final List<PlayerMatchStatistic> playerMatchStatistics;
 
   MatchCenterInnerNew({
-    this.matchKey,
-    this.matchTitle,
-    this.result,
-    this.resultType,
-    this.resultMsg,
-    this.teamWon,
-    this.winnerTeamKey,
-    this.playerOfTheMatch,
-    this.matchStatus,
-    this.status,
-    this.playStatus,
-    this.homeTeamKey,
-    this.homeTeamName,
-    this.homeTeamImageUrl,
-    this.awayTeamKey,
-    this.awayTeamName,
-    this.awayTeamImageUrl,
-    this.homeTeamScores,
-    this.awayTeamScores,
-    this.playerMatchStatistics,
-    this.topPerformers,
+    this.matchKey = '',
+    this.matchTitle = '',
+    this.result = '',
+    this.resultType = '',
+    this.resultMsg = '',
+    this.teamWon = '',
+    this.winnerTeamKey = '',
+    this.poM1 = '',
+    this.poM2 = '',
+    this.poM3 = '',
+    this.status = '',
+    this.homeTeamKey = '',
+    this.homeTeamName = '',
+    this.homeTeamImageUrl = '',
+    this.awayTeamKey = '',
+    this.awayTeamName = '',
+    this.awayTeamImageUrl = '',
     this.matchStartDate,
-    this.tournamentName,
-    this.competitionName,
-    this.expiryDate,
+    this.expiryTime,
+    this.tournamentName = '',
+    this.competitionName = '',
+    this.homeScore = 0,
+    this.awayScore = 0,
+    this.city = '',
+    this.country = '',
+    this.stadiumName = '',
+    this.playingSurface = '',
+    this.homeTeamScores = const [],
+    this.awayTeamScores = const [],
+    this.playersOfTheMatch = const [],
+    this.playerMatchStatistics = const [],
   });
 
   factory MatchCenterInnerNew.fromJson(Map<String, dynamic> json) {
     return MatchCenterInnerNew(
-      matchKey: json['matchKey'] ?? '',
-      matchTitle: json['matchTitle'] ?? '',
-      result: json['result'] ?? "",
-      resultType: json['resultType'] ?? '',
-      resultMsg: json['resultMsg'] ?? '',
-      teamWon: json['teamWon'] ?? '',
-      winnerTeamKey: json['winnerTeamKey'] ?? '',
-      playerOfTheMatch: json['playerOfTheMatch'] ?? '',
-      matchStatus: json['matchStatus'] ?? '',
-      status: json['status'] ?? '',
-      playStatus: json['playStatus'] ?? '',
-      homeTeamKey: json['homeTeamKey'] ?? '',
-      homeTeamName: json['homeTeamName'],
-      homeTeamImageUrl: json['homeTeamImageUrl'] ?? '',
-      awayTeamKey: json['awayTeamKey'] ?? '',
-      awayTeamName: json['awayTeamName'] ?? '',
-      awayTeamImageUrl: json['awayTeamImageUrl'] ?? '',
-      homeTeamScores: List<String>.from(json['homeTeamScores']),
-      awayTeamScores: List<String>.from(json['awayTeamScores']),
-      playerMatchStatistics: (json['playerMatchStatistics'] as List)
-          .map((item) => PlayerMatchStatistic.fromJson(item))
-          .toList(),
-      topPerformers: (json['topPerformers'] as List)
-          .map((item) => TopPerformer.fromJson(item))
-          .toList(),
-      matchStartDate: json['matchStartDate'] != null
-          ? DateTime.parse(json['matchStartDate'])
-          : null,
-      expiryDate: json['expiryDate'] != null
-          ? DateTime.parse(json['expiryDate'])
-          : null,
-      tournamentName: json['tournamentName'] ?? '',
-      competitionName: json['competitionName'] ?? '',
+      matchKey: json['matchKey']?.toString() ?? '',
+      matchTitle: json['matchTitle']?.toString() ?? '',
+      result: json['result']?.toString() ?? '',
+      resultType: json['resultType']?.toString() ?? '',
+      resultMsg: json['resultMsg']?.toString() ?? '',
+      teamWon: json['teamWon']?.toString() ?? '',
+      winnerTeamKey: json['winnerTeamKey']?.toString() ?? '',
+      poM1: json['poM1']?.toString() ?? '',
+      poM2: json['poM2']?.toString() ?? '',
+      poM3: json['poM3']?.toString() ?? '',
+      status: json['status']?.toString() ?? '',
+      homeTeamKey: json['homeTeamKey']?.toString() ?? '',
+      homeTeamName: json['homeTeamName']?.toString() ?? '',
+      homeTeamImageUrl: json['homeTeamImageUrl']?.toString() ?? '',
+      awayTeamKey: json['awayTeamKey']?.toString() ?? '',
+      awayTeamName: json['awayTeamName']?.toString() ?? '',
+      awayTeamImageUrl: json['awayTeamImageUrl']?.toString() ?? '',
+      matchStartDate: _tryParseDate(json['matchStartDate']),
+      expiryTime: _tryParseDate(json['expiryTime']),
+      tournamentName: json['tournamentName']?.toString() ?? '',
+      competitionName: json['competitionName']?.toString() ?? '',
+      homeScore: json['homeScore'] is int ? json['homeScore'] : 0,
+      awayScore: json['awayScore'] is int ? json['awayScore'] : 0,
+      city: json['city']?.toString() ?? '',
+      country: json['country']?.toString() ?? '',
+      stadiumName: json['stadiumName']?.toString() ?? '',
+      playingSurface: json['playingSurface']?.toString() ?? '',
+      homeTeamScores: (json['homeTeamScores'] as List?)
+              ?.map((e) => e?.toString() ?? '')
+              .toList() ??
+          [],
+      awayTeamScores: (json['awayTeamScores'] as List?)
+              ?.map((e) => e?.toString() ?? '')
+              .toList() ??
+          [],
+      playersOfTheMatch: (json['playersOfTheMatch'] as List?)
+              ?.map((e) => PlayerOfTheMatch.fromJson(e ?? <String, dynamic>{}))
+              .toList() ??
+          [],
+      playerMatchStatistics: (json['playerMatchStatistics'] as List?)
+              ?.map((e) =>
+                  PlayerMatchStatistic.fromJson(e ?? <String, dynamic>{}))
+              .toList() ??
+          [],
     );
   }
 
@@ -100,276 +123,247 @@ class MatchCenterInnerNew {
       'resultMsg': resultMsg,
       'teamWon': teamWon,
       'winnerTeamKey': winnerTeamKey,
-      'playerOfTheMatch': playerOfTheMatch,
-      'matchStatus': matchStatus,
+      'poM1': poM1,
+      'poM2': poM2,
+      'poM3': poM3,
       'status': status,
-      'playStatus': playStatus,
       'homeTeamKey': homeTeamKey,
       'homeTeamName': homeTeamName,
       'homeTeamImageUrl': homeTeamImageUrl,
       'awayTeamKey': awayTeamKey,
       'awayTeamName': awayTeamName,
       'awayTeamImageUrl': awayTeamImageUrl,
+      'matchStartDate': matchStartDate?.toIso8601String(),
+      'expiryTime': expiryTime?.toIso8601String(),
+      'tournamentName': tournamentName,
+      'competitionName': competitionName,
+      'homeScore': homeScore,
+      'awayScore': awayScore,
+      'city': city,
+      'country': country,
+      'stadiumName': stadiumName,
+      'playingSurface': playingSurface,
       'homeTeamScores': homeTeamScores,
       'awayTeamScores': awayTeamScores,
+      'playersOfTheMatch': playersOfTheMatch.map((e) => e.toJson()).toList(),
       'playerMatchStatistics':
-          playerMatchStatistics?.map((e) => e.toJson()).toList(),
-      'topPerformers': topPerformers?.map((e) => e.toJson()).toList(),
+          playerMatchStatistics.map((e) => e.toJson()).toList(),
+    };
+  }
+
+  static DateTime? _tryParseDate(dynamic date) {
+    if (date == null) return null;
+    try {
+      return DateTime.parse(date.toString());
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+class PlayerOfTheMatch {
+  final String name;
+  final String imageUrl;
+  final String role;
+  final List<String> scores;
+
+  PlayerOfTheMatch({
+    this.name = '',
+    this.imageUrl = '',
+    this.role = '',
+    this.scores = const [],
+  });
+
+  factory PlayerOfTheMatch.fromJson(Map<String, dynamic> json) {
+    return PlayerOfTheMatch(
+      name: json['name']?.toString() ?? '',
+      imageUrl: json['imageUrl']?.toString() ?? '',
+      role: json['role']?.toString() ?? '',
+      scores:
+          (json['scores'] as List?)?.map((e) => e?.toString() ?? '').toList() ??
+              [],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'imageUrl': imageUrl,
+      'role': role,
+      'scores': scores,
     };
   }
 }
 
 class PlayerMatchStatistic {
-  final int rank;
-  final double totalFantasyPoints;
-  final String playerName;
+  final String playerKey;
+  final String name;
+  final String position;
   final String role;
   final String headshotImageUrl;
+  final int jerseyNumber;
+  final String jerseyImageUrl;
+  final String jerseyName;
+  final int teamKey;
+  final String teamName;
+  final String teamShortName;
+  final bool isTeamAway;
+  final double fantasyPoints;
+  final double fantasyPointsRaw;
+  final int rank;
+  final bool isStarter;
+  final bool hasPlayed;
+  final bool isAway;
   final List<FantasyPointsBreakdown> fantasyPointsBreakdowns;
-  final String playerKey;
-  final String? matchKey;
-  final String teamKey;
-  final String? innings;
-  final int runScored;
-  final int ballsFaced;
-  final int fours;
-  final int sixes;
-  final double strikeRate;
-  final int ballsBowled;
-  final int runsGiven;
-  final double bowlingEconomy;
-  final int extrasGiven;
-  final int wicketsTaken;
-  final int maidenOvers;
-  final int dotBallsBowled;
-  final int widesGiven;
-  final int noBallsBowled;
-  final int foursGiven;
-  final int sixesGiven;
-  final int wicketsBowled;
-  final int wicketsCaught;
-  final int wicketsLbw;
-  final int wicketsStumping;
-  final int catches;
-  final int stumpings;
-  final int runOuts;
-  final int runoutDirectHits;
-  final int runoutAssists;
-  final String updatedAt;
+  final List<StatsBreakdown> statsBreakdowns;
 
   PlayerMatchStatistic({
-    required this.rank,
-    required this.totalFantasyPoints,
-    required this.playerName,
-    required this.role,
-    required this.headshotImageUrl,
-    required this.fantasyPointsBreakdowns,
-    required this.playerKey,
-    this.matchKey,
-    required this.teamKey,
-    this.innings,
-    required this.runScored,
-    required this.ballsFaced,
-    required this.fours,
-    required this.sixes,
-    required this.strikeRate,
-    required this.ballsBowled,
-    required this.runsGiven,
-    required this.bowlingEconomy,
-    required this.extrasGiven,
-    required this.wicketsTaken,
-    required this.maidenOvers,
-    required this.dotBallsBowled,
-    required this.widesGiven,
-    required this.noBallsBowled,
-    required this.foursGiven,
-    required this.sixesGiven,
-    required this.wicketsBowled,
-    required this.wicketsCaught,
-    required this.wicketsLbw,
-    required this.wicketsStumping,
-    required this.catches,
-    required this.stumpings,
-    required this.runOuts,
-    required this.runoutDirectHits,
-    required this.runoutAssists,
-    required this.updatedAt,
+    this.playerKey = '',
+    this.name = '',
+    this.position = '',
+    this.role = '',
+    this.headshotImageUrl = '',
+    this.jerseyNumber = 0,
+    this.jerseyImageUrl = '',
+    this.jerseyName = '',
+    this.teamKey = 0,
+    this.teamName = '',
+    this.teamShortName = '',
+    this.isTeamAway = false,
+    this.fantasyPoints = 0.0,
+    this.fantasyPointsRaw = 0.0,
+    this.rank = 0,
+    this.isStarter = false,
+    this.hasPlayed = false,
+    this.isAway = false,
+    this.fantasyPointsBreakdowns = const [],
+    this.statsBreakdowns = const [],
   });
 
   factory PlayerMatchStatistic.fromJson(Map<String, dynamic> json) {
     return PlayerMatchStatistic(
-      rank: json['rank'],
-      totalFantasyPoints: (json['totalFantasyPoints'] as num).toDouble(),
-      playerName: json['playerName'],
-      role: json['role'],
-      headshotImageUrl: json['headshotImageUrl'],
-      fantasyPointsBreakdowns: (json['fantasyPointsBreakdowns'] as List)
-          .map((item) => FantasyPointsBreakdown.fromJson(item))
-          .toList(),
-      playerKey: json['playerKey'],
-      matchKey: json['matchKey'],
-      teamKey: json['teamKey'],
-      innings: json['innings'],
-      runScored: json['runScored'],
-      ballsFaced: json['ballsFaced'],
-      fours: json['fours'],
-      sixes: json['sixes'],
-      strikeRate: (json['strikeRate'] as num).toDouble(),
-      ballsBowled: json['ballsBowled'],
-      runsGiven: json['runsGiven'],
-      bowlingEconomy: (json['bowlingEconomy'] as num).toDouble(),
-      extrasGiven: json['extrasGiven'],
-      wicketsTaken: json['wicketsTaken'],
-      maidenOvers: json['maidenOvers'],
-      dotBallsBowled: json['dotBallsBowled'],
-      widesGiven: json['widesGiven'],
-      noBallsBowled: json['noBallsBowled'],
-      foursGiven: json['foursGiven'],
-      sixesGiven: json['sixesGiven'],
-      wicketsBowled: json['wicketsBowled'],
-      wicketsCaught: json['wicketsCaught'],
-      wicketsLbw: json['wicketsLbw'],
-      wicketsStumping: json['wicketsStumping'],
-      catches: json['catches'],
-      stumpings: json['stumpings'],
-      runOuts: json['runOuts'],
-      runoutDirectHits: json['runoutDirectHits'],
-      runoutAssists: json['runoutAssists'],
-      updatedAt: json['updatedAt'],
+      playerKey: json['playerKey']?.toString() ?? '',
+      name: json['name']?.toString() ?? '',
+      position: json['position']?.toString() ?? '',
+      role: json['role']?.toString() ?? '',
+      headshotImageUrl: json['headshotImageUrl']?.toString() ?? '',
+      jerseyNumber: json['jerseyNumber'] is int ? json['jerseyNumber'] : 0,
+      jerseyImageUrl: json['jerseyImageUrl']?.toString() ?? '',
+      jerseyName: json['jerseyName']?.toString() ?? '',
+      teamKey: json['teamKey'] is int ? json['teamKey'] : 0,
+      teamName: json['teamName']?.toString() ?? '',
+      teamShortName: json['teamShortName']?.toString() ?? '',
+      isTeamAway: json['isTeamAway'] ?? false,
+      fantasyPoints: (json['fantasyPoints'] as num?)?.toDouble() ?? 0.0,
+      fantasyPointsRaw: (json['fantasyPointsRaw'] as num?)?.toDouble() ?? 0.0,
+      rank: json['rank'] is int ? json['rank'] : 0,
+      isStarter: json['isStarter'] ?? false,
+      hasPlayed: json['hasPlayed'] ?? false,
+      isAway: json['isAway'] ?? false,
+      fantasyPointsBreakdowns: (json['fantasyPointsBreakdowns'] as List?)
+              ?.map((e) =>
+                  FantasyPointsBreakdown.fromJson(e ?? <String, dynamic>{}))
+              .toList() ??
+          [],
+      statsBreakdowns: (json['statsBreakdowns'] as List?)
+              ?.map((e) => StatsBreakdown.fromJson(e ?? <String, dynamic>{}))
+              .toList() ??
+          [],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'rank': rank,
-      'totalFantasyPoints': totalFantasyPoints,
-      'playerName': playerName,
+      'playerKey': playerKey,
+      'name': name,
+      'position': position,
       'role': role,
       'headshotImageUrl': headshotImageUrl,
+      'jerseyNumber': jerseyNumber,
+      'jerseyImageUrl': jerseyImageUrl,
+      'jerseyName': jerseyName,
+      'teamKey': teamKey,
+      'teamName': teamName,
+      'teamShortName': teamShortName,
+      'isTeamAway': isTeamAway,
+      'fantasyPoints': fantasyPoints,
+      'fantasyPointsRaw': fantasyPointsRaw,
+      'rank': rank,
+      'isStarter': isStarter,
+      'hasPlayed': hasPlayed,
+      'isAway': isAway,
       'fantasyPointsBreakdowns':
           fantasyPointsBreakdowns.map((e) => e.toJson()).toList(),
-      'playerKey': playerKey,
-      'matchKey': matchKey,
-      'teamKey': teamKey,
-      'innings': innings,
-      'runScored': runScored,
-      'ballsFaced': ballsFaced,
-      'fours': fours,
-      'sixes': sixes,
-      'strikeRate': strikeRate,
-      'ballsBowled': ballsBowled,
-      'runsGiven': runsGiven,
-      'bowlingEconomy': bowlingEconomy,
-      'extrasGiven': extrasGiven,
-      'wicketsTaken': wicketsTaken,
-      'maidenOvers': maidenOvers,
-      'dotBallsBowled': dotBallsBowled,
-      'widesGiven': widesGiven,
-      'noBallsBowled': noBallsBowled,
-      'foursGiven': foursGiven,
-      'sixesGiven': sixesGiven,
-      'wicketsBowled': wicketsBowled,
-      'wicketsCaught': wicketsCaught,
-      'wicketsLbw': wicketsLbw,
-      'wicketsStumping': wicketsStumping,
-      'catches': catches,
-      'stumpings': stumpings,
-      'runOuts': runOuts,
-      'runoutDirectHits': runoutDirectHits,
-      'runoutAssists': runoutAssists,
-      'updatedAt': updatedAt,
+      'statsBreakdowns': statsBreakdowns.map((e) => e.toJson()).toList(),
     };
   }
 }
 
 class FantasyPointsBreakdown {
-  final String? matchKey;
   final String playerKey;
   final String fantasyPointType;
+  final double statValue;
   final double fantasyPoints;
   final String fantasyPointDescription;
 
   FantasyPointsBreakdown({
-    this.matchKey,
-    required this.playerKey,
-    required this.fantasyPointType,
-    required this.fantasyPoints,
-    required this.fantasyPointDescription,
+    this.playerKey = '',
+    this.fantasyPointType = '',
+    this.statValue = 0.0,
+    this.fantasyPoints = 0.0,
+    this.fantasyPointDescription = '',
   });
 
   factory FantasyPointsBreakdown.fromJson(Map<String, dynamic> json) {
     return FantasyPointsBreakdown(
-      matchKey: json['matchKey'],
-      playerKey: json['playerKey'],
-      fantasyPointType: json['fantasyPointType'],
-      fantasyPoints: (json['fantasyPoints'] as num).toDouble(),
-      fantasyPointDescription: json['fantasyPointDescription'],
+      playerKey: json['playerKey']?.toString() ?? '',
+      fantasyPointType: json['fantasyPointType']?.toString() ?? '',
+      statValue: (json['statValue'] as num?)?.toDouble() ?? 0.0,
+      fantasyPoints: (json['fantasyPoints'] as num?)?.toDouble() ?? 0.0,
+      fantasyPointDescription:
+          json['fantasyPointDescription']?.toString() ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'matchKey': matchKey,
       'playerKey': playerKey,
       'fantasyPointType': fantasyPointType,
+      'statValue': statValue,
       'fantasyPoints': fantasyPoints,
       'fantasyPointDescription': fantasyPointDescription,
     };
   }
 }
 
-class TopPerformer {
-  final String teamKey;
-  final String innings;
-  final String topBatsman1;
-  final String topBatsman1Score;
-  final String topBatsman2;
-  final String topBatsman2Score;
-  final String topBowler1;
-  final String topBowler1Score;
-  final String topBowler2;
-  final String topBowler2Score;
+class StatsBreakdown {
+  final String playerKey;
+  final String statName;
+  final double statValue;
+  final String? statDescription;
 
-  TopPerformer({
-    required this.teamKey,
-    required this.innings,
-    required this.topBatsman1,
-    required this.topBatsman1Score,
-    required this.topBatsman2,
-    required this.topBatsman2Score,
-    required this.topBowler1,
-    required this.topBowler1Score,
-    required this.topBowler2,
-    required this.topBowler2Score,
+  StatsBreakdown({
+    required this.playerKey,
+    required this.statName,
+    required this.statValue,
+    this.statDescription,
   });
 
-  factory TopPerformer.fromJson(Map<String, dynamic> json) {
-    return TopPerformer(
-      teamKey: json['teamKey'],
-      innings: json['innings'],
-      topBatsman1: json['topBatsman1'],
-      topBatsman1Score: json['topBatsman1Score'],
-      topBatsman2: json['topBatsman2'],
-      topBatsman2Score: json['topBatsman2Score'],
-      topBowler1: json['topBowler1'],
-      topBowler1Score: json['topBowler1Score'],
-      topBowler2: json['topBowler2'],
-      topBowler2Score: json['topBowler2Score'],
+  factory StatsBreakdown.fromJson(Map<String, dynamic> json) {
+    return StatsBreakdown(
+      playerKey: json['playerKey'],
+      statName: json['statName'],
+      statValue: (json['statValue'] ?? 0).toDouble(),
+      statDescription: json['statDescription'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'teamKey': teamKey,
-      'innings': innings,
-      'topBatsman1': topBatsman1,
-      'topBatsman1Score': topBatsman1Score,
-      'topBatsman2': topBatsman2,
-      'topBatsman2Score': topBatsman2Score,
-      'topBowler1': topBowler1,
-      'topBowler1Score': topBowler1Score,
-      'topBowler2': topBowler2,
-      'topBowler2Score': topBowler2Score,
+      'playerKey': playerKey,
+      'statName': statName,
+      'statValue': statValue,
+      'statDescription': statDescription,
     };
   }
 }

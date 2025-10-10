@@ -1,16 +1,15 @@
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
-import 'package:fmlfantasy/model/match_center_inner_model.dart';
+import 'package:fmlfantasy/new_model/match_center_inner_new.dart';
 
 class PointsGrid extends StatelessWidget {
-  final PlayersBreakDown playersdata;
+  final PlayerMatchStatistic playersdata;
   const PointsGrid({super.key, required this.playersdata});
 
   @override
   Widget build(BuildContext context) {
-    // Sort stats by value in descending order (highest first)
-    List<StatsBreakDown> sortedStats = List.from(playersdata.statsBreakDown)
-      ..sort((a, b) => b.value!.compareTo(a.value!));
+    List<StatsBreakdown> sortedStats = List.from(playersdata.statsBreakdowns)
+      ..sort((a, b) => b.statValue.compareTo(a.statValue));
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -25,11 +24,11 @@ class PointsGrid extends StatelessWidget {
             crossAxisCount: 3,
             crossAxisSpacing: 5.w,
             mainAxisSpacing: 5.h,
-            childAspectRatio: 1.2, // Adjust as needed for proper height
+            childAspectRatio: 1.2,
           ),
           itemCount: sortedStats.length,
           itemBuilder: (context, index) {
-            StatsBreakDown data = sortedStats[index];
+            StatsBreakdown data = sortedStats[index];
 
             Color containerColor =
                 (index < 3) ? AppColors.secondary : AppColors.primaryLight;
@@ -52,20 +51,22 @@ class PointsGrid extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    data.value!.toStringAsFixed(0).padLeft(2, "0"),
+                    data.statValue.toStringAsFixed(0).padLeft(2, "0"),
                     style: globalTextStyle(
-                        fontSize: 24.sp,
-                        color: textColor,
-                        fontWeight: FontWeight.w700),
+                      fontSize: 24.sp,
+                      color: textColor,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   Text(
                     textAlign: TextAlign.center,
-                    data.name!,
+                    data.statName,
                     style: globalTextStyle2(
-                        fontSize: 12.sp,
-                        color: textColor,
-                        fontWeight: FontWeight.w700),
-                  )
+                      fontSize: 12.sp,
+                      color: textColor,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ],
               ),
             );

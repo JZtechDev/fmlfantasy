@@ -8,9 +8,9 @@ import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/new_model/match_center_inner_new.dart';
 import 'package:fmlfantasy/ui/helpers/replace_svg_with_png.dart';
 
-class BasketballGround extends StatelessWidget {
+class AmericanFootballGround extends StatelessWidget {
   final List<PlayerMatchStatistic> data;
-  const BasketballGround({super.key, required this.data});
+  const AmericanFootballGround({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -20,42 +20,13 @@ class BasketballGround extends StatelessWidget {
         child: Stack(alignment: Alignment.center, children: [
           Positioned.fill(
               child: Container(
-            decoration: const BoxDecoration(
-              color: Color.fromRGBO(132, 91, 69, 1),
+            decoration: const BoxDecoration(color: AppColors.primaryLight),
+            child: Image.asset(
+              'assets/images/nfl-pitch.png',
+              width: Get.width,
+              fit: BoxFit.contain,
             ),
           )),
-          Positioned(
-              top: 10.h,
-              left: 40.w,
-              right: 40.w,
-              child: Image.asset(
-                'assets/new_images/basketball_court.png',
-                width: Get.width,
-                height: Get.height * 0.2,
-              )),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40.w),
-            child: Align(
-              alignment: Alignment.center,
-              child: Image.asset('assets/new_images/mid-line.png'),
-            ),
-          ),
-          Positioned(
-            bottom: 10.h,
-            left: 40.w,
-            right: 40.w,
-            child: Transform.rotate(
-              angle: 180 * math.pi / 180,
-              child: Transform.scale(
-                scaleX: -1,
-                child: Image.asset(
-                  'assets/new_images/basketball_court.png',
-                  width: Get.width,
-                  height: Get.height * 0.2,
-                ),
-              ),
-            ),
-          ),
           Wrap(
             spacing: 20.w,
             runSpacing: 30.h,

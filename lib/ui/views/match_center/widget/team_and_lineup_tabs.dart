@@ -2,10 +2,11 @@ import 'package:fmlfantasy/app/app_sizings.dart';
 import 'package:fmlfantasy/app/textstyles/textstyle.dart';
 import 'package:fmlfantasy/core/imports/imports.dart';
 import 'package:fmlfantasy/model/match_center_inner.dart';
+import 'package:fmlfantasy/new_model/match_center_inner_new.dart';
 import 'package:fmlfantasy/ui/views/match_center/controller/match_center_inner_controller.dart';
 
 class TeamAndLineupTabs extends GetView<MatchCenterInner> {
-  final InnerMatchCenterModel data;
+  final MatchCenterInnerNew data;
   const TeamAndLineupTabs({super.key, required this.data});
 
   @override
@@ -51,7 +52,7 @@ class TeamAndLineupTabs extends GetView<MatchCenterInner> {
                                 ? AppColors.darkGreen
                                 : AppColors.secondary,
                           ),
-                          data.teamAName ?? '-'),
+                          data.homeTeamName ?? '-'),
                     ),
                   ),
                 ),
@@ -84,7 +85,7 @@ class TeamAndLineupTabs extends GetView<MatchCenterInner> {
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        data.teamBName ?? '-',
+                        data.awayTeamName ?? '-',
                         style: globalTextStyle2(
                           fontSize: AppSizing.isMobile(context) ? 12.sp : 10.sp,
                           color: controller.playersTabIsAway.value == true
